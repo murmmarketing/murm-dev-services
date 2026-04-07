@@ -517,6 +517,48 @@ nav .container {
   border-color: var(--border-hover);
 }
 
+/* ── About ───────────────────────────────────── */
+.about-inner {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin-top: 56px;
+}
+.about-portrait {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border-hover);
+}
+.about-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* SVG placeholder — swap src to a real photo later */
+.about-portrait svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.about-text p {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 560px;
+}
+@media (max-width: 768px) {
+  .about-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+  .about-text p { max-width: 100%; }
+}
+
 /* ── Footer ──────────────────────────────────── */
 footer {
   padding: 40px 0;
@@ -677,6 +719,29 @@ footer a:hover { color: var(--gold); }
         <span class="step-number">04</span>
         <h3>Launch</h3>
         <p>Final review, go live, and 14 days of post-launch support included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <p class="section-label reveal">Who you're working with</p>
+    <h2 class="section-title reveal">About</h2>
+
+    <div class="about-inner reveal">
+      <!-- Replace this SVG with <img src="your-photo.jpg" alt="Marius"> -->
+      <div class="about-portrait">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <rect width="120" height="120" fill="#1a1a1a"/>
+          <text x="50%" y="54%" dominant-baseline="central" text-anchor="middle"
+                font-family="'DM Serif Display', Georgia, serif" font-size="44"
+                fill="#C4A87A">M</text>
+        </svg>
+      </div>
+      <div class="about-text">
+        <p>Solo developer based in Leiden, Netherlands. I've shipped platforms handling 15K+ products and built everything from Shopify stores to custom full-stack web applications. I work directly with every client &mdash; no agencies, no middlemen.</p>
       </div>
     </div>
   </div>
