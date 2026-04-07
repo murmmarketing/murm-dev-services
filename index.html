@@ -106,7 +106,8 @@ nav {
   animation: fadeIn 0.5s ease-out;
 }
 nav .container { display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo img { width: 28px; height: 28px; object-fit: contain; }
 .logo span { color: var(--gold); }
 .nav-cta {
   font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
@@ -455,7 +456,7 @@ footer a:hover { color: var(--gold); }
 <!-- Nav -->
 <nav>
   <div class="container">
-    <a href="#" class="logo">murm<span>web</span>.dev</a>
+    <a href="#" class="logo"><img src="logo.png" alt="M" width="28" height="28">murm<span>web</span>.dev</a>
     <a href="#contact" class="nav-cta">Get in touch</a>
   </div>
 </nav>
