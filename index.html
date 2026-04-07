@@ -938,7 +938,7 @@ footer a:hover { color: var(--gold); }
     <p class="hero-subtitle animate animate-d2">Shopify stores and custom Next.js applications for brands and entrepreneurs who need more than a template. From first line of code to launch day.</p>
     <div class="hero-stats animate animate-d3">
       <div class="stat">
-        <span class="stat-number">15,000+</span>
+        <span class="stat-number" data-count="15000" data-suffix="+">0</span>
         <span class="stat-label">Products managed</span>
       </div>
       <div class="stat">
@@ -1289,6 +1289,31 @@ footer a:hover { color: var(--gold); }
     const h = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
   }, { passive: true });
+
+  // Count-up animation for hero stats
+  document.querySelectorAll('[data-count]').forEach(function(el) {
+    var target = parseInt(el.dataset.count, 10);
+    var suffix = el.dataset.suffix || '';
+    var done = false;
+    var statObserver = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting && !done) {
+        done = true;
+        statObserver.disconnect();
+        var duration = 1500;
+        var start = performance.now();
+        function tick(now) {
+          var t = Math.min((now - start) / duration, 1);
+          // Ease-out cubic
+          var eased = 1 - Math.pow(1 - t, 3);
+          var val = Math.floor(eased * target);
+          el.textContent = val.toLocaleString('en-US') + (t >= 1 ? suffix : '');
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.5 });
+    statObserver.observe(el);
+  });
 })();
 </script>
 
