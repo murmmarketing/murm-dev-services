@@ -40,10 +40,10 @@ body { font-family: var(--sans); background: var(--bg); color: var(--text); line
 body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat:repeat; background-size:256px; }
 
 /* ── Loading Screen ──────────────────────────── */
-#loader { position:fixed; inset:0; z-index:10000; background:var(--bg); display:flex; align-items:center; justify-content:center; transition: opacity 0.4s ease; }
+#loader { position:fixed; inset:0; z-index:10000; background:var(--bg); display:flex; align-items:center; justify-content:center; transition: opacity 0.2s ease; }
 #loader.done { opacity:0; pointer-events:none; }
 #loader svg { width:80px; height:80px; }
-#loader svg path { fill:none; stroke:var(--gold); stroke-width:1.5; stroke-dasharray:300; stroke-dashoffset:300; animation: drawM 1s ease-out 0.2s forwards; }
+#loader svg path { fill:none; stroke:var(--gold); stroke-width:1.5; stroke-dasharray:300; stroke-dashoffset:300; animation: drawM 0.5s ease-out 0.1s forwards; }
 @keyframes drawM { to { stroke-dashoffset:0; } }
 
 /* ── Custom Cursor ───────────────────────────── */
@@ -541,8 +541,8 @@ footer a:hover { color:var(--gold); }
       loader.classList.add('done');
       document.body.classList.add('loaded');
       startHeroSequence(200);
-      setTimeout(function() { loader.remove(); }, 500);
-    }, 1400);
+      setTimeout(function() { loader.remove(); }, 250);
+    }, 700);
   }
 
   // ── 1. Hero Entrance Sequence ───────────────────
