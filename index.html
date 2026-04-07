@@ -905,9 +905,22 @@ footer a:hover { color: var(--gold); }
   .process-steps { grid-template-columns: 1fr; }
   .hero-stats { flex-direction: column; gap: 24px; }
 }
+/* ── Scroll Progress ─────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(196, 168, 122, 0.4);
+  z-index: 9998;
+  transition: none;
+}
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <!-- Nav -->
 <nav>
@@ -1269,6 +1282,13 @@ footer a:hover { color: var(--gold); }
     { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
   );
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+  // Scroll progress bar
+  const bar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', function() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  }, { passive: true });
 })();
 </script>
 
