@@ -106,11 +106,11 @@ nav {
   animation: fadeIn 0.5s ease-out;
 }
 nav .container { display: flex; align-items: center; justify-content: space-between; }
-.logo { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+.logo { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: -0.03em; }
 .logo img { width: 38px; height: 38px; object-fit: contain; }
 .logo span { color: var(--gold); }
 .nav-cta {
-  font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
   color: var(--gold); text-decoration: none; padding: 10px 24px;
   border: 1px solid var(--border-hover); border-radius: 4px; transition: all 0.3s ease;
 }
@@ -143,6 +143,23 @@ nav .container { display: flex; align-items: center; justify-content: space-betw
   opacity: 0.1;
   transform: rotate(-20deg);
   pointer-events: none;
+}
+.hero-watermark {
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+  width: 440px;
+  height: 440px;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.hero-divider {
+  width: 200px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.15;
+  margin-top: 56px;
 }
 .hero-label {
   font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.15em;
@@ -423,6 +440,7 @@ footer a:hover { color: var(--gold); }
 @media (max-width: 768px) {
   .hero { padding: 150px 0 90px; }
   .hero::after { display: none; }
+  .hero-watermark { display: none; }
   .services-grid { grid-template-columns: 1fr; }
   .service-card:first-child { border-radius: 16px 16px 0 0; }
   .service-card:nth-child(2), .service-card:nth-child(3) { border-radius: 0; }
@@ -463,6 +481,7 @@ footer a:hover { color: var(--gold); }
 
 <!-- Hero -->
 <section class="hero">
+  <img src="logo.png" alt="" class="hero-watermark" aria-hidden="true">
   <div class="container">
     <p class="hero-label animate">Full-stack developer &mdash; Netherlands</p>
     <h1 class="animate animate-d1">I build stores<br>that <em>actually</em> sell</h1>
@@ -473,14 +492,15 @@ footer a:hover { color: var(--gold); }
         <div class="stat-label">Products managed</div>
       </div>
       <div class="stat">
-        <div class="stat-number">2 day</div>
+        <div class="stat-number">48hr</div>
         <div class="stat-label">Avg. delivery time</div>
       </div>
       <div class="stat">
-        <div class="stat-number">Full-stack</div>
-        <div class="stat-label">Next.js &amp; Shopify</div>
+        <div class="stat-number">3 days</div>
+        <div class="stat-label">Avg. project start</div>
       </div>
     </div>
+    <div class="hero-divider animate animate-d4"></div>
   </div>
 </section>
 
