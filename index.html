@@ -242,6 +242,37 @@ nav .container {
   line-height: 1.7;
 }
 
+/* ── Clients ─────────────────────────────────── */
+.clients-section {
+  padding: 0 0 80px;
+}
+.clients-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.client-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  padding: 9px 18px;
+  border-radius: 99px;
+  transition: border-color 0.25s ease;
+}
+.client-pill:hover {
+  border-color: var(--border-hover);
+}
+.client-pill span {
+  font-size: 15px;
+  line-height: 1;
+}
+
 /* ── Services ────────────────────────────────── */
 .services-grid {
   display: grid;
@@ -632,6 +663,20 @@ footer a:hover { color: var(--gold); }
     </div>
   </div>
 </section>
+
+<!-- Who I work with -->
+<div class="clients-section">
+  <div class="container">
+    <p class="section-label reveal">Who I work with</p>
+    <div class="clients-row reveal">
+      <div class="client-pill"><span>&#x1F4E6;</span> Dropshippers</div>
+      <div class="client-pill"><span>&#x1F3F7;&#xFE0F;</span> DTC Brands</div>
+      <div class="client-pill"><span>&#x26A1;</span> SaaS Startups</div>
+      <div class="client-pill"><span>&#x1F4A1;</span> Solo Founders</div>
+      <div class="client-pill"><span>&#x1F3E2;</span> Agencies</div>
+    </div>
+  </div>
+</div>
 
 <!-- Services -->
 <section id="services">
