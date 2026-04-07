@@ -489,6 +489,211 @@ nav .container {
   line-height: 1.6;
 }
 
+/* ── Browser Mockups ─────────────────────────── */
+.mockups-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 0.6fr;
+  gap: 20px;
+  margin-bottom: 40px;
+  align-items: start;
+}
+.mockup-frame {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+}
+.mockup-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  opacity: 0.4;
+}
+.mockup-url {
+  flex: 1;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--bg);
+  margin-left: 6px;
+}
+.mockup-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 14px 0;
+}
+.mockup-body { padding: 14px; }
+
+/* Product Discovery mockup */
+.mock-discover {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 10px;
+}
+.mock-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mock-sidebar-item {
+  height: 8px;
+  border-radius: 2px;
+  background: var(--border-hover);
+}
+.mock-sidebar-item.active { background: var(--gold); opacity: 0.5; }
+.mock-search {
+  height: 18px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+  grid-column: 1 / -1;
+}
+.mock-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+.mock-card {
+  aspect-ratio: 3/4;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.mock-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(transparent, rgba(196,168,122,0.04));
+}
+.mock-card-img {
+  width: 100%;
+  height: 60%;
+  background: var(--bg-elevated);
+}
+.mock-card-line {
+  height: 4px;
+  border-radius: 1px;
+  margin: 6px 6px 0;
+}
+.mock-card-line:nth-child(2) { background: var(--text-dim); width: 70%; opacity: 0.3; }
+.mock-card-line:nth-child(3) { background: var(--gold); width: 40%; opacity: 0.25; }
+
+/* Admin Panel mockup */
+.mock-table { display: flex; flex-direction: column; gap: 0; }
+.mock-table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.6fr;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mock-th {
+  height: 6px;
+  border-radius: 1px;
+  background: var(--gold);
+  opacity: 0.3;
+}
+.mock-table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.6fr;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mock-td {
+  height: 6px;
+  border-radius: 1px;
+  background: var(--text-dim);
+  opacity: 0.15;
+}
+.mock-badge {
+  height: 10px;
+  width: 28px;
+  border-radius: 99px;
+  opacity: 0.6;
+}
+.mock-badge.green { background: #5CB882; }
+.mock-badge.yellow { background: #C4A87A; }
+.mock-badge.red { background: #C27A7A; }
+
+/* Mobile mockup */
+.mockup-phone {
+  width: 100%;
+  max-width: 180px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.phone-notch {
+  width: 50%;
+  height: 6px;
+  margin: 8px auto 0;
+  border-radius: 99px;
+  background: var(--bg-card);
+}
+.phone-body { padding: 10px; }
+.phone-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  margin-bottom: 8px;
+}
+.phone-line {
+  height: 5px;
+  border-radius: 2px;
+  margin-bottom: 5px;
+}
+.phone-line.w80 { width: 80%; background: var(--text-dim); opacity: 0.25; }
+.phone-line.w50 { width: 50%; background: var(--text-dim); opacity: 0.15; }
+.phone-line.w35 { width: 35%; background: var(--gold); opacity: 0.35; }
+.phone-btn {
+  width: 100%;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--gold);
+  opacity: 0.25;
+  margin-top: 8px;
+}
+.phone-home {
+  width: 40%;
+  height: 4px;
+  margin: 10px auto 8px;
+  border-radius: 99px;
+  background: var(--text-dim);
+  opacity: 0.2;
+}
+@media (max-width: 768px) {
+  .mockups-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .mockup-phone-wrapper { grid-column: 1 / -1; }
+  .mockup-phone { max-width: 140px; }
+}
+@media (max-width: 480px) {
+  .mockups-row { grid-template-columns: 1fr; }
+  .mockup-phone-wrapper { grid-column: auto; }
+}
+
 /* ── CTA ─────────────────────────────────────── */
 .cta-section {
   text-align: center;
@@ -875,6 +1080,88 @@ footer a:hover { color: var(--gold); }
         <a href="https://murmreps.com" target="_blank" rel="noopener noreferrer" class="case-link">Visit site &rarr;</a>
       </div>
       <p class="case-desc">A fashion discovery platform with 15,000+ products, built from scratch with Next.js, Supabase, and Tailwind CSS. Full-stack application including user reviews, wishlists, admin panel, multi-currency pricing, blog, email marketing, and PWA support.</p>
+
+      <!-- Visual mockups -->
+      <div class="mockups-row">
+        <!-- Product Discovery -->
+        <div class="mockup-frame">
+          <div class="mockup-bar">
+            <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+            <div class="mockup-url"></div>
+          </div>
+          <div class="mockup-label">Product Discovery</div>
+          <div class="mockup-body">
+            <div class="mock-search"></div>
+            <div class="mock-discover">
+              <div class="mock-sidebar">
+                <div class="mock-sidebar-item active"></div>
+                <div class="mock-sidebar-item"></div>
+                <div class="mock-sidebar-item"></div>
+                <div class="mock-sidebar-item"></div>
+                <div class="mock-sidebar-item"></div>
+              </div>
+              <div class="mock-grid">
+                <div class="mock-card"><div class="mock-card-img"></div><div class="mock-card-line"></div><div class="mock-card-line"></div></div>
+                <div class="mock-card"><div class="mock-card-img"></div><div class="mock-card-line"></div><div class="mock-card-line"></div></div>
+                <div class="mock-card"><div class="mock-card-img"></div><div class="mock-card-line"></div><div class="mock-card-line"></div></div>
+                <div class="mock-card"><div class="mock-card-img"></div><div class="mock-card-line"></div><div class="mock-card-line"></div></div>
+                <div class="mock-card"><div class="mock-card-img"></div><div class="mock-card-line"></div><div class="mock-card-line"></div></div>
+                <div class="mock-card"><div class="mock-card-img"></div><div class="mock-card-line"></div><div class="mock-card-line"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div class="mockup-frame">
+          <div class="mockup-bar">
+            <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+            <div class="mockup-url"></div>
+          </div>
+          <div class="mockup-label">Admin Panel</div>
+          <div class="mockup-body">
+            <div class="mock-table">
+              <div class="mock-table-header">
+                <div class="mock-th"></div><div class="mock-th"></div><div class="mock-th"></div><div class="mock-th"></div>
+              </div>
+              <div class="mock-table-row">
+                <div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div>
+              </div>
+              <div class="mock-table-row">
+                <div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div>
+              </div>
+              <div class="mock-table-row">
+                <div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge yellow"></div>
+              </div>
+              <div class="mock-table-row">
+                <div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge red"></div>
+              </div>
+              <div class="mock-table-row">
+                <div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div>
+              </div>
+              <div class="mock-table-row">
+                <div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Experience -->
+        <div class="mockup-phone-wrapper">
+          <div class="mockup-label" style="padding: 0 0 8px;">Mobile Experience</div>
+          <div class="mockup-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-body">
+              <div class="phone-img"></div>
+              <div class="phone-line w80"></div>
+              <div class="phone-line w50"></div>
+              <div class="phone-line w35"></div>
+              <div class="phone-btn"></div>
+            </div>
+            <div class="phone-home"></div>
+          </div>
+        </div>
+      </div>
 
       <div class="case-features">
         <div class="case-feature">
