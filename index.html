@@ -590,6 +590,53 @@ nav .container {
   .about-text p { max-width: 100%; }
 }
 
+/* ── FAQ ─────────────────────────────────────── */
+.faq-list {
+  max-width: 680px;
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.faq-list details {
+  border-bottom: 1px solid var(--border);
+}
+.faq-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s ease;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: '+';
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+.faq-list details[open] summary::after {
+  transform: rotate(45deg);
+}
+.faq-list summary:hover { color: var(--gold); }
+.faq-list details p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  padding: 0 0 24px;
+  max-width: 600px;
+}
+
 /* ── Response badge ──────────────────────────── */
 .response-badge {
   display: inline-flex;
@@ -855,6 +902,41 @@ footer a:hover { color: var(--gold); }
           <p>Outfit generator, trending searches, newsletter popups, recently viewed tracking, and product recommendation engine.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-label reveal">Good questions</p>
+    <h2 class="section-title reveal">Frequently asked questions</h2>
+
+    <div class="faq-list reveal">
+      <details>
+        <summary>Do you work with international clients?</summary>
+        <p>Yes. I work with clients across Europe, the UK, US, and beyond. All communication is in English or Dutch. Timezone differences have never been an issue.</p>
+      </details>
+      <details>
+        <summary>What's your payment process?</summary>
+        <p>50% upfront to start, 50% on delivery. For projects over &euro;2,000, we can split into milestones. I invoice via email with bank transfer or PayPal.</p>
+      </details>
+      <details>
+        <summary>Can you help with ongoing maintenance?</summary>
+        <p>Yes. After the 14-day post-launch support, I offer monthly maintenance packages starting at &euro;150/month for updates, fixes, and small improvements.</p>
+      </details>
+      <details>
+        <summary>What if I need changes after launch?</summary>
+        <p>The 14-day support window covers any reasonable adjustments. After that, changes are billed at my hourly rate or we agree on a maintenance package.</p>
+      </details>
+      <details>
+        <summary>Do you build on WordPress?</summary>
+        <p>No. I specialize in Shopify for e-commerce and Next.js + Supabase for custom applications. These are modern, fast, and scalable &mdash; no bloated plugins or security headaches.</p>
+      </details>
+      <details>
+        <summary>Can you handle my Meta/Google ads too?</summary>
+        <p>I handle the technical setup &mdash; Pixel, Conversions API, GA4, tracking. For ongoing ad management I can recommend trusted partners.</p>
+      </details>
     </div>
   </div>
 </section>
