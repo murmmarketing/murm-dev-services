@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — murmweb.dev</title>
+<meta name="description" content="Thoughts on e-commerce development, Shopify optimization, Next.js, and building for the web.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://murmweb.dev/blog/">
+<meta property="og:title" content="Blog — murmweb.dev">
+<meta property="og:description" content="Thoughts on e-commerce development, Shopify optimization, and building for the web.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://murmweb.dev/blog/">
+<meta property="og:image" content="https://murmweb.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#0A0A0A; --bg-elevated:#111110; --bg-card:#161615;
+  --gold:#C4A87A; --gold-dim:rgba(196,168,122,0.12);
+  --text:#E8E4DF; --text-muted:#8A8580; --text-dim:#5A5652;
+  --border:rgba(196,168,122,0.08); --border-hover:rgba(196,168,122,0.18);
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:rgba(10,10,10,0.8); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
+.logo img { width:38px; height:38px; object-fit:contain; }
+.logo span { color:var(--gold); }
+.nav-cta { font-family:var(--mono); font-size:13px; font-weight:500; color:var(--gold); text-decoration:none; padding:10px 24px; border:1px solid var(--border-hover); border-radius:4px; transition:all 0.3s ease; }
+.nav-cta:hover { background:var(--gold-dim); border-color:var(--gold); }
+.container { max-width:720px; margin:0 auto; padding:0 24px; }
+.page-header { padding:160px 0 60px; }
+.page-header .back { font-family:var(--mono); font-size:12px; color:var(--text-dim); text-decoration:none; letter-spacing:0.04em; display:inline-block; margin-bottom:32px; transition:color 0.2s; }
+.page-header .back:hover { color:var(--gold); }
+.page-header h1 { font-family:var(--serif); font-size:clamp(32px,5vw,48px); font-weight:400; line-height:1.15; letter-spacing:-0.02em; margin-bottom:12px; }
+.page-header p { font-size:16px; color:var(--text-muted); line-height:1.7; }
+.articles { padding:0 0 100px; display:flex; flex-direction:column; gap:2px; }
+.article-card { display:block; text-decoration:none; background:var(--bg-card); padding:32px 28px; border-radius:12px; transition:background 0.3s ease; margin-bottom:16px; }
+.article-card:hover { background:var(--bg-elevated); }
+.article-date { font-family:var(--mono); font-size:11px; color:var(--text-dim); letter-spacing:0.04em; margin-bottom:10px; }
+.article-card h2 { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--text); margin-bottom:8px; line-height:1.3; }
+.article-card p { font-size:14px; color:var(--text-muted); line-height:1.7; }
+footer { padding:48px 0; border-top:1px solid var(--border); }
+footer .footer-inner { max-width:1100px; margin:0 auto; padding:0 24px; }
+footer p { font-size:13px; color:var(--text-dim); }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
+    <a href="/#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <a href="/" class="back">&larr; Home</a>
+    <h1>Writing</h1>
+    <p>Thoughts on building for the web, e-commerce, and the tools I use.</p>
+  </div>
+
+  <div class="articles">
+    <a href="/blog/shopify-speed-optimization.html" class="article-card">
+      <div class="article-date">April 2026</div>
+      <h2>How to Actually Speed Up Your Shopify Store in 2026</h2>
+      <p>Most Shopify speed guides are useless. Here's what actually moves the needle on Core Web Vitals and conversion rates.</p>
+    </a>
+    <a href="/blog/shopify-store-setup-cost.html" class="article-card">
+      <div class="article-date">April 2026</div>
+      <h2>What Does a Shopify Store Actually Cost in 2026?</h2>
+      <p>A transparent breakdown of every cost involved in launching a Shopify store — from subscriptions to development.</p>
+    </a>
+    <a href="/blog/nextjs-vs-wordpress-ecommerce.html" class="article-card">
+      <div class="article-date">April 2026</div>
+      <h2>Next.js vs WordPress for E-Commerce: An Honest Comparison</h2>
+      <p>When does a custom Next.js build make sense over WordPress + WooCommerce? A practical comparison from someone who builds both.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands</p>
+  </div>
+</footer>
+</body>
+</html>

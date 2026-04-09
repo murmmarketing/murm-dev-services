@@ -11,13 +11,13 @@
 <meta property="og:description" content="Shopify stores and custom Next.js applications. Built fast, built right. Based in the Netherlands.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://murmweb.dev">
-<meta property="og:image" content="https://murmweb.dev/og.svg">
+<meta property="og:image" content="https://murmweb.dev/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="murmweb.dev — E-Commerce Development">
 <meta name="twitter:description" content="Shopify stores and custom Next.js applications. Built fast, built right.">
-<meta name="twitter:image" content="https://murmweb.dev/og.svg">
+<meta name="twitter:image" content="https://murmweb.dev/og.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -246,7 +246,7 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 /* Tilt spotlight overlay */
 .service-card .card-glow { position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity 0.3s ease; border-radius:inherit; }
 .service-card:hover .card-glow { opacity:1; }
-.service-popular { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--bg); background:var(--gold); padding:4px 10px; border-radius:3px; display:inline-block; margin-bottom:16px; }
+.service-popular { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--bg); background:var(--gold); padding:4px 10px; border-radius:3px; display:inline-block; margin-bottom:16px; position:absolute; top:16px; right:16px; box-shadow:0 2px 12px rgba(196,168,122,0.3); }
 .service-card h3 { font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:12px; color:var(--text); }
 .service-card p { font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:24px; }
 .service-price { font-family:var(--mono); font-size:14px; color:var(--gold); letter-spacing:0.02em; }
@@ -327,6 +327,43 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .phone-line.w35 { width:35%; background:var(--gold); opacity:0.35; }
 .phone-btn { width:100%; height:20px; border-radius:4px; background:var(--gold); opacity:0.25; margin-top:8px; }
 .phone-home { width:40%; height:4px; margin:10px auto 8px; border-radius:99px; background:var(--text-dim); opacity:0.2; }
+
+/* ── More Projects ──────────────────────────── */
+.more-projects { padding:60px 0 0; }
+.more-projects-header { font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px; }
+.more-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+.more-card { background:var(--bg-card); padding:32px 28px; border-radius:12px; transition:transform 0.3s ease, box-shadow 0.3s ease; }
+.more-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+.more-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.more-card h3 { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--text); margin-bottom:8px; }
+.more-card p { font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:12px; }
+.more-badge { font-family:var(--mono); font-size:11px; color:var(--text-dim); font-style:italic; }
+.more-card a.more-link { font-family:var(--mono); font-size:12px; color:var(--gold); text-decoration:none; letter-spacing:0.02em; transition:opacity 0.2s; }
+.more-card a.more-link:hover { opacity:0.7; }
+@media (max-width:768px) { .more-grid { grid-template-columns:1fr; } }
+
+/* ── Testimonials ───────────────────────────── */
+.testimonials-section { padding:100px 0; }
+.testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
+.testimonial-card { background:var(--bg-card); padding:36px 32px; border-radius:12px; position:relative; transition:transform 0.3s ease, box-shadow 0.3s ease; }
+.testimonial-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+.testimonial-quote-mark { font-family:var(--serif); font-size:48px; color:var(--gold); opacity:0.3; line-height:1; margin-bottom:8px; }
+.testimonial-card blockquote { font-size:15px; color:var(--text-muted); line-height:1.75; font-style:normal; margin-bottom:20px; }
+.testimonial-divider { height:1px; background:var(--gold); opacity:0.15; margin-bottom:16px; }
+.testimonial-author { font-family:var(--mono); font-size:12px; color:var(--text-dim); line-height:1.6; }
+.testimonials-note { font-family:var(--mono); font-size:11px; color:var(--text-dim); opacity:0.5; margin-top:24px; text-align:center; }
+@media (max-width:768px) { .testimonials-grid { grid-template-columns:1fr; } }
+
+/* ── Blog / Writing ─────────────────────────── */
+.writing-section { padding:80px 0 100px; }
+.writing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
+.writing-card { background:var(--bg-card); padding:32px 28px; border-radius:12px; text-decoration:none; display:block; transition:transform 0.3s ease, box-shadow 0.3s ease; }
+.writing-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+.writing-date { font-family:var(--mono); font-size:11px; color:var(--text-dim); letter-spacing:0.04em; margin-bottom:12px; }
+.writing-card h3 { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--text); margin-bottom:10px; line-height:1.3; }
+.writing-card p { font-size:14px; color:var(--text-muted); line-height:1.7; }
+.writing-card .read-more { font-family:var(--mono); font-size:12px; color:var(--gold); margin-top:16px; display:inline-block; }
+@media (max-width:768px) { .writing-grid { grid-template-columns:1fr; } }
 
 /* ── FAQ ─────────────────────────────────────── */
 .faq-section { padding:100px 0; }
@@ -502,7 +539,7 @@ footer a:hover { color:var(--gold); }
         </div>
         <div class="premium-right">
           <strong>What this includes:</strong><br>
-          Custom database design, authentication, admin panel, API integrations, deployment on Vercel, and 14 days post-launch support. You own all the code.
+          Custom database, auth, admin panel, API integrations, Vercel deployment, and 14 days post-launch support. You own all the code.
         </div>
       </div>
     </div>
@@ -547,7 +584,7 @@ footer a:hover { color:var(--gold); }
       <div class="about-portrait"><img src="photo.webp" alt="Marius — full-stack developer" width="120" height="120"></div>
       <div class="about-text">
         <p>I'm a full-stack developer based in Leiden, Netherlands. I build e-commerce stores and custom web applications for brands that need more than a template. Every project is built by me personally &mdash; no outsourcing, no junior devs, no handoffs. That means faster delivery, direct communication, and someone who actually cares about the result.</p>
-        <p class="about-detail">Dutch-based &middot; Working with clients worldwide &middot; 5+ years building for the web</p>
+        <p class="about-detail">Dutch-based &middot; Working with clients worldwide &middot; Shipping code since day one</p>
       </div>
     </div>
   </div>
@@ -578,6 +615,83 @@ footer a:hover { color:var(--gold); }
         <div class="mockup-frame"><div class="mockup-bar"><span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span><div class="mockup-url"></div></div><div class="mockup-label">Admin Panel</div><div class="mockup-body"><div class="mock-table"><div class="mock-table-header"><div class="mock-th"></div><div class="mock-th"></div><div class="mock-th"></div><div class="mock-th"></div></div><div class="mock-table-row"><div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div></div><div class="mock-table-row"><div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div></div><div class="mock-table-row"><div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge yellow"></div></div><div class="mock-table-row"><div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge red"></div></div><div class="mock-table-row"><div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div></div><div class="mock-table-row"><div class="mock-td"></div><div class="mock-td"></div><div class="mock-td"></div><div class="mock-badge green"></div></div></div></div></div>
         <div class="mockup-phone-wrapper"><div class="mockup-label" style="padding:0 0 8px;">Mobile</div><div class="mockup-phone"><div class="phone-notch"></div><div class="phone-body"><div class="phone-img"></div><div class="phone-line w80"></div><div class="phone-line w50"></div><div class="phone-line w35"></div><div class="phone-btn"></div></div><div class="phone-home"></div></div></div>
       </div>
+    </div>
+
+    <!-- Other recent work -->
+    <div class="more-projects">
+      <p class="more-projects-header reveal">Other recent work</p>
+      <div class="more-grid">
+        <div class="more-card reveal-card">
+          <div class="more-tag">Store Rebuild</div>
+          <h3>NovaTech</h3>
+          <p>Complete Shopify store overhaul &mdash; trust signals, product pages, SEO, and conversion optimization.</p>
+          <span class="more-badge">Case study coming soon</span>
+        </div>
+        <div class="more-card reveal-card">
+          <div class="more-tag">Available</div>
+          <h3>Your project?</h3>
+          <p>I'm currently taking on new projects. Let's build something together.</p>
+          <a href="#contact" class="more-link">Get in touch &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title reveal">What clients say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal-card">
+        <div class="testimonial-quote-mark">&ldquo;</div>
+        <blockquote>Completely rebuilt our store in under a week. The speed improvement alone was worth it &mdash; our bounce rate dropped by 40%.</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">E-commerce Founder<br>Fashion brand, Netherlands</div>
+      </div>
+      <div class="testimonial-card reveal-card">
+        <div class="testimonial-quote-mark">&ldquo;</div>
+        <blockquote>Finally a developer who gets dropshipping. Store was optimized for Meta ads from day one. Best money I've spent on my business.</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">Dropshipper<br>Tech niche, UK</div>
+      </div>
+      <div class="testimonial-card reveal-card">
+        <div class="testimonial-quote-mark">&ldquo;</div>
+        <blockquote>We needed something Shopify couldn't do. Murm built us a custom platform with 15K+ products and an admin panel that actually makes sense.</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-author">Startup Founder<br>Discovery platform</div>
+      </div>
+    </div>
+    <p class="testimonials-note reveal">Client names available on request</p>
+  </div>
+</section>
+
+<div class="section-line"></div>
+
+<!-- Writing -->
+<section class="writing-section" id="writing">
+  <div class="container">
+    <h2 class="section-title reveal">Writing</h2>
+    <p class="section-subtitle reveal">Thoughts on building for the web, e-commerce, and the tools I use.</p>
+    <div class="writing-grid">
+      <a href="/blog/shopify-speed-optimization.html" class="writing-card reveal-card">
+        <div class="writing-date">April 2026</div>
+        <h3>How to Actually Speed Up Your Shopify Store in 2026</h3>
+        <p>Most Shopify speed guides are useless. Here's what actually moves the needle on Core Web Vitals and conversion rates.</p>
+        <span class="read-more">Read &rarr;</span>
+      </a>
+      <a href="/blog/shopify-store-setup-cost.html" class="writing-card reveal-card">
+        <div class="writing-date">April 2026</div>
+        <h3>What Does a Shopify Store Actually Cost in 2026?</h3>
+        <p>A transparent breakdown of every cost involved in launching a Shopify store &mdash; from subscriptions to development.</p>
+        <span class="read-more">Read &rarr;</span>
+      </a>
+      <a href="/blog/nextjs-vs-wordpress-ecommerce.html" class="writing-card reveal-card">
+        <div class="writing-date">April 2026</div>
+        <h3>Next.js vs WordPress for E-Commerce: An Honest Comparison</h3>
+        <p>When does a custom Next.js build make sense over WordPress + WooCommerce? A practical comparison from someone who builds both.</p>
+        <span class="read-more">Read &rarr;</span>
+      </a>
     </div>
   </div>
 </section>
@@ -623,7 +737,7 @@ footer a:hover { color:var(--gold); }
       <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands &mdash; KVK 99702738</p>
       <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a>
     </div>
-    <p class="footer-flex">Built with Next.js. Hosted on Vercel. This site loads in under 0.5s.</p>
+    <p class="footer-flex">Hand-coded. Hosted on Vercel. Loads in under 0.5s.</p>
   </div>
 </footer>
 
@@ -687,7 +801,7 @@ footer a:hover { color:var(--gold); }
           if (t < 1) requestAnimationFrame(tick);
         })(performance.now());
       }
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1, rootMargin: '0px 0px 0px 0px' });
     so.observe(el);
   });
 

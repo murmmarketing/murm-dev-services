@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Actually Speed Up Your Shopify Store in 2026 — murmweb.dev</title>
+<meta name="description" content="Most Shopify speed guides rehash the same tips. Here's what actually moves the needle on Core Web Vitals, load times, and conversion rates in 2026.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://murmweb.dev/blog/shopify-speed-optimization.html">
+<meta property="og:title" content="How to Actually Speed Up Your Shopify Store in 2026">
+<meta property="og:description" content="What actually moves the needle on Shopify store speed and Core Web Vitals.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://murmweb.dev/blog/shopify-speed-optimization.html">
+<meta property="og:image" content="https://murmweb.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#0A0A0A; --bg-elevated:#111110; --bg-card:#161615;
+  --gold:#C4A87A; --gold-dim:rgba(196,168,122,0.12);
+  --text:#E8E4DF; --text-muted:#8A8580; --text-dim:#5A5652;
+  --border:rgba(196,168,122,0.08); --border-hover:rgba(196,168,122,0.18);
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+.container { max-width:720px; margin:0 auto; padding:0 24px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:rgba(10,10,10,0.8); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
+.logo img { width:38px; height:38px; object-fit:contain; }
+.logo span { color:var(--gold); }
+.nav-cta { font-family:var(--mono); font-size:13px; font-weight:500; color:var(--gold); text-decoration:none; padding:10px 24px; border:1px solid var(--border-hover); border-radius:4px; transition:all 0.3s ease; }
+.nav-cta:hover { background:var(--gold-dim); border-color:var(--gold); }
+article { padding:160px 0 100px; }
+article .back { font-family:var(--mono); font-size:12px; color:var(--text-dim); text-decoration:none; letter-spacing:0.04em; display:inline-block; margin-bottom:32px; transition:color 0.2s; }
+article .back:hover { color:var(--gold); }
+article .date { font-family:var(--mono); font-size:11px; color:var(--text-dim); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; }
+article h1 { font-family:var(--serif); font-size:clamp(32px,5vw,48px); font-weight:400; line-height:1.15; letter-spacing:-0.02em; margin-bottom:24px; }
+article h2 { font-family:var(--serif); font-size:24px; font-weight:400; margin:48px 0 16px; color:var(--text); }
+article p { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:20px; }
+article strong { color:var(--text); font-weight:500; }
+article ul, article ol { margin:0 0 20px 20px; }
+article li { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:8px; }
+footer { padding:48px 0; border-top:1px solid var(--border); }
+footer .footer-inner { max-width:1100px; margin:0 auto; padding:0 24px; }
+footer p { font-size:13px; color:var(--text-dim); }
+footer a { color:var(--text-muted); text-decoration:none; font-size:13px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
+    <a href="/#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+    <a href="/blog/" class="back">&larr; All articles</a>
+    <div class="date">April 2026</div>
+    <h1>How to Actually Speed Up Your Shopify Store in 2026</h1>
+
+    <p>If you've searched for "how to speed up Shopify" before, you've probably seen the same recycled advice: remove unused apps, compress your images, pick a lightweight theme. That's not wrong — it's just not enough. Most of those tips address symptoms, not root causes.</p>
+
+    <p>I've optimized dozens of Shopify stores and measured the results. Here's what actually makes a measurable difference in Core Web Vitals and real-world load times.</p>
+
+    <h2>1. Audit your third-party scripts first</h2>
+
+    <p>The single biggest performance killer on Shopify stores isn't your theme — it's the pile of third-party JavaScript loaded by apps and tracking pixels. Every review widget, upsell popup, live chat tool, and analytics snippet adds weight.</p>
+
+    <p><strong>What to do:</strong> Open Chrome DevTools, go to the Network tab, and filter by "JS". Sort by size. You'll likely find 3–5 scripts that account for 80% of the load. Remove or replace the worst offenders. If you need a review app, pick one that lazy-loads. If your live chat loads 400KB of JavaScript on every page — that's a problem.</p>
+
+    <h2>2. Eliminate render-blocking resources</h2>
+
+    <p>Shopify themes often load CSS and JavaScript synchronously in the <strong>&lt;head&gt;</strong>, blocking the browser from rendering anything until they're fully downloaded. This directly impacts your Largest Contentful Paint (LCP) score.</p>
+
+    <p><strong>What to do:</strong> Defer non-critical JavaScript with the <strong>defer</strong> attribute. Inline your critical CSS (the styles needed for above-the-fold content) and load the rest asynchronously. In Liquid, you can use <strong>{% style %}</strong> tags strategically and move app scripts to just before <strong>&lt;/body&gt;</strong>.</p>
+
+    <h2>3. Fix your Largest Contentful Paint</h2>
+
+    <p>LCP measures how long it takes for the biggest visible element to render — usually your hero image or banner. On most Shopify stores, this image loads lazily by default, which is exactly the opposite of what you want.</p>
+
+    <p><strong>What to do:</strong> Add <strong>loading="eager"</strong> and <strong>fetchpriority="high"</strong> to your hero image. Use Shopify's image CDN with the right size parameters instead of loading a 3000px-wide image for a 600px container. Switch to WebP format if you haven't already — Shopify's CDN supports it natively.</p>
+
+    <h2>4. Reduce Cumulative Layout Shift</h2>
+
+    <p>CLS happens when elements move around as the page loads — usually because images or fonts load without reserved space. Google penalizes this in rankings.</p>
+
+    <p><strong>What to do:</strong> Set explicit <strong>width</strong> and <strong>height</strong> attributes on all images. Use <strong>font-display: swap</strong> for custom fonts and consider preloading your primary font file. Reserve space for dynamic content like announcement bars and review widgets.</p>
+
+    <h2>5. Optimize Interaction to Next Paint (INP)</h2>
+
+    <p>INP replaced FID in 2024 as Google's responsiveness metric. It measures how quickly your site responds to user interactions — clicks, taps, key presses. Heavy JavaScript execution blocks the main thread and makes your store feel sluggish.</p>
+
+    <p><strong>What to do:</strong> Minimize DOM size (Shopify themes can easily balloon to 3,000+ nodes). Break up long tasks with <strong>requestIdleCallback</strong> or <strong>setTimeout</strong>. Debounce scroll and resize handlers. Use the Chrome DevTools Performance panel to find and fix long tasks over 50ms.</p>
+
+    <h2>6. Use Shopify's native features</h2>
+
+    <p>Shopify has invested heavily in performance. Use what they give you:</p>
+
+    <ul>
+      <li><strong>Section rendering API</strong> — Fetch only the parts of the page that change (e.g., cart drawer) instead of full page reloads</li>
+      <li><strong>Predictive search</strong> — Built-in fast search without third-party apps</li>
+      <li><strong>Native lazy loading</strong> — But only for below-the-fold images</li>
+      <li><strong>Shopify CDN</strong> — Automatic image resizing, WebP conversion, and global edge caching</li>
+    </ul>
+
+    <h2>7. Measure what matters</h2>
+
+    <p>Shopify's built-in speed score is a rough guide at best. For real data, use <strong>Google PageSpeed Insights</strong> with field data (real users, not lab tests). Check the Chrome User Experience Report (CrUX) for your domain. Track before and after every change.</p>
+
+    <p>Most stores can improve their LCP by 40–60% and pass all Core Web Vitals within a week of focused optimization. The key is measuring precisely, fixing systematically, and resisting the urge to add more apps that undo your work.</p>
+
+    <p>If your store needs a speed audit and optimization, <a href="/#contact" style="color:var(--gold)">I can help</a>. Fixed-price packages starting at €400.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next.js vs WordPress for E-Commerce: An Honest Comparison — murmweb.dev</title>
+<meta name="description" content="When does a custom Next.js build make sense over WordPress + WooCommerce? A practical comparison covering performance, cost, scalability, and real trade-offs.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://murmweb.dev/blog/nextjs-vs-wordpress-ecommerce.html">
+<meta property="og:title" content="Next.js vs WordPress for E-Commerce: An Honest Comparison">
+<meta property="og:description" content="When does a custom Next.js build make sense over WordPress + WooCommerce?">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://murmweb.dev/blog/nextjs-vs-wordpress-ecommerce.html">
+<meta property="og:image" content="https://murmweb.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#0A0A0A; --bg-elevated:#111110; --bg-card:#161615;
+  --gold:#C4A87A; --gold-dim:rgba(196,168,122,0.12);
+  --text:#E8E4DF; --text-muted:#8A8580; --text-dim:#5A5652;
+  --border:rgba(196,168,122,0.08); --border-hover:rgba(196,168,122,0.18);
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+.container { max-width:720px; margin:0 auto; padding:0 24px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:rgba(10,10,10,0.8); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
+.logo img { width:38px; height:38px; object-fit:contain; }
+.logo span { color:var(--gold); }
+.nav-cta { font-family:var(--mono); font-size:13px; font-weight:500; color:var(--gold); text-decoration:none; padding:10px 24px; border:1px solid var(--border-hover); border-radius:4px; transition:all 0.3s ease; }
+.nav-cta:hover { background:var(--gold-dim); border-color:var(--gold); }
+article { padding:160px 0 100px; }
+article .back { font-family:var(--mono); font-size:12px; color:var(--text-dim); text-decoration:none; letter-spacing:0.04em; display:inline-block; margin-bottom:32px; transition:color 0.2s; }
+article .back:hover { color:var(--gold); }
+article .date { font-family:var(--mono); font-size:11px; color:var(--text-dim); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; }
+article h1 { font-family:var(--serif); font-size:clamp(32px,5vw,48px); font-weight:400; line-height:1.15; letter-spacing:-0.02em; margin-bottom:24px; }
+article h2 { font-family:var(--serif); font-size:24px; font-weight:400; margin:48px 0 16px; color:var(--text); }
+article h3 { font-family:var(--serif); font-size:20px; font-weight:400; margin:32px 0 12px; color:var(--text); }
+article p { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:20px; }
+article strong { color:var(--text); font-weight:500; }
+article ul, article ol { margin:0 0 20px 20px; }
+article li { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:8px; }
+footer { padding:48px 0; border-top:1px solid var(--border); }
+footer .footer-inner { max-width:1100px; margin:0 auto; padding:0 24px; }
+footer p { font-size:13px; color:var(--text-dim); }
+footer a { color:var(--text-muted); text-decoration:none; font-size:13px; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
+    <a href="/#contact" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+    <a href="/blog/" class="back">&larr; All articles</a>
+    <div class="date">April 2026</div>
+    <h1>Next.js vs WordPress for E-Commerce: An Honest Comparison</h1>
+
+    <p>I build with both Next.js and Shopify (not WordPress) for a reason. But the "Next.js vs WordPress" question comes up constantly from founders deciding how to build their e-commerce presence. Here's an honest comparison from someone who's built production applications with both stacks.</p>
+
+    <h2>WordPress + WooCommerce: the incumbent</h2>
+
+    <p>WordPress powers roughly 40% of the web, and WooCommerce is the most popular e-commerce plugin with millions of active installs. It's battle-tested, well-documented, and has an enormous ecosystem.</p>
+
+    <h3>Where WordPress excels</h3>
+
+    <ul>
+      <li><strong>Speed to market:</strong> You can launch a functional e-commerce store in a day. Install WooCommerce, pick a theme, add products, and you're live.</li>
+      <li><strong>Content management:</strong> WordPress's CMS is unmatched for non-technical users. Writing blog posts, updating pages, managing media — it's intuitive.</li>
+      <li><strong>Plugin ecosystem:</strong> There's a plugin for almost anything. Subscriptions, bookings, memberships, multi-vendor marketplaces — someone has built it.</li>
+      <li><strong>Cost of talent:</strong> WordPress developers are everywhere. Finding someone to maintain or modify your site is easy and relatively affordable.</li>
+      <li><strong>Hosting flexibility:</strong> You can host WordPress anywhere from a €5/month shared host to a managed platform like Kinsta or WP Engine.</li>
+    </ul>
+
+    <h3>Where WordPress struggles</h3>
+
+    <ul>
+      <li><strong>Performance:</strong> WordPress is fundamentally a PHP application that generates pages on every request (without caching). Add WooCommerce, a page builder, and 15 plugins, and you're looking at 3-5 second load times. Caching helps, but it's a band-aid.</li>
+      <li><strong>Security:</strong> WordPress is the most targeted CMS on the internet. Plugins are the main attack vector — one vulnerable plugin can compromise your entire site. You need constant updates, a WAF, and security monitoring.</li>
+      <li><strong>Scalability:</strong> WooCommerce can handle a few hundred orders per day on good hosting. Beyond that, you're fighting the architecture. High-traffic sales events (Black Friday, product drops) require careful caching and infrastructure planning.</li>
+      <li><strong>Technical debt:</strong> The plugin-based architecture means your site becomes a dependency nightmare. Plugin conflicts, update breakages, and PHP version incompatibilities are constant maintenance burdens.</li>
+    </ul>
+
+    <h2>Next.js: the modern alternative</h2>
+
+    <p>Next.js is a React framework built by Vercel. It's not a CMS or an e-commerce platform — it's a framework for building custom web applications. You use it with a database (like Supabase or PostgreSQL), a headless CMS, or an API-based e-commerce backend.</p>
+
+    <h3>Where Next.js excels</h3>
+
+    <ul>
+      <li><strong>Performance:</strong> Static generation, incremental static regeneration (ISR), and edge rendering mean your pages load in under a second. There's no comparison with WordPress on raw speed.</li>
+      <li><strong>Custom functionality:</strong> Need a product discovery engine with smart filters, real-time pricing, and user-generated content? Next.js gives you full control. No plugin limitations, no theme constraints.</li>
+      <li><strong>Security:</strong> No admin panel exposed to the internet. No plugin vulnerabilities. The attack surface is dramatically smaller. API routes handle sensitive operations server-side.</li>
+      <li><strong>Scalability:</strong> Deploy on Vercel or Cloudflare and your app scales automatically. Edge caching, serverless functions, and global CDN distribution are built in. Traffic spikes don't require infrastructure planning.</li>
+      <li><strong>Developer experience:</strong> TypeScript, React components, hot module replacement, Git-based deployments. The development workflow is significantly more productive for experienced developers.</li>
+    </ul>
+
+    <h3>Where Next.js struggles</h3>
+
+    <ul>
+      <li><strong>No built-in e-commerce:</strong> You need to build or integrate everything — cart, checkout, inventory, payments, shipping calculations, tax handling. This is either a cost or a feature, depending on your needs.</li>
+      <li><strong>Content editing:</strong> Non-technical team members can't just log into WordPress and edit a page. You need a headless CMS (Sanity, Contentful, Strapi) or a custom admin panel.</li>
+      <li><strong>Cost of development:</strong> A custom Next.js application costs significantly more than a WordPress site. Expect €2,500–€10,000+ for a production e-commerce application, versus €500–€2,000 for WordPress.</li>
+      <li><strong>Talent pool:</strong> Finding a React/Next.js developer who also understands e-commerce, SEO, and deployment is harder than finding a WordPress developer.</li>
+      <li><strong>Ongoing maintenance:</strong> While there are fewer security concerns, you still need a developer for updates and changes. Non-technical founders can't self-serve as easily.</li>
+    </ul>
+
+    <h2>When to choose what</h2>
+
+    <p><strong>Choose WordPress + WooCommerce if:</strong></p>
+    <ul>
+      <li>You're launching quickly with a limited budget (under €2,000)</li>
+      <li>You need a content-heavy site with a blog, landing pages, and SEO content</li>
+      <li>Your product catalog is straightforward (standard products, simple variants)</li>
+      <li>You want to edit content yourself without touching code</li>
+      <li>Your team already knows WordPress</li>
+    </ul>
+
+    <p><strong>Choose Next.js if:</strong></p>
+    <ul>
+      <li>Performance is critical to your business model (product discovery, marketplaces)</li>
+      <li>You need custom functionality that plugins can't provide</li>
+      <li>You're building a platform, not just a store (user accounts, reviews, dashboards)</li>
+      <li>You expect high traffic and need guaranteed uptime</li>
+      <li>You value long-term maintainability over short-term speed</li>
+    </ul>
+
+    <h2>My honest recommendation</h2>
+
+    <p>For straightforward e-commerce, I recommend <strong>Shopify</strong> over both options. It handles payments, hosting, security, and inventory out of the box, and it's optimized for selling. WordPress + WooCommerce makes sense for content-first businesses that also sell products.</p>
+
+    <p>For anything custom — product directories, membership platforms, multi-vendor marketplaces, discovery engines — <strong>Next.js + Supabase</strong> is my stack of choice. The upfront investment is higher, but you get a faster, more secure, and infinitely more flexible application.</p>
+
+    <p>The wrong choice is picking a technology because it's trendy or because it's familiar. Pick the tool that matches your actual requirements, budget, and growth trajectory.</p>
+
+    <p>Not sure which approach fits your project? <a href="/#contact" style="color:var(--gold)">Book a free 15-minute call</a> and I'll give you an honest recommendation.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="footer-inner">
+    <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands</p>
+  </div>
+</footer>
+</body>
+</html>
