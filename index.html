@@ -19,9 +19,17 @@
 <meta name="twitter:description" content="Shopify stores and custom Next.js applications. Built fast, built right.">
 <meta name="twitter:image" content="https://murmweb.dev/og.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.gstatic.com/s/dmseridisplay/v15/rnCQoNPRaJDqk018e0GD4ij3.woff2" as="font" type="font/woff2" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER");
+</script>
 <script type="application/ld+json">
 [
   {
@@ -328,6 +336,49 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .phone-btn { width:100%; height:20px; border-radius:4px; background:var(--gold); opacity:0.25; margin-top:8px; }
 .phone-home { width:40%; height:4px; margin:10px auto 8px; border-radius:99px; background:var(--text-dim); opacity:0.2; }
 
+/* ── Lead Magnet (Free Audit) ───────────────── */
+.audit-section { padding:100px 0; text-align:center; }
+.audit-inner { max-width:600px; margin:0 auto; }
+.audit-section .section-title { max-width:100%; }
+.audit-form { display:flex; gap:12px; margin-top:36px; flex-wrap:wrap; }
+.audit-input {
+  flex:1; min-width:260px;
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:6px; padding:14px 18px;
+  font-family:var(--mono); font-size:13px;
+  color:var(--text); outline:none;
+  transition:border-color 0.25s ease, background 0.25s ease;
+}
+.audit-input::placeholder { color:var(--text-dim); font-family:var(--mono); }
+.audit-input:focus { border-color:var(--gold); background:var(--bg-elevated); }
+.audit-btn {
+  font-family:var(--mono); font-size:13px; font-weight:500;
+  letter-spacing:0.04em; color:var(--bg); background:var(--gold);
+  border:none; padding:14px 26px; border-radius:6px;
+  cursor:pointer; transition:all 0.25s ease;
+}
+.audit-btn:hover { background:#D4B88A; transform:translateY(-1px); box-shadow:0 8px 24px rgba(196,168,122,0.15); }
+.audit-note { font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-top:16px; opacity:0.7; }
+
+/* ── Pricing Comparison Table ───────────────── */
+.compare-section { margin-top:72px; }
+.compare-title { font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-dim); margin-bottom:24px; }
+.compare-wrap { overflow-x:auto; }
+.compare-table { width:100%; min-width:700px; border-collapse:collapse; font-size:13px; }
+.compare-table thead th {
+  text-align:left; padding:16px 14px; font-family:var(--sans);
+  font-weight:500; color:var(--text); vertical-align:top;
+  border-bottom:1px solid var(--border);
+}
+.compare-table thead th.popular { color:var(--gold); position:relative; }
+.compare-table thead th.popular::after { content:'Most popular'; display:block; font-family:var(--mono); font-size:9px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); opacity:0.7; margin-top:4px; }
+.compare-table thead .col-price { font-family:var(--mono); font-size:11px; color:var(--text-dim); display:block; margin-top:4px; font-weight:400; }
+.compare-table tbody td { padding:14px; border-bottom:1px solid var(--border); color:var(--text-muted); }
+.compare-table tbody td.feature { color:var(--text); font-weight:500; font-size:13px; }
+.compare-table tbody td.yes { color:var(--gold); font-size:16px; }
+.compare-table tbody td.no { color:var(--text-dim); opacity:0.4; }
+.compare-table tbody tr:hover { background:rgba(196,168,122,0.02); }
+
 /* ── More Projects ──────────────────────────── */
 .more-projects { padding:60px 0 0; }
 .more-projects-header { font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px; }
@@ -364,6 +415,69 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .writing-card p { font-size:14px; color:var(--text-muted); line-height:1.7; }
 .writing-card .read-more { font-family:var(--mono); font-size:12px; color:var(--gold); margin-top:16px; display:inline-block; }
 @media (max-width:768px) { .writing-grid { grid-template-columns:1fr; } }
+
+/* ── Client Logos ──────────────────────────── */
+.trusted-section { padding:60px 0 40px; text-align:center; }
+.trusted-label { font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:24px; }
+.trusted-row { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:40px; }
+.trusted-logo { font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text-muted); opacity:0.6; transition:opacity 0.3s ease; letter-spacing:-0.01em; }
+.trusted-logo:hover { opacity:1; }
+.trusted-logo.placeholder { opacity:0.25; font-style:italic; }
+.trusted-logo.placeholder:hover { opacity:0.5; }
+
+/* ── Results Section ────────────────────────── */
+.results-section { padding:120px 0 100px; text-align:center; }
+.results-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:48px; margin-top:64px; }
+.result-stat { display:flex; flex-direction:column; align-items:center; }
+.result-number { font-family:var(--serif); font-size:clamp(42px,5vw,56px); color:var(--gold); letter-spacing:-0.02em; line-height:1; margin-bottom:14px; }
+.result-label { font-family:var(--mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; max-width:160px; line-height:1.5; }
+.results-note { margin-top:56px; font-family:var(--mono); font-size:11px; color:var(--text-dim); opacity:0.5; }
+@media (max-width:768px) { .results-grid { grid-template-columns:repeat(2,1fr); gap:48px 24px; } }
+@media (max-width:480px) { .results-grid { grid-template-columns:1fr; } }
+
+/* ── Shopify Partner Badge ──────────────────── */
+.shopify-badge { display:inline-flex; align-items:center; gap:10px; margin-top:32px; font-family:var(--mono); font-size:12px; color:var(--text-muted); }
+.shopify-badge svg { width:16px; height:16px; color:#5CB882; }
+
+/* ── Email Capture ──────────────────────────── */
+.email-capture-section { padding:100px 0; text-align:center; background:var(--bg-elevated); margin:60px 0 0; border-radius:20px; }
+.email-capture-inner { max-width:500px; margin:0 auto; padding:0 24px; }
+
+/* ── Exit Intent Popup ──────────────────────── */
+.exit-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.7);
+  z-index:10000; display:none; align-items:center; justify-content:center;
+  padding:20px; opacity:0; transition:opacity 0.3s ease;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.exit-overlay.show { display:flex; opacity:1; }
+.exit-modal {
+  max-width:480px; width:100%; background:var(--bg-card);
+  border:1px solid var(--border-hover); border-radius:16px;
+  padding:40px 36px; position:relative;
+  transform:scale(0.95); transition:transform 0.3s ease;
+}
+.exit-overlay.show .exit-modal { transform:scale(1); }
+.exit-close {
+  position:absolute; top:14px; right:14px;
+  width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+  background:transparent; border:none; color:var(--text-dim);
+  cursor:pointer; font-size:20px; transition:color 0.2s ease;
+}
+.exit-close:hover { color:var(--gold); }
+.exit-modal h3 { font-family:var(--serif); font-size:24px; font-weight:400; color:var(--text); margin-bottom:8px; }
+.exit-modal p { font-size:14px; color:var(--text-muted); line-height:1.6; margin-bottom:20px; }
+.exit-modal .audit-form { flex-direction:column; gap:10px; margin-top:0; }
+.exit-modal .audit-btn { width:100%; }
+.exit-no-thanks { display:block; margin-top:14px; text-align:center; font-family:var(--mono); font-size:11px; color:var(--text-dim); text-decoration:none; cursor:pointer; background:none; border:none; width:100%; }
+.exit-no-thanks:hover { color:var(--text-muted); }
+
+/* ── Calendar Embed ─────────────────────────── */
+.cal-wrap { margin-top:48px; max-width:800px; margin-left:auto; margin-right:auto; }
+.cal-label { font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-dim); margin-bottom:16px; text-align:center; }
+.cal-frame { width:100%; height:640px; border:1px solid var(--border); border-radius:12px; background:var(--bg-card); }
+.cal-fallback { display:block; text-align:center; margin-top:16px; font-family:var(--mono); font-size:12px; color:var(--text-dim); text-decoration:none; }
+.cal-fallback:hover { color:var(--gold); }
 
 /* ── FAQ ─────────────────────────────────────── */
 .faq-section { padding:100px 0; }
@@ -458,7 +572,15 @@ footer a:hover { color:var(--gold); }
 <nav>
   <div class="container">
     <a href="#" class="logo"><img src="logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
-    <a href="#contact" class="nav-cta" data-magnetic>Get in touch</a>
+    <div class="nav-right">
+      <span class="nav-status"><span class="dot"></span>2 active projects</span>
+      <button type="button" class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <a href="/pricing.html" class="nav-cta" data-magnetic style="padding:10px 16px;">Pricing</a>
+      <a href="#contact" class="nav-cta" data-magnetic>Get in touch</a>
+    </div>
   </div>
 </nav>
 
@@ -543,6 +665,52 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
     </div>
+
+    <!-- Pricing Comparison Table -->
+    <div class="compare-section reveal">
+      <p class="compare-title">Compare all services</p>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Store Optimization<span class="col-price">from &euro;400</span></th>
+              <th>Dropshipper Pack<span class="col-price">from &euro;650</span></th>
+              <th class="popular">Shopify Store Setup<span class="col-price">from &euro;750</span></th>
+              <th>Custom Web App<span class="col-price">from &euro;2,500</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="feature">Custom design</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+            <tr><td class="feature">Product pages</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+            <tr><td class="feature">Meta Pixel setup</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+            <tr><td class="feature">Klaviyo flows</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&mdash;</td></tr>
+            <tr><td class="feature">Speed optimization</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+            <tr><td class="feature">Conversions API</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="no">&mdash;</td></tr>
+            <tr><td class="feature">Supplier integration</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="no">&mdash;</td><td class="no">&mdash;</td></tr>
+            <tr><td class="feature">Custom database</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td class="feature">Admin panel</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td class="feature">API integrations</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td></tr>
+            <tr><td class="feature">Post-launch support</td><td class="yes">7 days</td><td class="yes">14 days</td><td class="yes">14 days</td><td class="yes">14 days</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Free Store Audit Lead Magnet -->
+<section class="audit-section">
+  <div class="container">
+    <div class="audit-inner">
+      <h2 class="section-title reveal">Get a free store audit</h2>
+      <p class="section-subtitle reveal" style="margin:0 auto;">Drop your store URL and I'll send you a personalized report within 24 hours. No strings attached.</p>
+      <form class="audit-form reveal" action="https://formspree.io/f/xplaceholder" method="POST" data-audit-form>
+        <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
+        <button type="submit" class="audit-btn">Get my free audit &rarr;</button>
+      </form>
+      <p class="audit-note reveal">No spam, no sales pitch. Just actionable feedback.</p>
+    </div>
   </div>
 </section>
 
@@ -554,6 +722,10 @@ footer a:hover { color:var(--gold); }
       <div class="stack-group reveal"><span class="stack-group-label">Frontend</span><span class="stack-group-items">Next.js &middot; React &middot; TypeScript &middot; Tailwind CSS</span></div>
       <div class="stack-group reveal"><span class="stack-group-label">Backend</span><span class="stack-group-items">Supabase &middot; PostgreSQL &middot; Liquid</span></div>
       <div class="stack-group reveal"><span class="stack-group-label">Marketing</span><span class="stack-group-items">Klaviyo &middot; Meta Pixel &middot; Conversions API &middot; GA4 &middot; Resend</span></div>
+    </div>
+    <div class="shopify-badge reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      Official Shopify Partner
     </div>
   </div>
 </section>
@@ -638,6 +810,21 @@ footer a:hover { color:var(--gold); }
   </div>
 </section>
 
+<!-- Trusted By -->
+<div class="trusted-section">
+  <div class="container">
+    <p class="trusted-label reveal">Trusted by</p>
+    <div class="trusted-row reveal">
+      <span class="trusted-logo">MurmReps</span>
+      <span class="trusted-logo">NovaTech</span>
+      <span class="trusted-logo placeholder">Your brand</span>
+      <span class="trusted-logo placeholder">Your brand</span>
+      <span class="trusted-logo placeholder">Your brand</span>
+      <span class="trusted-logo placeholder">Your brand</span>
+    </div>
+  </div>
+</div>
+
 <!-- Testimonials -->
 <section class="testimonials-section">
   <div class="container">
@@ -668,6 +855,35 @@ footer a:hover { color:var(--gold); }
 
 <div class="section-line"></div>
 
+<!-- Results -->
+<section class="results-section">
+  <div class="container">
+    <h2 class="section-title reveal">Real results</h2>
+    <p class="section-subtitle reveal" style="margin:0 auto;">What recent projects have delivered.</p>
+    <div class="results-grid">
+      <div class="result-stat reveal">
+        <div class="result-number" data-count="40" data-suffix="%">0</div>
+        <div class="result-label">avg. bounce rate reduction</div>
+      </div>
+      <div class="result-stat reveal">
+        <div class="result-number" data-count="2.5" data-suffix="x">0</div>
+        <div class="result-label">faster load times</div>
+      </div>
+      <div class="result-stat reveal">
+        <div class="result-number" data-count="48" data-suffix="hr">0</div>
+        <div class="result-label">average delivery</div>
+      </div>
+      <div class="result-stat reveal">
+        <div class="result-number" data-count="15000" data-suffix="+">0</div>
+        <div class="result-label">products managed</div>
+      </div>
+    </div>
+    <p class="results-note reveal">Based on recent client projects</p>
+  </div>
+</section>
+
+<div class="section-line"></div>
+
 <!-- Writing -->
 <section class="writing-section" id="writing">
   <div class="container">
@@ -692,7 +908,14 @@ footer a:hover { color:var(--gold); }
         <p>When does a custom Next.js build make sense over WordPress + WooCommerce? A practical comparison from someone who builds both.</p>
         <span class="read-more">Read &rarr;</span>
       </a>
+      <a href="/blog/novatech-store-rebuild.html" class="writing-card reveal-card">
+        <div class="writing-date">April 2026</div>
+        <h3>How I Rebuilt a Failing Shopify Store in 48 Hours</h3>
+        <p>A systematic audit and rebuild of a struggling dropshipping store. What I changed, why it mattered, and five lessons for store owners.</p>
+        <span class="read-more">Read &rarr;</span>
+      </a>
     </div>
+    <p style="text-align:center; margin-top:40px;"><a href="/blog/" style="font-family:var(--mono); font-size:12px; color:var(--gold); text-decoration:none; letter-spacing:0.04em;">View all articles &rarr;</a></p>
   </div>
 </section>
 
@@ -721,6 +944,26 @@ footer a:hover { color:var(--gold); }
       <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" class="btn-secondary" data-magnetic>Book a free 15-min call &rarr;</a>
     </div>
     <div class="response-badge reveal"><span class="response-dot"></span>Typically responds within 4 hours</div>
+
+    <div class="cal-wrap reveal">
+      <p class="cal-label">Or pick a time below</p>
+      <iframe class="cal-frame" src="https://cal.com/murmweb/free-15-min-intro-call?embed=true&theme=dark" loading="lazy" title="Book a free 15-minute call"></iframe>
+      <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" class="cal-fallback">Open calendar in new tab &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- Email Capture -->
+<section class="email-capture-section">
+  <div class="container">
+    <div class="email-capture-inner">
+      <h2 class="section-title reveal">Get the Shopify optimization checklist</h2>
+      <p class="section-subtitle reveal" style="margin:0 auto;">7 things to fix on your store today. Free, no spam.</p>
+      <form class="audit-form reveal" action="https://formspree.io/f/xplaceholder" method="POST" style="max-width:480px;margin:36px auto 0;">
+        <input type="email" name="email" class="audit-input" placeholder="you@yourbrand.com" required>
+        <button type="submit" class="audit-btn">Send it to me &rarr;</button>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -735,11 +978,36 @@ footer a:hover { color:var(--gold); }
   <div class="container">
     <div class="footer-main">
       <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands &mdash; KVK 99702738</p>
-      <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a>
+        <a href="https://www.trustpilot.com/review/murmweb.dev" target="_blank" rel="noopener noreferrer">Leave a review on Trustpilot</a>
+        <a href="/refer.html">Refer a client</a>
+        <a href="/tools.html">Free tools</a>
+        <a href="/blog/">Blog</a>
+      </div>
     </div>
     <p class="footer-flex">Hand-coded. Hosted on Vercel. Loads in under 0.5s.</p>
   </div>
 </footer>
+
+<!-- Back to Top -->
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</a>
+
+<!-- Exit Intent Popup -->
+<div class="exit-overlay" id="exitOverlay">
+  <div class="exit-modal">
+    <button type="button" class="exit-close" aria-label="Close" onclick="closeExit()">&times;</button>
+    <h3>Before you go&hellip;</h3>
+    <p>Get a free 5-point audit of your store. I'll send you a personalized report within 24 hours.</p>
+    <form class="audit-form" action="https://formspree.io/f/xplaceholder" method="POST" data-audit-form>
+      <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
+      <button type="submit" class="audit-btn">Send me the audit &rarr;</button>
+    </form>
+    <button type="button" class="exit-no-thanks" onclick="closeExit()">No thanks</button>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -790,14 +1058,17 @@ footer a:hover { color:var(--gold); }
 
   // ── Count-up ────────────────────────────────────
   document.querySelectorAll('[data-count]').forEach(function(el) {
-    var target = parseInt(el.dataset.count, 10), suffix = el.dataset.suffix || '', done = false;
+    var target = parseFloat(el.dataset.count), suffix = el.dataset.suffix || '', done = false;
+    var isFloat = target % 1 !== 0;
     var so = new IntersectionObserver(function(entries) {
       if (entries[0].isIntersecting && !done) {
         done = true; so.disconnect();
         var dur = 1500, start = performance.now();
         (function tick(now) {
           var t = Math.min((now - start) / dur, 1), eased = 1 - Math.pow(1 - t, 3);
-          el.textContent = Math.floor(eased * target).toLocaleString('en-US') + (t >= 1 ? suffix : '');
+          var val = eased * target;
+          var display = isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString('en-US');
+          el.textContent = display + (t >= 1 ? suffix : '');
           if (t < 1) requestAnimationFrame(tick);
         })(performance.now());
       }
@@ -879,6 +1150,45 @@ footer a:hover { color:var(--gold); }
   document.documentElement.style.cursor = 'none';
   document.querySelectorAll('a,button,summary,[data-tilt]').forEach(function(el) { el.style.cursor = 'none'; });
 })();
+
+/* ── Exit Intent Popup ────────────────────────── */
+(function(){
+  var isMobile = window.matchMedia('(pointer:coarse)').matches || window.innerWidth < 769;
+  if (isMobile) return;
+  if (sessionStorage.getItem('exit_shown')) return;
+
+  var overlay = document.getElementById('exitOverlay');
+  if (!overlay) return;
+
+  window.closeExit = function() {
+    overlay.classList.remove('show');
+    setTimeout(function(){ overlay.style.display = 'none'; }, 300);
+  };
+
+  function showExit() {
+    if (sessionStorage.getItem('exit_shown')) return;
+    if (sessionStorage.getItem('audit_submitted')) return;
+    sessionStorage.setItem('exit_shown', '1');
+    overlay.style.display = 'flex';
+    requestAnimationFrame(function(){ overlay.classList.add('show'); });
+  }
+
+  document.addEventListener('mouseout', function(e) {
+    if (e.clientY <= 0 && !e.relatedTarget) showExit();
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeExit();
+  });
+
+  // Mark audit as submitted on form interaction
+  document.querySelectorAll('[data-audit-form]').forEach(function(f) {
+    f.addEventListener('submit', function() {
+      sessionStorage.setItem('audit_submitted', '1');
+    });
+  });
+})();
 </script>
+<script src="/site.js" defer></script>
 </body>
 </html>

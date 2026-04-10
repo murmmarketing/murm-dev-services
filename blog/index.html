@@ -13,10 +13,18 @@
 <meta property="og:url" content="https://murmweb.dev/blog/">
 <meta property="og:image" content="https://murmweb.dev/og.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.gstatic.com/s/dmseridisplay/v15/rnCQoNPRaJDqk018e0GD4ij3.woff2" as="font" type="font/woff2" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER");
+</script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root {
@@ -58,7 +66,13 @@ footer p { font-size:13px; color:var(--text-dim); }
 <nav>
   <div class="nav-inner">
     <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
-    <a href="/#contact" class="nav-cta">Get in touch</a>
+    <div class="nav-right">
+      <button type="button" class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <a href="/#contact" class="nav-cta">Get in touch</a>
+    </div>
   </div>
 </nav>
 
@@ -70,6 +84,11 @@ footer p { font-size:13px; color:var(--text-dim); }
   </div>
 
   <div class="articles">
+    <a href="/blog/novatech-store-rebuild.html" class="article-card">
+      <div class="article-date">April 2026</div>
+      <h2>How I Rebuilt a Failing Shopify Store in 48 Hours</h2>
+      <p>A systematic audit and rebuild of a struggling Shopify store: trust badges, policies, product pages, and five quick wins any store owner can implement.</p>
+    </a>
     <a href="/blog/shopify-speed-optimization.html" class="article-card">
       <div class="article-date">April 2026</div>
       <h2>How to Actually Speed Up Your Shopify Store in 2026</h2>
@@ -93,5 +112,10 @@ footer p { font-size:13px; color:var(--text-dim); }
     <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands</p>
   </div>
 </footer>
+
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</a>
+<script src="/site.js" defer></script>
 </body>
 </html>

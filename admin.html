@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — murmweb</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#0A0A0A; --bg-elev:#111110; --bg-card:#161615;
+  --gold:#C4A87A; --gold-dim:rgba(196,168,122,0.12);
+  --text:#E8E4DF; --muted:#8A8580; --dim:#5A5652;
+  --border:rgba(196,168,122,0.12); --border-h:rgba(196,168,122,0.25);
+  --green:#5CB882; --red:#C27A7A; --yellow:#C4A87A; --blue:#7AA8C4;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',-apple-system,sans-serif;
+}
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.5; font-size:13px; -webkit-font-smoothing:antialiased; }
+.gate { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:24px; }
+.gate-box { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:40px; max-width:400px; width:100%; text-align:center; }
+.gate-box h1 { font-family:var(--mono); font-size:16px; margin-bottom:20px; color:var(--gold); }
+.gate-box input { width:100%; padding:14px 16px; background:var(--bg); border:1px solid var(--border); border-radius:6px; color:var(--text); font-family:var(--mono); font-size:13px; outline:none; margin-bottom:12px; }
+.gate-box input:focus { border-color:var(--gold); }
+.gate-box button { width:100%; padding:14px; background:var(--gold); color:var(--bg); border:none; border-radius:6px; font-family:var(--mono); font-weight:500; cursor:pointer; font-size:13px; }
+.gate-box button:hover { background:#D4B88A; }
+.gate-error { color:var(--red); font-size:12px; margin-top:12px; font-family:var(--mono); }
+
+.dashboard { display:none; max-width:1400px; margin:0 auto; padding:24px; }
+.dashboard.active { display:block; }
+.dash-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; padding-bottom:20px; border-bottom:1px solid var(--border); flex-wrap:wrap; gap:12px; }
+.dash-header h1 { font-family:var(--mono); font-size:18px; color:var(--gold); letter-spacing:-0.02em; }
+.dash-header .updated { font-family:var(--mono); font-size:11px; color:var(--dim); }
+.dash-header .logout { font-family:var(--mono); font-size:11px; color:var(--muted); background:none; border:1px solid var(--border); padding:6px 12px; border-radius:4px; cursor:pointer; }
+.dash-header .logout:hover { color:var(--gold); border-color:var(--gold); }
+
+.grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+@media (max-width:900px) { .grid { grid-template-columns:1fr; } }
+
+.panel { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:24px; }
+.panel h2 { font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+
+/* Stats panel */
+.stats-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.stat { display:flex; flex-direction:column; gap:4px; }
+.stat label { font-family:var(--mono); font-size:10px; color:var(--dim); text-transform:uppercase; letter-spacing:0.06em; }
+.stat input { background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:var(--mono); font-size:15px; padding:8px 12px; border-radius:6px; outline:none; }
+.stat input:focus { border-color:var(--gold); }
+.stat input[readonly] { color:var(--gold); cursor:default; }
+
+/* Leads table */
+.lead-form { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:8px; margin-bottom:16px; }
+@media (max-width:900px) { .lead-form { grid-template-columns:1fr 1fr; } }
+.lead-form input, .lead-form select, .lead-form textarea { background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:var(--mono); font-size:11px; padding:8px 10px; border-radius:4px; outline:none; }
+.lead-form button { grid-column:1/-1; background:var(--gold); color:var(--bg); border:none; padding:10px; border-radius:4px; font-family:var(--mono); font-size:11px; cursor:pointer; font-weight:500; }
+.filter-bar { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; }
+.filter-btn { background:var(--bg); border:1px solid var(--border); color:var(--muted); font-family:var(--mono); font-size:10px; padding:5px 10px; border-radius:3px; cursor:pointer; }
+.filter-btn.active { background:var(--gold); color:var(--bg); border-color:var(--gold); }
+.leads-table { width:100%; font-size:11px; font-family:var(--mono); border-collapse:collapse; }
+.leads-table th { text-align:left; padding:8px 6px; color:var(--dim); text-transform:uppercase; font-weight:500; font-size:10px; border-bottom:1px solid var(--border); }
+.leads-table td { padding:8px 6px; border-bottom:1px solid var(--border); color:var(--muted); }
+.leads-table tr:hover td { background:rgba(196,168,122,0.03); cursor:pointer; }
+.status-badge { display:inline-block; padding:2px 8px; border-radius:99px; font-size:9px; text-transform:uppercase; font-weight:500; }
+.status-new { background:rgba(122,168,196,0.15); color:#7AA8C4; }
+.status-contacted { background:rgba(196,168,122,0.15); color:var(--gold); }
+.status-replied { background:rgba(196,168,122,0.25); color:var(--gold); }
+.status-booked { background:rgba(92,184,130,0.15); color:var(--green); }
+.status-won { background:rgba(92,184,130,0.3); color:var(--green); font-weight:600; }
+.status-lost { background:rgba(194,122,122,0.15); color:var(--red); }
+.export-btn { margin-top:12px; background:transparent; color:var(--muted); border:1px solid var(--border); padding:8px 14px; border-radius:4px; font-family:var(--mono); font-size:11px; cursor:pointer; }
+.export-btn:hover { color:var(--gold); border-color:var(--gold); }
+
+/* Testimonial manager */
+.testi-form { display:flex; flex-direction:column; gap:10px; }
+.testi-form textarea, .testi-form input { background:var(--bg); border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-family:var(--mono); font-size:11px; outline:none; resize:vertical; }
+.testi-form textarea { min-height:70px; }
+.testi-form button { background:var(--gold); color:var(--bg); border:none; padding:10px; border-radius:4px; font-family:var(--mono); font-size:11px; cursor:pointer; font-weight:500; }
+.testi-list { margin-top:16px; display:flex; flex-direction:column; gap:10px; }
+.testi-item { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:12px; font-size:11px; color:var(--muted); font-family:var(--mono); }
+.testi-item .quote { color:var(--text); margin-bottom:6px; line-height:1.5; }
+.testi-item .meta { color:var(--dim); font-size:10px; }
+.testi-item .actions { display:flex; gap:6px; margin-top:8px; }
+.testi-item .actions button { background:transparent; border:1px solid var(--border); color:var(--muted); padding:4px 8px; border-radius:3px; font-family:var(--mono); font-size:9px; cursor:pointer; }
+
+/* Calendar */
+.cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; font-size:10px; font-family:var(--mono); }
+.cal-day { background:var(--bg); border:1px solid var(--border); padding:6px; border-radius:3px; min-height:60px; display:flex; flex-direction:column; gap:3px; }
+.cal-day-label { color:var(--dim); font-size:9px; margin-bottom:2px; }
+.cal-item { background:var(--gold-dim); color:var(--gold); padding:2px 4px; border-radius:2px; font-size:9px; cursor:pointer; display:flex; align-items:center; gap:3px; }
+.cal-item.done { opacity:0.4; text-decoration:line-through; }
+.cal-item.blog { background:rgba(122,168,196,0.15); color:#7AA8C4; }
+.cal-item.reddit { background:rgba(194,122,122,0.15); color:var(--red); }
+.cal-item.email { background:rgba(92,184,130,0.15); color:var(--green); }
+.cal-item.linkedin { background:rgba(196,168,122,0.2); color:var(--gold); }
+.cal-add { display:grid; grid-template-columns:1fr 1fr 1fr 60px; gap:6px; margin-top:12px; }
+.cal-add input, .cal-add select { background:var(--bg); border:1px solid var(--border); color:var(--text); padding:6px 8px; border-radius:3px; font-family:var(--mono); font-size:10px; outline:none; }
+.cal-add button { background:var(--gold); color:var(--bg); border:none; border-radius:3px; font-family:var(--mono); font-size:10px; cursor:pointer; }
+
+/* Links */
+.link-list { display:flex; flex-direction:column; gap:8px; }
+.link-item { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--bg); border:1px solid var(--border); border-radius:6px; text-decoration:none; transition:all 0.2s; }
+.link-item:hover { border-color:var(--gold); }
+.link-item .title { font-family:var(--mono); font-size:12px; color:var(--gold); }
+.link-item .desc { font-family:var(--mono); font-size:10px; color:var(--dim); margin-top:2px; }
+
+/* Quick actions */
+.action-list { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.action-btn { background:var(--bg); border:1px solid var(--border); color:var(--muted); padding:12px; border-radius:6px; font-family:var(--mono); font-size:11px; cursor:pointer; text-align:left; transition:all 0.2s; }
+.action-btn:hover { color:var(--gold); border-color:var(--gold); }
+
+/* Calculator */
+.calc-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.calc-field { display:flex; flex-direction:column; gap:4px; }
+.calc-field label { font-family:var(--mono); font-size:10px; color:var(--dim); text-transform:uppercase; }
+.calc-field input { background:var(--bg); border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-family:var(--mono); font-size:13px; outline:none; }
+.calc-result { grid-column:1/-1; margin-top:12px; padding:16px; background:var(--bg); border:1px solid var(--border); border-radius:6px; }
+.calc-result .row { display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; margin-bottom:6px; }
+.calc-result .row .label { color:var(--dim); }
+.calc-result .row .val { color:var(--gold); font-weight:600; }
+
+/* Competitors */
+.comp-list { display:flex; flex-direction:column; gap:10px; }
+.comp-item { background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:12px; }
+.comp-item .name { font-family:var(--mono); font-size:12px; color:var(--gold); margin-bottom:4px; }
+.comp-item .links { display:flex; gap:12px; margin-bottom:8px; }
+.comp-item .links a { font-family:var(--mono); font-size:10px; color:var(--muted); text-decoration:none; }
+.comp-item .links a:hover { color:var(--gold); }
+.comp-item textarea { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--muted); padding:8px; border-radius:4px; font-family:var(--mono); font-size:10px; min-height:50px; resize:vertical; outline:none; }
+.comp-add { margin-top:12px; display:flex; gap:6px; }
+.comp-add input { flex:1; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:8px 10px; border-radius:4px; font-family:var(--mono); font-size:11px; outline:none; }
+.comp-add button { background:var(--gold); color:var(--bg); border:none; padding:8px 14px; border-radius:4px; font-family:var(--mono); font-size:11px; cursor:pointer; }
+
+/* Toast */
+.toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--bg-card); color:var(--text); padding:12px 20px; border:1px solid var(--border-h); border-radius:6px; font-family:var(--mono); font-size:11px; opacity:0; pointer-events:none; transition:all 0.3s; z-index:9999; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div id="gate" class="gate">
+  <div class="gate-box">
+    <h1>murmweb admin</h1>
+    <input type="password" id="gatePass" placeholder="Password" autofocus>
+    <button onclick="checkGate()">Unlock</button>
+    <div id="gateError" class="gate-error" style="display:none;">Incorrect password</div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" class="dashboard">
+  <div class="dash-header">
+    <h1>&gt; murmweb admin</h1>
+    <span class="updated" id="lastUpdated">Last updated: never</span>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="grid">
+    <!-- Panel 1: Quick Stats -->
+    <div class="panel">
+      <h2>Quick Stats</h2>
+      <div class="stats-grid">
+        <div class="stat">
+          <label>Active projects</label>
+          <input type="number" data-stat="active" value="2">
+        </div>
+        <div class="stat">
+          <label>Revenue this month (€)</label>
+          <input type="number" data-stat="revenue" value="0">
+        </div>
+        <div class="stat">
+          <label>Leads this week</label>
+          <input type="number" data-stat="leads" value="0">
+        </div>
+        <div class="stat">
+          <label>Emails sent</label>
+          <input type="number" data-stat="emails" value="0">
+        </div>
+        <div class="stat" style="grid-column:1/-1;">
+          <label>Response rate</label>
+          <input type="text" id="responseRate" readonly value="0%">
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: Lead Tracker -->
+    <div class="panel">
+      <h2>Lead Tracker</h2>
+      <form class="lead-form" onsubmit="addLead(event)">
+        <input type="text" id="leadName" placeholder="Name" required>
+        <input type="email" id="leadEmail" placeholder="Email">
+        <select id="leadSource">
+          <option value="reddit">Reddit</option>
+          <option value="cold">Cold email</option>
+          <option value="inbound">Inbound</option>
+          <option value="referral">Referral</option>
+        </select>
+        <select id="leadStatus">
+          <option value="new">New</option>
+          <option value="contacted">Contacted</option>
+          <option value="replied">Replied</option>
+          <option value="booked">Booked</option>
+          <option value="won">Won</option>
+          <option value="lost">Lost</option>
+        </select>
+        <button type="submit">+ Add lead</button>
+      </form>
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="new">New</button>
+        <button class="filter-btn" data-filter="contacted">Contacted</button>
+        <button class="filter-btn" data-filter="replied">Replied</button>
+        <button class="filter-btn" data-filter="booked">Booked</button>
+        <button class="filter-btn" data-filter="won">Won</button>
+        <button class="filter-btn" data-filter="lost">Lost</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="leads-table">
+          <thead>
+            <tr><th>Name</th><th>Source</th><th>Status</th><th>Date</th></tr>
+          </thead>
+          <tbody id="leadsBody"></tbody>
+        </table>
+      </div>
+      <button class="export-btn" onclick="exportLeads()">Export CSV</button>
+    </div>
+
+    <!-- Panel 3: Testimonial Manager -->
+    <div class="panel">
+      <h2>Testimonial Manager</h2>
+      <form class="testi-form" onsubmit="addTesti(event)">
+        <textarea id="testiQuote" placeholder="Quote text" required></textarea>
+        <input type="text" id="testiName" placeholder="Name / Title" required>
+        <input type="text" id="testiCompany" placeholder="Company">
+        <input type="number" id="testiRating" min="1" max="5" value="5" placeholder="Rating 1-5">
+        <button type="submit">+ Add testimonial</button>
+      </form>
+      <div class="testi-list" id="testiList"></div>
+    </div>
+
+    <!-- Panel 4: Content Calendar -->
+    <div class="panel">
+      <h2>Content Calendar</h2>
+      <div class="cal-grid" id="calGrid"></div>
+      <form class="cal-add" onsubmit="addCalItem(event)">
+        <input type="text" id="calTitle" placeholder="Title" required>
+        <input type="date" id="calDate" required>
+        <select id="calType">
+          <option value="blog">Blog</option>
+          <option value="reddit">Reddit</option>
+          <option value="email">Cold email</option>
+          <option value="linkedin">LinkedIn</option>
+        </select>
+        <button type="submit">Add</button>
+      </form>
+    </div>
+
+    <!-- Panel 5: Site Health -->
+    <div class="panel">
+      <h2>Site Health</h2>
+      <div class="link-list">
+        <a href="https://pagespeed.web.dev/analysis?url=https://murmweb.dev" target="_blank" class="link-item">
+          <div><div class="title">PageSpeed Insights</div><div class="desc">Check Core Web Vitals</div></div>
+        </a>
+        <a href="https://search.google.com/search-console" target="_blank" class="link-item">
+          <div><div class="title">Search Console</div><div class="desc">Index coverage, queries, errors</div></div>
+        </a>
+        <a href="https://vercel.com/dashboard" target="_blank" class="link-item">
+          <div><div class="title">Vercel Dashboard</div><div class="desc">Deployments, analytics, logs</div></div>
+        </a>
+        <a href="https://partners.shopify.com" target="_blank" class="link-item">
+          <div><div class="title">Shopify Partners</div><div class="desc">Development stores, referrals</div></div>
+        </a>
+        <a href="https://cal.com/bookings" target="_blank" class="link-item">
+          <div><div class="title">Cal.com</div><div class="desc">Upcoming bookings</div></div>
+        </a>
+        <a href="https://formspree.io/forms" target="_blank" class="link-item">
+          <div><div class="title">Formspree</div><div class="desc">Form submissions</div></div>
+        </a>
+        <a href="https://business.trustpilot.com" target="_blank" class="link-item">
+          <div><div class="title">Trustpilot</div><div class="desc">Reviews and responses</div></div>
+        </a>
+        <a href="https://clarity.microsoft.com/projects" target="_blank" class="link-item">
+          <div><div class="title">Microsoft Clarity</div><div class="desc">Heatmaps and session recordings</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Panel 6: Quick Actions -->
+    <div class="panel">
+      <h2>Quick Actions</h2>
+      <div class="action-list">
+        <button class="action-btn" data-copy="cold-a">Cold email template A</button>
+        <button class="action-btn" data-copy="cold-b">Cold email template B</button>
+        <button class="action-btn" data-copy="reddit">Reddit reply template</button>
+        <button class="action-btn" data-copy="portfolio">Portfolio link</button>
+        <button class="action-btn" data-copy="calendar">Calendar link</button>
+        <button class="action-btn" data-copy="pricing">Pricing link</button>
+      </div>
+    </div>
+
+    <!-- Panel 7: Revenue Calculator -->
+    <div class="panel">
+      <h2>Revenue Calculator</h2>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label>Project price (€)</label>
+          <input type="number" id="calcPrice" value="750" oninput="recalc()">
+        </div>
+        <div class="calc-field">
+          <label>Hours spent</label>
+          <input type="number" id="calcHours" value="20" oninput="recalc()">
+        </div>
+        <div class="calc-field">
+          <label>Projects / month</label>
+          <input type="number" id="calcProjects" value="4" oninput="recalc()">
+        </div>
+        <div class="calc-field">
+          <label>Target hourly rate (€)</label>
+          <input type="number" id="calcTarget" value="65" oninput="recalc()">
+        </div>
+        <div class="calc-result">
+          <div class="row"><span class="label">Effective hourly rate</span><span class="val" id="calcEffective">€37.50</span></div>
+          <div class="row"><span class="label">Monthly projection</span><span class="val" id="calcMonthly">€3,000</span></div>
+          <div class="row"><span class="label">Yearly projection</span><span class="val" id="calcYearly">€36,000</span></div>
+          <div class="row"><span class="label">vs target rate</span><span class="val" id="calcVsTarget">-€27.50/hr</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 8: Competition Monitor -->
+    <div class="panel">
+      <h2>Competition Monitor</h2>
+      <div class="comp-list" id="compList"></div>
+      <form class="comp-add" onsubmit="addComp(event)">
+        <input type="url" id="compUrl" placeholder="https://competitor.com" required>
+        <button type="submit">+ Add</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── Password Gate ────────────────────────── */
+var PASS_HASH = 'murmweb2026'; // User can change this
+function checkGate() {
+  var input = document.getElementById('gatePass').value;
+  if (input === localStorage.getItem('admin_pass') || input === PASS_HASH) {
+    localStorage.setItem('admin_pass', input);
+    localStorage.setItem('admin_auth', '1');
+    showDashboard();
+  } else {
+    document.getElementById('gateError').style.display = 'block';
+  }
+}
+document.getElementById('gatePass').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkGate();
+});
+function logout() {
+  localStorage.removeItem('admin_auth');
+  location.reload();
+}
+function showDashboard() {
+  document.getElementById('gate').style.display = 'none';
+  document.getElementById('dashboard').classList.add('active');
+  initDashboard();
+}
+if (localStorage.getItem('admin_auth') === '1') showDashboard();
+
+/* ── Toast ────────────────────────── */
+function toast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+/* ── Update timestamp ────────────────────────── */
+function touch() {
+  var now = new Date();
+  var s = now.toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' });
+  localStorage.setItem('admin_updated', s);
+  document.getElementById('lastUpdated').textContent = 'Last updated: ' + s;
+}
+
+/* ── Init ────────────────────────── */
+function initDashboard() {
+  var last = localStorage.getItem('admin_updated');
+  if (last) document.getElementById('lastUpdated').textContent = 'Last updated: ' + last;
+  loadStats();
+  loadLeads();
+  loadTestis();
+  loadCalendar();
+  loadComps();
+  recalc();
+}
+
+/* ── Quick Stats ────────────────────────── */
+function loadStats() {
+  document.querySelectorAll('[data-stat]').forEach(function(el) {
+    var key = el.dataset.stat;
+    var val = localStorage.getItem('stat_' + key);
+    if (val !== null) el.value = val;
+    el.addEventListener('input', function() {
+      localStorage.setItem('stat_' + key, el.value);
+      updateResponseRate();
+      touch();
+    });
+  });
+  updateResponseRate();
+}
+function updateResponseRate() {
+  var leads = parseFloat(localStorage.getItem('stat_leads') || 0);
+  var emails = parseFloat(localStorage.getItem('stat_emails') || 0);
+  var rate = emails > 0 ? (leads / emails * 100).toFixed(1) + '%' : '0%';
+  document.getElementById('responseRate').value = rate;
+}
+
+/* ── Lead Tracker ────────────────────────── */
+var currentFilter = 'all';
+function loadLeads() {
+  var leads = JSON.parse(localStorage.getItem('leads') || '[]');
+  var tbody = document.getElementById('leadsBody');
+  tbody.innerHTML = '';
+  leads.filter(function(l){ return currentFilter === 'all' || l.status === currentFilter; }).forEach(function(lead, i) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + escapeHtml(lead.name) + '<br><small style="color:var(--dim);">' + escapeHtml(lead.email || '') + '</small></td>' +
+      '<td>' + escapeHtml(lead.source) + '</td>' +
+      '<td><span class="status-badge status-' + lead.status + '">' + lead.status + '</span></td>' +
+      '<td>' + lead.date + '</td>';
+    tr.onclick = function() { editLead(leads.indexOf(lead)); };
+    tbody.appendChild(tr);
+  });
+}
+function addLead(e) {
+  e.preventDefault();
+  var leads = JSON.parse(localStorage.getItem('leads') || '[]');
+  leads.unshift({
+    name: document.getElementById('leadName').value,
+    email: document.getElementById('leadEmail').value,
+    source: document.getElementById('leadSource').value,
+    status: document.getElementById('leadStatus').value,
+    date: new Date().toISOString().slice(0,10),
+    notes: ''
+  });
+  localStorage.setItem('leads', JSON.stringify(leads));
+  document.getElementById('leadName').value = '';
+  document.getElementById('leadEmail').value = '';
+  loadLeads();
+  touch();
+  toast('Lead added');
+}
+function editLead(i) {
+  var leads = JSON.parse(localStorage.getItem('leads') || '[]');
+  var lead = leads[i];
+  var newStatus = prompt('Status (new/contacted/replied/booked/won/lost):', lead.status);
+  if (newStatus) lead.status = newStatus;
+  var newNotes = prompt('Notes:', lead.notes || '');
+  if (newNotes !== null) lead.notes = newNotes;
+  localStorage.setItem('leads', JSON.stringify(leads));
+  loadLeads();
+  touch();
+}
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    loadLeads();
+  });
+});
+function exportLeads() {
+  var leads = JSON.parse(localStorage.getItem('leads') || '[]');
+  var csv = 'Name,Email,Source,Status,Date,Notes\n';
+  leads.forEach(function(l) {
+    csv += '"' + l.name + '","' + (l.email||'') + '","' + l.source + '","' + l.status + '","' + l.date + '","' + (l.notes||'').replace(/"/g,'""') + '"\n';
+  });
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'leads-' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  toast('CSV exported');
+}
+
+/* ── Testimonial Manager ────────────────────────── */
+function loadTestis() {
+  var testis = JSON.parse(localStorage.getItem('testis') || '[]');
+  var list = document.getElementById('testiList');
+  list.innerHTML = '';
+  testis.forEach(function(t, i) {
+    var div = document.createElement('div');
+    div.className = 'testi-item';
+    div.innerHTML = '<div class="quote">"' + escapeHtml(t.quote) + '"</div>' +
+      '<div class="meta">' + escapeHtml(t.name) + (t.company ? ' &mdash; ' + escapeHtml(t.company) : '') + ' &middot; ' + (t.rating || 5) + '/5</div>' +
+      '<div class="actions"><button onclick="copyTestiHtml(' + i + ')">Copy HTML</button><button onclick="deleteTesti(' + i + ')">Delete</button></div>';
+    list.appendChild(div);
+  });
+}
+function addTesti(e) {
+  e.preventDefault();
+  var testis = JSON.parse(localStorage.getItem('testis') || '[]');
+  testis.push({
+    quote: document.getElementById('testiQuote').value,
+    name: document.getElementById('testiName').value,
+    company: document.getElementById('testiCompany').value,
+    rating: parseInt(document.getElementById('testiRating').value, 10) || 5
+  });
+  localStorage.setItem('testis', JSON.stringify(testis));
+  document.getElementById('testiQuote').value = '';
+  document.getElementById('testiName').value = '';
+  document.getElementById('testiCompany').value = '';
+  loadTestis();
+  touch();
+  toast('Testimonial added');
+}
+function copyTestiHtml(i) {
+  var testis = JSON.parse(localStorage.getItem('testis') || '[]');
+  var t = testis[i];
+  var html = '<div class="testimonial-card reveal-card">\n' +
+    '  <div class="testimonial-quote-mark">&ldquo;</div>\n' +
+    '  <blockquote>' + t.quote + '</blockquote>\n' +
+    '  <div class="testimonial-divider"></div>\n' +
+    '  <div class="testimonial-author">' + t.name + (t.company ? '<br>' + t.company : '') + '</div>\n' +
+    '</div>';
+  navigator.clipboard.writeText(html);
+  toast('HTML copied');
+}
+function deleteTesti(i) {
+  var testis = JSON.parse(localStorage.getItem('testis') || '[]');
+  testis.splice(i, 1);
+  localStorage.setItem('testis', JSON.stringify(testis));
+  loadTestis();
+  touch();
+}
+
+/* ── Content Calendar ────────────────────────── */
+function loadCalendar() {
+  var items = JSON.parse(localStorage.getItem('calendar') || '[]');
+  var grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+  var now = new Date();
+  var start = new Date(now); start.setDate(now.getDate() - now.getDay());
+  for (var i = 0; i < 14; i++) {
+    var day = new Date(start); day.setDate(start.getDate() + i);
+    var dayStr = day.toISOString().slice(0,10);
+    var label = day.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric' });
+    var div = document.createElement('div');
+    div.className = 'cal-day';
+    div.innerHTML = '<div class="cal-day-label">' + label + '</div>';
+    items.filter(function(it){ return it.date === dayStr; }).forEach(function(it, idx) {
+      var realIdx = items.indexOf(it);
+      var span = document.createElement('div');
+      span.className = 'cal-item ' + it.type + (it.done ? ' done' : '');
+      span.textContent = it.title;
+      span.onclick = function(e) {
+        e.stopPropagation();
+        if (confirm('Mark "' + it.title + '" as ' + (it.done ? 'not done' : 'done') + '? (Shift+click to delete)')) {
+          if (e.shiftKey) items.splice(realIdx, 1);
+          else items[realIdx].done = !items[realIdx].done;
+          localStorage.setItem('calendar', JSON.stringify(items));
+          loadCalendar();
+          touch();
+        }
+      };
+      div.appendChild(span);
+    });
+    grid.appendChild(div);
+  }
+}
+function addCalItem(e) {
+  e.preventDefault();
+  var items = JSON.parse(localStorage.getItem('calendar') || '[]');
+  items.push({
+    title: document.getElementById('calTitle').value,
+    date: document.getElementById('calDate').value,
+    type: document.getElementById('calType').value,
+    done: false
+  });
+  localStorage.setItem('calendar', JSON.stringify(items));
+  document.getElementById('calTitle').value = '';
+  loadCalendar();
+  touch();
+}
+
+/* ── Quick Actions ────────────────────────── */
+var templates = {
+  'cold-a': 'Hi [name],\n\nI took a look at [store] and noticed [specific observation]. I build and optimize Shopify stores for brands like yours, and I think I could help you [specific benefit].\n\nWould you be open to a quick 15-min call this week?\n\nBest,\nMarius\nmurmweb.dev',
+  'cold-b': 'Hi [name],\n\nI help local businesses in [city] get more customers through a better website. I noticed [observation about their current site/listing].\n\nI can build you a fast, modern site for a fixed price with no surprises. Would you like to see some examples?\n\nBest,\nMarius\nmurmweb.dev',
+  'reddit': 'Great question. I actually build stores for a living — here\'s what I\'d suggest:\n\n[actual helpful advice]\n\nHappy to take a look at your store if you want a free audit. DM me or check murmweb.dev.',
+  'portfolio': 'https://murmweb.dev',
+  'calendar': 'https://cal.com/murmweb/free-15-min-intro-call',
+  'pricing': 'https://murmweb.dev/pricing.html'
+};
+document.querySelectorAll('[data-copy]').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    navigator.clipboard.writeText(templates[btn.dataset.copy]);
+    toast('Copied!');
+  });
+});
+
+/* ── Revenue Calculator ────────────────────────── */
+function recalc() {
+  var price = parseFloat(document.getElementById('calcPrice').value) || 0;
+  var hours = parseFloat(document.getElementById('calcHours').value) || 1;
+  var projects = parseFloat(document.getElementById('calcProjects').value) || 0;
+  var target = parseFloat(document.getElementById('calcTarget').value) || 0;
+  var effective = price / hours;
+  var monthly = price * projects;
+  var yearly = monthly * 12;
+  var diff = effective - target;
+  document.getElementById('calcEffective').textContent = '€' + effective.toFixed(2);
+  document.getElementById('calcMonthly').textContent = '€' + monthly.toLocaleString();
+  document.getElementById('calcYearly').textContent = '€' + yearly.toLocaleString();
+  document.getElementById('calcVsTarget').textContent = (diff >= 0 ? '+' : '') + '€' + diff.toFixed(2) + '/hr';
+  document.getElementById('calcVsTarget').style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
+}
+
+/* ── Competition Monitor ────────────────────────── */
+function loadComps() {
+  var comps = JSON.parse(localStorage.getItem('comps') || '[{"url":"https://perfectmediasolutions.nl","notes":""}]');
+  var list = document.getElementById('compList');
+  list.innerHTML = '';
+  comps.forEach(function(c, i) {
+    var div = document.createElement('div');
+    div.className = 'comp-item';
+    var host = new URL(c.url).hostname;
+    div.innerHTML = '<div class="name">' + escapeHtml(host) + '</div>' +
+      '<div class="links"><a href="' + c.url + '" target="_blank">Visit &rarr;</a>' +
+      '<a href="https://pagespeed.web.dev/analysis?url=' + encodeURIComponent(c.url) + '" target="_blank">PageSpeed</a>' +
+      '<a href="#" onclick="deleteComp(' + i + '); return false;">Delete</a></div>' +
+      '<textarea placeholder="Notes..." data-comp="' + i + '">' + escapeHtml(c.notes || '') + '</textarea>';
+    list.appendChild(div);
+  });
+  document.querySelectorAll('[data-comp]').forEach(function(ta) {
+    ta.addEventListener('input', function() {
+      var comps = JSON.parse(localStorage.getItem('comps') || '[]');
+      comps[ta.dataset.comp].notes = ta.value;
+      localStorage.setItem('comps', JSON.stringify(comps));
+      touch();
+    });
+  });
+}
+function addComp(e) {
+  e.preventDefault();
+  var comps = JSON.parse(localStorage.getItem('comps') || '[]');
+  comps.push({ url: document.getElementById('compUrl').value, notes: '' });
+  localStorage.setItem('comps', JSON.stringify(comps));
+  document.getElementById('compUrl').value = '';
+  loadComps();
+  touch();
+}
+function deleteComp(i) {
+  var comps = JSON.parse(localStorage.getItem('comps') || '[]');
+  comps.splice(i, 1);
+  localStorage.setItem('comps', JSON.stringify(comps));
+  loadComps();
+  touch();
+}
+
+/* ── Helpers ────────────────────────── */
+function escapeHtml(str) {
+  return String(str || '').replace(/[&<>"']/g, function(m) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m];
+  });
+}
+</script>
+</body>
+</html>
