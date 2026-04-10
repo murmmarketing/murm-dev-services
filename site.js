@@ -6,13 +6,17 @@
   var initial = saved || (prefersLight ? 'light' : 'dark');
   if (initial === 'light') document.documentElement.setAttribute('data-theme', 'light');
 
-  window.toggleTheme = function() {
+  function toggleTheme() {
     var current = document.documentElement.getAttribute('data-theme');
     var next = current === 'light' ? 'dark' : 'light';
     if (next === 'dark') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.setAttribute('data-theme', 'light');
     localStorage.setItem('theme', next);
-  };
+  }
+  // Wire up any .theme-toggle buttons on the page (no inline handler needed).
+  document.querySelectorAll('.theme-toggle').forEach(function(btn) {
+    btn.addEventListener('click', toggleTheme);
+  });
 
   // ── Back to Top ──────────────────────────
   var btt = document.querySelector('.back-to-top');

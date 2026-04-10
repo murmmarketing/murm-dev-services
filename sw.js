@@ -39,6 +39,12 @@ self.addEventListener('activate', function(e) {
 
 self.addEventListener('fetch', function(e) {
   if (e.request.method !== 'GET') return;
+  var url = new URL(e.request.url);
+  // Only handle http(s) — skip chrome-extension://, blob:, data:, etc.
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+  // Skip cross-origin analytics/tracking and same-origin _vercel endpoints
+  if (url.origin !== self.location.origin) return;
+  if (url.pathname.startsWith('/_vercel/')) return;
   e.respondWith(
     caches.match(e.request).then(function(cached) {
       return cached || fetch(e.request).then(function(res) {

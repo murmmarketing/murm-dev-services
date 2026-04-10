@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+  TODO (H1 from AUDIT_REPORT.md): Client-side password gating is not real auth.
+  Anyone can open DevTools and bypass the SHA-256 check. For production, either:
+    a) Enable Vercel Password Protection on this project (fastest; no code changes)
+    b) Move admin behind a serverless function with a proper session cookie
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -146,7 +152,7 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
   <div class="gate-box">
     <h1>murmweb admin</h1>
     <input type="password" id="gatePass" placeholder="Password" autofocus>
-    <button onclick="checkGate()">Unlock</button>
+    <button id="gateBtn" type="button">Unlock</button>
     <div id="gateError" class="gate-error" style="display:none;">Incorrect password</div>
   </div>
 </div>
@@ -156,7 +162,7 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
   <div class="dash-header">
     <h1>&gt; murmweb admin</h1>
     <span class="updated" id="lastUpdated">Last updated: never</span>
-    <button class="logout" onclick="logout()">Logout</button>
+    <button class="logout" id="logoutBtn" type="button">Logout</button>
   </div>
 
   <div class="grid">
@@ -190,7 +196,7 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
     <!-- Panel 2: Lead Tracker -->
     <div class="panel">
       <h2>Lead Tracker</h2>
-      <form class="lead-form" onsubmit="addLead(event)">
+      <form class="lead-form" id="leadForm">
         <input type="text" id="leadName" placeholder="Name" required>
         <input type="email" id="leadEmail" placeholder="Email">
         <select id="leadSource">
@@ -226,13 +232,13 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
           <tbody id="leadsBody"></tbody>
         </table>
       </div>
-      <button class="export-btn" onclick="exportLeads()">Export CSV</button>
+      <button class="export-btn" id="exportBtn" type="button">Export CSV</button>
     </div>
 
     <!-- Panel 3: Testimonial Manager -->
     <div class="panel">
       <h2>Testimonial Manager</h2>
-      <form class="testi-form" onsubmit="addTesti(event)">
+      <form class="testi-form" id="testiForm">
         <textarea id="testiQuote" placeholder="Quote text" required></textarea>
         <input type="text" id="testiName" placeholder="Name / Title" required>
         <input type="text" id="testiCompany" placeholder="Company">
@@ -246,7 +252,7 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
     <div class="panel">
       <h2>Content Calendar</h2>
       <div class="cal-grid" id="calGrid"></div>
-      <form class="cal-add" onsubmit="addCalItem(event)">
+      <form class="cal-add" id="calForm">
         <input type="text" id="calTitle" placeholder="Title" required>
         <input type="date" id="calDate" required>
         <select id="calType">
@@ -263,28 +269,28 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
     <div class="panel">
       <h2>Site Health</h2>
       <div class="link-list">
-        <a href="https://pagespeed.web.dev/analysis?url=https://murmweb.dev" target="_blank" class="link-item">
+        <a href="https://pagespeed.web.dev/analysis?url=https://murmweb.dev" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">PageSpeed Insights</div><div class="desc">Check Core Web Vitals</div></div>
         </a>
-        <a href="https://search.google.com/search-console" target="_blank" class="link-item">
+        <a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">Search Console</div><div class="desc">Index coverage, queries, errors</div></div>
         </a>
-        <a href="https://vercel.com/dashboard" target="_blank" class="link-item">
+        <a href="https://vercel.com/dashboard" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">Vercel Dashboard</div><div class="desc">Deployments, analytics, logs</div></div>
         </a>
-        <a href="https://partners.shopify.com" target="_blank" class="link-item">
+        <a href="https://partners.shopify.com" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">Shopify Partners</div><div class="desc">Development stores, referrals</div></div>
         </a>
-        <a href="https://cal.com/bookings" target="_blank" class="link-item">
+        <a href="https://cal.com/bookings" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">Cal.com</div><div class="desc">Upcoming bookings</div></div>
         </a>
-        <a href="https://formspree.io/forms" target="_blank" class="link-item">
+        <a href="https://formspree.io/forms" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">Formspree</div><div class="desc">Form submissions</div></div>
         </a>
-        <a href="https://business.trustpilot.com" target="_blank" class="link-item">
+        <a href="https://business.trustpilot.com" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">Trustpilot</div><div class="desc">Reviews and responses</div></div>
         </a>
-        <a href="https://clarity.microsoft.com/projects" target="_blank" class="link-item">
+        <a href="https://clarity.microsoft.com/projects" target="_blank" rel="noopener noreferrer" class="link-item">
           <div><div class="title">Microsoft Clarity</div><div class="desc">Heatmaps and session recordings</div></div>
         </a>
       </div>
@@ -309,19 +315,19 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
       <div class="calc-grid">
         <div class="calc-field">
           <label>Project price (€)</label>
-          <input type="number" id="calcPrice" value="750" oninput="recalc()">
+          <input type="number" id="calcPrice" value="750" data-calc>
         </div>
         <div class="calc-field">
           <label>Hours spent</label>
-          <input type="number" id="calcHours" value="20" oninput="recalc()">
+          <input type="number" id="calcHours" value="20" data-calc>
         </div>
         <div class="calc-field">
           <label>Projects / month</label>
-          <input type="number" id="calcProjects" value="4" oninput="recalc()">
+          <input type="number" id="calcProjects" value="4" data-calc>
         </div>
         <div class="calc-field">
           <label>Target hourly rate (€)</label>
-          <input type="number" id="calcTarget" value="65" oninput="recalc()">
+          <input type="number" id="calcTarget" value="65" data-calc>
         </div>
         <div class="calc-result">
           <div class="row"><span class="label">Effective hourly rate</span><span class="val" id="calcEffective">€37.50</span></div>
@@ -336,7 +342,7 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
     <div class="panel">
       <h2>Competition Monitor</h2>
       <div class="comp-list" id="compList"></div>
-      <form class="comp-add" onsubmit="addComp(event)">
+      <form class="comp-add" id="compForm">
         <input type="url" id="compUrl" placeholder="https://competitor.com" required>
         <button type="submit">+ Add</button>
       </form>
@@ -347,31 +353,46 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
 <div class="toast" id="toast"></div>
 
 <script>
-/* ── Password Gate ────────────────────────── */
-var PASS_HASH = 'murmweb2026'; // User can change this
-function checkGate() {
-  var input = document.getElementById('gatePass').value;
-  if (input === localStorage.getItem('admin_pass') || input === PASS_HASH) {
-    localStorage.setItem('admin_pass', input);
-    localStorage.setItem('admin_auth', '1');
-    showDashboard();
-  } else {
-    document.getElementById('gateError').style.display = 'block';
-  }
+/* ── Password Gate ──────────────────────────
+   Password is stored as a SHA-256 hash, not plaintext.
+   Current hash corresponds to the legacy password "murmweb2026".
+   TO CHANGE: compute new hash in terminal with:
+     printf "your-new-password" | shasum -a 256
+   …and replace the PASS_HASH constant below. */
+var PASS_HASH = '6507636938e7dc6e949417c4ce7a6bcb6f84ce23b4f92af38f6498c894f376c8';
+
+async function sha256Hex(str) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
 }
+
+async function checkGate() {
+  var input = document.getElementById('gatePass').value;
+  try {
+    var hash = await sha256Hex(input);
+    if (hash === PASS_HASH) {
+      sessionStorage.setItem('admin_auth', '1');
+      showDashboard();
+      return;
+    }
+  } catch (err) { /* crypto.subtle not available (non-HTTPS) */ }
+  document.getElementById('gateError').style.display = 'block';
+}
+document.getElementById('gateBtn').addEventListener('click', checkGate);
 document.getElementById('gatePass').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') checkGate();
 });
 function logout() {
-  localStorage.removeItem('admin_auth');
+  sessionStorage.removeItem('admin_auth');
   location.reload();
 }
+document.getElementById('logoutBtn').addEventListener('click', logout);
 function showDashboard() {
   document.getElementById('gate').style.display = 'none';
   document.getElementById('dashboard').classList.add('active');
   initDashboard();
 }
-if (localStorage.getItem('admin_auth') === '1') showDashboard();
+if (sessionStorage.getItem('admin_auth') === '1') showDashboard();
 
 /* ── Toast ────────────────────────── */
 function toast(msg) {
@@ -393,6 +414,15 @@ function touch() {
 function initDashboard() {
   var last = localStorage.getItem('admin_updated');
   if (last) document.getElementById('lastUpdated').textContent = 'Last updated: ' + last;
+  // Wire up forms/buttons (no inline handlers)
+  document.getElementById('leadForm').addEventListener('submit', addLead);
+  document.getElementById('testiForm').addEventListener('submit', addTesti);
+  document.getElementById('calForm').addEventListener('submit', addCalItem);
+  document.getElementById('compForm').addEventListener('submit', addComp);
+  document.getElementById('exportBtn').addEventListener('click', exportLeads);
+  document.querySelectorAll('[data-calc]').forEach(function(el) {
+    el.addEventListener('input', recalc);
+  });
   loadStats();
   loadLeads();
   loadTestis();
@@ -498,8 +528,20 @@ function loadTestis() {
     var div = document.createElement('div');
     div.className = 'testi-item';
     div.innerHTML = '<div class="quote">"' + escapeHtml(t.quote) + '"</div>' +
-      '<div class="meta">' + escapeHtml(t.name) + (t.company ? ' &mdash; ' + escapeHtml(t.company) : '') + ' &middot; ' + (t.rating || 5) + '/5</div>' +
-      '<div class="actions"><button onclick="copyTestiHtml(' + i + ')">Copy HTML</button><button onclick="deleteTesti(' + i + ')">Delete</button></div>';
+      '<div class="meta">' + escapeHtml(t.name) + (t.company ? ' &mdash; ' + escapeHtml(t.company) : '') + ' &middot; ' + (t.rating || 5) + '/5</div>';
+    var actions = document.createElement('div');
+    actions.className = 'actions';
+    var copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.textContent = 'Copy HTML';
+    copyBtn.addEventListener('click', function(){ copyTestiHtml(i); });
+    var delBtn = document.createElement('button');
+    delBtn.type = 'button';
+    delBtn.textContent = 'Delete';
+    delBtn.addEventListener('click', function(){ deleteTesti(i); });
+    actions.appendChild(copyBtn);
+    actions.appendChild(delBtn);
+    div.appendChild(actions);
     list.appendChild(div);
   });
 }
@@ -630,21 +672,43 @@ function loadComps() {
   comps.forEach(function(c, i) {
     var div = document.createElement('div');
     div.className = 'comp-item';
-    var host = new URL(c.url).hostname;
-    div.innerHTML = '<div class="name">' + escapeHtml(host) + '</div>' +
-      '<div class="links"><a href="' + c.url + '" target="_blank">Visit &rarr;</a>' +
-      '<a href="https://pagespeed.web.dev/analysis?url=' + encodeURIComponent(c.url) + '" target="_blank">PageSpeed</a>' +
-      '<a href="#" onclick="deleteComp(' + i + '); return false;">Delete</a></div>' +
-      '<textarea placeholder="Notes..." data-comp="' + i + '">' + escapeHtml(c.notes || '') + '</textarea>';
-    list.appendChild(div);
-  });
-  document.querySelectorAll('[data-comp]').forEach(function(ta) {
+    var host;
+    try { host = new URL(c.url).hostname; } catch (e) { host = c.url; }
+    var name = document.createElement('div');
+    name.className = 'name';
+    name.textContent = host;
+    var links = document.createElement('div');
+    links.className = 'links';
+    var visit = document.createElement('a');
+    visit.href = c.url;
+    visit.target = '_blank';
+    visit.rel = 'noopener noreferrer';
+    visit.textContent = 'Visit →';
+    var ps = document.createElement('a');
+    ps.href = 'https://pagespeed.web.dev/analysis?url=' + encodeURIComponent(c.url);
+    ps.target = '_blank';
+    ps.rel = 'noopener noreferrer';
+    ps.textContent = 'PageSpeed';
+    var del = document.createElement('a');
+    del.href = '#';
+    del.textContent = 'Delete';
+    del.addEventListener('click', function(e){ e.preventDefault(); deleteComp(i); });
+    links.appendChild(visit);
+    links.appendChild(ps);
+    links.appendChild(del);
+    var ta = document.createElement('textarea');
+    ta.placeholder = 'Notes...';
+    ta.value = c.notes || '';
     ta.addEventListener('input', function() {
-      var comps = JSON.parse(localStorage.getItem('comps') || '[]');
-      comps[ta.dataset.comp].notes = ta.value;
-      localStorage.setItem('comps', JSON.stringify(comps));
+      var all = JSON.parse(localStorage.getItem('comps') || '[]');
+      all[i].notes = ta.value;
+      localStorage.setItem('comps', JSON.stringify(all));
       touch();
     });
+    div.appendChild(name);
+    div.appendChild(links);
+    div.appendChild(ta);
+    list.appendChild(div);
   });
 }
 function addComp(e) {

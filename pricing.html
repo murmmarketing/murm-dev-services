@@ -20,10 +20,66 @@
 <link rel="preload" href="https://fonts.gstatic.com/s/dmseridisplay/v15/rnCQoNPRaJDqk018e0GD4ij3.woff2" as="font" type="font/woff2" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why fixed pricing instead of hourly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fixed pricing means you know exactly what you're paying before we start. No surprise invoices, no incentive for me to drag out the work. I scope the project, quote it, and deliver it. If it takes me longer than expected, that's my problem, not yours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the payment process?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "50% upfront to start, 50% on delivery. For projects over €2,000, we can split into milestones. I invoice via email with bank transfer or PayPal. Dutch clients can pay by iDEAL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer discounts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For long-term partnerships or multiple projects, yes. For a single project, the quoted price is what it is. I don't do discounts for \"exposure\" or promises of future work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I need changes after delivery?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The post-launch support window (7 or 14 days depending on the package) covers any reasonable adjustments. After that, changes are billed at my hourly rate (€65/hr) or we agree on a maintenance package starting at €150/month."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I pay in installments?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For projects over €2,000, yes. We can split into 3 milestones: 40% upfront, 40% at mid-point review, 20% on delivery. Email me to discuss."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you charge VAT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I'm VAT-registered in the Netherlands (KVK 99702738). Dutch and EU-based businesses with a valid VAT number get reverse-charged (no VAT on invoice). Private individuals and non-EU clients are billed at 21% VAT where applicable."
+      }
+    }
+  ]
+}
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script type="text/javascript">
-(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER");
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER"/* TODO (M5 from AUDIT_REPORT): replace with real Clarity project ID */);
 </script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -39,7 +95,7 @@
 html { scroll-behavior:smooth; }
 body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
 .container { max-width:820px; margin:0 auto; padding:0 24px; }
-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:rgba(10,10,10,0.8); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
 nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
 .logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
 .logo img { width:38px; height:38px; object-fit:contain; }
@@ -89,7 +145,7 @@ footer p { font-size:13px; color:var(--text-dim); }
   <div class="nav-inner">
     <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
     <div class="nav-right">
-      <button type="button" class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+      <button type="button" class="theme-toggle" aria-label="Toggle theme">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
@@ -218,7 +274,7 @@ footer p { font-size:13px; color:var(--text-dim); }
       <p>Tell me about your project. I'll get back within 24 hours with an honest quote.</p>
       <div class="cta-buttons">
         <a href="mailto:hello@murmweb.dev" class="btn-primary">Send me an email &rarr;</a>
-        <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener" class="btn-secondary">Book a free call &rarr;</a>
+        <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" class="btn-secondary">Book a free call &rarr;</a>
       </div>
     </div>
   </div>

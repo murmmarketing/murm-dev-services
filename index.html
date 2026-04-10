@@ -28,7 +28,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script type="text/javascript">
-(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER");
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER"/* TODO (M5 from AUDIT_REPORT): replace with real Clarity project ID */);
 </script>
 <script type="application/ld+json">
 [
@@ -207,7 +207,7 @@ body.loaded .hero-word.gold { animation: goldShimmer 1.2s ease 0.2s; }
 .container { max-width:1100px; margin:0 auto; padding:0 24px; }
 
 /* ── Nav ─────────────────────────────────────── */
-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:rgba(10,10,10,0.8); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); opacity:0; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); opacity:0; }
 body.loaded nav { opacity:1; transition: opacity 0.4s ease 0.3s; }
 nav .container { display:flex; align-items:center; justify-content:space-between; }
 .logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
@@ -571,10 +571,10 @@ footer a:hover { color:var(--gold); }
 <!-- Nav -->
 <nav>
   <div class="container">
-    <a href="#" class="logo"><img src="logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
+    <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
     <div class="nav-right">
       <span class="nav-status"><span class="dot"></span>2 active projects</span>
-      <button type="button" class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+      <button type="button" class="theme-toggle" aria-label="Toggle theme">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
@@ -588,7 +588,7 @@ footer a:hover { color:var(--gold); }
 <section class="hero">
   <div class="hero-glow" data-parallax="0.2"></div>
   <div class="hero-deco" data-parallax="0.5"></div>
-  <img src="logo.png" alt="" class="hero-watermark" data-parallax="0.3" aria-hidden="true">
+  <img src="/logo.png" alt="" class="hero-watermark" data-parallax="0.3" aria-hidden="true">
   <div class="container">
     <div class="hero-line"></div>
     <p class="hero-label-text">Full-stack developer &mdash; Netherlands</p>
@@ -705,6 +705,7 @@ footer a:hover { color:var(--gold); }
     <div class="audit-inner">
       <h2 class="section-title reveal">Get a free store audit</h2>
       <p class="section-subtitle reveal" style="margin:0 auto;">Drop your store URL and I'll send you a personalized report within 24 hours. No strings attached.</p>
+      <!-- TODO (M6 from AUDIT_REPORT): replace xplaceholder with real Formspree form ID -->
       <form class="audit-form reveal" action="https://formspree.io/f/xplaceholder" method="POST" data-audit-form>
         <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
         <button type="submit" class="audit-btn">Get my free audit &rarr;</button>
@@ -959,6 +960,7 @@ footer a:hover { color:var(--gold); }
     <div class="email-capture-inner">
       <h2 class="section-title reveal">Get the Shopify optimization checklist</h2>
       <p class="section-subtitle reveal" style="margin:0 auto;">7 things to fix on your store today. Free, no spam.</p>
+      <!-- TODO (M6 from AUDIT_REPORT): replace xplaceholder with real Formspree form ID -->
       <form class="audit-form reveal" action="https://formspree.io/f/xplaceholder" method="POST" style="max-width:480px;margin:36px auto 0;">
         <input type="email" name="email" class="audit-input" placeholder="you@yourbrand.com" required>
         <button type="submit" class="audit-btn">Send it to me &rarr;</button>
@@ -998,14 +1000,15 @@ footer a:hover { color:var(--gold); }
 <!-- Exit Intent Popup -->
 <div class="exit-overlay" id="exitOverlay">
   <div class="exit-modal">
-    <button type="button" class="exit-close" aria-label="Close" onclick="closeExit()">&times;</button>
+    <button type="button" class="exit-close" aria-label="Close" data-exit-close>&times;</button>
     <h3>Before you go&hellip;</h3>
     <p>Get a free 5-point audit of your store. I'll send you a personalized report within 24 hours.</p>
+    <!-- TODO (M6 from AUDIT_REPORT): replace xplaceholder with real Formspree form ID -->
     <form class="audit-form" action="https://formspree.io/f/xplaceholder" method="POST" data-audit-form>
       <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
       <button type="submit" class="audit-btn">Send me the audit &rarr;</button>
     </form>
-    <button type="button" class="exit-no-thanks" onclick="closeExit()">No thanks</button>
+    <button type="button" class="exit-no-thanks" data-exit-close>No thanks</button>
   </div>
 </div>
 
@@ -1160,10 +1163,10 @@ footer a:hover { color:var(--gold); }
   var overlay = document.getElementById('exitOverlay');
   if (!overlay) return;
 
-  window.closeExit = function() {
+  function closeExit() {
     overlay.classList.remove('show');
     setTimeout(function(){ overlay.style.display = 'none'; }, 300);
-  };
+  }
 
   function showExit() {
     if (sessionStorage.getItem('exit_shown')) return;
@@ -1179,6 +1182,10 @@ footer a:hover { color:var(--gold); }
 
   overlay.addEventListener('click', function(e) {
     if (e.target === overlay) closeExit();
+  });
+
+  document.querySelectorAll('[data-exit-close]').forEach(function(btn) {
+    btn.addEventListener('click', closeExit);
   });
 
   // Mark audit as submitted on form interaction

@@ -23,7 +23,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script type="text/javascript">
-(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER");
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","PLACEHOLDER"/* TODO (M5 from AUDIT_REPORT): replace with real Clarity project ID */);
 </script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -39,7 +39,7 @@
 html { scroll-behavior:smooth; }
 body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
 .container { max-width:720px; margin:0 auto; padding:0 24px; }
-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:rgba(10,10,10,0.8); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
 nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
 .logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
 .logo img { width:38px; height:38px; object-fit:contain; }
@@ -51,6 +51,7 @@ main { padding:160px 0 100px; }
 .back:hover { color:var(--gold); }
 h1 { font-family:var(--serif); font-size:clamp(36px,5vw,52px); font-weight:400; line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px; }
 .intro { font-size:17px; color:var(--text-muted); line-height:1.7; margin-bottom:56px; }
+.section-title { font-family:var(--serif); font-size:28px; font-weight:400; color:var(--text); margin-bottom:24px; letter-spacing:-0.01em; }
 .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:64px; }
 .step { background:var(--bg-card); padding:32px 28px; border-radius:12px; }
 .step .num { font-family:var(--serif); font-size:32px; color:var(--gold); line-height:1; margin-bottom:16px; }
@@ -58,10 +59,10 @@ h1 { font-family:var(--serif); font-size:clamp(36px,5vw,52px); font-weight:400; 
 .step p { font-size:13px; color:var(--text-muted); line-height:1.6; }
 @media (max-width:640px) { .steps { grid-template-columns:1fr; } }
 .share-links { background:var(--bg-elevated); padding:40px; border-radius:16px; margin-bottom:48px; }
-.share-links h3 { font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:20px; }
+.share-links h2 { font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:20px; letter-spacing:-0.01em; }
 .share-links code { display:block; background:var(--bg); padding:16px; border-radius:6px; font-family:var(--mono); font-size:13px; color:var(--gold); margin-bottom:12px; border:1px solid var(--border); word-break:break-all; }
 .refer-form { background:var(--bg-card); padding:40px; border-radius:16px; }
-.refer-form h3 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:24px; }
+.refer-form h2 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:24px; letter-spacing:-0.01em; }
 .refer-form .row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
 @media (max-width:640px) { .refer-form .row { grid-template-columns:1fr; } }
 .refer-form input { width:100%; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:14px 16px; font-family:var(--sans); font-size:14px; color:var(--text); outline:none; transition:border-color 0.25s ease; }
@@ -79,7 +80,7 @@ footer p { font-size:13px; color:var(--text-dim); }
   <div class="nav-inner">
     <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
     <div class="nav-right">
-      <button type="button" class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+      <button type="button" class="theme-toggle" aria-label="Toggle theme">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
@@ -94,6 +95,7 @@ footer p { font-size:13px; color:var(--text-dim); }
     <h1>Refer a client, earn 10%</h1>
     <p class="intro">Know someone who needs a website or e-commerce store? Send them my way and earn 10% of the project value when they sign on. No caps, no limits.</p>
 
+    <h2 class="section-title">How it works</h2>
     <div class="steps">
       <div class="step">
         <div class="num">1</div>
@@ -113,14 +115,15 @@ footer p { font-size:13px; color:var(--text-dim); }
     </div>
 
     <div class="share-links">
-      <h3>Your referral links</h3>
+      <h2>Your referral links</h2>
       <code>https://murmweb.dev</code>
       <code>https://murmweb.dev/refer.html?ref=YOURNAME</code>
       <p style="font-size:13px; color:var(--text-muted); margin-top:12px;">Replace YOURNAME with your name so I know who referred them.</p>
     </div>
 
     <div class="refer-form">
-      <h3>Or refer someone directly</h3>
+      <h2>Or refer someone directly</h2>
+      <!-- TODO (M6 from AUDIT_REPORT): replace xplaceholder with real Formspree form ID -->
       <form action="https://formspree.io/f/xplaceholder" method="POST">
         <div class="row">
           <input type="text" name="your_name" placeholder="Your name" required>

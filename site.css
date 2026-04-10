@@ -1,3 +1,8 @@
+/* ── Dark Mode Default Nav Background ─────────── */
+:root {
+  --nav-bg: rgba(10,10,10,0.8);
+}
+
 /* ── Light Mode Override ──────────────────────── */
 html[data-theme="light"] {
   --bg: #F5F3EF;
@@ -11,6 +16,7 @@ html[data-theme="light"] {
   --text-dim: #9A9590;
   --border: rgba(0,0,0,0.08);
   --border-hover: rgba(0,0,0,0.15);
+  --nav-bg: rgba(245,243,239,0.85);
 }
 html[data-theme="light"] body::before { opacity: 0.015; }
 html[data-theme="light"] .cursor { background: #1A1918; }
