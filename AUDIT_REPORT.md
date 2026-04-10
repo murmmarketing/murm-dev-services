@@ -98,15 +98,15 @@ frame-ancestors 'self'
 **Problem:** Without an explicit `scope`, the PWA navigation scope defaults to the `start_url` directory, which can cause subtle routing issues when navigating between pages in standalone mode.
 **Fix:** Added `"scope": "/"` so the entire site is in-scope for the installed PWA.
 
-### M5. Microsoft Clarity tracking ID is a placeholder — NEEDS INPUT
+### M5. Microsoft Clarity tracking ID is a placeholder — FIXED
 **Files:** All HTML pages (9 files)
-**Problem:** The Clarity snippet uses the literal string `"PLACEHOLDER"` for the project ID, meaning Clarity never initializes — you're shipping the request but receiving no data.
-**Recommendation:** Create a Clarity project at `https://clarity.microsoft.com`, grab the project ID, and search-replace `"PLACEHOLDER"` → `"YOURID"` across the repo. Marked with a `TODO` comment at the script tag in each page.
+**Problem:** The Clarity snippet used the literal string `"PLACEHOLDER"` for the project ID, so Clarity never initialized.
+**Fix:** Replaced with the real Clarity project ID `w9omdg3pe6` across all 9 HTML files.
 
-### M6. Formspree form endpoints are placeholders — NEEDS INPUT
+### M6. Formspree form endpoints are placeholders — FIXED
 **Files:** `index.html`, `refer.html`
-**Problem:** Forms post to `https://formspree.io/f/xplaceholder`. These submissions silently fail / 404.
-**Recommendation:** Create a Formspree form and swap `xplaceholder` with your real form ID. Marked with a `TODO` comment at each form.
+**Problem:** Forms posted to `https://formspree.io/f/xplaceholder`, so submissions silently 404'd.
+**Fix:** Replaced with the real Formspree form ID `mykbqrpd` in all 4 forms.
 
 ---
 
@@ -135,14 +135,12 @@ Correctly points to `/sitemap.xml` and allows all crawlers on public pages. No i
 |----------|-------|-------|-------------|
 | Critical | 2     | 2     | 0           |
 | High     | 6     | 5     | 1           |
-| Medium   | 6     | 4     | 2           |
+| Medium   | 6     | 6     | 0           |
 | Low      | 5     | 5     | 0           |
-| **Total**| **19**| **16**| **3**       |
+| **Total**| **19**| **18**| **1**       |
 
 ### Action items for you
 
 1. **Decide admin auth strategy** (H1). Vercel password protection is the fastest win if you want to keep the static HTML approach.
-2. **Set up Microsoft Clarity** and replace `PLACEHOLDER` (M5).
-3. **Set up Formspree forms** and replace `xplaceholder` (M6).
 
-Every other issue has been resolved in this commit. After you provide the three items above, the site will be fully audit-clean.
+Every other issue has been resolved. After you decide on admin auth, the site will be fully audit-clean.
