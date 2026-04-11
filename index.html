@@ -171,7 +171,7 @@ body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events
 @keyframes drawM { to { stroke-dashoffset:0; } }
 
 /* ── Custom Cursor ───────────────────────────── */
-.cursor { position:fixed; top:0; left:0; width:8px; height:8px; border-radius:50%; background:var(--gold); pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border 0.25s ease; will-change:transform; mix-blend-mode:normal; }
+.cursor { position:fixed; top:0; left:0; width:8px; height:8px; border-radius:50%; background:var(--gold); pointer-events:none; z-index:100000; transform:translate(-50%,-50%); transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border 0.25s ease; will-change:transform; mix-blend-mode:normal; }
 .cursor.hover { width:40px; height:40px; background:transparent; border:1.5px solid var(--gold); }
 .cursor.click { transform:translate(-50%,-50%) scale(0.8); }
 @media (pointer:coarse),(max-width:768px) { .cursor { display:none !important; } }
@@ -486,6 +486,10 @@ body.loaded .hero-ctas { opacity:1; transform:none; transition: all 0.5s ease 0.
 .exit-modal .audit-btn { width:100%; }
 .exit-no-thanks { display:block; margin-top:14px; text-align:center; font-family:var(--mono); font-size:11px; color:var(--text-dim); text-decoration:none; cursor:pointer; background:none; border:none; width:100%; }
 .exit-no-thanks:hover { color:var(--text-muted); }
+/* Keep custom cursor visible on top of the exit modal (including form inputs) */
+@media (pointer:fine) and (min-width:769px) {
+  .exit-overlay, .exit-overlay *, .exit-modal, .exit-modal * { cursor: none !important; }
+}
 
 /* ── Calendar Embed ─────────────────────────── */
 
