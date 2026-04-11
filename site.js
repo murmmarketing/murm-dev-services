@@ -92,4 +92,61 @@
       navigator.serviceWorker.register('/sw.js').catch(function(){});
     });
   }
+
+  // ── Analytics: custom events ──────────────────────────
+  // Fires into Vercel Web Analytics (window.va) and Microsoft Clarity.
+  // Both are already loaded via index.html / page heads.
+  function track(name, props) {
+    try { if (window.va) window.va('event', { name: name, data: props || {} }); } catch (e) {}
+    try { if (window.clarity) window.clarity('event', name); } catch (e) {}
+  }
+
+  // CTA clicks (delegated) — book call, pricing, email, whatsapp
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var inHero    = !!a.closest('.hero-ctas, .hero');
+    var inFinal   = !!a.closest('.cta-section');
+    var inNav     = !!a.closest('nav');
+    var inPricing = !!a.closest('.pricing-card, .compare-section, .tier');
+    var loc = inHero ? 'hero' : inFinal ? 'final_cta' : inNav ? 'nav' : inPricing ? 'pricing' : 'body';
+
+    if (/cal\.com\/murmweb/.test(href))             track('cta_book_call',    { location: loc });
+    else if (href.indexOf('/pricing') === 0)        track('cta_pricing',      { location: loc });
+    else if (href.indexOf('mailto:') === 0)         track('cta_email_direct', { location: loc });
+    else if (/wa\.me/.test(href))                   track('cta_whatsapp',     {});
+  });
+
+  // Form submissions
+  document.querySelectorAll('form[action*="formspree"]').forEach(function(f) {
+    f.addEventListener('submit', function() {
+      if (f.hasAttribute('data-audit-form'))                   track('form_submit_audit',     {});
+      else if (f.querySelector('input[name="their_email"]'))   track('form_submit_referral',  {});
+      else                                                     track('form_submit_newsletter',{});
+    });
+  });
+
+  // FAQ opens (homepage + pricing page)
+  document.querySelectorAll('.faq-list details, .faq-mini details').forEach(function(d) {
+    d.addEventListener('toggle', function() {
+      if (!d.open) return;
+      var s = d.querySelector('summary');
+      track('faq_opened', { question: s ? (s.innerText || '').slice(0, 80) : '' });
+    });
+  });
+
+  // Blog: article read complete (scrolled past 90% of page)
+  if (/\/blog\/.+\.html$/.test(location.pathname)) {
+    var readFired = false;
+    window.addEventListener('scroll', function() {
+      if (readFired) return;
+      var h = document.documentElement;
+      var ratio = (h.scrollTop + window.innerHeight) / h.scrollHeight;
+      if (ratio > 0.9) {
+        readFired = true;
+        track('blog_read_complete', { slug: location.pathname });
+      }
+    }, { passive: true });
+  }
 })();
