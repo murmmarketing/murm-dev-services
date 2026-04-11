@@ -126,3 +126,32 @@ body.page-entering { animation: pageEnter 0.3s ease; }
   background: var(--gold); box-shadow: 0 0 8px rgba(196,168,122,0.4);
   z-index: 9997; transition: width 0.1s linear;
 }
+
+/* ── Breadcrumbs ──────────────────────────────── */
+.breadcrumbs {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--text-dim); letter-spacing: 0.04em;
+  margin-bottom: 24px; display: flex; flex-wrap: wrap;
+  align-items: center; gap: 8px;
+}
+.breadcrumbs a {
+  color: var(--text-dim); text-decoration: none;
+  transition: color 0.2s ease;
+}
+.breadcrumbs a:hover { color: var(--gold); }
+.breadcrumbs .sep { color: var(--text-dim); opacity: 0.5; }
+.breadcrumbs .current { color: var(--text-muted); }
+
+/* ── Blog Author Byline ───────────────────────── */
+.byline {
+  font-family: var(--mono); font-size: 12px;
+  color: var(--text-dim); letter-spacing: 0.02em;
+  margin-bottom: 32px; display: flex; align-items: center; gap: 10px;
+}
+.byline a {
+  color: var(--text-muted); text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.byline a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+.byline .dot { color: var(--text-dim); opacity: 0.5; }

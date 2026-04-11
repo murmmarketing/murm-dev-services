@@ -30,13 +30,24 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "How I Rebuilt a Failing Shopify Store in 48 Hours",
-  "author": { "@type": "Person", "name": "Murm", "url": "https://murmweb.dev" },
+  "author": { "@type": "Person", "name": "Marius Kerkvliet", "url": "https://murmweb.dev/about.html" },
   "datePublished": "2026-04-09",
   "dateModified": "2026-04-11",
   "publisher": { "@type": "Organization", "name": "murmweb.dev", "logo": { "@type": "ImageObject", "url": "https://murmweb.dev/logo.png" } },
   "description": "A systematic audit and rebuild of a struggling Shopify store: trust badges, policies, product pages, and five quick wins any store owner can implement.",
   "mainEntityOfPage": "https://murmweb.dev/blog/novatech-store-rebuild.html",
   "image": "https://murmweb.dev/og.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://murmweb.dev/" },
+    { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://murmweb.dev/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "How I Rebuilt a Failing Shopify Store in 48 Hours", "item": "https://murmweb.dev/blog/novatech-store-rebuild.html" }
+  ]
 }
 </script>
 <style>
@@ -92,9 +103,20 @@ footer p { font-size:13px; color:var(--text-dim); }
 
 <article>
   <div class="container">
-    <a href="/blog/" class="back">&larr; All articles</a>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/blog/">Writing</a>
+      <span class="sep">/</span>
+      <span class="current">Failing Shopify Store Rebuild</span>
+    </nav>
     <div class="date">April 2026</div>
     <h1>How I Rebuilt a Failing Shopify Store in 48 Hours</h1>
+    <div class="byline">
+      <span>By <a href="/about.html">Marius Kerkvliet</a></span>
+      <span class="dot">·</span>
+      <span>Shopify &amp; Next.js developer</span>
+    </div>
 
     <p>A few weeks ago, a founder reached out to me about her store. It had been live for six months. Thousands of ad dollars spent. Near-zero sales. The store looked like a textbook example of what not to do &mdash; but it's an extremely common situation, and every mistake was fixable.</p>
 

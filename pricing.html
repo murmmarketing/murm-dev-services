@@ -23,6 +23,16 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://murmweb.dev/" },
+    { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://murmweb.dev/pricing.html" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
@@ -156,7 +166,11 @@ footer p { font-size:13px; color:var(--text-dim); }
 
 <main>
   <div class="container">
-    <a href="/" class="back">&larr; Home</a>
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <span class="current">Pricing</span>
+    </nav>
     <h1>What I charge</h1>
     <p class="intro">Transparent, fixed-price packages. No hourly billing, no surprise invoices. You know what you're paying and what you're getting before we start.</p>
 
