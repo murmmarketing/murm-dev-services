@@ -240,9 +240,11 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .hero h1 { font-family:var(--serif); font-size:clamp(42px,6.5vw,76px); font-weight:400; line-height:1.06; letter-spacing:-0.025em; color:var(--text); max-width:680px; margin-bottom:28px; }
 .hero h1 em { font-style:italic; color:var(--gold); }
 .hero-subtitle { font-size:17px; color:var(--text-muted); max-width:500px; line-height:1.75; margin-bottom:64px; }
-.hero-stats { display:flex; gap:56px; flex-wrap:wrap; }
+.hero-stats { display:flex; gap:56px; flex-wrap:wrap; margin-bottom:48px; }
 .stat-number { font-family:var(--serif); font-size:32px; color:var(--text); letter-spacing:-0.02em; }
 .stat-label { font-family:var(--mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+.hero-ctas { display:flex; flex-wrap:wrap; gap:14px; opacity:0; transform:translateY(18px); }
+body.loaded .hero-ctas { opacity:1; transform:none; transition: all 0.5s ease 0.2s; }
 
 /* ── Clients ─────────────────────────────────── */
 .clients-section { padding:0 0 60px; }
@@ -267,7 +269,8 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .service-card .card-glow { position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity 0.3s ease; border-radius:inherit; }
 .service-card:hover .card-glow { opacity:1; }
 .service-popular { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--bg); background:var(--gold); padding:4px 10px; border-radius:3px; display:inline-block; margin-bottom:16px; position:absolute; top:16px; right:16px; box-shadow:0 2px 12px rgba(196,168,122,0.3); }
-.service-card h3 { font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:12px; color:var(--text); }
+.service-card h3 { font-family:var(--serif); font-size:22px; font-weight:400; margin-bottom:8px; color:var(--text); }
+.service-card .service-best-for { font-family:var(--mono); font-size:11px; font-weight:500; color:var(--gold); letter-spacing:0.02em; margin-bottom:14px; }
 .service-card p { font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:24px; }
 .service-price { font-family:var(--mono); font-size:14px; color:var(--gold); letter-spacing:0.02em; }
 .service-price span { color:var(--text-dim); font-size:12px; }
@@ -485,11 +488,6 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .exit-no-thanks:hover { color:var(--text-muted); }
 
 /* ── Calendar Embed ─────────────────────────── */
-.cal-wrap { margin-top:48px; max-width:800px; margin-left:auto; margin-right:auto; }
-.cal-label { font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-dim); margin-bottom:16px; text-align:center; }
-.cal-frame { width:100%; height:640px; border:1px solid var(--border); border-radius:12px; background:var(--bg-card); }
-.cal-fallback { display:block; text-align:center; margin-top:16px; font-family:var(--mono); font-size:12px; color:var(--text-dim); text-decoration:none; }
-.cal-fallback:hover { color:var(--gold); }
 
 /* ── FAQ ─────────────────────────────────────── */
 .faq-section { padding:100px 0; }
@@ -603,22 +601,26 @@ footer a:hover { color:var(--gold); }
   <img src="/logo.png" alt="" class="hero-watermark" data-parallax="0.3" aria-hidden="true">
   <div class="container">
     <div class="hero-line"></div>
-    <p class="hero-label-text">Shopify &amp; Next.js developer &mdash; Netherlands</p>
+    <p class="hero-label-text">Official Shopify Partner &middot; Leiden, NL &middot; Booking April</p>
     <h1><span class="hero-word" style="display:inline-block">Shopify</span> <span class="hero-word" style="display:inline-block">stores</span><br><span class="hero-word" style="display:inline-block">that</span> <em><span class="hero-word gold" style="display:inline-block">actually</span></em> <span class="hero-word" style="display:inline-block">sell</span></h1>
-    <p class="hero-subtitle">Shopify stores and custom Next.js applications for brands and entrepreneurs who need more than a template. From first line of code to launch day.</p>
+    <p class="hero-subtitle">No agency, no junior devs, no scope creep. Just one developer building Shopify stores and Next.js apps that ship in days &mdash; not months.</p>
     <div class="hero-stats">
       <div class="stat">
         <div class="stat-number" data-count="15000" data-suffix="+">0</div>
-        <div class="stat-label">Products managed</div>
+        <div class="stat-label">Products on a Next.js storefront I built</div>
       </div>
       <div class="stat">
         <div class="stat-number">48hr</div>
-        <div class="stat-label">Avg. delivery time</div>
+        <div class="stat-label">Store optimization turnaround</div>
       </div>
       <div class="stat">
         <div class="stat-number">3 days</div>
         <div class="stat-label">Avg. project start</div>
       </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary" data-magnetic>Book a free strategy call &rarr;</a>
+      <a href="/pricing.html" class="btn-secondary" data-magnetic>See pricing</a>
     </div>
     <div class="hero-divider"></div>
   </div>
@@ -648,12 +650,14 @@ footer a:hover { color:var(--gold); }
       <div class="service-card reveal-card" data-tilt>
         <div class="card-glow"></div>
         <h3>Store Optimization</h3>
+        <p class="service-best-for">Best for: live stores that aren&rsquo;t converting</p>
         <p>Speed audit, conversion rate improvements, SEO fixes, mobile optimization, and analytics setup. For stores that are live but underperforming.</p>
         <span class="service-price">from &euro;400 <span>&mdash; same-week delivery</span></span>
       </div>
       <div class="service-card reveal-card" data-tilt>
         <div class="card-glow"></div>
         <h3>Dropshipper Launch Pack</h3>
+        <p class="service-best-for">Best for: running Meta ads from day one</p>
         <p>A streamlined, conversion-focused Shopify store built for dropshipping. Supplier integration, Conversions API, abandoned cart flows, and a product page template optimized for Meta ads.</p>
         <span class="service-price">from &euro;650 <span>&mdash; ready in 48hrs</span></span>
       </div>
@@ -661,12 +665,14 @@ footer a:hover { color:var(--gold); }
         <div class="card-glow"></div>
         <span class="service-popular">Most popular</span>
         <h3>Shopify Store Setup</h3>
+        <p class="service-best-for">Best for: building a serious brand</p>
         <p>Complete brand store with custom design, optimized product pages, Meta Pixel, email capture, Klaviyo flows, and speed optimization. Ready to run ads from day one.</p>
         <span class="service-price">from &euro;750 <span>&mdash; delivered in days</span></span>
       </div>
       <div class="service-card premium reveal-card">
         <div>
           <h3>Custom Web App</h3>
+          <p class="service-best-for">Best for: anything Shopify can&rsquo;t do</p>
           <p>Full-stack Next.js and Supabase applications. Admin dashboards, product directories, membership platforms, marketplaces &mdash; anything beyond a standard store.</p>
           <span class="service-price">from &euro;2,500 <span>&mdash; scope dependent</span></span>
           <p style="margin-top:10px;font-size:12px;font-style:italic;color:var(--text-dim);">Agencies typically charge &euro;8,000&ndash;15,000 for this scope</p>
@@ -715,13 +721,13 @@ footer a:hover { color:var(--gold); }
 <section class="audit-section">
   <div class="container">
     <div class="audit-inner">
-      <h2 class="section-title reveal">Get a free store audit</h2>
-      <p class="section-subtitle reveal" style="margin:0 auto;">Drop your store URL and I'll send you a personalized report within 24 hours. No strings attached.</p>
+      <h2 class="section-title reveal">I&rsquo;ll review your store in 24 hours, free</h2>
+      <p class="section-subtitle reveal" style="margin:0 auto;">Drop your store URL and I&rsquo;ll personally reply with 3 things you can fix this week. No sales call required.</p>
       <form class="audit-form reveal" action="https://formspree.io/f/mykbqrpd" method="POST" data-audit-form>
         <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
-        <button type="submit" class="audit-btn">Get my free audit &rarr;</button>
+        <button type="submit" class="audit-btn">Send my store &rarr;</button>
       </form>
-      <p class="audit-note reveal">No spam, no sales pitch. Just actionable feedback.</p>
+      <p class="audit-note reveal">No spam, no sales pitch. Reply within 24 hours from a real human (me).</p>
     </div>
   </div>
 </section>
@@ -861,7 +867,7 @@ footer a:hover { color:var(--gold); }
         <div class="testimonial-author">Startup Founder<br>Discovery platform</div>
       </div>
     </div>
-    <p class="testimonials-note reveal">Client names available on request</p>
+    <p class="testimonials-note reveal">Names anonymized to protect client brands. Full references available during a call.</p>
   </div>
 </section>
 
@@ -952,16 +958,10 @@ footer a:hover { color:var(--gold); }
     <h2 class="section-title reveal">Let's build<br>something real</h2>
     <p class="section-subtitle reveal">Tell me what you're working on. I'll get back to you within 24 hours with an honest assessment of what it takes.</p>
     <div class="cta-buttons reveal">
-      <a href="mailto:hello@murmweb.dev" class="btn-primary" data-magnetic>Send me an email &rarr;</a>
-      <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" class="btn-secondary" data-magnetic>Book a free 15-min call &rarr;</a>
+      <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" class="btn-primary" data-magnetic>Book a free strategy call &rarr;</a>
+      <a href="mailto:hello@murmweb.dev" class="btn-secondary" data-magnetic>Or send me an email</a>
     </div>
     <div class="response-badge reveal"><span class="response-dot"></span>Typically responds within 4 hours</div>
-
-    <div class="cal-wrap reveal">
-      <p class="cal-label">Or pick a time below</p>
-      <iframe class="cal-frame" src="https://cal.com/murmweb/free-15-min-intro-call?embed=true&theme=dark" loading="lazy" title="Book a free 15-minute call"></iframe>
-      <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" class="cal-fallback">Open calendar in new tab &rarr;</a>
-    </div>
   </div>
 </section>
 
@@ -992,7 +992,7 @@ footer a:hover { color:var(--gold); }
       <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands &mdash; KVK 99702738</p>
       <div style="display:flex;gap:20px;flex-wrap:wrap;">
         <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a>
-        <a href="https://www.trustpilot.com/review/murmweb.dev" target="_blank" rel="noopener noreferrer">Leave a review on Trustpilot</a>
+        <a href="/about.html">About</a>
         <a href="/refer.html">Refer a client</a>
         <a href="/tools.html">Free tools</a>
         <a href="/blog/">Blog</a>
