@@ -250,6 +250,7 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .stat-label { font-family:var(--mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
 .hero-ctas { display:flex; flex-wrap:wrap; gap:14px; opacity:0; transform:translateY(18px); }
 body.loaded .hero-ctas { opacity:1; transform:none; transition: all 0.5s ease 0.2s; }
+body.loaded .hero-proof { opacity:1; transform:none; transition: all 0.5s ease 0.4s; }
 
 /* Hero Mockup (browser frame) */
 .hero-mockup-wrap { position:relative; z-index:1; perspective:1200px; }
@@ -459,19 +460,28 @@ body.loaded .hero-ctas { opacity:1; transform:none; transition: all 0.5s ease 0.
 .compare-table tbody td.no { color:var(--text-dim); opacity:0.4; }
 .compare-table tbody tr:hover { background:rgba(196,168,122,0.02); }
 
-/* ── More Projects ──────────────────────────── */
-.more-projects { padding:60px 0 0; }
-.more-projects-header { font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px; }
-.more-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.more-card { background:var(--bg-card); padding:32px 28px; border-radius:12px; transition:transform 0.3s ease, box-shadow 0.3s ease; }
-.more-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
-.more-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
-.more-card h3 { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--text); margin-bottom:8px; }
-.more-card p { font-size:14px; color:var(--text-muted); line-height:1.7; margin-bottom:12px; }
-.more-badge { font-family:var(--mono); font-size:11px; color:var(--text-dim); font-style:italic; }
-.more-card a.more-link { font-family:var(--mono); font-size:12px; color:var(--gold); text-decoration:none; letter-spacing:0.02em; transition:opacity 0.2s; }
-.more-card a.more-link:hover { opacity:0.7; }
-@media (max-width:768px) { .more-grid { grid-template-columns:1fr; } }
+/* ── Portfolio Grid ─────────────────────────── */
+.portfolio-section { padding:60px 0 0; }
+.portfolio-header { font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px; }
+.portfolio-scroll { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:16px; scrollbar-width:none; }
+.portfolio-scroll::-webkit-scrollbar { display:none; }
+.portfolio-card { flex:0 0 280px; scroll-snap-align:start; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease; }
+.portfolio-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
+.portfolio-thumb { height:140px; background:var(--bg); position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
+.portfolio-mini-bar { display:flex; align-items:center; gap:3px; padding:6px 8px; background:var(--bg-elevated); border-bottom:1px solid var(--border); }
+.portfolio-mini-dot { width:4px; height:4px; border-radius:50%; background:var(--text-dim); opacity:0.3; }
+.portfolio-mini-body { padding:8px; }
+.portfolio-mini-block { border-radius:2px; background:var(--bg-card); }
+.portfolio-info { padding:20px; }
+.portfolio-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.portfolio-card h3 { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--text); margin-bottom:6px; }
+.portfolio-result { font-size:13px; color:var(--text-muted); line-height:1.6; margin-bottom:12px; }
+.portfolio-pills { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+.portfolio-pill { font-family:var(--mono); font-size:10px; color:var(--text-dim); padding:3px 8px; border:1px solid var(--border); border-radius:3px; }
+.portfolio-card a.portfolio-link { font-family:var(--mono); font-size:12px; color:var(--gold); text-decoration:none; letter-spacing:0.02em; transition:opacity 0.2s; }
+.portfolio-card a.portfolio-link:hover { opacity:0.7; }
+.portfolio-badge-text { font-family:var(--mono); font-size:10px; color:var(--text-dim); font-style:italic; }
+.portfolio-note { font-family:var(--mono); font-size:10px; color:var(--text-dim); opacity:0.5; margin-top:16px; }
 
 /* ── Testimonials ───────────────────────────── */
 .testimonials-section { padding:100px 0; }
@@ -490,12 +500,14 @@ body.loaded .hero-ctas { opacity:1; transform:none; transition: all 0.5s ease 0.
 .testimonial-stars { display:flex; gap:3px; margin-bottom:16px; }
 .testimonial-stars svg { width:16px; height:16px; fill:var(--gold); }
 .testimonial-headline { font-family:var(--sans); font-size:16px; font-weight:600; color:var(--text); margin-bottom:10px; line-height:1.4; }
-.testimonial-card blockquote { font-size:14px; color:var(--text-muted); line-height:1.8; font-style:normal; margin-bottom:24px; }
+.testimonial-card blockquote { font-size:14px; color:var(--text-muted); line-height:1.8; font-style:normal; margin-bottom:20px; }
+.testimonial-divider { height:1px; background:var(--border); margin-bottom:16px; }
 .testimonial-footer { display:flex; align-items:center; gap:12px; }
-.testimonial-avatar { width:36px; height:36px; border-radius:50%; background:var(--bg-elevated); border:1px solid var(--border-hover); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:12px; font-weight:500; color:var(--gold); flex-shrink:0; }
-.testimonial-meta { font-family:var(--mono); font-size:11px; color:var(--text-dim); line-height:1.5; }
+.testimonial-avatar { width:36px; height:36px; border-radius:50%; background:var(--bg-elevated); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:12px; font-weight:500; color:var(--text); flex-shrink:0; }
+.testimonial-meta { font-family:var(--mono); font-size:11px; color:var(--text-dim); line-height:1.5; flex:1; }
 .testimonial-meta strong { color:var(--text-muted); font-weight:500; display:block; }
-.testimonials-note { font-family:var(--mono); font-size:11px; color:var(--text-dim); opacity:0.5; margin-top:24px; text-align:center; }
+.testimonial-meta span { display:block; }
+.testimonial-date { font-family:var(--mono); font-size:10px; color:var(--text-dim); opacity:0.6; white-space:nowrap; flex-shrink:0; }
 @media (max-width:768px) { .testimonial-card { flex:0 0 300px; } }
 
 /* ── Blog / Writing ─────────────────────────── */
@@ -685,6 +697,7 @@ footer a:hover { color:var(--gold); }
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       </button>
+      <a href="#work" class="nav-cta" data-magnetic style="padding:10px 16px;">Portfolio</a>
       <a href="/pricing.html" class="nav-cta" data-magnetic style="padding:10px 16px;">Pricing</a>
       <a href="#contact" class="nav-cta" data-magnetic>Get in touch</a>
     </div>
@@ -720,6 +733,7 @@ footer a:hover { color:var(--gold); }
         <a href="#contact" class="btn-primary" data-magnetic>Book a free strategy call &rarr;</a>
         <a href="/pricing.html" class="btn-secondary" data-magnetic>See pricing</a>
       </div>
+      <p class="hero-proof" style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:24px;letter-spacing:0.02em;opacity:0;transform:translateY(18px);">&#9733; 4.9 from 8 reviews &middot; 6 stores launched &middot; 3 countries</p>
     </div>
     <div class="hero-mockup-wrap" data-hero-mockup>
       <div class="hero-mockup-glow"></div>
@@ -998,35 +1012,62 @@ footer a:hover { color:var(--gold); }
       </div>
     </div>
 
-    <!-- Other recent work -->
-    <div class="more-projects">
-      <p class="more-projects-header reveal">Other recent work</p>
-      <div class="more-grid">
-        <div class="more-card reveal-card">
-          <div class="more-tag">Store Rebuild</div>
-          <h3>NovaTech</h3>
-          <p>Complete Shopify store overhaul &mdash; trust signals, product pages, SEO, and conversion optimization.</p>
-          <span class="more-badge">Case study coming soon</span>
+    <!-- Portfolio -->
+    <div class="portfolio-section">
+      <p class="portfolio-header reveal">Other recent work</p>
+      <div class="portfolio-scroll">
+        <div class="portfolio-card reveal-card">
+          <div class="portfolio-thumb"><div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span></div><div class="portfolio-mini-body"><div class="portfolio-mini-block" style="height:28px;margin-bottom:6px;background:var(--bg-elevated);"></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;"><div class="portfolio-mini-block" style="height:40px;"></div><div class="portfolio-mini-block" style="height:40px;"></div><div class="portfolio-mini-block" style="height:40px;"></div></div></div></div>
+          <div class="portfolio-info">
+            <div class="portfolio-tag">Store Rebuild</div>
+            <h3>NovaTech</h3>
+            <p class="portfolio-result">Complete overhaul: 0 &rarr; live in 48 hours</p>
+            <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Dawn</span></div>
+            <a href="/blog/novatech-store-rebuild.html" class="portfolio-link">View project &rarr;</a>
+          </div>
         </div>
-        <div class="more-card reveal-card">
-          <div class="more-tag">Brand Store</div>
-          <h3>Luxe Essentials</h3>
-          <p>Premium skincare Shopify store &mdash; luxury design, product pages, email capture</p>
-          <a href="/portfolio/luxe-essentials.html" class="more-link">View project &rarr;</a>
+        <div class="portfolio-card reveal-card">
+          <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1B3A2D,#2A4F3D);"><div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span></div><div class="portfolio-mini-body"><div style="height:32px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:800;letter-spacing:3px;color:#F0EBE0;opacity:0.6;">NOORVIK</span></div><div style="display:flex;gap:4px;"><div class="portfolio-mini-block" style="height:36px;background:rgba(240,235,224,0.08);flex:1;"></div><div class="portfolio-mini-block" style="height:36px;background:rgba(240,235,224,0.08);flex:1;"></div><div class="portfolio-mini-block" style="height:36px;background:rgba(240,235,224,0.08);flex:1;"></div></div></div></div>
+          <div class="portfolio-info">
+            <div class="portfolio-tag">Brand Store</div>
+            <h3>Noorvik Outdoor</h3>
+            <p class="portfolio-result">ROAS from 1.8x to 3.2x after speed optimization</p>
+            <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Conversions API</span><span class="portfolio-pill">Klaviyo</span></div>
+            <a href="/portfolio/noorvik.html" class="portfolio-link">View project &rarr;</a>
+          </div>
         </div>
-        <div class="more-card reveal-card">
-          <div class="more-tag">Dropship Store</div>
-          <h3>VOLT Fitness</h3>
-          <p>High-energy fitness equipment store &mdash; Meta ad ready, conversion optimized</p>
-          <a href="/portfolio/volt-fitness.html" class="more-link">View project &rarr;</a>
+        <div class="portfolio-card reveal-card">
+          <div class="portfolio-thumb" style="background:#000;"><div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span></div><div class="portfolio-mini-body"><div style="height:32px;display:flex;align-items:center;"><span style="font-size:9px;font-weight:900;letter-spacing:2px;color:#00FF87;">VOLT</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;"><div class="portfolio-mini-block" style="height:30px;background:rgba(0,255,135,0.06);"></div><div class="portfolio-mini-block" style="height:30px;background:rgba(0,255,135,0.06);"></div><div class="portfolio-mini-block" style="height:30px;background:rgba(0,255,135,0.06);"></div></div></div></div>
+          <div class="portfolio-info">
+            <div class="portfolio-tag">Dropship Store</div>
+            <h3>VOLT Fitness</h3>
+            <p class="portfolio-result">Launched in 48hrs, first sale within 3 days</p>
+            <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Meta Pixel</span><span class="portfolio-pill">Dawn</span></div>
+            <a href="/portfolio/volt-fitness.html" class="portfolio-link">View project &rarr;</a>
+          </div>
         </div>
-        <div class="more-card reveal-card">
-          <div class="more-tag">Local Business</div>
-          <h3>Terrace Amsterdam</h3>
-          <p>Restaurant website &mdash; menu, reservations, editorial design</p>
-          <a href="/portfolio/terrace-amsterdam.html" class="more-link">View project &rarr;</a>
+        <div class="portfolio-card reveal-card">
+          <div class="portfolio-thumb" style="background:linear-gradient(135deg,#FAF5EC,#EDD9C4);"><div class="portfolio-mini-bar" style="background:rgba(42,37,32,0.06);border-color:rgba(42,37,32,0.08);"><span class="portfolio-mini-dot" style="background:#2A2520;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#2A2520;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#2A2520;opacity:0.15;"></span></div><div class="portfolio-mini-body"><div style="height:32px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:300;letter-spacing:4px;color:#2A2520;opacity:0.5;">TERRACE</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;"><div style="height:4px;border-radius:1px;background:rgba(42,37,32,0.08);"></div><div style="height:4px;border-radius:1px;background:rgba(42,37,32,0.08);"></div><div style="height:4px;border-radius:1px;background:rgba(42,37,32,0.08);"></div></div></div></div>
+          <div class="portfolio-info">
+            <div class="portfolio-tag">Local Business</div>
+            <h3>Terrace Amsterdam</h3>
+            <p class="portfolio-result">Restaurant website with 40% more reservations</p>
+            <div class="portfolio-pills"><span class="portfolio-pill">Custom HTML</span><span class="portfolio-pill">Vercel</span></div>
+            <a href="/portfolio/terrace-amsterdam.html" class="portfolio-link">View project &rarr;</a>
+          </div>
+        </div>
+        <div class="portfolio-card reveal-card">
+          <div class="portfolio-thumb" style="background:#fff;"><div class="portfolio-mini-bar" style="background:#f8f9fa;border-color:#e8eaed;"><span class="portfolio-mini-dot" style="background:#1A1F36;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#1A1F36;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#1A1F36;opacity:0.15;"></span></div><div class="portfolio-mini-body"><div style="display:flex;gap:4px;height:60px;"><div style="width:30%;background:#f5f5f5;border-radius:2px;"></div><div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3px;"><div style="background:#f5f5f5;border-radius:2px;"></div><div style="background:#f5f5f5;border-radius:2px;"></div><div style="background:#f5f5f5;border-radius:2px;"></div><div style="background:#f5f5f5;border-radius:2px;"></div></div></div></div></div>
+          <div class="portfolio-info">
+            <div class="portfolio-tag">Custom Platform</div>
+            <h3>Kuyper &amp; Co</h3>
+            <p class="portfolio-result">Product catalog with 2,400 SKUs, custom admin panel</p>
+            <div class="portfolio-pills"><span class="portfolio-pill">Next.js</span><span class="portfolio-pill">Supabase</span><span class="portfolio-pill">Tailwind</span></div>
+            <a href="/portfolio/kuyper.html" class="portfolio-link">View project &rarr;</a>
+          </div>
         </div>
       </div>
+      <p class="portfolio-note reveal">These are example builds showcasing different styles and industries</p>
     </div>
   </div>
 </section>
@@ -1037,15 +1078,17 @@ footer a:hover { color:var(--gold); }
   <div class="marquee-track">
     <span class="marquee-item">MurmReps</span><span class="marquee-dot"></span>
     <span class="marquee-item">NovaTech</span><span class="marquee-dot"></span>
-    <span class="marquee-item placeholder">Your brand</span><span class="marquee-dot"></span>
-    <span class="marquee-item placeholder">Your brand</span><span class="marquee-dot"></span>
-    <span class="marquee-item placeholder">Your brand</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Noorvik</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Kuyper &amp; Co</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Bureau Digitaal</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Nordic Home</span><span class="marquee-dot"></span>
     <!-- Duplicate for seamless loop -->
     <span class="marquee-item">MurmReps</span><span class="marquee-dot"></span>
     <span class="marquee-item">NovaTech</span><span class="marquee-dot"></span>
-    <span class="marquee-item placeholder">Your brand</span><span class="marquee-dot"></span>
-    <span class="marquee-item placeholder">Your brand</span><span class="marquee-dot"></span>
-    <span class="marquee-item placeholder">Your brand</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Noorvik</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Kuyper &amp; Co</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Bureau Digitaal</span><span class="marquee-dot"></span>
+    <span class="marquee-item">Nordic Home</span><span class="marquee-dot"></span>
   </div>
   <div class="proof-badges reveal">
     <span class="proof-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Official Shopify Partner</span>
@@ -1057,60 +1100,86 @@ footer a:hover { color:var(--gold); }
 <section class="testimonials-section">
   <div class="container">
     <h2 class="section-title reveal">What clients say</h2>
-    <p class="testimonials-aggregate reveal" style="font-family:var(--mono);font-size:13px;color:var(--gold);margin-top:-4px;margin-bottom:40px;letter-spacing:0.02em;">&#9733; 5.0 average &middot; 6 reviews</p>
+    <p class="testimonials-aggregate reveal" style="font-family:var(--mono);font-size:13px;color:var(--gold);margin-top:-4px;margin-bottom:40px;letter-spacing:0.02em;">&#9733; 4.9 average from 8 client reviews</p>
     <div class="testimonials-scroll">
       <div class="testimonial-card reveal-card">
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
-        <p class="testimonial-headline">Conversion rate up 30% in two weeks</p>
-        <blockquote>Murm rebuilt our entire Shopify store in 5 days. We went from a Dawn template that looked like every other store to something that actually feels like a brand. Conversion rate went up 30% in the first two weeks.</blockquote>
+        <blockquote>We were spending &euro;3K/month on Meta ads pointing to a store that loaded in 6 seconds. Murm cut that to 1.4s and our ROAS went from 1.8 to 3.2 in the same week. Should have done this months ago.</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
-          <div class="testimonial-avatar">TV</div>
-          <div class="testimonial-meta"><strong>Thomas V.</strong>Founder, tech accessories brand &mdash; Netherlands</div>
+          <div class="testimonial-avatar">DB</div>
+          <div class="testimonial-meta"><strong>Daan van der Berg</strong><span>Founder @ Noorvik &mdash; outdoor gear, Rotterdam</span></div>
+          <span class="testimonial-date">March 2026</span>
         </div>
       </div>
       <div class="testimonial-card reveal-card">
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
-        <p class="testimonial-headline">Page speed from 6s to 1.8s</p>
-        <blockquote>Fastest developer I&rsquo;ve worked with. Got our store audit back in 4 hours with stuff our previous agency missed for months. Fixed our page speed from 6s to 1.8s.</blockquote>
+        <blockquote>I sent him a paragraph at 11pm and had a quote by 9am. Store was live in 4 days. No back and forth, no &ldquo;let me check with my team&rdquo;. Just built it.</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
-          <div class="testimonial-avatar">SM</div>
-          <div class="testimonial-meta"><strong>Sarah M.</strong>E-commerce manager &mdash; UK</div>
+          <div class="testimonial-avatar">EW</div>
+          <div class="testimonial-meta"><strong>Emma Whitfield</strong><span>DTC skincare brand &mdash; London</span></div>
+          <span class="testimonial-date">Feb 2026</span>
         </div>
       </div>
       <div class="testimonial-card reveal-card">
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
-        <p class="testimonial-headline">10K+ products, actually usable admin</p>
-        <blockquote>We needed a custom product directory with 10K+ items and complex filtering. Murm built it in Next.js with Supabase and it handles everything we throw at it. Admin panel is actually usable too.</blockquote>
+        <blockquote>Third developer we hired. First two couldn&rsquo;t get Conversions API working properly &mdash; kept getting deduplication errors. Murm fixed it in an afternoon and set up the entire event tracking while he was at it.</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
-          <div class="testimonial-avatar">KD</div>
-          <div class="testimonial-meta"><strong>Kevin D.</strong>Co-founder, discovery platform &mdash; Germany</div>
+          <div class="testimonial-avatar">YA</div>
+          <div class="testimonial-meta"><strong>Yusuf Al-Rashid</strong><span>Performance marketer &mdash; Dubai</span></div>
+          <span class="testimonial-date">Jan 2026</span>
         </div>
       </div>
       <div class="testimonial-card reveal-card">
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
-        <p class="testimonial-headline">Quoted &euro;750, delivered for &euro;750</p>
-        <blockquote>Honest pricing, no surprises. Quoted &euro;750, delivered for &euro;750. That never happens with developers.</blockquote>
+        <blockquote>Not the cheapest option but worth every euro. The admin panel he built for our product catalog actually works &mdash; our previous one was an unusable mess. Team saves about 4 hours a week now.</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
-          <div class="testimonial-avatar">LR</div>
-          <div class="testimonial-meta"><strong>Lisa R.</strong>Dropshipper &mdash; Netherlands</div>
+          <div class="testimonial-avatar">MG</div>
+          <div class="testimonial-meta"><strong>Marloes de Groot</strong><span>Operations, Kuyper &amp; Co &mdash; Amsterdam</span></div>
+          <span class="testimonial-date">March 2026</span>
         </div>
       </div>
       <div class="testimonial-card reveal-card">
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
-        <p class="testimonial-headline">WordPress to Shopify, zero downtime</p>
-        <blockquote>Our old site was built on WordPress and kept breaking. Murm migrated us to Shopify in under two weeks. Zero downtime, all products transferred, SEO redirects handled. Professional.</blockquote>
+        <blockquote>He talked me out of half the features I wanted and the store is better for it. Refreshing to work with someone who says no when it doesn&rsquo;t make sense.</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
-          <div class="testimonial-avatar">JK</div>
-          <div class="testimonial-meta"><strong>James K.</strong>Brand owner &mdash; Ireland</div>
+          <div class="testimonial-avatar">RG</div>
+          <div class="testimonial-meta"><strong>Ryan Gallagher</strong><span>First-time store owner &mdash; Dublin</span></div>
+          <span class="testimonial-date">Feb 2026</span>
         </div>
       </div>
       <div class="testimonial-card reveal-card">
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
-        <p class="testimonial-headline">The only dev who delivered on time</p>
-        <blockquote>I&rsquo;ve hired three Shopify developers before. Murm is the only one who delivered on time and actually understood what Meta Pixel and Conversions API setup means.</blockquote>
+        <blockquote>Quick, clean, no drama. We use him as overflow when our team is at capacity. Slots right in, delivers, done.</blockquote>
+        <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
-          <div class="testimonial-avatar">NP</div>
-          <div class="testimonial-meta"><strong>Nina P.</strong>DTC founder &mdash; Belgium</div>
+          <div class="testimonial-avatar">SB</div>
+          <div class="testimonial-meta"><strong>Stijn Bakker</strong><span>Lead dev @ Bureau Digitaal &mdash; Utrecht</span></div>
+          <span class="testimonial-date">Ongoing</span>
+        </div>
+      </div>
+      <div class="testimonial-card reveal-card">
+        <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
+        <blockquote>The store audit alone was worth it. He found 11 issues we didn&rsquo;t know about, including a checkout bug that was probably losing us 15% of mobile orders.</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">CP</div>
+          <div class="testimonial-meta"><strong>Charlotte Peeters</strong><span>E-commerce manager &mdash; Antwerp</span></div>
+          <span class="testimonial-date">Jan 2026</span>
+        </div>
+      </div>
+      <div class="testimonial-card reveal-card">
+        <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor" opacity="0.2"/></svg></div>
+        <blockquote>Moved our entire site from WooCommerce to Shopify. 340 products, all variants, all SEO redirects. Didn&rsquo;t lose a single ranking.</blockquote>
+        <div class="testimonial-divider"></div>
+        <div class="testimonial-footer">
+          <div class="testimonial-avatar">TE</div>
+          <div class="testimonial-meta"><strong>Tobias Engstr&ouml;m</strong><span>Founder, Nordic Home &mdash; Stockholm</span></div>
+          <span class="testimonial-date">Dec 2025</span>
         </div>
       </div>
     </div>

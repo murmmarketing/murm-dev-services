@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Kuyper &amp; Co &middot; Wholesale Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #FFFFFF; color: #1A1F36; line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* Portfolio badge */
+    .portfolio-badge {
+      position: fixed; top: 16px; left: 16px; z-index: 1000;
+      background: #1A1F36; color: #FFFFFF; font-size: 11px; font-weight: 600;
+      padding: 5px 12px; border-radius: 20px; letter-spacing: 0.02em;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: opacity 0.2s;
+    }
+    .portfolio-badge:hover { opacity: 0.85; }
+
+    /* Top bar */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; padding: 0 24px; border-bottom: 1px solid #E5E7EB;
+      background: #FFFFFF; position: sticky; top: 0; z-index: 100;
+    }
+    .topbar-brand { font-size: 15px; font-weight: 700; color: #1A1F36; white-space: nowrap; }
+    .topbar-brand span { color: #6B7280; font-weight: 400; }
+    .topbar-search {
+      flex: 0 1 420px; margin: 0 24px; position: relative;
+    }
+    .topbar-search input {
+      width: 100%; height: 36px; padding: 0 14px 0 36px; border: 1px solid #D1D5DB;
+      border-radius: 8px; font-size: 13px; font-family: inherit; color: #1A1F36;
+      background: #F9FAFB; transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .topbar-search input:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); background: #FFF; }
+    .topbar-search input::placeholder { color: #9CA3AF; }
+    .topbar-search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #9CA3AF; }
+    .topbar-actions { display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+    .topbar-help { font-size: 12px; color: #6B7280; }
+    .topbar-help strong { color: #1A1F36; font-weight: 600; }
+    .topbar-quote {
+      display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; color: #1A1F36;
+      padding: 6px 12px; border: 1px solid #E5E7EB; border-radius: 8px; transition: border-color 0.15s;
+    }
+    .topbar-quote:hover { border-color: #2563EB; }
+    .topbar-login {
+      background: #2563EB; color: #FFF; font-size: 13px; font-weight: 600;
+      padding: 7px 18px; border-radius: 8px; transition: background 0.15s;
+    }
+    .topbar-login:hover { background: #1D4ED8; }
+
+    /* Layout */
+    .app-layout { display: flex; min-height: calc(100vh - 56px); }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px; min-width: 260px; border-right: 1px solid #E5E7EB;
+      padding: 20px 0; background: #FAFBFC; overflow-y: auto;
+    }
+    .sidebar-title {
+      font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+      color: #9CA3AF; padding: 0 20px; margin-bottom: 8px;
+    }
+    .sidebar-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 20px; font-size: 13px; font-weight: 500; color: #4B5563;
+      cursor: pointer; transition: background 0.1s, color 0.1s; border-left: 3px solid transparent;
+    }
+    .sidebar-item:hover { background: #F3F4F6; color: #1A1F36; }
+    .sidebar-item.active { background: #EFF6FF; color: #2563EB; border-left-color: #2563EB; font-weight: 600; }
+    .sidebar-item .count {
+      font-size: 11px; font-weight: 500; color: #9CA3AF; background: #F3F4F6;
+      padding: 1px 8px; border-radius: 10px;
+    }
+    .sidebar-item.active .count { background: #DBEAFE; color: #2563EB; }
+
+    /* Filter toggle (mobile) */
+    .filter-toggle {
+      display: none; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;
+      color: #1A1F36; padding: 10px 16px; border: 1px solid #E5E7EB; border-radius: 8px;
+      margin-bottom: 16px; background: #FFF;
+    }
+    .filter-toggle svg { width: 16px; height: 16px; }
+
+    /* Main content */
+    .main { flex: 1; padding: 24px; max-width: 100%; }
+    .main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .main-title { font-size: 18px; font-weight: 700; color: #1A1F36; }
+    .main-title span { font-weight: 400; color: #6B7280; font-size: 14px; margin-left: 4px; }
+    .sort-select {
+      font-size: 13px; font-family: inherit; color: #4B5563; padding: 6px 12px;
+      border: 1px solid #D1D5DB; border-radius: 8px; background: #FFF; cursor: pointer;
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .product-card {
+      background: #FFF; border: 1px solid #E5E7EB; border-radius: 12px;
+      overflow: hidden; transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .product-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); border-color: #D1D5DB; }
+    .product-img {
+      width: 100%; aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-img svg { width: 40px; height: 40px; color: #D1D5DB; }
+    .product-body { padding: 14px; }
+    .product-name { font-size: 13px; font-weight: 600; color: #1A1F36; line-height: 1.4; margin-bottom: 8px; min-height: 36px; }
+    .product-pricing { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+    .product-wholesale { font-size: 16px; font-weight: 700; color: #1A1F36; }
+    .product-rrp { font-size: 12px; color: #9CA3AF; text-decoration: line-through; }
+    .product-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .product-moq { font-size: 11px; color: #6B7280; }
+    .product-stock { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #059669; font-weight: 500; }
+    .product-stock::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: #10B981; display: inline-block;
+    }
+    .product-add {
+      width: 100%; padding: 8px; font-size: 13px; font-weight: 600; color: #2563EB;
+      background: #EFF6FF; border: 1px solid #DBEAFE; border-radius: 8px; transition: background 0.15s, color 0.15s;
+    }
+    .product-add:hover { background: #2563EB; color: #FFF; }
+
+    /* Pagination */
+    .pagination {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 28px; padding-top: 20px; border-top: 1px solid #E5E7EB; flex-wrap: wrap; gap: 12px;
+    }
+    .pagination-info { font-size: 13px; color: #6B7280; }
+    .pagination-buttons { display: flex; gap: 4px; }
+    .pagination-btn {
+      min-width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 500; color: #4B5563; background: #FFF;
+      border: 1px solid #E5E7EB; border-radius: 8px; transition: all 0.15s;
+    }
+    .pagination-btn:hover { border-color: #2563EB; color: #2563EB; }
+    .pagination-btn.active { background: #2563EB; color: #FFF; border-color: #2563EB; }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .product-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .topbar-help { display: none; }
+      .topbar-search { flex: 0 1 260px; }
+    }
+    @media (max-width: 768px) {
+      .sidebar { display: none; position: fixed; top: 56px; left: 0; bottom: 0; z-index: 90; width: 280px; box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
+      .sidebar.open { display: block; }
+      .filter-toggle { display: flex; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .topbar-search { flex: 0 1 180px; margin: 0 12px; }
+      .topbar-brand span { display: none; }
+    }
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: 1fr; }
+      .topbar { padding: 0 12px; }
+      .main { padding: 16px; }
+      .topbar-quote span { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="/" class="portfolio-badge">murmweb.dev portfolio</a>
+
+<!-- Top bar -->
+<header class="topbar">
+  <div class="topbar-brand">Kuyper &amp; Co <span>&middot; Wholesale Portal</span></div>
+  <div class="topbar-search">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" placeholder="Search 2,412 products...">
+  </div>
+  <div class="topbar-actions">
+    <span class="topbar-help">Need help? <strong>+31 20 555 0123</strong></span>
+    <button class="topbar-quote">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span>Quote (0 items)</span>
+    </button>
+    <button class="topbar-login">Log in</button>
+  </div>
+</header>
+
+<!-- App layout -->
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">Categories</div>
+    <div class="sidebar-item active" data-category="all" onclick="setCategory(this)">
+      All Products <span class="count">2,412</span>
+    </div>
+    <div class="sidebar-item" data-category="kitchen" onclick="setCategory(this)">
+      Kitchen &amp; Dining <span class="count">487</span>
+    </div>
+    <div class="sidebar-item" data-category="textiles" onclick="setCategory(this)">
+      Home Textiles <span class="count">342</span>
+    </div>
+    <div class="sidebar-item" data-category="lighting" onclick="setCategory(this)">
+      Lighting <span class="count">228</span>
+    </div>
+    <div class="sidebar-item" data-category="storage" onclick="setCategory(this)">
+      Storage &amp; Organization <span class="count">196</span>
+    </div>
+    <div class="sidebar-item" data-category="bathroom" onclick="setCategory(this)">
+      Bathroom <span class="count">167</span>
+    </div>
+    <div class="sidebar-item" data-category="decorative" onclick="setCategory(this)">
+      Decorative <span class="count">312</span>
+    </div>
+    <div class="sidebar-item" data-category="office" onclick="setCategory(this)">
+      Office <span class="count">180</span>
+    </div>
+    <div class="sidebar-item" data-category="outdoor" onclick="setCategory(this)">
+      Outdoor <span class="count">156</span>
+    </div>
+    <div class="sidebar-item" data-category="seasonal" onclick="setCategory(this)">
+      Seasonal <span class="count">344</span>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <button class="filter-toggle" id="filterToggle" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="12" y1="18" x2="20" y2="18"/></svg>
+      Filter categories
+    </button>
+
+    <div class="main-header">
+      <h1 class="main-title">All Products <span>2,412 items</span></h1>
+      <select class="sort-select">
+        <option>Sort by: Newest</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Name: A-Z</option>
+        <option>MOQ: Low to High</option>
+      </select>
+    </div>
+
+    <div class="product-grid">
+      <!-- Product 1 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="12" cy="18" rx="9" ry="3"/><path d="M3 15v3c0 1.66 4.03 3 9 3s9-1.34 9-3v-3"/><ellipse cx="12" cy="15" rx="9" ry="3"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Ceramic dinner plate set (6pc)</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;34.50</span>
+            <span class="product-rrp">RRP &euro;89</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 24 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 3v18"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Linen napkins natural (4pc)</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;12.80</span>
+            <span class="product-rrp">RRP &euro;32</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 48 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6"/><path d="M9 8h6"/><path d="M8 8l-2 12h12L16 8"/><circle cx="12" cy="5" r="1"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Brass pendant lamp</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;67.00</span>
+            <span class="product-rrp">RRP &euro;169</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 12 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 7c0-2.21 3.13-4 7-4s7 1.79 7 4v10c0 2.21-3.13 4-7 4s-7-1.79-7-4V7z"/><path d="M5 12c0 2.21 3.13 4 7 4s7-1.79 7-4"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Storage basket seagrass L</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;8.90</span>
+            <span class="product-rrp">RRP &euro;24</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 36 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 6v12"/><path d="M18 6v12"/><path d="M2 12h20"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Cotton throw blanket</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;22.50</span>
+            <span class="product-rrp">RRP &euro;59</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 24 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/><circle cx="7" cy="7.5" r="0.5" fill="currentColor"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Bamboo cutting board XL</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;11.20</span>
+            <span class="product-rrp">RRP &euro;29</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 48 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 21h8"/><path d="M12 21V10"/><path d="M7 4c0 2.76 2.24 6 5 6s5-3.24 5-6"/><path d="M7 4h10"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Recycled glass vase</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;14.80</span>
+            <span class="product-rrp">RRP &euro;39</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 24 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="product-card">
+        <div class="product-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16"/><path d="M10 4v16"/><path d="M4 16h6"/></svg>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Wooden desk organizer</div>
+          <div class="product-pricing">
+            <span class="product-wholesale">&euro;18.60</span>
+            <span class="product-rrp">RRP &euro;45</span>
+          </div>
+          <div class="product-meta">
+            <span class="product-moq">MOQ: 12 units</span>
+            <span class="product-stock">In Stock</span>
+          </div>
+          <button class="product-add">Add to quote</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <span class="pagination-info">Showing 1&ndash;8 of 2,412 products &middot; Page 1 of 302</span>
+      <div class="pagination-buttons">
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">4</button>
+        <button class="pagination-btn">5</button>
+        <button class="pagination-btn">&hellip;</button>
+        <button class="pagination-btn">302</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  function setCategory(el) {
+    document.querySelectorAll('.sidebar-item').forEach(function(item) {
+      item.classList.remove('active');
+    });
+    el.classList.add('active');
+    // Close sidebar on mobile after selection
+    if (window.innerWidth <= 768) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  }
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  // Close sidebar when clicking outside on mobile
+  document.addEventListener('click', function(e) {
+    var sidebar = document.getElementById('sidebar');
+    var toggle = document.getElementById('filterToggle');
+    if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+      if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+        sidebar.classList.remove('open');
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

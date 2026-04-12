@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Noorvik — Dutch-Designed Outdoor Gear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --forest: #1B3A2D;
+      --forest-light: #24503D;
+      --forest-dark: #132A20;
+      --cream: #F0EBE0;
+      --cream-dim: rgba(240, 235, 224, 0.6);
+      --orange: #D4713B;
+      --orange-hover: #E07F48;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--forest);
+      color: var(--cream);
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Noise overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+    }
+
+    /* Portfolio badge */
+    .portfolio-badge {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: rgba(27, 58, 45, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(240, 235, 224, 0.15);
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .portfolio-badge:hover {
+      background: rgba(27, 58, 45, 0.95);
+      color: var(--cream);
+      border-color: rgba(240, 235, 224, 0.3);
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      transition: all 0.4s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(19, 42, 32, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 14px 40px;
+      box-shadow: 0 1px 0 rgba(240, 235, 224, 0.06);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--cream);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 120% 60% at 50% 100%, rgba(19, 42, 32, 1) 0%, transparent 70%),
+        linear-gradient(180deg, transparent 40%, rgba(19, 42, 32, 0.6) 70%, rgba(19, 42, 32, 1) 100%),
+        radial-gradient(ellipse 80% 40% at 30% 80%, rgba(36, 80, 61, 0.7) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 35% at 70% 75%, rgba(36, 80, 61, 0.5) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 50% at 50% 85%, rgba(27, 58, 45, 0.8) 0%, transparent 60%),
+        linear-gradient(175deg, #1B3A2D 0%, #24503D 30%, #2D6B4F 50%, #24503D 70%, #1B3A2D 100%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      background: linear-gradient(to top, var(--forest) 0%, transparent 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 24px;
+    }
+
+    .hero h1 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(3rem, 10vw, 7rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-right: -0.3em;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      font-weight: 300;
+      color: var(--cream-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--cream-dim), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: 0.06em;
+      margin-bottom: 56px;
+      line-height: 1.15;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Products */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: linear-gradient(145deg, var(--forest-light), var(--forest-dark));
+      border: 1px solid rgba(240, 235, 224, 0.06);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(240, 235, 224, 0.12);
+    }
+
+    .product-image {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(160deg, rgba(36, 80, 61, 0.6) 0%, rgba(19, 42, 32, 0.9) 100%);
+      overflow: hidden;
+    }
+
+    .product-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 40% 40%, rgba(240, 235, 224, 0.04) 0%, transparent 60%);
+    }
+
+    .quick-add {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(19, 42, 32, 0.7);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover .quick-add {
+      opacity: 1;
+    }
+
+    .quick-add button {
+      background: var(--orange);
+      color: var(--cream);
+      border: none;
+      padding: 12px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .quick-add button:hover {
+      background: var(--orange-hover);
+      transform: scale(1.04);
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .product-desc {
+      font-size: 0.8rem;
+      color: var(--cream-dim);
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .product-price {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--orange);
+    }
+
+    /* Story */
+    .story-section {
+      background: linear-gradient(180deg, var(--forest) 0%, var(--forest-dark) 50%, var(--forest) 100%);
+    }
+
+    .story-content {
+      max-width: 640px;
+    }
+
+    .story-content .section-title {
+      margin-bottom: 32px;
+    }
+
+    .story-content p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--cream-dim);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .story-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Feature strip */
+    .features {
+      border-top: 1px solid rgba(240, 235, 224, 0.08);
+      border-bottom: 1px solid rgba(240, 235, 224, 0.08);
+      padding: 64px 24px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .feature-item svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--orange);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      margin-bottom: 14px;
+    }
+
+    .feature-item span {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+    }
+
+    /* Signup */
+    .signup-section {
+      text-align: center;
+    }
+
+    .signup-section .section-title {
+      margin-bottom: 36px;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 12px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .signup-form input {
+      flex: 1;
+      background: rgba(240, 235, 224, 0.06);
+      border: 1px solid rgba(240, 235, 224, 0.12);
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .signup-form input::placeholder {
+      color: rgba(240, 235, 224, 0.35);
+    }
+
+    .signup-form input:focus {
+      border-color: var(--orange);
+    }
+
+    .signup-form button {
+      background: var(--orange);
+      color: var(--cream);
+      border: none;
+      padding: 14px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s ease;
+    }
+
+    .signup-form button:hover {
+      background: var(--orange-hover);
+    }
+
+    /* Footer */
+    footer {
+      padding: 64px 24px 40px;
+      border-top: 1px solid rgba(240, 235, 224, 0.06);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--cream-dim);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 14px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 8px;
+    }
+
+    .footer-col a {
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 300;
+      transition: color 0.3s ease;
+    }
+
+    .footer-col a:hover {
+      color: var(--cream);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(240, 235, 224, 0.12);
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .social-links a:hover {
+      border-color: var(--orange);
+      background: rgba(212, 113, 59, 0.1);
+    }
+
+    .social-links svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--cream-dim);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 16px 20px;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .nav-links a {
+        font-size: 0.7rem;
+      }
+
+      section {
+        padding: 72px 20px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+        margin: 0 auto;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 24px;
+      }
+
+      .signup-form {
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .footer-links {
+        gap: 32px;
+      }
+
+      .portfolio-badge {
+        top: 14px;
+        left: 14px;
+        font-size: 0.65rem;
+        padding: 5px 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links {
+        gap: 14px;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="/" class="portfolio-badge">murmweb.dev portfolio</a>
+
+  <nav class="nav" id="nav">
+    <ul class="nav-links">
+      <li><a href="#collection">Shop</a></li>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#signup">Updates</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Noorvik</h1>
+      <p>Dutch-designed gear for real weather</p>
+    </div>
+    <div class="hero-scroll"></div>
+  </section>
+
+  <section id="collection">
+    <div class="container">
+      <div class="reveal">
+        <p class="section-label">Featured</p>
+        <h2 class="section-title">The Essentials</h2>
+      </div>
+      <div class="products-grid">
+        <div class="product-card reveal">
+          <div class="product-image">
+            <div class="quick-add"><button>Quick Add</button></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">The Rambler Jacket</h3>
+            <p class="product-desc">Water-resistant, 4-season</p>
+            <span class="product-price">&euro;189</span>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-image">
+            <div class="quick-add"><button>Quick Add</button></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Trail Pack 32L</h3>
+            <p class="product-desc">Recycled materials, padded straps</p>
+            <span class="product-price">&euro;129</span>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-image">
+            <div class="quick-add"><button>Quick Add</button></div>
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">Merino Base Layer</h3>
+            <p class="product-desc">Temperature regulating</p>
+            <span class="product-price">&euro;69</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-section" id="story">
+    <div class="container">
+      <div class="story-content reveal">
+        <p class="section-label">Our Story</p>
+        <h2 class="section-title">Born in Rotterdam.<br>Tested in the Veluwe.</h2>
+        <p>The Netherlands doesn't get dramatic weather. It gets persistent weather. Sideways rain that finds every gap. Winds that turn a flat landscape into a wind tunnel. Grey mornings that blur into greyer afternoons. We don't design for summit days and bluebird skies. We design for the other 340 days of the year.</p>
+        <p>Noorvik started in a garage workshop in Rotterdam-Noord, where two industrial designers got tired of outdoor gear that looked great in a showroom but failed on a Tuesday commute across the Erasmusbrug. Every piece we make is tested in the Veluwe forests, on North Sea beaches, and on the daily bike ride to work. If it can handle a Dutch winter, it can handle anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="features reveal">
+    <div class="features-grid">
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none"/>
+          <path d="M7 12l2-6 3 8 2-4 3 6" fill="none"/>
+          <path d="M2 15h20" fill="none"/>
+          <path d="M12 2v2M12 20v2" fill="none"/>
+        </svg>
+        <span>Waterproof</span>
+      </div>
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L8 8H3l4 5-2 7 7-4 7 4-2-7 4-5h-5L12 2z" fill="none"/>
+        </svg>
+        <span>Recycled</span>
+      </div>
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 9l4-5h10l4 5-9 13L3 9z" fill="none"/>
+          <path d="M3 9h18" fill="none"/>
+          <path d="M9 4l-1 5 4 13M15 4l1 5-4 13" fill="none"/>
+        </svg>
+        <span>Dutch Design</span>
+      </div>
+      <div class="feature-item">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="7" width="20" height="14" rx="2" fill="none"/>
+          <path d="M16 7V5a4 4 0 0 0-8 0v2" fill="none"/>
+          <path d="M9 14l2 2 4-4" fill="none"/>
+        </svg>
+        <span>Free Returns</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup-section" id="signup">
+    <div class="container reveal">
+      <p class="section-label">Stay in the loop</p>
+      <h2 class="section-title">Get early access to new drops</h2>
+      <form class="signup-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You\'re in'; this.querySelector('input').disabled=true; this.querySelector('button').disabled=true;">
+        <input type="email" placeholder="your@email.com" required aria-label="Email address">
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Noorvik</div>
+        <p class="footer-copy">Noorvik &copy; 2026 &middot; Rotterdam, NL</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Follow</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 13.5 3h-3v12.4a2.59 2.59 0 0 1-2.6 2.6 2.59 2.59 0 0 1-2.6-2.6 2.59 2.59 0 0 1 2.6-2.6c.28 0 .56.05.82.13V9.73A5.81 5.81 0 0 0 5.3 9a5.67 5.67 0 0 0-1 11.27A5.67 5.67 0 0 0 10.5 15V9.4a7.52 7.52 0 0 0 4.12 1.23h.15V7.4a4.25 4.25 0 0 1 1.83-1.58z" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Shipping</h4>
+          <ul>
+            <li><a href="#">Free NL delivery over &euro;50</a></li>
+            <li><a href="#">EU shipping 3&ndash;5 days</a></li>
+            <li><a href="#">30-day returns</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav fill on scroll
+    const nav = document.getElementById('nav');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          nav.classList.toggle('scrolled', window.scrollY > 60);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Scroll reveal with IntersectionObserver
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // Stagger siblings slightly
+          const delay = Array.from(entry.target.parentElement.children)
+            .filter(c => c.classList.contains('reveal'))
+            .indexOf(entry.target) * 100;
+
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

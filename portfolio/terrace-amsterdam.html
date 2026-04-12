@@ -3,117 +3,539 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terrace — Seasonal. Local. Amsterdam.</title>
-<meta name="description" content="Farm-to-table dining in the heart of Amsterdam. Seasonal menu, local ingredients.">
+<title>TERRACE — Seasonal Cooking on the Herengracht</title>
+<meta name="description" content="Seasonal cooking on the Herengracht. An Amsterdam canal-side restaurant celebrating Dutch ingredients and golden-hour dining.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 :root {
-  --bg: #F5F0E8; --text: #2C3E2D; --muted: #6B7A6C; --accent: #C67A3C;
-  --card: #FFFDF8; --border: #DDD6C8;
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'Inter', -apple-system, sans-serif;
+  --cream: #FAF5EC;
+  --dark: #2A2520;
+  --terracotta: #C4714A;
+  --terracotta-hover: #D4815A;
+  --muted: #8A7E74;
+  --light-muted: #B5ADA5;
+  --border: #E2DAD0;
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, Helvetica Neue, sans-serif;
 }
-html { scroll-behavior:smooth; }
-body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
 
-.portfolio-badge { position:fixed; top:16px; left:16px; z-index:100; font-size:11px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:rgba(44,62,45,0.8); backdrop-filter:blur(8px); padding:8px 14px; border-radius:99px; text-decoration:none; transition:background 0.2s; }
-.portfolio-badge:hover { background:rgba(44,62,45,0.95); }
+/* Portfolio badge */
+.portfolio-badge {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(42, 37, 32, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 8px 16px;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: background 0.6s ease;
+}
+.portfolio-badge:hover { background: rgba(42, 37, 32, 0.95); }
 
-.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity:1; transform:none; }
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
 
-.container { max-width:1000px; margin:0 auto; padding:0 24px; }
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
 
-/* Nav */
-.nav { padding:24px 0; }
-.nav .container { display:flex; align-items:center; justify-content:space-between; }
-.nav-logo { font-family:var(--serif); font-size:26px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:0.01em; }
-.nav-links { display:flex; gap:28px; align-items:center; }
-.nav-links a { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-.nav-links a:hover { color:var(--text); }
-.nav-reserve { font-size:12px; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; color:var(--card); background:var(--accent); padding:10px 24px; border-radius:3px; text-decoration:none; transition:all 0.2s; }
-.nav-reserve:hover { background:#D48A4C; }
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  padding: 20px 0;
+  transition: background 0.6s ease, padding 0.6s ease, box-shadow 0.6s ease;
+}
+.nav.scrolled {
+  background: rgba(250, 245, 236, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 14px 0;
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-decoration: none;
+  transition: color 0.6s ease;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.6s ease;
+}
+.nav-links a:hover { color: var(--dark); }
+.nav-reserve {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
+  color: #fff !important;
+  background: var(--terracotta);
+  padding: 10px 24px;
+  border-radius: 2px;
+  transition: background 0.6s ease, transform 0.6s ease !important;
+}
+.nav-reserve:hover {
+  background: var(--terracotta-hover) !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
 
 /* Hero */
-.hero { padding:80px 0 100px; text-align:center; position:relative; }
-.hero h1 { font-family:var(--serif); font-size:clamp(40px,6vw,64px); font-weight:400; line-height:1.05; letter-spacing:-0.01em; margin-bottom:20px; }
-.hero h1 em { font-style:italic; color:var(--accent); }
-.hero p { font-size:17px; color:var(--muted); max-width:500px; margin:0 auto 36px; line-height:1.8; }
-.btn { display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-size:13px; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; text-decoration:none; padding:16px 36px; border-radius:3px; transition:all 0.3s ease; }
-.btn-accent { background:var(--accent); color:var(--card); }
-.btn-accent:hover { background:#D48A4C; transform:translateY(-1px); }
-.btn-outline { border:1px solid var(--border); color:var(--text); }
-.btn-outline:hover { border-color:var(--accent); color:var(--accent); }
-.hero-divider { width:60px; height:1px; background:var(--accent); margin:48px auto 0; opacity:0.4; }
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 30% 50%, rgba(216, 168, 108, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 70% 40%, rgba(196, 113, 74, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(250, 220, 180, 0.2) 0%, transparent 50%),
+    linear-gradient(175deg, #FAF5EC 0%, #F5EDE0 30%, #F0E4D2 60%, #EDD9C4 100%);
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 120px 32px 80px;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+.hero-subtitle {
+  font-family: var(--serif);
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 48px;
+  letter-spacing: 0.02em;
+}
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.btn-primary {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--terracotta);
+  padding: 18px 48px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.6s ease, transform 0.6s ease, box-shadow 0.6s ease;
+}
+.btn-primary:hover {
+  background: var(--terracotta-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196, 113, 74, 0.25);
+}
+.hero-availability {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.hero-availability span {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--light-muted);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.6s ease;
+}
+.hero-scroll:hover { color: var(--dark); }
+.hero-scroll-line {
+  width: 1px;
+  height: 32px;
+  background: var(--light-muted);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* Divider */
+.section-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--terracotta);
+  margin: 0 auto 48px;
+  opacity: 0.5;
+}
 
 /* Menu */
-.menu { padding:100px 0; }
-.menu h2 { font-family:var(--serif); font-size:clamp(28px,4vw,40px); font-weight:400; text-align:center; margin-bottom:12px; }
-.menu .subtitle { text-align:center; color:var(--muted); font-size:14px; margin-bottom:60px; font-style:italic; }
-.menu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:48px; }
-.menu-column h3 { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--accent); margin-bottom:24px; padding-bottom:12px; border-bottom:1px solid var(--border); }
-.menu-item { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-bottom:1px solid rgba(221,214,200,0.5); }
-.menu-item-name { font-size:14px; font-weight:500; }
-.menu-item-desc { font-size:12px; color:var(--muted); font-style:italic; margin-top:2px; }
-.menu-item-price { font-size:14px; font-weight:500; color:var(--accent); white-space:nowrap; flex-shrink:0; }
+.menu {
+  padding: 120px 0;
+}
+.section-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  text-align: center;
+  margin-bottom: 16px;
+}
+.menu h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+.menu .menu-note {
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 64px;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 56px;
+}
+.menu-column h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--dark);
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.menu-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(226, 218, 208, 0.5);
+}
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.menu-item-name {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+  letter-spacing: 0.01em;
+}
+.menu-item-price {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--terracotta);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.menu-item-desc {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 4px;
+  line-height: 1.5;
+}
 
-/* About */
-.about { padding:100px 0; }
-.about-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-.about-img { aspect-ratio:4/3; border-radius:8px; background:linear-gradient(135deg, #D4C4A8, #BFB090, #A89878); position:relative; overflow:hidden; }
-.about-img::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 40% 40%, rgba(255,255,255,0.15), transparent 60%); }
-.about-text h2 { font-family:var(--serif); font-size:clamp(24px,3.5vw,34px); font-weight:400; margin-bottom:20px; }
-.about-text p { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:16px; }
+/* Our Story */
+.story {
+  padding: 120px 0;
+  background: linear-gradient(180deg, var(--cream) 0%, #F5EEE3 100%);
+}
+.story-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.story h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  margin-bottom: 40px;
+  letter-spacing: 0.02em;
+}
+.story p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.story p:last-of-type { margin-bottom: 0; }
 
 /* Hours & Location */
-.info { padding:80px 0; border-top:1px solid var(--border); }
-.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
-.info-section h3 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:24px; }
-.hours-table { width:100%; font-size:14px; }
-.hours-table tr { border-bottom:1px solid rgba(221,214,200,0.5); }
-.hours-table td { padding:10px 0; }
-.hours-table td:last-child { text-align:right; color:var(--muted); }
-.hours-table .closed { color:var(--accent); font-style:italic; }
-.location-address { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:20px; }
-.map-placeholder { width:100%; aspect-ratio:16/9; background:linear-gradient(135deg, #D8D0C4, #C8BCA8); border-radius:8px; display:flex; align-items:center; justify-content:center; }
-.map-placeholder a { font-size:13px; font-weight:500; color:var(--accent); text-decoration:none; padding:10px 20px; border:1px solid var(--accent); border-radius:3px; transition:all 0.2s; }
-.map-placeholder a:hover { background:var(--accent); color:var(--card); }
+.info {
+  padding: 120px 0;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.info-section h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 28px;
+  letter-spacing: 0.02em;
+}
+.hours-grid {
+  display: grid;
+  gap: 0;
+}
+.hours-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(226, 218, 208, 0.5);
+  font-size: 14px;
+}
+.hours-day { font-weight: 400; color: var(--dark); }
+.hours-time { color: var(--muted); }
+.hours-note {
+  margin-top: 16px;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--light-muted);
+}
+.location-address {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.location-contact {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+.location-contact a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.6s ease;
+}
+.location-contact a:hover { color: var(--terracotta); }
+.maps-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--terracotta);
+  text-decoration: none;
+  transition: gap 0.6s ease;
+}
+.maps-link:hover { gap: 10px; }
 
 /* Instagram */
-.instagram { padding:80px 0; text-align:center; }
-.instagram h3 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:8px; }
-.instagram p { font-size:13px; color:var(--muted); margin-bottom:32px; }
-.insta-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-.insta-item { aspect-ratio:1; border-radius:6px; transition:opacity 0.3s; cursor:pointer; }
-.insta-item:hover { opacity:0.8; }
-.insta-item:nth-child(1) { background:linear-gradient(135deg, #D4C8B0, #C8B898); }
-.insta-item:nth-child(2) { background:linear-gradient(135deg, #C0B498, #B0A488); }
-.insta-item:nth-child(3) { background:linear-gradient(135deg, #D0C4A8, #BEB298); }
-.insta-item:nth-child(4) { background:linear-gradient(135deg, #C8BCA0, #B8AC90); }
-
-/* CTA */
-.cta { padding:80px 0; text-align:center; border-top:1px solid var(--border); }
-.cta h2 { font-family:var(--serif); font-size:clamp(28px,4vw,40px); font-weight:400; margin-bottom:12px; }
-.cta p { color:var(--muted); font-size:15px; margin-bottom:32px; }
+.instagram {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--cream) 0%, #F5EEE3 100%);
+}
+.instagram-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.instagram-header h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+.instagram-header a {
+  font-size: 13px;
+  color: var(--terracotta);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.6s ease;
+}
+.instagram-header a:hover { color: var(--terracotta-hover); }
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+.insta-item {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  cursor: pointer;
+}
+.insta-item:hover {
+  transform: scale(1.03);
+  opacity: 0.85;
+}
+.insta-item:nth-child(1) {
+  background: linear-gradient(145deg, #D4A574, #C4714A, #B86540);
+}
+.insta-item:nth-child(2) {
+  background: linear-gradient(135deg, #8B9E6B, #6B8450, #7A9460);
+}
+.insta-item:nth-child(3) {
+  background: linear-gradient(150deg, #E8D5BE, #D4C0A5, #C8B090);
+}
+.insta-item:nth-child(4) {
+  background: linear-gradient(130deg, #D48E5A, #C07848, #B06838);
+}
+.insta-item:nth-child(5) {
+  background: linear-gradient(140deg, #A4B88A, #8CA070, #7A9060);
+}
+.insta-item:nth-child(6) {
+  background: linear-gradient(155deg, #F0E0CC, #E0CCAE, #D4BC9A);
+}
 
 /* Footer */
-footer { padding:48px 0; border-top:1px solid var(--border); }
-footer .container { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
-footer p { font-size:12px; color:var(--muted); }
-.footer-links { display:flex; gap:20px; }
-.footer-links a { font-size:12px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-.footer-links a:hover { color:var(--accent); }
+footer {
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+}
+.footer-col p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.footer-col a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.6s ease;
+}
+.footer-col a:hover { color: var(--terracotta); }
+.footer-col .footer-heading {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin-bottom: 14px;
+}
+.footer-bottom {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.footer-bottom p {
+  font-size: 12px;
+  color: var(--light-muted);
+  letter-spacing: 0.04em;
+}
 
-@media (max-width:768px) {
-  .menu-grid { grid-template-columns:1fr; gap:40px; }
-  .about-inner { grid-template-columns:1fr; gap:32px; }
-  .info-grid { grid-template-columns:1fr; gap:40px; }
-  .insta-grid { grid-template-columns:1fr 1fr; }
-  .nav-links a:not(.nav-reserve) { display:none; }
+/* Responsive */
+@media (max-width: 900px) {
+  .menu-grid { grid-template-columns: 1fr; gap: 48px; }
+  .info-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+}
+@media (max-width: 768px) {
+  .insta-grid { grid-template-columns: repeat(3, 1fr); }
+  .nav-links a:not(.nav-reserve) { display: none; }
+  .hero-title { letter-spacing: 0.15em; }
+  .container { padding: 0 24px; }
+}
+@media (max-width: 480px) {
+  .insta-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-title { letter-spacing: 0.1em; }
 }
 </style>
 </head>
@@ -121,92 +543,180 @@ footer p { font-size:12px; color:var(--muted); }
 
 <a href="/" class="portfolio-badge">murmweb.dev portfolio</a>
 
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="container">
     <a href="#" class="nav-logo">Terrace</a>
     <div class="nav-links">
       <a href="#menu">Menu</a>
-      <a href="#about">Our Story</a>
+      <a href="#story">Our Story</a>
       <a href="#visit">Visit</a>
-      <a href="#" class="nav-reserve">Book a table</a>
+      <a href="#" class="nav-reserve">Reserve a table</a>
     </div>
   </div>
 </nav>
 
-<section class="hero reveal">
-  <div class="container">
-    <h1>Seasonal. Local.<br><em>Amsterdam.</em></h1>
-    <p>Farm-to-table dining in the heart of the Jordaan. Every dish tells the story of the season and the people who grew it.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="#" class="btn btn-accent">Book a table</a>
-      <a href="#menu" class="btn btn-outline">View the menu</a>
+<section class="hero">
+  <div class="hero-gradient"></div>
+  <div class="hero-content reveal">
+    <h1 class="hero-title">Terrace</h1>
+    <p class="hero-subtitle">Seasonal cooking on the Herengracht</p>
+    <div class="hero-cta">
+      <a href="#" class="btn-primary">Reserve a table</a>
+      <p class="hero-availability">Next available: <span>Tonight, 20:00</span></p>
     </div>
-    <div class="hero-divider"></div>
   </div>
+  <a href="#menu" class="hero-scroll">
+    <span>Scroll</span>
+    <span class="hero-scroll-line"></span>
+  </a>
 </section>
 
 <section class="menu reveal" id="menu">
   <div class="container">
-    <h2>Spring Menu</h2>
-    <p class="subtitle">Updated weekly based on what arrives from our suppliers</p>
+    <p class="section-label">The Menu</p>
+    <h2>Seasonal &amp; Local</h2>
+    <p class="menu-note">Updated weekly with what arrives from our growers and fishermen</p>
     <div class="menu-grid">
       <div class="menu-column">
         <h3>Starters</h3>
-        <div class="menu-item"><div><p class="menu-item-name">Burrata & Heritage Tomatoes</p><p class="menu-item-desc">basil oil, sourdough crumble</p></div><span class="menu-item-price">&euro;14</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Celeriac Soup</p><p class="menu-item-desc">truffle, hazelnut, chive</p></div><span class="menu-item-price">&euro;11</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Beef Tartare</p><p class="menu-item-desc">egg yolk, capers, rye</p></div><span class="menu-item-price">&euro;16</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Grilled Artichoke</p><p class="menu-item-desc">lemon aioli, pecorino</p></div><span class="menu-item-price">&euro;13</span></div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Burrata with heritage tomatoes</span>
+            <span class="menu-item-price">&euro;14</span>
+          </div>
+          <p class="menu-item-desc">Basil oil, fleur de sel, sourdough crumble</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Croquettes with mustard</span>
+            <span class="menu-item-price">&euro;9</span>
+          </div>
+          <p class="menu-item-desc">Veal ragout, Dijon, cornichons</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Ceviche of the day</span>
+            <span class="menu-item-price">&euro;16</span>
+          </div>
+          <p class="menu-item-desc">Citrus-cured, avocado, crispy shallot</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Dutch asparagus soup</span>
+            <span class="menu-item-price">&euro;12</span>
+          </div>
+          <p class="menu-item-desc">White asparagus, chive cr&egrave;me, truffle oil</p>
+        </div>
       </div>
       <div class="menu-column">
         <h3>Mains</h3>
-        <div class="menu-item"><div><p class="menu-item-name">Pan-Roasted Sea Bass</p><p class="menu-item-desc">fennel, samphire, beurre blanc</p></div><span class="menu-item-price">&euro;28</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Dry-Aged Duck Breast</p><p class="menu-item-desc">cherry jus, roasted beets, polenta</p></div><span class="menu-item-price">&euro;32</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Wild Mushroom Risotto</p><p class="menu-item-desc">porcini, parmesan, black truffle</p></div><span class="menu-item-price">&euro;24</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Lamb Rack</p><p class="menu-item-desc">herb crust, spring peas, jus</p></div><span class="menu-item-price">&euro;34</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Grilled Aubergine</p><p class="menu-item-desc">tahini, pomegranate, za'atar</p></div><span class="menu-item-price">&euro;22</span></div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Grass-fed ribeye</span>
+            <span class="menu-item-price">&euro;32</span>
+          </div>
+          <p class="menu-item-desc">Caf&eacute; de Paris butter, frites, watercress</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Pan-roasted cod with samphire</span>
+            <span class="menu-item-price">&euro;28</span>
+          </div>
+          <p class="menu-item-desc">Brown butter, capers, crushed new potatoes</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Wild mushroom risotto</span>
+            <span class="menu-item-price">&euro;24</span>
+          </div>
+          <p class="menu-item-desc">Porcini, aged parmesan, black truffle</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Duck breast with cherry jus</span>
+            <span class="menu-item-price">&euro;29</span>
+          </div>
+          <p class="menu-item-desc">Roasted beetroot, fondant potato, thyme</p>
+        </div>
       </div>
       <div class="menu-column">
         <h3>Desserts</h3>
-        <div class="menu-item"><div><p class="menu-item-name">Cr&egrave;me Br&ucirc;l&eacute;e</p><p class="menu-item-desc">vanilla bean, shortbread</p></div><span class="menu-item-price">&euro;12</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Dark Chocolate Fondant</p><p class="menu-item-desc">salted caramel, pistachio ice cream</p></div><span class="menu-item-price">&euro;14</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Seasonal Fruit Tart</p><p class="menu-item-desc">almond cream, fresh berries</p></div><span class="menu-item-price">&euro;11</span></div>
-        <div class="menu-item"><div><p class="menu-item-name">Cheese Selection</p><p class="menu-item-desc">three Dutch cheeses, quince, walnuts</p></div><span class="menu-item-price">&euro;16</span></div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Cr&egrave;me br&ucirc;l&eacute;e</span>
+            <span class="menu-item-price">&euro;11</span>
+          </div>
+          <p class="menu-item-desc">Tahitian vanilla, caramelised sugar</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Chocolate fondant</span>
+            <span class="menu-item-price">&euro;13</span>
+          </div>
+          <p class="menu-item-desc">Molten centre, salted caramel ice cream</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Dutch apple tart with cream</span>
+            <span class="menu-item-price">&euro;10</span>
+          </div>
+          <p class="menu-item-desc">Warm, cinnamon spiced, whipped cream</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Cheese board</span>
+            <span class="menu-item-price">&euro;14 / &euro;19</span>
+          </div>
+          <p class="menu-item-desc">Three or five Dutch cheeses, quince, walnuts</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="about reveal" id="about">
+<section class="story reveal" id="story">
   <div class="container">
-    <div class="about-inner">
-      <div class="about-img"></div>
-      <div class="about-text">
-        <h2>A kitchen built on relationships</h2>
-        <p>Terrace started in 2019 with a simple idea: cook what grows nearby. Our menu changes with the seasons because our farmers' fields do. Every supplier is within 80km of Amsterdam.</p>
-        <p>We don't have a walk-in freezer. What arrives in the morning is on your plate by evening. That's not a gimmick &mdash; it's just how we think food should work.</p>
-      </div>
+    <div class="story-inner">
+      <p class="section-label">Our Story</p>
+      <h2>A canal house kitchen</h2>
+      <div class="section-divider"></div>
+      <p>Terrace was born in 2018 when chef Joris van der Berg took over a 17th-century canal house on the Herengracht and turned its ground floor into an open kitchen. The building's original oak beams and hand-laid tiles remain, and the terrace stretches out over the water in summer, catching the last of the golden-hour light that Amsterdam does so well. Joris trained in Lyon and Copenhagen before returning home, bringing with him a conviction that the best cooking starts with restraint and impeccable ingredients.</p>
+      <p>Everything on our menu traces back to growers, fishermen, and producers we know by name. Dutch asparagus in spring, North Sea cod landed that morning, Beemster beef raised on open pastures. We do not import what the season cannot provide. The result is a menu that changes weekly, sometimes daily, and a kitchen that feels more like a conversation between the land and the plate. That simplicity is the point.</p>
     </div>
   </div>
 </section>
 
 <section class="info reveal" id="visit">
   <div class="container">
+    <p class="section-label">Visit Us</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:300;text-align:center;margin-bottom:64px;letter-spacing:0.02em;">Plan Your Evening</h2>
     <div class="info-grid">
       <div class="info-section">
         <h3>Opening Hours</h3>
-        <table class="hours-table">
-          <tr><td>Monday</td><td class="closed">Closed</td></tr>
-          <tr><td>Tuesday &ndash; Thursday</td><td>17:00 &ndash; 23:00</td></tr>
-          <tr><td>Friday &ndash; Saturday</td><td>12:00 &ndash; 00:00</td></tr>
-          <tr><td>Sunday</td><td>12:00 &ndash; 22:00</td></tr>
-        </table>
+        <div class="hours-grid">
+          <div class="hours-row">
+            <span class="hours-day">Monday &ndash; Thursday</span>
+            <span class="hours-time">17:00 &ndash; 23:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Friday &ndash; Saturday</span>
+            <span class="hours-time">12:00 &ndash; 00:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="hours-day">Sunday</span>
+            <span class="hours-time">12:00 &ndash; 22:00</span>
+          </div>
+        </div>
+        <p class="hours-note">Kitchen closes 30 minutes before closing</p>
       </div>
       <div class="info-section">
-        <h3>Find Us</h3>
-        <p class="location-address">Prinsengracht 412<br>1016 JB Amsterdam<br>The Netherlands<br><br>+31 20 123 4567<br>hello@terrace-amsterdam.nl</p>
-        <div class="map-placeholder">
-          <a href="#">View on Google Maps</a>
-        </div>
+        <h3>Location</h3>
+        <p class="location-address">Herengracht 341<br>1016 AZ Amsterdam</p>
+        <p class="location-contact">
+          <a href="tel:+31205550198">+31 20 555 0198</a><br>
+          <a href="mailto:hello@terrace-amsterdam.nl">hello@terrace-amsterdam.nl</a>
+        </p>
+        <a href="https://www.google.com/maps/search/Herengracht+341+Amsterdam" target="_blank" rel="noopener" class="maps-link">View on Google Maps &rarr;</a>
       </div>
     </div>
   </div>
@@ -214,42 +724,71 @@ footer p { font-size:12px; color:var(--muted); }
 
 <section class="instagram reveal">
   <div class="container">
-    <h3>@terrace.amsterdam</h3>
-    <p>Follow us for daily specials and behind-the-scenes</p>
+    <div class="instagram-header">
+      <h3>From Our Kitchen</h3>
+      <a href="https://instagram.com/terrace.amsterdam" target="_blank" rel="noopener">@terrace.amsterdam</a>
+    </div>
     <div class="insta-grid">
       <div class="insta-item"></div>
       <div class="insta-item"></div>
       <div class="insta-item"></div>
       <div class="insta-item"></div>
+      <div class="insta-item"></div>
+      <div class="insta-item"></div>
     </div>
-  </div>
-</section>
-
-<section class="cta reveal">
-  <div class="container">
-    <h2>Reserve your table</h2>
-    <p>Walk-ins welcome, but we recommend booking for dinner.</p>
-    <a href="#" class="btn btn-accent">Book a table</a>
   </div>
 </section>
 
 <footer>
   <div class="container">
-    <p>&copy; 2026 Terrace Amsterdam</p>
-    <div class="footer-links">
-      <a href="#">Instagram</a>
-      <a href="#">Privacy</a>
-      <a href="#">Contact</a>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <p class="footer-heading">Address</p>
+        <p>Herengracht 341<br>1016 AZ Amsterdam</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Contact</p>
+        <p><a href="tel:+31205550198">+31 20 555 0198</a><br><a href="mailto:hello@terrace-amsterdam.nl">hello@terrace-amsterdam.nl</a></p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">Follow</p>
+        <p><a href="https://instagram.com/terrace.amsterdam" target="_blank" rel="noopener">Instagram</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Terrace Amsterdam &copy; 2026</p>
     </div>
   </div>
 </footer>
 
 <script>
-(function(){
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
-  }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+(function() {
+  // Reveal on scroll
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // Nav scroll effect
+  var nav = document.getElementById('nav');
+  var scrollThreshold = 80;
+  function checkScroll() {
+    if (window.scrollY > scrollThreshold) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  checkScroll();
 })();
 </script>
 </body>
