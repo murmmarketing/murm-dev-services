@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOLT Fitness — Train Harder</title>
+<meta name="description" content="Premium fitness equipment. Free shipping. 30-day guarantee.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #0D0D0D; --bg2: #141414; --card: #1A1A1A;
+  --blue: #3B82F6; --blue-glow: rgba(59,130,246,0.15); --blue-dim: rgba(59,130,246,0.08);
+  --text: #F5F5F5; --muted: #8A8A8A; --dim: #555;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+
+/* Portfolio badge */
+.portfolio-badge { position:fixed; top:16px; left:16px; z-index:100; font-size:11px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:rgba(59,130,246,0.4); backdrop-filter:blur(8px); padding:8px 14px; border-radius:99px; text-decoration:none; transition:background 0.2s; }
+.portfolio-badge:hover { background:rgba(59,130,246,0.6); }
+
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+.container { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+/* Nav */
+.nav { padding:20px 0; position:fixed; top:0; left:0; right:0; z-index:50; background:rgba(13,13,13,0.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.06); }
+.nav .container { display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { font-size:20px; font-weight:900; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); text-decoration:none; }
+.nav-logo span { color:var(--blue); }
+.nav-links { display:flex; gap:24px; align-items:center; }
+.nav-links a { font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover { color:var(--text); }
+.nav-cart { font-size:12px; font-weight:600; color:var(--bg); background:var(--blue); padding:8px 20px; border-radius:4px; text-decoration:none; transition:all 0.2s; }
+.nav-cart:hover { background:#5B9AF6; box-shadow:0 4px 20px var(--blue-glow); }
+
+/* Hero */
+.hero { padding:180px 0 120px; position:relative; overflow:hidden; }
+.hero-bg { position:absolute; top:0; right:-10%; width:600px; height:600px; background:radial-gradient(circle, var(--blue-glow), transparent 60%); pointer-events:none; }
+.hero .container { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.hero-text h1 { font-size:clamp(42px,6vw,72px); font-weight:900; line-height:1.0; letter-spacing:-0.02em; text-transform:uppercase; margin-bottom:20px; }
+.hero-text h1 span { color:var(--blue); display:block; }
+.hero-text p { font-size:16px; color:var(--muted); max-width:420px; margin-bottom:32px; }
+.btn { display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:600; letter-spacing:0.04em; text-decoration:none; padding:16px 36px; border-radius:6px; transition:all 0.3s ease; text-transform:uppercase; }
+.btn-blue { background:var(--blue); color:#fff; box-shadow:0 4px 24px var(--blue-glow); }
+.btn-blue:hover { background:#5B9AF6; transform:translateY(-2px); box-shadow:0 8px 32px rgba(59,130,246,0.3); }
+.btn-ghost { border:1px solid var(--dim); color:var(--muted); }
+.btn-ghost:hover { border-color:var(--blue); color:var(--blue); }
+/* Hero product mockup */
+.hero-product { position:relative; display:flex; align-items:center; justify-content:center; }
+.hero-product-shape { width:280px; height:280px; position:relative; }
+.dumbbell { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-15deg); }
+.dumbbell-bar { width:180px; height:12px; background:linear-gradient(90deg, var(--dim), #666, var(--dim)); border-radius:6px; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+.dumbbell-weight { width:36px; height:80px; border-radius:6px; background:linear-gradient(180deg, var(--blue), #2563EB); position:absolute; top:50%; transform:translateY(-50%); box-shadow:0 4px 20px var(--blue-glow); }
+.dumbbell-weight.left { left:0; }
+.dumbbell-weight.right { right:0; }
+.hero-product-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:320px; height:320px; background:radial-gradient(circle, var(--blue-glow), transparent 60%); border-radius:50%; }
+
+/* Sale banner */
+.sale-banner { padding:20px 0; background:var(--blue-dim); border-top:1px solid rgba(59,130,246,0.15); border-bottom:1px solid rgba(59,130,246,0.15); text-align:center; }
+.sale-banner p { font-size:14px; font-weight:600; letter-spacing:0.04em; }
+.sale-banner span { color:var(--blue); }
+.sale-timer { display:inline-flex; gap:8px; margin-left:16px; }
+.sale-timer-unit { background:var(--card); padding:4px 10px; border-radius:4px; font-size:14px; font-weight:700; font-variant-numeric:tabular-nums; }
+
+/* Products */
+.products { padding:100px 0; }
+.products h2 { font-size:clamp(24px,4vw,36px); font-weight:800; text-transform:uppercase; text-align:center; margin-bottom:12px; }
+.products .subtitle { text-align:center; color:var(--muted); font-size:14px; margin-bottom:56px; }
+.product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.product-card { background:var(--card); border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.06); transition:transform 0.3s, box-shadow 0.3s; }
+.product-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.4); }
+.product-img { aspect-ratio:4/3; position:relative; display:flex; align-items:center; justify-content:center; }
+.product-img.bands { background:linear-gradient(135deg, #1a1a2e, #16213e); }
+.product-img.kettlebell { background:linear-gradient(135deg, #1a1a1a, #2a2a2a); }
+.product-img.mat { background:linear-gradient(135deg, #0d1b2a, #1b2838); }
+/* Simple equipment shapes */
+.shape-bands { display:flex; gap:6px; }
+.shape-band { width:8px; height:80px; border-radius:4px; }
+.shape-band:nth-child(1) { background:var(--blue); opacity:0.5; }
+.shape-band:nth-child(2) { background:var(--blue); opacity:0.7; }
+.shape-band:nth-child(3) { background:var(--blue); }
+.shape-kettlebell { width:60px; height:70px; position:relative; }
+.shape-kettlebell-body { width:60px; height:50px; background:#444; border-radius:50%; position:absolute; bottom:0; }
+.shape-kettlebell-handle { width:36px; height:28px; border:4px solid #444; border-bottom:none; border-radius:18px 18px 0 0; position:absolute; top:0; left:12px; }
+.shape-mat { width:120px; height:16px; background:var(--blue); border-radius:8px; opacity:0.6; box-shadow:0 4px 16px var(--blue-glow); }
+.product-info { padding:20px; }
+.product-name { font-size:16px; font-weight:600; margin-bottom:4px; }
+.product-desc { font-size:12px; color:var(--muted); margin-bottom:12px; }
+.product-pricing { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.price-was { font-size:14px; color:var(--dim); text-decoration:line-through; }
+.price-now { font-size:18px; font-weight:700; color:var(--blue); }
+.product-card .btn { width:100%; justify-content:center; padding:12px; font-size:12px; }
+
+/* Trust */
+.trust { padding:60px 0; }
+.trust .container { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
+.trust-item { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); }
+.trust-icon { width:20px; height:20px; display:flex; align-items:center; justify-content:center; }
+.trust-icon svg { width:16px; height:16px; stroke:var(--blue); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+/* Reviews */
+.reviews { padding:80px 0; }
+.reviews h2 { font-size:clamp(20px,3vw,28px); font-weight:700; text-align:center; margin-bottom:48px; }
+.reviews-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.review-card { background:var(--card); padding:28px 24px; border-radius:12px; border:1px solid rgba(255,255,255,0.06); }
+.review-stars { color:var(--blue); font-size:14px; letter-spacing:2px; margin-bottom:12px; }
+.review-text { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:16px; }
+.review-author { font-size:12px; font-weight:500; color:var(--dim); }
+
+/* Footer */
+footer { padding:48px 0; border-top:1px solid rgba(255,255,255,0.06); }
+footer .container { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+footer p { font-size:12px; color:var(--dim); }
+
+@media (max-width:768px) {
+  .hero .container { grid-template-columns:1fr; }
+  .hero-product { display:none; }
+  .product-grid { grid-template-columns:1fr; }
+  .reviews-grid { grid-template-columns:1fr; }
+  .hero { padding:140px 0 80px; }
+}
+</style>
+</head>
+<body>
+
+<a href="/" class="portfolio-badge">murmweb.dev portfolio</a>
+
+<nav class="nav">
+  <div class="container">
+    <a href="#" class="nav-logo"><span>VOLT</span> FITNESS</a>
+    <div class="nav-links">
+      <a href="#">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Reviews</a>
+      <a href="#" class="nav-cart">Cart (0)</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-text reveal">
+      <h1>Train<br><span>Harder</span></h1>
+      <p>Premium fitness equipment shipped to your door. No gym membership required. No excuses left.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="#" class="btn btn-blue">Shop now</a>
+        <a href="#" class="btn btn-ghost">Summer sale &mdash; 30% off</a>
+      </div>
+    </div>
+    <div class="hero-product reveal">
+      <div class="hero-product-glow"></div>
+      <div class="hero-product-shape">
+        <div class="dumbbell">
+          <div class="dumbbell-bar"></div>
+          <div class="dumbbell-weight left"></div>
+          <div class="dumbbell-weight right"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sale-banner">
+  <p>Summer Sale &mdash; <span>30% off everything</span> &mdash; Ends in
+    <span class="sale-timer">
+      <span class="sale-timer-unit">02</span>:
+      <span class="sale-timer-unit">14</span>:
+      <span class="sale-timer-unit">37</span>
+    </span>
+  </p>
+</div>
+
+<section class="products reveal">
+  <div class="container">
+    <h2>Best Sellers</h2>
+    <p class="subtitle">Everything you need to train at home. Period.</p>
+    <div class="product-grid">
+      <div class="product-card reveal">
+        <div class="product-img bands">
+          <div class="shape-bands"><div class="shape-band"></div><div class="shape-band"></div><div class="shape-band"></div></div>
+        </div>
+        <div class="product-info">
+          <p class="product-name">Resistance Band Set (5x)</p>
+          <p class="product-desc">5 resistance levels, latex-free, carry bag included</p>
+          <div class="product-pricing">
+            <span class="price-was">&euro;39.95</span>
+            <span class="price-now">&euro;27.95</span>
+          </div>
+          <a href="#" class="btn btn-blue">Add to cart</a>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img kettlebell">
+          <div class="shape-kettlebell"><div class="shape-kettlebell-handle"></div><div class="shape-kettlebell-body"></div></div>
+        </div>
+        <div class="product-info">
+          <p class="product-name">Cast Iron Kettlebell 16kg</p>
+          <p class="product-desc">Powder-coated, wide handle, flat base</p>
+          <div class="product-pricing">
+            <span class="price-was">&euro;59.95</span>
+            <span class="price-now">&euro;41.95</span>
+          </div>
+          <a href="#" class="btn btn-blue">Add to cart</a>
+        </div>
+      </div>
+      <div class="product-card reveal">
+        <div class="product-img mat">
+          <div class="shape-mat"></div>
+        </div>
+        <div class="product-info">
+          <p class="product-name">Pro Yoga Mat 6mm</p>
+          <p class="product-desc">Non-slip, eco-friendly TPE, alignment lines</p>
+          <div class="product-pricing">
+            <span class="price-was">&euro;44.95</span>
+            <span class="price-now">&euro;31.45</span>
+          </div>
+          <a href="#" class="btn btn-blue">Add to cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container">
+    <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span>Fast shipping</div>
+    <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/></svg></span>30-day guarantee</div>
+    <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>10,000+ sold</div>
+  </div>
+</div>
+
+<section class="reviews reveal">
+  <div class="container">
+    <h2>What Our Customers Say</h2>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Best resistance bands I've bought. The quality is insane for the price. Ditched my gym membership."</p>
+        <p class="review-author">Mark T. &mdash; Amsterdam</p>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Shipped faster than expected. The kettlebell feels premium. Wide handle is great for swings."</p>
+        <p class="review-author">Sarah L. &mdash; London</p>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Finally a yoga mat that doesn't slide around. The alignment lines are a nice touch. Would buy again."</p>
+        <p class="review-author">Daniil K. &mdash; Berlin</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 VOLT Fitness. All rights reserved.</p>
+    <p>hello@voltfitness.com</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+</body>
+</html>

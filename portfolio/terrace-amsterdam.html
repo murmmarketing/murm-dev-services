@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terrace — Seasonal. Local. Amsterdam.</title>
+<meta name="description" content="Farm-to-table dining in the heart of Amsterdam. Seasonal menu, local ingredients.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #F5F0E8; --text: #2C3E2D; --muted: #6B7A6C; --accent: #C67A3C;
+  --card: #FFFDF8; --border: #DDD6C8;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+
+.portfolio-badge { position:fixed; top:16px; left:16px; z-index:100; font-size:11px; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:#fff; background:rgba(44,62,45,0.8); backdrop-filter:blur(8px); padding:8px 14px; border-radius:99px; text-decoration:none; transition:background 0.2s; }
+.portfolio-badge:hover { background:rgba(44,62,45,0.95); }
+
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:none; }
+
+.container { max-width:1000px; margin:0 auto; padding:0 24px; }
+
+/* Nav */
+.nav { padding:24px 0; }
+.nav .container { display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { font-family:var(--serif); font-size:26px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:0.01em; }
+.nav-links { display:flex; gap:28px; align-items:center; }
+.nav-links a { font-size:13px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover { color:var(--text); }
+.nav-reserve { font-size:12px; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; color:var(--card); background:var(--accent); padding:10px 24px; border-radius:3px; text-decoration:none; transition:all 0.2s; }
+.nav-reserve:hover { background:#D48A4C; }
+
+/* Hero */
+.hero { padding:80px 0 100px; text-align:center; position:relative; }
+.hero h1 { font-family:var(--serif); font-size:clamp(40px,6vw,64px); font-weight:400; line-height:1.05; letter-spacing:-0.01em; margin-bottom:20px; }
+.hero h1 em { font-style:italic; color:var(--accent); }
+.hero p { font-size:17px; color:var(--muted); max-width:500px; margin:0 auto 36px; line-height:1.8; }
+.btn { display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-size:13px; font-weight:500; letter-spacing:0.04em; text-transform:uppercase; text-decoration:none; padding:16px 36px; border-radius:3px; transition:all 0.3s ease; }
+.btn-accent { background:var(--accent); color:var(--card); }
+.btn-accent:hover { background:#D48A4C; transform:translateY(-1px); }
+.btn-outline { border:1px solid var(--border); color:var(--text); }
+.btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+.hero-divider { width:60px; height:1px; background:var(--accent); margin:48px auto 0; opacity:0.4; }
+
+/* Menu */
+.menu { padding:100px 0; }
+.menu h2 { font-family:var(--serif); font-size:clamp(28px,4vw,40px); font-weight:400; text-align:center; margin-bottom:12px; }
+.menu .subtitle { text-align:center; color:var(--muted); font-size:14px; margin-bottom:60px; font-style:italic; }
+.menu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:48px; }
+.menu-column h3 { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--accent); margin-bottom:24px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+.menu-item { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-bottom:1px solid rgba(221,214,200,0.5); }
+.menu-item-name { font-size:14px; font-weight:500; }
+.menu-item-desc { font-size:12px; color:var(--muted); font-style:italic; margin-top:2px; }
+.menu-item-price { font-size:14px; font-weight:500; color:var(--accent); white-space:nowrap; flex-shrink:0; }
+
+/* About */
+.about { padding:100px 0; }
+.about-inner { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.about-img { aspect-ratio:4/3; border-radius:8px; background:linear-gradient(135deg, #D4C4A8, #BFB090, #A89878); position:relative; overflow:hidden; }
+.about-img::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 40% 40%, rgba(255,255,255,0.15), transparent 60%); }
+.about-text h2 { font-family:var(--serif); font-size:clamp(24px,3.5vw,34px); font-weight:400; margin-bottom:20px; }
+.about-text p { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:16px; }
+
+/* Hours & Location */
+.info { padding:80px 0; border-top:1px solid var(--border); }
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+.info-section h3 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:24px; }
+.hours-table { width:100%; font-size:14px; }
+.hours-table tr { border-bottom:1px solid rgba(221,214,200,0.5); }
+.hours-table td { padding:10px 0; }
+.hours-table td:last-child { text-align:right; color:var(--muted); }
+.hours-table .closed { color:var(--accent); font-style:italic; }
+.location-address { font-size:15px; color:var(--muted); line-height:1.8; margin-bottom:20px; }
+.map-placeholder { width:100%; aspect-ratio:16/9; background:linear-gradient(135deg, #D8D0C4, #C8BCA8); border-radius:8px; display:flex; align-items:center; justify-content:center; }
+.map-placeholder a { font-size:13px; font-weight:500; color:var(--accent); text-decoration:none; padding:10px 20px; border:1px solid var(--accent); border-radius:3px; transition:all 0.2s; }
+.map-placeholder a:hover { background:var(--accent); color:var(--card); }
+
+/* Instagram */
+.instagram { padding:80px 0; text-align:center; }
+.instagram h3 { font-family:var(--serif); font-size:24px; font-weight:400; margin-bottom:8px; }
+.instagram p { font-size:13px; color:var(--muted); margin-bottom:32px; }
+.insta-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.insta-item { aspect-ratio:1; border-radius:6px; transition:opacity 0.3s; cursor:pointer; }
+.insta-item:hover { opacity:0.8; }
+.insta-item:nth-child(1) { background:linear-gradient(135deg, #D4C8B0, #C8B898); }
+.insta-item:nth-child(2) { background:linear-gradient(135deg, #C0B498, #B0A488); }
+.insta-item:nth-child(3) { background:linear-gradient(135deg, #D0C4A8, #BEB298); }
+.insta-item:nth-child(4) { background:linear-gradient(135deg, #C8BCA0, #B8AC90); }
+
+/* CTA */
+.cta { padding:80px 0; text-align:center; border-top:1px solid var(--border); }
+.cta h2 { font-family:var(--serif); font-size:clamp(28px,4vw,40px); font-weight:400; margin-bottom:12px; }
+.cta p { color:var(--muted); font-size:15px; margin-bottom:32px; }
+
+/* Footer */
+footer { padding:48px 0; border-top:1px solid var(--border); }
+footer .container { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+footer p { font-size:12px; color:var(--muted); }
+.footer-links { display:flex; gap:20px; }
+.footer-links a { font-size:12px; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.footer-links a:hover { color:var(--accent); }
+
+@media (max-width:768px) {
+  .menu-grid { grid-template-columns:1fr; gap:40px; }
+  .about-inner { grid-template-columns:1fr; gap:32px; }
+  .info-grid { grid-template-columns:1fr; gap:40px; }
+  .insta-grid { grid-template-columns:1fr 1fr; }
+  .nav-links a:not(.nav-reserve) { display:none; }
+}
+</style>
+</head>
+<body>
+
+<a href="/" class="portfolio-badge">murmweb.dev portfolio</a>
+
+<nav class="nav">
+  <div class="container">
+    <a href="#" class="nav-logo">Terrace</a>
+    <div class="nav-links">
+      <a href="#menu">Menu</a>
+      <a href="#about">Our Story</a>
+      <a href="#visit">Visit</a>
+      <a href="#" class="nav-reserve">Book a table</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero reveal">
+  <div class="container">
+    <h1>Seasonal. Local.<br><em>Amsterdam.</em></h1>
+    <p>Farm-to-table dining in the heart of the Jordaan. Every dish tells the story of the season and the people who grew it.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="#" class="btn btn-accent">Book a table</a>
+      <a href="#menu" class="btn btn-outline">View the menu</a>
+    </div>
+    <div class="hero-divider"></div>
+  </div>
+</section>
+
+<section class="menu reveal" id="menu">
+  <div class="container">
+    <h2>Spring Menu</h2>
+    <p class="subtitle">Updated weekly based on what arrives from our suppliers</p>
+    <div class="menu-grid">
+      <div class="menu-column">
+        <h3>Starters</h3>
+        <div class="menu-item"><div><p class="menu-item-name">Burrata & Heritage Tomatoes</p><p class="menu-item-desc">basil oil, sourdough crumble</p></div><span class="menu-item-price">&euro;14</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Celeriac Soup</p><p class="menu-item-desc">truffle, hazelnut, chive</p></div><span class="menu-item-price">&euro;11</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Beef Tartare</p><p class="menu-item-desc">egg yolk, capers, rye</p></div><span class="menu-item-price">&euro;16</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Grilled Artichoke</p><p class="menu-item-desc">lemon aioli, pecorino</p></div><span class="menu-item-price">&euro;13</span></div>
+      </div>
+      <div class="menu-column">
+        <h3>Mains</h3>
+        <div class="menu-item"><div><p class="menu-item-name">Pan-Roasted Sea Bass</p><p class="menu-item-desc">fennel, samphire, beurre blanc</p></div><span class="menu-item-price">&euro;28</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Dry-Aged Duck Breast</p><p class="menu-item-desc">cherry jus, roasted beets, polenta</p></div><span class="menu-item-price">&euro;32</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Wild Mushroom Risotto</p><p class="menu-item-desc">porcini, parmesan, black truffle</p></div><span class="menu-item-price">&euro;24</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Lamb Rack</p><p class="menu-item-desc">herb crust, spring peas, jus</p></div><span class="menu-item-price">&euro;34</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Grilled Aubergine</p><p class="menu-item-desc">tahini, pomegranate, za'atar</p></div><span class="menu-item-price">&euro;22</span></div>
+      </div>
+      <div class="menu-column">
+        <h3>Desserts</h3>
+        <div class="menu-item"><div><p class="menu-item-name">Cr&egrave;me Br&ucirc;l&eacute;e</p><p class="menu-item-desc">vanilla bean, shortbread</p></div><span class="menu-item-price">&euro;12</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Dark Chocolate Fondant</p><p class="menu-item-desc">salted caramel, pistachio ice cream</p></div><span class="menu-item-price">&euro;14</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Seasonal Fruit Tart</p><p class="menu-item-desc">almond cream, fresh berries</p></div><span class="menu-item-price">&euro;11</span></div>
+        <div class="menu-item"><div><p class="menu-item-name">Cheese Selection</p><p class="menu-item-desc">three Dutch cheeses, quince, walnuts</p></div><span class="menu-item-price">&euro;16</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about reveal" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-img"></div>
+      <div class="about-text">
+        <h2>A kitchen built on relationships</h2>
+        <p>Terrace started in 2019 with a simple idea: cook what grows nearby. Our menu changes with the seasons because our farmers' fields do. Every supplier is within 80km of Amsterdam.</p>
+        <p>We don't have a walk-in freezer. What arrives in the morning is on your plate by evening. That's not a gimmick &mdash; it's just how we think food should work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="info reveal" id="visit">
+  <div class="container">
+    <div class="info-grid">
+      <div class="info-section">
+        <h3>Opening Hours</h3>
+        <table class="hours-table">
+          <tr><td>Monday</td><td class="closed">Closed</td></tr>
+          <tr><td>Tuesday &ndash; Thursday</td><td>17:00 &ndash; 23:00</td></tr>
+          <tr><td>Friday &ndash; Saturday</td><td>12:00 &ndash; 00:00</td></tr>
+          <tr><td>Sunday</td><td>12:00 &ndash; 22:00</td></tr>
+        </table>
+      </div>
+      <div class="info-section">
+        <h3>Find Us</h3>
+        <p class="location-address">Prinsengracht 412<br>1016 JB Amsterdam<br>The Netherlands<br><br>+31 20 123 4567<br>hello@terrace-amsterdam.nl</p>
+        <div class="map-placeholder">
+          <a href="#">View on Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="instagram reveal">
+  <div class="container">
+    <h3>@terrace.amsterdam</h3>
+    <p>Follow us for daily specials and behind-the-scenes</p>
+    <div class="insta-grid">
+      <div class="insta-item"></div>
+      <div class="insta-item"></div>
+      <div class="insta-item"></div>
+      <div class="insta-item"></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta reveal">
+  <div class="container">
+    <h2>Reserve your table</h2>
+    <p>Walk-ins welcome, but we recommend booking for dinner.</p>
+    <a href="#" class="btn btn-accent">Book a table</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Terrace Amsterdam</p>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Privacy</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+</body>
+</html>
