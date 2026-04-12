@@ -32,8 +32,21 @@
   }
 
   // ── Page Transitions ──────────────────────────
+  // Always ensure page is visible on load (fixes back/forward cache showing black screen)
+  document.body.style.opacity = '1';
+  document.body.style.transform = 'none';
+  document.body.classList.remove('page-leaving');
   document.body.classList.add('page-entering');
   setTimeout(function(){ document.body.classList.remove('page-entering'); }, 320);
+
+  // Handle bfcache (back/forward navigation) — page may still have page-leaving styles
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+      document.body.style.opacity = '1';
+      document.body.style.transform = 'none';
+      document.body.classList.remove('page-leaving');
+    }
+  });
 
   document.addEventListener('click', function(e) {
     var a = e.target.closest('a');
