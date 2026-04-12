@@ -463,9 +463,10 @@ body.loaded .hero-proof { opacity:1; transform:none; transition: all 0.5s ease 0
 /* ── Portfolio Grid ─────────────────────────── */
 .portfolio-section { padding:60px 0 0; }
 .portfolio-header { font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px; }
-.portfolio-scroll { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:16px; scrollbar-width:none; }
+.portfolio-wrap { position:relative; }
+.portfolio-scroll { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:16px; scrollbar-width:none; scroll-behavior:smooth; }
 .portfolio-scroll::-webkit-scrollbar { display:none; }
-.portfolio-card { flex:0 0 280px; scroll-snap-align:start; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease; }
+.portfolio-card { flex:0 0 300px; scroll-snap-align:start; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease; }
 .portfolio-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
 .portfolio-thumb { height:140px; background:var(--bg); position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
 .portfolio-mini-bar { display:flex; align-items:center; gap:3px; padding:6px 8px; background:var(--bg-elevated); border-bottom:1px solid var(--border); }
@@ -480,8 +481,22 @@ body.loaded .hero-proof { opacity:1; transform:none; transition: all 0.5s ease 0
 .portfolio-pill { font-family:var(--mono); font-size:10px; color:var(--text-dim); padding:3px 8px; border:1px solid var(--border); border-radius:3px; }
 .portfolio-card a.portfolio-link { font-family:var(--mono); font-size:12px; color:var(--gold); text-decoration:none; letter-spacing:0.02em; transition:opacity 0.2s; }
 .portfolio-card a.portfolio-link:hover { opacity:0.7; }
-.portfolio-badge-text { font-family:var(--mono); font-size:10px; color:var(--text-dim); font-style:italic; }
 .portfolio-note { font-family:var(--mono); font-size:10px; color:var(--text-dim); opacity:0.5; margin-top:16px; }
+/* Portfolio arrows */
+.portfolio-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:40px; height:40px; border-radius:50%; background:var(--bg-card); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--gold); transition:border-color 0.2s, background 0.2s, opacity 0.2s; }
+.portfolio-arrow:hover { border-color:var(--gold); background:var(--bg-elevated); }
+.portfolio-arrow.hidden { opacity:0; pointer-events:none; }
+.portfolio-arrow svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.portfolio-arrow-left { left:-20px; }
+.portfolio-arrow-right { right:-20px; }
+/* Portfolio dots */
+.portfolio-dots { display:flex; justify-content:center; gap:8px; margin-top:8px; }
+.portfolio-dot { width:6px; height:6px; border-radius:50%; background:var(--text-dim); opacity:0.25; transition:opacity 0.2s, background 0.2s; }
+.portfolio-dot.active { background:var(--gold); opacity:1; }
+@media (max-width:768px) {
+  .portfolio-arrow { display:none; }
+  .portfolio-card { flex:0 0 280px; }
+}
 
 /* ── Testimonials ───────────────────────────── */
 .testimonials-section { padding:100px 0; }
@@ -1015,6 +1030,9 @@ footer a:hover { color:var(--gold); }
     <!-- Portfolio -->
     <div class="portfolio-section">
       <p class="portfolio-header reveal">Other recent work</p>
+      <div class="portfolio-wrap">
+      <button class="portfolio-arrow portfolio-arrow-left hidden" aria-label="Scroll left"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="portfolio-arrow portfolio-arrow-right" aria-label="Scroll right"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
       <div class="portfolio-scroll">
         <div class="portfolio-card reveal-card">
           <div class="portfolio-thumb"><div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span></div><div class="portfolio-mini-body"><div class="portfolio-mini-block" style="height:28px;margin-bottom:6px;background:var(--bg-elevated);"></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;"><div class="portfolio-mini-block" style="height:40px;"></div><div class="portfolio-mini-block" style="height:40px;"></div><div class="portfolio-mini-block" style="height:40px;"></div></div></div></div>
@@ -1067,6 +1085,8 @@ footer a:hover { color:var(--gold); }
           </div>
         </div>
       </div>
+      </div>
+      <div class="portfolio-dots"><span class="portfolio-dot active"></span><span class="portfolio-dot"></span><span class="portfolio-dot"></span><span class="portfolio-dot"></span><span class="portfolio-dot"></span></div>
       <p class="portfolio-note reveal">These are example builds showcasing different styles and industries</p>
     </div>
   </div>
@@ -1499,6 +1519,32 @@ footer a:hover { color:var(--gold); }
       if (panel) panel.classList.add('active');
     });
   });
+})();
+
+/* ── Portfolio Scroll Arrows & Dots ──────────────── */
+(function(){
+  var scroll = document.querySelector('.portfolio-scroll');
+  var left = document.querySelector('.portfolio-arrow-left');
+  var right = document.querySelector('.portfolio-arrow-right');
+  var dots = document.querySelectorAll('.portfolio-dot');
+  if (!scroll || !left || !right) return;
+
+  var cardWidth = 320; // 300px card + 20px gap
+
+  function update() {
+    var sl = scroll.scrollLeft;
+    var maxScroll = scroll.scrollWidth - scroll.clientWidth;
+    left.classList.toggle('hidden', sl <= 4);
+    right.classList.toggle('hidden', sl >= maxScroll - 4);
+    // Update dots
+    var activeIndex = Math.round(sl / cardWidth);
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === activeIndex); });
+  }
+
+  left.addEventListener('click', function() { scroll.scrollLeft -= cardWidth; });
+  right.addEventListener('click', function() { scroll.scrollLeft += cardWidth; });
+  scroll.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
 /* ── Exit Intent Popup ────────────────────────── */
