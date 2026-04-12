@@ -62,7 +62,7 @@
   --mono:'JetBrains Mono',monospace;
 }
 html { scroll-behavior:smooth; }
-body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 .container { max-width:720px; margin:0 auto; padding:0 24px; }
 nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
 nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
@@ -103,13 +103,13 @@ footer p { font-size:13px; color:var(--text-dim); }
 
 <article>
   <div class="container">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span class="sep">/</span>
       <a href="/blog/">Writing</a>
       <span class="sep">/</span>
       <span class="current">Failing Shopify Store Rebuild</span>
-    </nav>
+    </div>
     <div class="date">April 2026</div>
     <h1>How I Rebuilt a Failing Shopify Store in 48 Hours</h1>
     <div class="byline">

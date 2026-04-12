@@ -47,7 +47,7 @@
   --mono:'JetBrains Mono',monospace;
 }
 html { scroll-behavior:smooth; }
-body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
 nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
 nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
 .logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
@@ -88,11 +88,11 @@ footer p { font-size:13px; color:var(--text-dim); }
 
 <div class="container">
   <div class="page-header">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span class="sep">/</span>
       <span class="current">Writing</span>
-    </nav>
+    </div>
     <h1>Writing</h1>
     <p>Thoughts on building for the web, e-commerce, and the tools I use.</p>
   </div>
