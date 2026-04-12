@@ -483,12 +483,12 @@ body.loaded .hero-proof { opacity:1; transform:none; transition: all 0.5s ease 0
 .portfolio-card a.portfolio-link:hover { opacity:0.7; }
 .portfolio-note { font-family:var(--mono); font-size:10px; color:var(--text-dim); opacity:0.5; margin-top:16px; }
 /* Portfolio arrows */
-.portfolio-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:40px; height:40px; border-radius:50%; background:var(--bg-card); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--gold); transition:border-color 0.2s, background 0.2s, opacity 0.2s; }
-.portfolio-arrow:hover { border-color:var(--gold); background:var(--bg-elevated); }
+.portfolio-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--gold); transition:background 0.2s, opacity 0.2s; }
+.portfolio-arrow:hover { background:rgba(196,168,122,0.2); }
 .portfolio-arrow.hidden { opacity:0; pointer-events:none; }
-.portfolio-arrow svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.portfolio-arrow-left { left:-20px; }
-.portfolio-arrow-right { right:-20px; }
+.portfolio-arrow svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.portfolio-arrow-left { left:0; }
+.portfolio-arrow-right { right:0; }
 /* Portfolio dots */
 .portfolio-dots { display:flex; justify-content:center; gap:8px; margin-top:8px; }
 .portfolio-dot { width:6px; height:6px; border-radius:50%; background:var(--text-dim); opacity:0.25; transition:opacity 0.2s, background 0.2s; }
