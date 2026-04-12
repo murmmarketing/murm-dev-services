@@ -31,34 +31,7 @@
     });
   }
 
-  // ── Page Transitions ──────────────────────────
-  // Always ensure page is visible on load (fixes back/forward cache showing black screen)
-  document.body.style.opacity = '1';
-  document.body.style.transform = 'none';
-  document.body.classList.remove('page-leaving');
-  document.body.classList.add('page-entering');
-  setTimeout(function(){ document.body.classList.remove('page-entering'); }, 320);
-
-  // Handle bfcache (back/forward navigation) — page may still have page-leaving styles
-  window.addEventListener('pageshow', function(e) {
-    if (e.persisted) {
-      document.body.style.opacity = '1';
-      document.body.style.transform = 'none';
-      document.body.classList.remove('page-leaving');
-    }
-  });
-
-  document.addEventListener('click', function(e) {
-    var a = e.target.closest('a');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href) return;
-    // Skip external, anchors, mailto, tel, new tab, download
-    if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http') || a.target === '_blank' || a.hasAttribute('download')) return;
-    e.preventDefault();
-    document.body.classList.add('page-leaving');
-    setTimeout(function(){ window.location.href = href; }, 300);
-  });
+  // ── Page Transitions (removed — caused black screen on back navigation) ──
 
   // ── Toast ──────────────────────────
   window.showToast = function(msg) {

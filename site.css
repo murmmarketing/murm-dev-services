@@ -76,11 +76,8 @@ html[data-theme="light"] .theme-toggle .moon { display: none; }
   .back-to-top { width: 36px; height: 36px; bottom: 16px; left: 16px; }
 }
 
-/* ── Page Transitions ─────────────────────────── */
-body { opacity: 1; transition: opacity 0.3s ease, transform 0.3s ease; }
-body.page-leaving { opacity: 0; transform: translateY(-10px); }
-@keyframes pageEnter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-body.page-entering { animation: pageEnter 0.3s ease; }
+/* ── Overflow guard (prevent horizontal bleed from scroll sections) ── */
+html, body { overflow-x: hidden; }
 
 /* ── Share Bar ────────────────────────────────── */
 .share-bar {
