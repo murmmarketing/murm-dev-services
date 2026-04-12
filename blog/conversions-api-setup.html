@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Meta Conversions API Setup Most Developers Get Wrong — murmweb.dev</title>
+<meta name="description" content="Most Conversions API setups fire duplicate events, inflating your conversion counts and breaking ad optimization. Here's how to do it right.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://murmweb.dev/blog/conversions-api-setup.html">
+<meta property="og:title" content="The Meta Conversions API Setup Most Developers Get Wrong">
+<meta property="og:description" content="Most Conversions API setups fire duplicate events, inflating your conversion counts and breaking ad optimization. Here's how to do it right.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://murmweb.dev/blog/conversions-api-setup.html">
+<meta property="og:image" content="https://murmweb.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.gstatic.com/s/dmseridisplay/v15/rnCQoNPRaJDqk018e0GD4ij3.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w9omdg3pe6");
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Meta Conversions API Setup Most Developers Get Wrong",
+  "author": { "@type": "Person", "name": "Marius Kerkvliet", "url": "https://murmweb.dev/about.html" },
+  "datePublished": "2026-04-12",
+  "dateModified": "2026-04-12",
+  "publisher": { "@type": "Organization", "name": "murmweb.dev", "logo": { "@type": "ImageObject", "url": "https://murmweb.dev/logo.png" } },
+  "description": "Most Conversions API setups fire duplicate events, inflating your conversion counts and breaking ad optimization. Here's how to do it right.",
+  "mainEntityOfPage": "https://murmweb.dev/blog/conversions-api-setup.html",
+  "image": "https://murmweb.dev/og.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://murmweb.dev/" },
+    { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://murmweb.dev/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "Conversions API Setup", "item": "https://murmweb.dev/blog/conversions-api-setup.html" }
+  ]
+}
+</script>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#0A0A0A; --bg-elevated:#111110; --bg-card:#161615;
+  --gold:#C4A87A; --gold-dim:rgba(196,168,122,0.12);
+  --text:#E8E4DF; --text-muted:#8A8580; --text-dim:#5A5652;
+  --border:rgba(196,168,122,0.08); --border-hover:rgba(196,168,122,0.18);
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+.container { max-width:720px; margin:0 auto; padding:0 24px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
+.logo img { width:38px; height:38px; object-fit:contain; }
+.logo span { color:var(--gold); }
+.nav-cta { font-family:var(--mono); font-size:13px; font-weight:500; color:var(--gold); text-decoration:none; padding:10px 24px; border:1px solid var(--border-hover); border-radius:4px; transition:all 0.3s ease; }
+.nav-cta:hover { background:var(--gold-dim); border-color:var(--gold); }
+article { padding:160px 0 100px; }
+article .back { font-family:var(--mono); font-size:12px; color:var(--text-dim); text-decoration:none; letter-spacing:0.04em; display:inline-block; margin-bottom:32px; }
+article .back:hover { color:var(--gold); }
+article .date { font-family:var(--mono); font-size:11px; color:var(--text-dim); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; }
+article h1 { font-family:var(--serif); font-size:clamp(32px,5vw,48px); font-weight:400; line-height:1.15; letter-spacing:-0.02em; margin-bottom:24px; }
+article h2 { font-family:var(--serif); font-size:24px; font-weight:400; margin:48px 0 16px; color:var(--text); }
+article p { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:20px; }
+article strong { color:var(--text); font-weight:500; }
+article ul, article ol { margin:0 0 20px 20px; }
+article li { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:8px; }
+footer { padding:48px 0; border-top:1px solid var(--border); }
+footer .footer-inner { max-width:1100px; margin:0 auto; padding:0 24px; }
+footer p { font-size:13px; color:var(--text-dim); }
+</style>
+</head>
+<body>
+<div class="read-progress"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="/logo.png" alt="M" width="38" height="38">murm<span>web</span>.dev</a>
+    <div class="nav-right">
+      <button type="button" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <a href="/#contact" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+    <div class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/blog/">Writing</a>
+      <span class="sep">/</span>
+      <span class="current">Conversions API Setup</span>
+    </div>
+    <div class="date">April 2026</div>
+    <h1>The Meta Conversions API Setup Most Developers Get Wrong</h1>
+    <div class="byline">
+      <span>By <a href="/about.html">Marius Kerkvliet</a></span>
+      <span class="dot">&middot;</span>
+      <span>Shopify &amp; Next.js developer</span>
+    </div>
+
+    <p>If you're running Meta ads for an e-commerce store, your conversion data is almost certainly incomplete. The browser-based Meta Pixel &mdash; the tracking snippet most stores rely on &mdash; is blocked by roughly 30% of your visitors. Ad blockers, Safari's Intelligent Tracking Prevention, iOS privacy changes, and Firefox's Enhanced Tracking Protection all silently strip your Pixel events before they reach Meta.</p>
+
+    <p>That means Meta's ad algorithm is optimizing on partial data. It can't learn from conversions it never sees. Your cost-per-acquisition looks higher than it is, your audiences are smaller than they should be, and your ad spend is less efficient than it could be. The fix is the Conversions API &mdash; but most setups I audit are doing it wrong.</p>
+
+    <h2>Why server-side matters</h2>
+
+    <p>The Meta Conversions API (CAPI) sends conversion events directly from your server to Meta's servers. No browser involved. No ad blocker can touch it. When a customer completes a purchase, your backend fires a server-side event to Meta with the transaction details, and that event gets attributed correctly regardless of what's happening in the customer's browser.</p>
+
+    <p>This isn't optional anymore. With the ongoing erosion of browser-based tracking &mdash; Apple's ATT framework, the slow death of third-party cookies, increasingly aggressive ad blockers &mdash; server-side event tracking is the only reliable way to give Meta the data it needs to optimize your campaigns. Without it, you're asking Meta to find your best customers while blindfolded. It can still do it, but it's going to cost you significantly more per conversion.</p>
+
+    <p>The standard setup is to run both: the Pixel fires events from the browser for users who aren't blocking it, and CAPI fires the same events from your server for everyone. Meta receives both and deduplicates them into a single event. In theory, this gives you the best of both worlds &mdash; real-time browser events plus reliable server-side coverage.</p>
+
+    <p>In practice, this is exactly where things go wrong.</p>
+
+    <h2>The deduplication problem</h2>
+
+    <p>This is the single most common mistake I see in Conversions API setups, and it's the one that does the most damage. If you send the same Purchase event from both the Pixel and CAPI without proper deduplication, <strong>Meta counts it twice</strong>. Your Events Manager shows double the conversions. Your ROAS looks 40% better than it actually is. Your cost-per-purchase looks impossibly low.</p>
+
+    <p>Everything looks great in the dashboard. So you scale your ad spend based on those numbers. And then you lose money, because the actual performance was never as good as the data suggested. You were optimizing on inflated metrics.</p>
+
+    <p>The fix is straightforward but requires careful implementation: <strong>send the same <code>event_id</code> from both the browser Pixel event and the server-side CAPI event</strong>. When Meta receives two events with the same event name, the same event ID, and roughly the same timestamp, it deduplicates them into a single conversion. Generate a unique ID (a UUID works fine) when the event occurs, pass it to both your Pixel call and your server-side API call, and Meta handles the rest.</p>
+
+    <p>Most Shopify apps that advertise CAPI support claim to handle deduplication automatically. Many don't do it correctly. Some generate separate IDs for browser and server events. Some don't send an event ID at all from the Pixel side. The only way to verify is to go to Events Manager &gt; Event Overview and check the "Deduplicated Events" section. If you're not seeing a healthy dedup rate there, your setup is broken and your conversion data is inflated.</p>
+
+    <h2>Event match quality</h2>
+
+    <p>Even if your deduplication is perfect, your CAPI setup can still underperform if Meta can't match the events back to actual users. Meta assigns each server-side event a <strong>match quality score from 1 to 10</strong> based on how many customer parameters you include. A low score means Meta received your conversion event but couldn't confidently connect it to a user profile &mdash; which means it can't optimize your ads based on that conversion.</p>
+
+    <p>The parameters that matter most: <strong>email</strong> (hashed with SHA-256), <strong>phone number</strong> (hashed), <strong>external_id</strong> (your customer ID, hashed), <strong>client_ip_address</strong>, <strong>client_user_agent</strong>, <strong>fbc</strong> (the Meta click ID from the URL parameter), and <strong>fbp</strong> (the Meta browser ID cookie). Most setups I see only send the customer's email. That alone gets you a match quality of about 3-4 out of 10.</p>
+
+    <p>You want to send every parameter you have available. The fbc and fbp values are particularly important because they let Meta match a server-side conversion directly to the ad click that caused it. Pull the <code>_fbc</code> and <code>_fbp</code> cookies from the customer's browser session, pass them to your server, and include them in the CAPI call. <strong>Aim for a match quality score of 7 or higher.</strong> Below that, you're leaving optimization quality on the table.</p>
+
+    <h2>Common mistakes I see</h2>
+
+    <ol>
+      <li><strong>Not sending test events before going live.</strong> Meta provides a Test Events tool in Events Manager specifically for this. Use it. Fire every event type &mdash; PageView, ViewContent, AddToCart, InitiateCheckout, Purchase &mdash; and confirm each one arrives correctly before you touch your live ad account.</li>
+      <li><strong>Wrong event names.</strong> "Purchase" is not the same as "purchase". Meta's standard events are case-sensitive. If you send "purchase" instead of "Purchase", Meta won't recognize it as a standard event, and your campaigns using the Purchase optimization event will get no data.</li>
+      <li><strong>Missing the <code>content_ids</code> parameter on ViewContent and AddToCart.</strong> This parameter links events to specific products in your catalog. Without it, dynamic product ads &mdash; the retargeting ads that show people the exact products they viewed &mdash; can't function. This is one of the highest-ROAS ad formats and it's broken by a single missing parameter.</li>
+      <li><strong>Setting up CAPI but leaving the browser Pixel firing the same events without an <code>event_id</code>.</strong> This is the deduplication problem again. Both sides need to share the same ID or you're doubling your conversion count.</li>
+      <li><strong>Not checking Events Manager regularly.</strong> Tracking breaks silently. A theme update changes your checkout flow and your AddToCart events stop firing. An app update changes how the Pixel is injected and suddenly your event IDs don't match. Things break without warning, and if you're not checking Events Manager at least monthly, you won't know until your ad performance mysteriously degrades.</li>
+    </ol>
+
+    <h2>How to verify your setup works</h2>
+
+    <p>Here's the exact process I follow after every CAPI implementation:</p>
+
+    <ol>
+      <li>Go to <strong>Events Manager &gt; Your Pixel &gt; Test Events</strong> and start a test session.</li>
+      <li>Open your store in a new incognito window (no extensions, clean cookies).</li>
+      <li>Browse a product page, add it to cart, start checkout, and complete a test purchase if possible.</li>
+      <li>Go back to Events Manager and check that <strong>each event appears exactly once</strong> &mdash; not twice. If you see duplicate ViewContent or AddToCart events, your deduplication is broken.</li>
+      <li>Click into each event and check the <strong>match quality score</strong>. If it's below 6, you're missing customer parameters that should be included.</li>
+      <li>Check the <strong>"Deduplicated Events"</strong> section in Event Overview. You should see a healthy deduplication rate &mdash; this confirms that both your Pixel and CAPI are firing and Meta is successfully merging them.</li>
+    </ol>
+
+    <p>Run this check after every theme change, every app install, and at least once a month as part of routine maintenance. Tracking is not a set-it-and-forget-it system.</p>
+
+    <p>This is one of the most technically impactful fixes you can make for your ad performance. If your CAPI setup is wrong &mdash; or missing entirely &mdash; you're burning ad spend on incomplete data. I set this up properly in about a day. <a href="/#contact" style="color:var(--gold)">Get in touch at murmweb.dev</a>.</p>
+
+    <!-- Share Bar -->
+    <div class="share-bar">
+      <div class="share-label">Share this article</div>
+      <div class="share-buttons">
+        <button type="button" class="share-btn" data-share="copy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          Copy link
+        </button>
+        <button type="button" class="share-btn" data-share="twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share on X
+        </button>
+        <button type="button" class="share-btn" data-share="linkedin">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </button>
+      </div>
+    </div>
+  </div>
+</article>
+
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</a>
+
+<footer>
+  <div class="footer-inner">
+    <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands</p>
+  </div>
+</footer>
+<script src="/site.js" defer></script>
+</body>
+</html>
