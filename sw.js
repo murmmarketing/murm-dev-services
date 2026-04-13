@@ -12,7 +12,8 @@ const ASSETS = [
   '/blog/nextjs-vs-wordpress-ecommerce.html',
   '/site.css',
   '/site.js',
-  '/logo.png',
+  '/logo-dark.png',
+  '/logo-light.png',
   '/photo.webp',
   '/og.png',
   '/manifest.json'

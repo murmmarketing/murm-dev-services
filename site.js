@@ -7,10 +7,9 @@
   if (initial === 'light') document.documentElement.setAttribute('data-theme', 'light');
 
   function swapLogo(theme) {
-    var src = theme === 'light' ? '/logo-light.png' : '/logo.png';
-    var imgs = document.querySelectorAll('a.logo img, .logo img, nav img');
-    imgs.forEach(function(img) {
-      if (img.src.indexOf('logo') !== -1) img.setAttribute('src', src);
+    var src = theme === 'light' ? '/logo-light.png' : '/logo-dark.png';
+    document.querySelectorAll('.site-logo').forEach(function(img) {
+      img.setAttribute('src', src);
     });
   }
   swapLogo(initial);
