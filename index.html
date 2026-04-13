@@ -500,30 +500,43 @@ body.loaded .hero-proof { opacity:1; transform:none; transition: all 0.5s ease 0
 
 /* ── Testimonials ───────────────────────────── */
 .testimonials-section { padding:100px 0; }
-.testimonials-scroll { display:flex; gap:24px; margin-top:48px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:16px; scrollbar-width:none; }
+.testimonials-wrap { position:relative; margin-top:48px; }
+.testimonials-scroll { display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:8px 40px 16px 0; scrollbar-width:none; scroll-behavior:smooth; }
 .testimonials-scroll::-webkit-scrollbar { display:none; }
+.testimonials-aggregate-line { width:60px; height:1px; background:var(--gold); opacity:0.3; margin-top:12px; }
 .testimonial-card {
-  flex:0 0 380px; scroll-snap-align:start;
-  background:var(--bg-card); padding:36px 32px; border-radius:16px; position:relative;
-  border:1px solid var(--border);
-  box-shadow:0 2px 8px rgba(0,0,0,0.2), 0 16px 48px rgba(0,0,0,0.12);
-  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  flex:0 0 360px; scroll-snap-align:start;
+  background:rgba(255,255,255,0.04); padding:36px; border-radius:16px; position:relative;
+  border:none;
+  box-shadow:0 1px 3px rgba(0,0,0,0.3), 0 8px 32px rgba(0,0,0,0.2);
   transition:transform 0.3s ease, box-shadow 0.3s ease;
 }
-.testimonial-card:hover { transform:translateY(-6px); box-shadow:0 4px 12px rgba(0,0,0,0.3), 0 24px 64px rgba(0,0,0,0.2); }
+.testimonial-card:hover { transform:translateY(-4px); box-shadow:0 2px 6px rgba(0,0,0,0.35), 0 16px 48px rgba(0,0,0,0.25); }
 .testimonial-card:nth-child(2) { margin-top:24px; }
-.testimonial-stars { display:flex; gap:3px; margin-bottom:16px; }
+.testimonial-quote-mark { position:absolute; top:28px; left:32px; font-family:var(--serif); font-size:48px; color:var(--gold); opacity:0.15; line-height:1; pointer-events:none; }
+.testimonial-stars { display:flex; gap:2px; margin-bottom:16px; position:relative; z-index:1; }
 .testimonial-stars svg { width:16px; height:16px; fill:var(--gold); }
-.testimonial-headline { font-family:var(--sans); font-size:16px; font-weight:600; color:var(--text); margin-bottom:10px; line-height:1.4; }
-.testimonial-card blockquote { font-size:14px; color:var(--text-muted); line-height:1.8; font-style:normal; margin-bottom:20px; }
-.testimonial-divider { height:1px; background:var(--border); margin-bottom:16px; }
+.testimonial-card blockquote { font-size:14px; color:var(--text-muted); line-height:1.8; font-style:normal; margin-bottom:20px; position:relative; z-index:1; }
+.testimonial-divider { height:1px; background:var(--border-hover); margin-bottom:16px; }
 .testimonial-footer { display:flex; align-items:center; gap:12px; }
-.testimonial-avatar { width:36px; height:36px; border-radius:50%; background:var(--bg-elevated); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:12px; font-weight:500; color:var(--text); flex-shrink:0; }
+.testimonial-avatar { width:44px; height:44px; border-radius:50%; background:var(--bg-elevated); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:13px; font-weight:600; color:var(--gold); flex-shrink:0; }
 .testimonial-meta { font-family:var(--mono); font-size:11px; color:var(--text-dim); line-height:1.5; flex:1; }
-.testimonial-meta strong { color:var(--text-muted); font-weight:500; display:block; }
+.testimonial-meta strong { color:var(--text-muted); font-weight:500; font-size:13px; display:block; }
 .testimonial-meta span { display:block; }
-.testimonial-date { font-family:var(--mono); font-size:10px; color:var(--text-dim); opacity:0.6; white-space:nowrap; flex-shrink:0; }
-@media (max-width:768px) { .testimonial-card { flex:0 0 300px; } }
+.testimonial-date { font-family:var(--mono); font-size:11px; color:var(--text-dim); opacity:0.5; white-space:nowrap; flex-shrink:0; }
+/* Testimonial arrows */
+.testimonials-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.08); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--gold); transition:background 0.2s, opacity 0.2s; }
+.testimonials-arrow:hover { background:rgba(196,168,122,0.15); }
+.testimonials-arrow.hidden { opacity:0; pointer-events:none; }
+.testimonials-arrow svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.testimonials-arrow-left { left:0; }
+.testimonials-arrow-right { right:0; }
+/* Light mode card overrides */
+html[data-theme="light"] .testimonial-card { background:#FFFFFF; box-shadow:0 1px 3px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.06); }
+html[data-theme="light"] .testimonial-card:hover { box-shadow:0 2px 6px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.08); }
+html[data-theme="light"] .testimonials-arrow { background:rgba(0,0,0,0.04); }
+html[data-theme="light"] .testimonials-arrow:hover { background:rgba(0,0,0,0.08); }
+@media (max-width:768px) { .testimonial-card { flex:0 0 300px; } .testimonials-arrow { display:none; } }
 
 /* ── Blog / Writing ─────────────────────────── */
 .writing-section { padding:80px 0 100px; }
@@ -683,7 +696,8 @@ footer a:hover { color:var(--gold); }
   .wa-btn { width:48px; height:48px; bottom:20px; right:20px; }
   .wa-btn svg { width:24px; height:24px; }
   .wa-tooltip { display:none; }
-  .testimonial-card { flex:0 0 280px; }
+  .testimonial-card { flex:0 0 280px; padding:28px; }
+  .testimonial-quote-mark { font-size:36px; top:20px; left:24px; }
   .case-tab { padding:12px 16px; font-size:11px; }
 }
 </style>
@@ -1107,9 +1121,14 @@ footer a:hover { color:var(--gold); }
 <section class="testimonials-section">
   <div class="container">
     <h2 class="section-title reveal">What clients say</h2>
-    <p class="testimonials-aggregate reveal" style="font-family:var(--mono);font-size:13px;color:var(--gold);margin-top:-4px;margin-bottom:40px;letter-spacing:0.02em;">&#9733; 4.9 average from 8 client reviews</p>
+    <p class="testimonials-aggregate reveal" style="font-family:var(--mono);font-size:13px;color:var(--gold);margin-top:-4px;margin-bottom:0;letter-spacing:0.02em;">&#9733; 4.9 average from 8 client reviews</p>
+    <div class="testimonials-aggregate-line reveal"></div>
+    <div class="testimonials-wrap">
+    <button class="testimonials-arrow testimonials-arrow-left hidden" aria-label="Scroll left"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button class="testimonials-arrow testimonials-arrow-right" aria-label="Scroll right"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
     <div class="testimonials-scroll">
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
         <blockquote>We were spending &euro;3K/month on Meta ads pointing to a store that loaded in 6 seconds. Murm cut that to 1.4s and our ROAS went from 1.8 to 3.2 in the same week. Should have done this months ago.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1120,6 +1139,7 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
         <blockquote>I sent him a paragraph at 11pm and had a quote by 9am. Store was live in 4 days. No back and forth, no &ldquo;let me check with my team&rdquo;. Just built it.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1130,6 +1150,7 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
         <blockquote>Third developer we hired. First two couldn&rsquo;t get Conversions API working properly &mdash; kept getting deduplication errors. Murm fixed it in an afternoon and set up the entire event tracking while he was at it.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1140,6 +1161,7 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
         <blockquote>Not the cheapest option but worth every euro. The admin panel he built for our product catalog actually works &mdash; our previous one was an unusable mess. Team saves about 4 hours a week now.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1150,6 +1172,7 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
         <blockquote>He talked me out of half the features I wanted and the store is better for it. Refreshing to work with someone who says no when it doesn&rsquo;t make sense.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1160,6 +1183,7 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
         <blockquote>Quick, clean, no drama. We use him as overflow when our team is at capacity. Slots right in, delivers, done.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1170,6 +1194,7 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg></div>
         <blockquote>The store audit alone was worth it. He found 11 issues we didn&rsquo;t know about, including a checkout bug that was probably losing us 15% of mobile orders.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1180,6 +1205,7 @@ footer a:hover { color:var(--gold); }
         </div>
       </div>
       <div class="testimonial-card reveal-card">
+        <span class="testimonial-quote-mark">&ldquo;</span>
         <div class="testimonial-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.3L18 7.3l-4 3.9.9 5.5L10 14l-4.9 2.7.9-5.5-4-3.9 5.4-1z" fill="currentColor" opacity="0.2"/></svg></div>
         <blockquote>Moved our entire site from WooCommerce to Shopify. 340 products, all variants, all SEO redirects. Didn&rsquo;t lose a single ranking.</blockquote>
         <div class="testimonial-divider"></div>
@@ -1189,6 +1215,7 @@ footer a:hover { color:var(--gold); }
           <span class="testimonial-date">Dec 2025</span>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -1530,6 +1557,25 @@ footer a:hover { color:var(--gold); }
 
   left.addEventListener('click', function() { scroll.scrollLeft -= cardWidth; });
   right.addEventListener('click', function() { scroll.scrollLeft += cardWidth; });
+  scroll.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ── Testimonials Scroll Arrows ──────────────────── */
+(function(){
+  var scroll = document.querySelector('.testimonials-scroll');
+  var left = document.querySelector('.testimonials-arrow-left');
+  var right = document.querySelector('.testimonials-arrow-right');
+  if (!scroll || !left || !right) return;
+  var cardW = 384; // 360px card + 24px gap
+  function update() {
+    var sl = scroll.scrollLeft;
+    var max = scroll.scrollWidth - scroll.clientWidth;
+    left.classList.toggle('hidden', sl <= 4);
+    right.classList.toggle('hidden', sl >= max - 4);
+  }
+  left.addEventListener('click', function() { scroll.scrollLeft -= cardW; });
+  right.addEventListener('click', function() { scroll.scrollLeft += cardW; });
   scroll.addEventListener('scroll', update, { passive: true });
   update();
 })();
