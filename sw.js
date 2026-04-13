@@ -10,7 +10,6 @@ const ASSETS = [
   '/blog/shopify-speed-optimization.html',
   '/blog/shopify-store-setup-cost.html',
   '/blog/nextjs-vs-wordpress-ecommerce.html',
-  '/blog/novatech-store-rebuild.html',
   '/site.css',
   '/site.js',
   '/logo.png',
