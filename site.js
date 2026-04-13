@@ -7,11 +7,13 @@
   if (initial === 'light') document.documentElement.setAttribute('data-theme', 'light');
 
   function swapLogo(theme) {
-    document.querySelectorAll('.logo img').forEach(function(img) {
-      img.src = theme === 'light' ? '/logo-light.png' : '/logo.png';
+    var src = theme === 'light' ? '/logo-light.png' : '/logo.png';
+    var imgs = document.querySelectorAll('a.logo img, .logo img, nav img');
+    imgs.forEach(function(img) {
+      if (img.src.indexOf('logo') !== -1) img.setAttribute('src', src);
     });
   }
-  if (initial === 'light') swapLogo('light');
+  swapLogo(initial);
 
   function toggleTheme() {
     var current = document.documentElement.getAttribute('data-theme');
