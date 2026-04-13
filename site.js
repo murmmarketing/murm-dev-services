@@ -7,7 +7,7 @@
   if (initial === 'light') document.documentElement.setAttribute('data-theme', 'light');
 
   function swapLogo(theme) {
-    var src = theme === 'light' ? '/logo-light.png' : '/logo-dark.png';
+    var src = theme === 'light' ? '/logo-light.webp' : '/logo-dark.webp';
     var imgs = document.querySelectorAll('.site-logo');
     if (imgs.length === 0) {
       // Fallback: try broader selectors

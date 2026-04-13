@@ -19,14 +19,12 @@
 <meta name="twitter:description" content="Shopify stores and custom Next.js applications. Built fast, built right.">
 <meta name="twitter:image" content="https://murmweb.dev/og.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
-<link rel="manifest" href="/manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.gstatic.com/s/dmseridisplay/v15/rnCQoNPRaJDqk018e0GD4ij3.woff2" as="font" type="font/woff2" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/site.css">
-<script defer src="/_vercel/insights/script.js"></script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="/site.css" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="/site.css"></noscript>
 <script type="text/javascript">
 (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w9omdg3pe6");
 </script>
@@ -40,7 +38,7 @@
     "email": "hello@murmweb.dev",
     "telephone": "+31655629684",
     "priceRange": "€400–€2500",
-    "image": "https://murmweb.dev/logo-dark.png",
+    "image": "https://murmweb.dev/logo-dark.webp",
     "description": "Full-stack e-commerce development. Shopify stores, custom Next.js web apps, and store optimization for brands and entrepreneurs.",
     "address": {
       "@type": "PostalAddress",
@@ -151,7 +149,7 @@
 :root {
   --bg: #0A0A0A; --bg-elevated: #111110; --bg-card: #161615;
   --gold: #C4A87A; --gold-dim: rgba(196,168,122,0.12); --gold-glow: rgba(196,168,122,0.06);
-  --text: #E8E4DF; --text-muted: #8A8580; --text-dim: #5A5652;
+  --text: #E8E4DF; --text-muted: #9A9590; --text-dim: #7A7672;
   --border: rgba(196,168,122,0.08); --border-hover: rgba(196,168,122,0.18);
   --serif: 'DM Serif Display', Georgia, serif;
   --sans: 'Inter', -apple-system, sans-serif;
@@ -664,7 +662,7 @@ footer a:hover { color:var(--gold); }
 @keyframes waBounce { 0%{opacity:0;transform:scale(0.5) translateY(16px)} 60%{opacity:1;transform:scale(1.12) translateY(-4px)} 100%{opacity:1;transform:scale(1) translateY(0)} }
 
 /* Magnetic button base */
-[data-magnetic] { transition: transform 0.25s cubic-bezier(0.23,1,0.32,1); }
+[data-magnetic] { transition: transform 0.25s cubic-bezier(0.23,1,0.32,1); will-change: transform; }
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width:768px) {
@@ -756,7 +754,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
 <!-- Nav -->
 <nav>
   <div class="container">
-    <a href="/" class="logo"><img src="/logo-dark.png" alt="M" width="38" height="38" class="site-logo">murm<span>web</span>.dev</a>
+    <a href="/" class="logo"><img src="/logo-dark.webp" alt="M" width="38" height="38" class="site-logo">murm<span>web</span>.dev</a>
     <div class="nav-right">
       <a href="#audit" class="nav-status" style="text-decoration:none;"><span class="dot"></span>Taking on 1 new project &middot; Book before it fills &rarr;</a>
       <button type="button" class="theme-toggle" aria-label="Toggle theme">
@@ -770,11 +768,12 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   </div>
 </nav>
 
+<main>
 <!-- Hero -->
 <section class="hero">
   <div class="hero-glow" data-parallax="0.2"></div>
   <div class="hero-deco" data-parallax="0.5"></div>
-  <img src="/logo-dark.png" alt="" class="hero-watermark" data-parallax="0.3" aria-hidden="true">
+  <img src="/logo-dark.webp" alt="" class="hero-watermark" data-parallax="0.3" aria-hidden="true">
   <div class="container">
     <div class="hero-content">
       <div class="hero-line"></div>
@@ -1113,7 +1112,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
             <h3>Noorvik Outdoor</h3>
             <p class="portfolio-result">ROAS from 1.8x to 3.2x after speed optimization</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Conversions API</span><span class="portfolio-pill">Klaviyo</span></div>
-            <a href="/portfolio/noorvik.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
+            <a href="/portfolio/noorvik.html" class="portfolio-link" aria-label="View Noorvik project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="portfolio-card reveal-card">
@@ -1129,7 +1128,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
             <h3>VOLT Fitness</h3>
             <p class="portfolio-result">Launched in 48hrs, first sale within 3 days</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Meta Pixel</span><span class="portfolio-pill">Dawn</span></div>
-            <a href="/portfolio/volt-fitness.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
+            <a href="/portfolio/volt-fitness.html" class="portfolio-link" aria-label="View VOLT Fitness project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="portfolio-card reveal-card">
@@ -1145,7 +1144,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
             <h3>Terrace Amsterdam</h3>
             <p class="portfolio-result">Restaurant website with 40% more reservations</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Custom HTML</span><span class="portfolio-pill">Vercel</span></div>
-            <a href="/portfolio/terrace-amsterdam.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
+            <a href="/portfolio/terrace-amsterdam.html" class="portfolio-link" aria-label="View Terrace Amsterdam project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="portfolio-card reveal-card">
@@ -1161,7 +1160,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
             <h3>Kuyper &amp; Co</h3>
             <p class="portfolio-result">Product catalog with 2,400 SKUs, custom admin panel</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Next.js</span><span class="portfolio-pill">Supabase</span><span class="portfolio-pill">Tailwind</span></div>
-            <a href="/portfolio/kuyper.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
+            <a href="/portfolio/kuyper.html" class="portfolio-link" aria-label="View Kuyper project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="portfolio-card reveal-card">
@@ -1177,7 +1176,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
             <h3>Luxe Essentials</h3>
             <p class="portfolio-result">Premium skincare brand with 2x email signup rate</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Klaviyo</span><span class="portfolio-pill">Custom Theme</span></div>
-            <a href="/portfolio/luxe-essentials.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
+            <a href="/portfolio/luxe-essentials.html" class="portfolio-link" aria-label="View Luxe Essentials project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
       </div>
@@ -1419,6 +1418,8 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- WhatsApp -->
 <a href="https://wa.me/31655629684" target="_blank" rel="noopener noreferrer" class="wa-btn" aria-label="Chat on WhatsApp">
