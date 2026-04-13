@@ -8,11 +8,19 @@
 
   function swapLogo(theme) {
     var src = theme === 'light' ? '/logo-light.png' : '/logo-dark.png';
-    document.querySelectorAll('.site-logo').forEach(function(img) {
-      img.setAttribute('src', src);
-    });
+    var imgs = document.querySelectorAll('.site-logo');
+    if (imgs.length === 0) {
+      // Fallback: try broader selectors
+      imgs = document.querySelectorAll('.logo img, nav img[alt="M"]');
+    }
+    imgs.forEach(function(img) { img.src = src; });
   }
+  // Run on IIFE execution (defer = after DOM parsed)
   swapLogo(initial);
+  // Also run on DOMContentLoaded as safety net
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { swapLogo(initial); });
+  }
 
   function toggleTheme() {
     var current = document.documentElement.getAttribute('data-theme');
