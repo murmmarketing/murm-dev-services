@@ -152,4 +152,44 @@
       }
     }, { passive: true });
   }
+
+  // ── Scroll depth tracking (25/50/75/100%) ─────
+  var depthMarks = { 25: false, 50: false, 75: false, 100: false };
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement;
+    var pct = Math.round((h.scrollTop + window.innerHeight) / h.scrollHeight * 100);
+    [25, 50, 75, 100].forEach(function(m) {
+      if (pct >= m && !depthMarks[m]) {
+        depthMarks[m] = true;
+        track('scroll_depth', { depth: m, page: location.pathname });
+      }
+    });
+  }, { passive: true });
+
+  // ── 30-second engaged visit ───────────────────
+  setTimeout(function() { track('engaged_visit_30s', { page: location.pathname }); }, 30000);
+
+  // ── Portfolio link clicks ─────────────────────
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a.portfolio-link, .portfolio-card a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var slug = href.replace(/^\/portfolio\//, '').replace(/\.html$/, '');
+    if (slug) track('portfolio_click', { project: slug });
+  });
+
+  // ── Audit form success state ──────────────────
+  document.querySelectorAll('[data-audit-form]').forEach(function(f) {
+    f.addEventListener('submit', function() {
+      var success = document.getElementById('auditSuccess');
+      if (success) {
+        setTimeout(function() {
+          f.style.display = 'none';
+          var trust = f.parentElement.querySelector('.audit-trust');
+          if (trust) trust.style.display = 'none';
+          success.classList.add('show');
+        }, 500);
+      }
+    });
+  });
 })();

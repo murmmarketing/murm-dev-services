@@ -697,6 +697,30 @@ footer a:hover { color:var(--gold); }
   .case-tab { padding:12px 16px; font-size:11px; }
 }
 
+/* ── Sticky Mobile CTA ───────────────────────── */
+.mobile-cta-bar { display:none; }
+@media (max-width:768px) {
+  .mobile-cta-bar { display:flex; position:fixed; bottom:0; left:0; right:0; z-index:95; background:rgba(10,10,10,0.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:12px 20px; align-items:center; justify-content:space-between; gap:12px; border-top:1px solid rgba(255,255,255,0.06); }
+  .mobile-cta-bar .mobile-cta-text { font-family:var(--sans); font-size:13px; color:var(--text-muted); }
+  .mobile-cta-bar .mobile-cta-btn { font-family:var(--mono); font-size:12px; font-weight:600; color:var(--bg); background:var(--gold); padding:10px 20px; border-radius:6px; text-decoration:none; white-space:nowrap; transition:background 0.2s; }
+  .mobile-cta-bar .mobile-cta-btn:hover { background:#D4B88A; }
+  body { padding-bottom:70px; }
+  html[data-theme="light"] .mobile-cta-bar { background:rgba(255,255,255,0.92); border-top-color:rgba(0,0,0,0.06); }
+  html[data-theme="light"] .mobile-cta-bar .mobile-cta-text { color:var(--text-muted); }
+}
+/* ── Micro-CTAs ──────────────────────────────── */
+.micro-cta { text-align:center; padding:32px 0; font-family:var(--mono); font-size:13px; color:var(--text-dim); letter-spacing:0.02em; }
+.micro-cta a { color:var(--gold); text-decoration:none; transition:opacity 0.2s; }
+.micro-cta a:hover { opacity:0.7; }
+/* ── Audit Success State ─────────────────────── */
+.audit-success { display:none; text-align:center; padding:20px 0; }
+.audit-success.show { display:block; }
+.audit-success .checkmark { font-size:32px; margin-bottom:12px; }
+.audit-success h3 { font-family:var(--serif); font-size:22px; font-weight:400; color:var(--text); margin-bottom:16px; }
+.audit-success ul { list-style:none; font-family:var(--mono); font-size:12px; color:var(--text-muted); line-height:2; }
+.audit-success li::before { content:'✓ '; color:var(--gold); }
+.audit-trust { font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-top:12px; opacity:0.7; }
+
 /* ── Light Mode: borderless card depth ───────── */
 html[data-theme="light"] .service-illus { border-color:transparent; background:#FFFFFF; box-shadow:0 1px 2px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06); }
 html[data-theme="light"] .service-row { border-bottom-color:rgba(0,0,0,0.06); }
@@ -734,7 +758,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   <div class="container">
     <a href="/" class="logo"><img src="/logo-dark.png" alt="M" width="38" height="38" class="site-logo">murm<span>web</span>.dev</a>
     <div class="nav-right">
-      <span class="nav-status"><span class="dot"></span>2 active projects</span>
+      <a href="#audit" class="nav-status" style="text-decoration:none;"><span class="dot"></span>Taking on 1 new project &middot; Book before it fills &rarr;</a>
       <button type="button" class="theme-toggle" aria-label="Toggle theme">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -954,6 +978,8 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   </div>
 </section>
 
+<div class="micro-cta reveal">Ready to fix your store? <a href="#audit">Get a free store audit &rarr;</a></div>
+
 <!-- Free Store Audit Lead Magnet -->
 <section class="audit-section" id="audit">
   <div class="container">
@@ -964,6 +990,18 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
         <button type="submit" class="audit-btn">Send my store &rarr;</button>
       </form>
+      <p class="audit-trust reveal">&#x1F512; I won&rsquo;t share your URL or data with anyone.</p>
+      <div class="audit-success" id="auditSuccess">
+        <div class="checkmark">&#10003;</div>
+        <h3>Got it. Auditing your store now.</h3>
+        <ul>
+          <li>Page speed score &amp; LCP analysis</li>
+          <li>Tracking setup review (Pixel, CAPI, GA4)</li>
+          <li>Mobile UX check</li>
+          <li>Top 3 highest-impact fixes</li>
+        </ul>
+        <p style="font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-top:16px;">You&rsquo;ll hear from me within 24 hours.</p>
+      </div>
       <p class="audit-note reveal">No spam, no sales pitch. Reply within 24 hours from a real human (me).</p>
     </div>
   </div>
@@ -1003,6 +1041,8 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   </div>
 </section>
 
+<div class="micro-cta reveal">Ready to fix your store? <a href="#audit">Get a free store audit &rarr;</a></div>
+
 <!-- About -->
 <section class="about-section" id="about">
   <div class="container">
@@ -1018,6 +1058,8 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
     </div>
   </div>
 </section>
+
+<div class="micro-cta reveal">Ready to fix your store? <a href="#audit">Get a free store audit &rarr;</a></div>
 
 <div class="section-divider"></div>
 
@@ -1268,6 +1310,8 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   </div>
 </section>
 
+<div class="micro-cta reveal">Join 12+ stores already optimized. <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer">Book a free strategy call &rarr;</a></div>
+
 <div class="section-divider"></div>
 
 <!-- Results -->
@@ -1408,8 +1452,8 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
 <div class="exit-overlay" id="exitOverlay">
   <div class="exit-modal">
     <button type="button" class="exit-close" aria-label="Close" data-exit-close>&times;</button>
-    <h3>Before you go&hellip;</h3>
-    <p>Get a free 5-point audit of your store. I'll send you a personalized report within 24 hours.</p>
+    <h3>Your store has at least 3 fixable problems.</h3>
+    <p>Want me to find them? Drop your URL and I&rsquo;ll send a personal report within 24 hours. Free, no strings.</p>
     <form class="audit-form" action="https://formspree.io/f/mykbqrpd" method="POST" data-audit-form>
       <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
       <button type="submit" class="audit-btn">Send me the audit &rarr;</button>
@@ -1646,6 +1690,12 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   });
 })();
 </script>
+<!-- Sticky Mobile CTA -->
+<div class="mobile-cta-bar">
+  <span class="mobile-cta-text">Free store audit &mdash; 24hr reply</span>
+  <a href="#audit" class="mobile-cta-btn">Get audit &rarr;</a>
+</div>
+
 <script src="/site.js" defer></script>
 </body>
 </html>
