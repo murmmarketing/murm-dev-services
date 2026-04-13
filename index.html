@@ -462,41 +462,38 @@ body.loaded .hero-proof { opacity:1; transform:none; transition: all 0.5s ease 0
 
 /* ── Portfolio Grid ─────────────────────────── */
 .portfolio-section { padding:60px 0 0; }
-.portfolio-header { font-family:var(--mono); font-size:12px; color:var(--text-dim); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:24px; }
-.portfolio-wrap { position:relative; }
-.portfolio-scroll { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding-bottom:16px; scrollbar-width:none; scroll-behavior:smooth; }
-.portfolio-scroll::-webkit-scrollbar { display:none; }
-.portfolio-card { flex:0 0 300px; scroll-snap-align:start; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease; }
-.portfolio-card:hover { transform:translateY(-4px); box-shadow:0 8px 32px rgba(0,0,0,0.3); }
-.portfolio-thumb { height:140px; background:var(--bg); position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
-.portfolio-mini-bar { display:flex; align-items:center; gap:3px; padding:6px 8px; background:var(--bg-elevated); border-bottom:1px solid var(--border); }
-.portfolio-mini-dot { width:4px; height:4px; border-radius:50%; background:var(--text-dim); opacity:0.3; }
-.portfolio-mini-body { padding:8px; }
-.portfolio-mini-block { border-radius:2px; background:var(--bg-card); }
-.portfolio-info { padding:20px; }
-.portfolio-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.portfolio-section .section-title { font-size:clamp(28px,4vw,40px); }
+.portfolio-subtitle { font-size:15px; color:var(--text-muted); margin-top:8px; margin-bottom:48px; }
+.portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.portfolio-card { background:var(--bg-card); border:none; border-radius:16px; overflow:hidden; transition:transform 0.4s ease, box-shadow 0.4s ease; box-shadow:0 1px 3px rgba(0,0,0,0.2), 0 8px 32px rgba(0,0,0,0.15); }
+.portfolio-card:hover { transform:translateY(-6px); box-shadow:0 4px 12px rgba(0,0,0,0.3), 0 16px 48px rgba(0,0,0,0.25); }
+.portfolio-card:hover .portfolio-link-arrow { transform:translateX(4px); }
+.portfolio-thumb { height:150px; background:var(--bg); position:relative; overflow:hidden; }
+.portfolio-mini-bar { display:flex; align-items:center; gap:4px; padding:7px 10px; background:rgba(0,0,0,0.3); }
+.portfolio-mini-dot { width:6px; height:6px; border-radius:50%; }
+.portfolio-mini-dot:nth-child(1) { background:#FF5F57; }
+.portfolio-mini-dot:nth-child(2) { background:#FEBC2E; }
+.portfolio-mini-dot:nth-child(3) { background:#28C840; }
+.portfolio-mini-url { flex:1; margin-left:6px; font-family:var(--mono); font-size:8px; color:rgba(255,255,255,0.35); letter-spacing:0.02em; }
+.portfolio-mini-body { padding:10px; flex:1; }
+.portfolio-info { padding:20px 22px 22px; }
+.portfolio-tag { font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); background:var(--gold-dim); padding:3px 8px; border-radius:3px; display:inline-block; margin-bottom:10px; }
 .portfolio-card h3 { font-family:var(--serif); font-size:20px; font-weight:400; color:var(--text); margin-bottom:6px; }
 .portfolio-result { font-size:13px; color:var(--text-muted); line-height:1.6; margin-bottom:12px; }
 .portfolio-pills { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
-.portfolio-pill { font-family:var(--mono); font-size:10px; color:var(--text-dim); padding:3px 8px; border:1px solid var(--border); border-radius:3px; }
-.portfolio-card a.portfolio-link { font-family:var(--mono); font-size:12px; color:var(--gold); text-decoration:none; letter-spacing:0.02em; transition:opacity 0.2s; }
-.portfolio-card a.portfolio-link:hover { opacity:0.7; }
-.portfolio-note { font-family:var(--mono); font-size:10px; color:var(--text-dim); opacity:0.5; margin-top:16px; }
-/* Portfolio arrows */
-.portfolio-arrow { position:absolute; top:50%; transform:translateY(-50%); z-index:10; width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--gold); transition:background 0.2s, opacity 0.2s; }
-.portfolio-arrow:hover { background:rgba(196,168,122,0.2); }
-.portfolio-arrow.hidden { opacity:0; pointer-events:none; }
-.portfolio-arrow svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.portfolio-arrow-left { left:0; }
-.portfolio-arrow-right { right:0; }
-/* Portfolio dots */
-.portfolio-dots { display:flex; justify-content:center; gap:8px; margin-top:8px; }
-.portfolio-dot { width:6px; height:6px; border-radius:50%; background:var(--text-dim); opacity:0.25; transition:opacity 0.2s, background 0.2s; }
-.portfolio-dot.active { background:var(--gold); opacity:1; }
-@media (max-width:768px) {
-  .portfolio-arrow { display:none; }
-  .portfolio-card { flex:0 0 280px; }
-}
+.portfolio-pill { font-family:var(--mono); font-size:11px; color:var(--text-dim); padding:4px 10px; background:var(--bg-elevated); border-radius:3px; }
+.portfolio-card a.portfolio-link { font-family:var(--mono); font-size:12px; font-weight:600; color:var(--gold); text-decoration:none; letter-spacing:0.02em; display:inline-flex; align-items:center; gap:4px; }
+.portfolio-link-arrow { display:inline-block; transition:transform 0.4s ease; }
+/* Light mode portfolio overrides */
+html[data-theme="light"] .portfolio-card { background:#FFFFFF; box-shadow:0 1px 3px rgba(0,0,0,0.04), 0 12px 40px rgba(0,0,0,0.06); }
+html[data-theme="light"] .portfolio-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.1); }
+html[data-theme="light"] .portfolio-tag { color:#8B7340; background:rgba(180,155,107,0.08); }
+html[data-theme="light"] .portfolio-pill { background:#F0EDE7; color:var(--text); }
+html[data-theme="light"] .portfolio-card a.portfolio-link { color:#8B7340; }
+html[data-theme="light"] .portfolio-mini-bar { background:rgba(0,0,0,0.06); }
+html[data-theme="light"] .portfolio-mini-url { color:rgba(0,0,0,0.3); }
+@media (max-width:1199px) { .portfolio-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:768px) { .portfolio-grid { grid-template-columns:1fr; } }
 
 /* ── Testimonials ───────────────────────────── */
 .testimonials-section { padding:100px 0; }
@@ -1042,55 +1039,90 @@ footer a:hover { color:var(--gold); }
 
     <!-- Portfolio -->
     <div class="portfolio-section">
-      <p class="portfolio-header reveal">Other recent work</p>
-      <div class="portfolio-wrap">
-      <button class="portfolio-arrow portfolio-arrow-left hidden" aria-label="Scroll left"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <button class="portfolio-arrow portfolio-arrow-right" aria-label="Scroll right"><svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg></button>
-      <div class="portfolio-scroll">
+      <h3 class="section-title reveal">Work</h3>
+      <p class="portfolio-subtitle reveal">Selected projects across different industries and platforms</p>
+      <div class="portfolio-grid">
         <div class="portfolio-card reveal-card">
-          <div class="portfolio-thumb" style="background:linear-gradient(135deg,#1B3A2D,#2A4F3D);"><div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span></div><div class="portfolio-mini-body"><div style="height:32px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:800;letter-spacing:3px;color:#F0EBE0;opacity:0.6;">NOORVIK</span></div><div style="display:flex;gap:4px;"><div class="portfolio-mini-block" style="height:36px;background:rgba(240,235,224,0.08);flex:1;"></div><div class="portfolio-mini-block" style="height:36px;background:rgba(240,235,224,0.08);flex:1;"></div><div class="portfolio-mini-block" style="height:36px;background:rgba(240,235,224,0.08);flex:1;"></div></div></div></div>
+          <div class="portfolio-thumb" style="background:linear-gradient(180deg,#15271F,#1E3A2C);">
+            <div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-url">noorvik.nl</span></div>
+            <div class="portfolio-mini-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 27px);">
+              <span style="font-size:11px;font-weight:700;letter-spacing:4px;color:#E8DFD0;">NOORVIK</span>
+              <div style="display:flex;gap:6px;margin-top:12px;"><div style="width:40px;height:28px;border-radius:3px;background:linear-gradient(135deg,#5C6B4F,#7A8B6A);"></div><div style="width:40px;height:28px;border-radius:3px;background:linear-gradient(135deg,#8B8060,#A09070);"></div><div style="width:40px;height:28px;border-radius:3px;background:linear-gradient(135deg,#D4C8B0,#E8DFD0);"></div></div>
+            </div>
+          </div>
           <div class="portfolio-info">
             <div class="portfolio-tag">Brand Store</div>
             <h3>Noorvik Outdoor</h3>
             <p class="portfolio-result">ROAS from 1.8x to 3.2x after speed optimization</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Conversions API</span><span class="portfolio-pill">Klaviyo</span></div>
-            <a href="/portfolio/noorvik.html" class="portfolio-link">View project &rarr;</a>
+            <a href="/portfolio/noorvik.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="portfolio-card reveal-card">
-          <div class="portfolio-thumb" style="background:#000;"><div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span></div><div class="portfolio-mini-body"><div style="height:32px;display:flex;align-items:center;"><span style="font-size:9px;font-weight:900;letter-spacing:2px;color:#00FF87;">VOLT</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;"><div class="portfolio-mini-block" style="height:30px;background:rgba(0,255,135,0.06);"></div><div class="portfolio-mini-block" style="height:30px;background:rgba(0,255,135,0.06);"></div><div class="portfolio-mini-block" style="height:30px;background:rgba(0,255,135,0.06);"></div></div></div></div>
+          <div class="portfolio-thumb" style="background:#000;">
+            <div class="portfolio-mini-bar"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-url">voltfitness.nl</span></div>
+            <div class="portfolio-mini-body" style="height:calc(100% - 27px);padding:10px;">
+              <span style="font-size:10px;font-weight:900;letter-spacing:3px;color:#00FF87;">VOLT</span>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:10px;"><div style="height:32px;border-radius:3px;background:#111;border:1px solid rgba(0,255,135,0.12);"></div><div style="height:32px;border-radius:3px;background:#111;border:1px solid rgba(0,255,135,0.12);"></div><div style="height:32px;border-radius:3px;background:#111;border:1px solid rgba(0,255,135,0.12);"></div></div>
+            </div>
+          </div>
           <div class="portfolio-info">
             <div class="portfolio-tag">Dropship Store</div>
             <h3>VOLT Fitness</h3>
             <p class="portfolio-result">Launched in 48hrs, first sale within 3 days</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Meta Pixel</span><span class="portfolio-pill">Dawn</span></div>
-            <a href="/portfolio/volt-fitness.html" class="portfolio-link">View project &rarr;</a>
+            <a href="/portfolio/volt-fitness.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="portfolio-card reveal-card">
-          <div class="portfolio-thumb" style="background:linear-gradient(135deg,#FAF5EC,#EDD9C4);"><div class="portfolio-mini-bar" style="background:rgba(42,37,32,0.06);border-color:rgba(42,37,32,0.08);"><span class="portfolio-mini-dot" style="background:#2A2520;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#2A2520;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#2A2520;opacity:0.15;"></span></div><div class="portfolio-mini-body"><div style="height:32px;display:flex;align-items:center;justify-content:center;"><span style="font-size:8px;font-weight:300;letter-spacing:4px;color:#2A2520;opacity:0.5;">TERRACE</span></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;"><div style="height:4px;border-radius:1px;background:rgba(42,37,32,0.08);"></div><div style="height:4px;border-radius:1px;background:rgba(42,37,32,0.08);"></div><div style="height:4px;border-radius:1px;background:rgba(42,37,32,0.08);"></div></div></div></div>
+          <div class="portfolio-thumb" style="background:linear-gradient(180deg,#FAF5EC,#F0E8D8);">
+            <div class="portfolio-mini-bar" style="background:rgba(42,37,32,0.05);"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-url" style="color:rgba(42,37,32,0.3);">terrace-amsterdam.nl</span></div>
+            <div class="portfolio-mini-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 27px);">
+              <span style="font-family:Georgia,serif;font-size:13px;font-weight:300;letter-spacing:5px;color:#2A2520;opacity:0.6;">TERRACE</span>
+              <div style="width:40px;height:1px;background:#C4714A;opacity:0.4;margin-top:8px;"></div>
+            </div>
+          </div>
           <div class="portfolio-info">
             <div class="portfolio-tag">Local Business</div>
             <h3>Terrace Amsterdam</h3>
             <p class="portfolio-result">Restaurant website with 40% more reservations</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Custom HTML</span><span class="portfolio-pill">Vercel</span></div>
-            <a href="/portfolio/terrace-amsterdam.html" class="portfolio-link">View project &rarr;</a>
+            <a href="/portfolio/terrace-amsterdam.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
         <div class="portfolio-card reveal-card">
-          <div class="portfolio-thumb" style="background:#fff;"><div class="portfolio-mini-bar" style="background:#f8f9fa;border-color:#e8eaed;"><span class="portfolio-mini-dot" style="background:#1A1F36;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#1A1F36;opacity:0.15;"></span><span class="portfolio-mini-dot" style="background:#1A1F36;opacity:0.15;"></span></div><div class="portfolio-mini-body"><div style="display:flex;gap:4px;height:60px;"><div style="width:30%;background:#f5f5f5;border-radius:2px;"></div><div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:3px;"><div style="background:#f5f5f5;border-radius:2px;"></div><div style="background:#f5f5f5;border-radius:2px;"></div><div style="background:#f5f5f5;border-radius:2px;"></div><div style="background:#f5f5f5;border-radius:2px;"></div></div></div></div></div>
+          <div class="portfolio-thumb" style="background:#FAFBFC;">
+            <div class="portfolio-mini-bar" style="background:rgba(0,0,0,0.03);"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-url" style="color:rgba(26,31,54,0.3);">kuyper-co.nl</span></div>
+            <div class="portfolio-mini-body" style="display:flex;gap:5px;height:calc(100% - 27px);padding:8px;">
+              <div style="width:28%;background:#F0F1F3;border-radius:3px;display:flex;flex-direction:column;gap:3px;padding:4px;"><div style="height:4px;background:#E2E4E8;border-radius:1px;width:80%;"></div><div style="height:4px;background:#E2E4E8;border-radius:1px;width:60%;"></div><div style="height:4px;background:#E2E4E8;border-radius:1px;width:70%;"></div><div style="height:4px;background:#E2E4E8;border-radius:1px;width:50%;"></div></div>
+              <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;"><div style="background:#F0F1F3;border-radius:3px;"></div><div style="background:#F0F1F3;border-radius:3px;"></div><div style="background:#F0F1F3;border-radius:3px;"></div><div style="background:#F0F1F3;border-radius:3px;"></div><div style="background:#F0F1F3;border-radius:3px;"></div><div style="background:#F0F1F3;border-radius:3px;"></div></div>
+            </div>
+          </div>
           <div class="portfolio-info">
             <div class="portfolio-tag">Custom Platform</div>
             <h3>Kuyper &amp; Co</h3>
             <p class="portfolio-result">Product catalog with 2,400 SKUs, custom admin panel</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Next.js</span><span class="portfolio-pill">Supabase</span><span class="portfolio-pill">Tailwind</span></div>
-            <a href="/portfolio/kuyper.html" class="portfolio-link">View project &rarr;</a>
+            <a href="/portfolio/kuyper.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
+          </div>
+        </div>
+        <div class="portfolio-card reveal-card">
+          <div class="portfolio-thumb" style="background:linear-gradient(180deg,#FFFDF8,#F2EBE0);">
+            <div class="portfolio-mini-bar" style="background:rgba(26,23,21,0.04);"><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-dot"></span><span class="portfolio-mini-url" style="color:rgba(26,23,21,0.25);">luxe-essentials.com</span></div>
+            <div class="portfolio-mini-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 27px);">
+              <span style="font-size:8px;font-weight:400;letter-spacing:5px;color:#1A1715;opacity:0.35;">LUXE ESSENTIALS</span>
+              <div style="display:flex;gap:8px;margin-top:12px;"><div style="width:24px;height:36px;border-radius:3px;background:linear-gradient(180deg,#E8D5C8,#F5EDE4);"></div><div style="width:24px;height:36px;border-radius:3px;background:linear-gradient(180deg,#E0CEC0,#F0E4DA);"></div><div style="width:24px;height:36px;border-radius:3px;background:linear-gradient(180deg,#E4D2C4,#F2E8DE);"></div><div style="width:24px;height:36px;border-radius:3px;background:linear-gradient(180deg,#DCC8BA,#EEE2D6);"></div></div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <div class="portfolio-tag">Brand Store</div>
+            <h3>Luxe Essentials</h3>
+            <p class="portfolio-result">Premium skincare brand with 2x email signup rate</p>
+            <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Klaviyo</span><span class="portfolio-pill">Custom Theme</span></div>
+            <a href="/portfolio/luxe-essentials.html" class="portfolio-link">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
         </div>
       </div>
-      </div>
-      <div class="portfolio-dots"><span class="portfolio-dot active"></span><span class="portfolio-dot"></span><span class="portfolio-dot"></span><span class="portfolio-dot"></span></div>
-      <p class="portfolio-note reveal">These are example builds showcasing different styles and industries</p>
     </div>
   </div>
 </section>
@@ -1535,31 +1567,7 @@ footer a:hover { color:var(--gold); }
   });
 })();
 
-/* ── Portfolio Scroll Arrows & Dots ──────────────── */
-(function(){
-  var scroll = document.querySelector('.portfolio-scroll');
-  var left = document.querySelector('.portfolio-arrow-left');
-  var right = document.querySelector('.portfolio-arrow-right');
-  var dots = document.querySelectorAll('.portfolio-dot');
-  if (!scroll || !left || !right) return;
-
-  var cardWidth = 320; // 300px card + 20px gap
-
-  function update() {
-    var sl = scroll.scrollLeft;
-    var maxScroll = scroll.scrollWidth - scroll.clientWidth;
-    left.classList.toggle('hidden', sl <= 4);
-    right.classList.toggle('hidden', sl >= maxScroll - 4);
-    // Update dots
-    var activeIndex = Math.round(sl / cardWidth);
-    dots.forEach(function(d, i) { d.classList.toggle('active', i === activeIndex); });
-  }
-
-  left.addEventListener('click', function() { scroll.scrollLeft -= cardWidth; });
-  right.addEventListener('click', function() { scroll.scrollLeft += cardWidth; });
-  scroll.addEventListener('scroll', update, { passive: true });
-  update();
-})();
+/* ── Portfolio Scroll (removed — now uses CSS grid) ── */
 
 /* ── Testimonials Scroll Arrows ──────────────────── */
 (function(){
