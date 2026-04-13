@@ -140,6 +140,26 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
 .comp-add input { flex:1; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:8px 10px; border-radius:4px; font-family:var(--mono); font-size:11px; outline:none; }
 .comp-add button { background:var(--gold); color:var(--bg); border:none; padding:8px 14px; border-radius:4px; font-family:var(--mono); font-size:11px; cursor:pointer; }
 
+/* Template panel */
+.tmpl-select { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-family:var(--mono); font-size:11px; outline:none; margin-bottom:12px; }
+.tmpl-select:focus { border-color:var(--gold); }
+.tmpl-area { width:100%; min-height:180px; background:var(--bg); border:1px solid var(--border); color:var(--muted); padding:12px; border-radius:6px; font-family:var(--mono); font-size:11px; line-height:1.6; resize:vertical; outline:none; }
+.tmpl-area:focus { border-color:var(--gold); color:var(--text); }
+.tmpl-copy { margin-top:10px; background:var(--gold); color:var(--bg); border:none; padding:10px 20px; border-radius:4px; font-family:var(--mono); font-size:11px; cursor:pointer; font-weight:500; }
+.tmpl-copy:hover { background:#D4B88A; }
+/* Discovery call panel */
+.checklist { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+.checklist li { display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; color:var(--muted); cursor:pointer; }
+.checklist input[type="checkbox"] { accent-color:var(--gold); width:14px; height:14px; cursor:pointer; }
+.checklist li.checked { color:var(--dim); text-decoration:line-through; }
+.objection-list { display:flex; flex-direction:column; gap:0; margin-top:16px; }
+.objection-item { border-bottom:1px solid var(--border); }
+.objection-q { display:flex; align-items:center; justify-content:space-between; padding:10px 0; font-family:var(--mono); font-size:11px; color:var(--text); cursor:pointer; list-style:none; }
+.objection-q::-webkit-details-marker { display:none; }
+.objection-q::after { content:'+'; color:var(--gold); font-size:14px; }
+details[open] .objection-q::after { content:'\2212'; }
+.objection-a { font-family:var(--mono); font-size:11px; color:var(--muted); padding:0 0 12px; line-height:1.6; }
+
 /* Toast */
 .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--bg-card); color:var(--text); padding:12px 20px; border:1px solid var(--border-h); border-radius:6px; font-family:var(--mono); font-size:11px; opacity:0; pointer-events:none; transition:all 0.3s; z-index:9999; }
 .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
@@ -309,7 +329,66 @@ body { font-family:var(--sans); background:var(--bg); color:var(--text); line-he
       </div>
     </div>
 
-    <!-- Panel 7: Revenue Calculator -->
+    <!-- Panel 7: Outreach Templates -->
+    <div class="panel" style="grid-column:1/-1;">
+      <h2>Outreach Templates</h2>
+      <select class="tmpl-select" id="tmplSelect">
+        <option value="">Select a template&hellip;</option>
+        <option value="agency-trojan">Agency Trojan Horse</option>
+        <option value="reddit-reply">Reddit Reply</option>
+        <option value="reddit-dm">Reddit DM</option>
+        <option value="cold-bad-store">Cold Email &mdash; Bad Store</option>
+        <option value="cold-followup">Cold Email Follow-up</option>
+        <option value="linkedin-tip">LinkedIn Post &mdash; Tip</option>
+        <option value="linkedin-build">LinkedIn Post &mdash; Build in Public</option>
+        <option value="linkedin-dm">LinkedIn DM</option>
+        <option value="whatsapp-followup">WhatsApp Follow-up</option>
+        <option value="whatsapp-delivery">WhatsApp Post-delivery</option>
+      </select>
+      <textarea class="tmpl-area" id="tmplArea" readonly placeholder="Select a template above to preview it here"></textarea>
+      <button type="button" class="tmpl-copy" id="tmplCopy">Copy to clipboard</button>
+    </div>
+
+    <!-- Panel 8: Discovery Call -->
+    <div class="panel" style="grid-column:1/-1;">
+      <h2>Discovery Call</h2>
+      <h3 style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Pre-call checklist</h3>
+      <ul class="checklist" id="callChecklist">
+        <li><input type="checkbox"><span>Ran PageSpeed Insights on their store</span></li>
+        <li><input type="checkbox"><span>Checked Meta Pixel with Pixel Helper extension</span></li>
+        <li><input type="checkbox"><span>Browsed their store on mobile (screenshots)</span></li>
+        <li><input type="checkbox"><span>Checked their checkout flow for friction</span></li>
+        <li><input type="checkbox"><span>Noted 3 specific issues to mention on call</span></li>
+        <li><input type="checkbox"><span>Prepared pricing for their likely tier</span></li>
+        <li><input type="checkbox"><span>Cal.com link ready to send</span></li>
+      </ul>
+      <h3 style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Value calculator</h3>
+      <div class="calc-grid">
+        <div class="calc-field"><label>Monthly visitors</label><input type="number" id="vcVisitors" value="5000" data-vcalc></div>
+        <div class="calc-field"><label>Current CR (%)</label><input type="number" id="vcCurrentCR" value="1.5" step="0.1" data-vcalc></div>
+        <div class="calc-field"><label>Target CR (%)</label><input type="number" id="vcTargetCR" value="2.5" step="0.1" data-vcalc></div>
+        <div class="calc-field"><label>Avg order value (&euro;)</label><input type="number" id="vcAOV" value="65" data-vcalc></div>
+        <div class="calc-result">
+          <div class="row"><span class="label">Current orders/month</span><span class="val" id="vcCurrentOrders">75</span></div>
+          <div class="row"><span class="label">Target orders/month</span><span class="val" id="vcTargetOrders">125</span></div>
+          <div class="row"><span class="label">Extra orders/month</span><span class="val" id="vcExtraOrders">50</span></div>
+          <div class="row"><span class="label">Extra revenue/month</span><span class="val" id="vcExtraRevenue">&euro;3,250</span></div>
+          <div class="row"><span class="label">Extra revenue/year</span><span class="val" id="vcExtraYear">&euro;39,000</span></div>
+          <div class="row" style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);"><span class="label">Suggested price (1 month ROI)</span><span class="val" id="vcSuggested" style="font-size:14px;">&euro;3,250</span></div>
+        </div>
+      </div>
+      <h3 style="font-family:var(--mono);font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;margin:20px 0 12px;">Objection handling</h3>
+      <div class="objection-list">
+        <details class="objection-item"><summary class="objection-q">Too expensive</summary><p class="objection-a">If I improve your CR from 1.5% to 2.5%, that&rsquo;s X extra orders/month at your AOV. The project pays for itself in [X] weeks. I can show you the math.</p></details>
+        <details class="objection-item"><summary class="objection-q">I can do it myself</summary><p class="objection-a">You absolutely can. The question is whether your time is better spent running your business or debugging Conversions API deduplication. I do this every day &mdash; it takes me 2 days, it&rsquo;ll take you 2 weeks.</p></details>
+        <details class="objection-item"><summary class="objection-q">I need to think about it</summary><p class="objection-a">Totally fair. I&rsquo;ll send you the audit report so you can see the exact issues. No pressure. But I am only taking on 1 new project right now, so if you do want to move forward, sooner is better.</p></details>
+        <details class="objection-item"><summary class="objection-q">My current dev can do it</summary><p class="objection-a">Great &mdash; forward them the audit report. If they fix everything on there, you don&rsquo;t need me. But if it&rsquo;s been 6 months and those issues are still there, that tells you something.</p></details>
+        <details class="objection-item"><summary class="objection-q">How do I know it will work?</summary><p class="objection-a">I measure before and after: LCP, conversion rate, bounce rate. Real numbers from your analytics. If the metrics don&rsquo;t improve, I&rsquo;ll keep working until they do &mdash; no extra charge.</p></details>
+        <details class="objection-item"><summary class="objection-q">Can you guarantee results?</summary><p class="objection-a">I can guarantee the work &mdash; every issue in the audit will be fixed. I can&rsquo;t guarantee a specific revenue number because that depends on your traffic, product, and ads. What I can tell you is that every store I&rsquo;ve optimized saw measurable improvement.</p></details>
+      </div>
+    </div>
+
+    <!-- Panel 9: Revenue Calculator -->
     <div class="panel">
       <h2>Revenue Calculator</h2>
       <div class="calc-grid">
@@ -727,6 +806,58 @@ function deleteComp(i) {
   loadComps();
   touch();
 }
+
+/* ── Outreach Templates ────────────────────────── */
+var outreachTemplates = {
+  'agency-trojan': "Hi [agency name],\n\nI'm Marius, a Shopify optimization specialist based in the Netherlands. I work with agencies as overflow dev capacity — when your team is at capacity or a project needs specialized Shopify/Next.js work.\n\nWhat I typically handle:\n- Store speed optimization (LCP, CLS, INP)\n- Meta Conversions API + Pixel setup with proper deduplication\n- Klaviyo email flow implementation\n- Custom Liquid theme development\n- Full-stack Next.js builds (Supabase, Vercel)\n\nFixed pricing, fast turnaround (most projects 2-5 days), and I work under your brand — your client never knows I exist.\n\nWould it be useful to have me on standby for your next overflow project?\n\nBest,\nMarius\nmurmweb.dev",
+  'reddit-reply': "[Genuinely helpful answer to their question — 2-3 paragraphs of real advice]\n\nI actually do this for a living — I optimize Shopify stores for speed and conversions. Happy to take a quick look at your store if you want a second opinion. No charge, just DM me the URL.",
+  'reddit-dm': "Hey — saw your post about [topic]. I actually specialize in exactly this.\n\nI took a quick look at [their store if mentioned] and noticed [1-2 specific observations]. These are usually quick fixes that make a measurable difference.\n\nI do free store audits — I'll send you a report with every issue ranked by revenue impact within 24 hours. No strings, no pitch. Want me to run one?\n\nMarius\nmurmweb.dev",
+  'cold-bad-store': "Subject: Quick note about [store name]\n\nHi [name],\n\nI came across [store name] and noticed a few things that are likely costing you sales:\n\n1. [Specific issue — e.g., page loads in 5.8s on mobile (should be under 2s)]\n2. [Specific issue — e.g., Meta Pixel is firing duplicate events]\n3. [Specific issue — e.g., no email capture on homepage]\n\nI'm a Shopify optimization specialist — I find and fix exactly these kinds of issues. Fixed price, typically done in 2-5 days.\n\nWant me to send you a full audit? It's free and takes me about an hour. No call required.\n\nBest,\nMarius\nmurmweb.dev",
+  'cold-followup': "Subject: Re: Quick note about [store name]\n\nHi [name],\n\nJust following up on my note from [X days ago]. I noticed [one more specific issue] on [store name] that's probably worth addressing.\n\nThe offer still stands — I'll run a free audit if you're interested. No call, no commitment. You'll get a prioritized report within 24 hours.\n\nEither way, no worries. Hope business is going well.\n\nMarius",
+  'linkedin-tip': "Most Shopify stores I audit have the same 3 problems:\n\n1. Too many apps (avg 6, need 3) — each one adds 0.3-1.5s load time\n2. No server-side tracking — Meta Pixel alone misses ~30% of conversions\n3. Hero image not optimized — I regularly find 4MB PNGs that should be 200KB WebP\n\nFix these three things and you'll see measurable improvement in both page speed and conversion rate.\n\nI run free store audits if you want me to check yours → murmweb.dev\n\n#shopify #ecommerce #cro",
+  'linkedin-build': "This week I optimized a client's Shopify store and cut their LCP from 5.8s to 1.4s.\n\nHere's exactly what I did:\n\n→ Removed 3 apps that were adding 600KB of JS (countdown timer, currency converter, social proof popup)\n→ Compressed hero image from 3.2MB PNG to 180KB WebP\n→ Deferred all non-critical JS below the fold\n→ Fixed their Conversions API setup (was firing duplicate events)\n→ Rebuilt their product page template with lazy-loaded reviews\n\nResult: ROAS went from 1.8x to 3.2x in the same week.\n\nPage speed isn't vanity. It's money.\n\n#shopify #webperformance #ecommerce",
+  'linkedin-dm': "Hi [name],\n\nI saw your post about [topic] — really resonated with me.\n\nI specialize in Shopify store optimization (speed, tracking, conversion rate). I noticed you [run a store / work with e-commerce clients / mentioned Shopify].\n\nWould it be useful to connect? I do free store audits that usually surface 3-5 quick wins.\n\nNo pitch — just genuinely enjoy the work.\n\nMarius",
+  'whatsapp-followup': "Hey [name] 👋\n\nJust checking in — did you get a chance to look at the audit report I sent over?\n\nThe top 3 issues I flagged ([issue 1], [issue 2], [issue 3]) are all things I can fix in 2-3 days. Happy to answer any questions.\n\nMarius",
+  'whatsapp-delivery': "Hey [name] 👋\n\nEverything is live! Here's what was done:\n\n✅ [Fix 1]\n✅ [Fix 2]\n✅ [Fix 3]\n✅ [Fix 4]\n\nBefore/after numbers:\n📊 LCP: [X]s → [Y]s\n📊 Page size: [X]MB → [Y]MB\n📊 Speed score: [X] → [Y]\n\nI'll check in next week to see how the conversion rate is tracking. The 14-day support window starts today — anything you need, just message me.\n\nEnjoy the faster store! 🚀"
+};
+document.getElementById('tmplSelect').addEventListener('change', function() {
+  var val = this.value;
+  document.getElementById('tmplArea').value = val ? outreachTemplates[val] || '' : '';
+});
+document.getElementById('tmplCopy').addEventListener('click', function() {
+  var text = document.getElementById('tmplArea').value;
+  if (text) { navigator.clipboard.writeText(text); toast('Copied!'); }
+});
+
+/* ── Discovery Call Checklist ────────────────────── */
+document.querySelectorAll('#callChecklist input[type="checkbox"]').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    cb.parentElement.classList.toggle('checked', cb.checked);
+  });
+});
+
+/* ── Value Calculator ────────────────────────── */
+function recalcValue() {
+  var visitors = parseFloat(document.getElementById('vcVisitors').value) || 0;
+  var currentCR = parseFloat(document.getElementById('vcCurrentCR').value) || 0;
+  var targetCR = parseFloat(document.getElementById('vcTargetCR').value) || 0;
+  var aov = parseFloat(document.getElementById('vcAOV').value) || 0;
+  var currentOrders = Math.round(visitors * currentCR / 100);
+  var targetOrders = Math.round(visitors * targetCR / 100);
+  var extraOrders = targetOrders - currentOrders;
+  var extraRevenue = extraOrders * aov;
+  var extraYear = extraRevenue * 12;
+  document.getElementById('vcCurrentOrders').textContent = currentOrders;
+  document.getElementById('vcTargetOrders').textContent = targetOrders;
+  document.getElementById('vcExtraOrders').textContent = extraOrders;
+  document.getElementById('vcExtraRevenue').textContent = '\u20AC' + extraRevenue.toLocaleString();
+  document.getElementById('vcExtraYear').textContent = '\u20AC' + extraYear.toLocaleString();
+  document.getElementById('vcSuggested').textContent = '\u20AC' + extraRevenue.toLocaleString();
+}
+document.querySelectorAll('[data-vcalc]').forEach(function(el) {
+  el.addEventListener('input', recalcValue);
+});
+recalcValue();
 
 /* ── Helpers ────────────────────────── */
 function escapeHtml(str) {
