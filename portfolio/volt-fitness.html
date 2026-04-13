@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,397 +7,384 @@
 <title>VOLT - Premium Fitness Equipment</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#000000;--green:#00FF87;--white:#FFFFFF;--gray:#888888;--dark:#0a0a0a;--card:#111111}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'Space Grotesk',sans-serif;background:#000;color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
 
 /* Portfolio Badge */
-.portfolio-badge{position:fixed;top:16px;left:16px;z-index:9999;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.15);padding:8px 16px;border-radius:50px;font-size:12px;font-weight:500;color:var(--white);letter-spacing:0.3px;transition:background .3s}
-.portfolio-badge:hover{background:rgba(255,255,255,0.2)}
+.badge{position:fixed;top:16px;left:16px;z-index:9999;background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);padding:8px 18px;border-radius:50px;font-size:12px;font-weight:500;color:#fff;letter-spacing:0.3px;transition:all .3s}
+.badge:hover{background:rgba(0,255,135,0.15);border-color:rgba(0,255,135,0.3)}
 
-/* Navbar */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.05)}
-.logo{font-size:28px;font-weight:900;letter-spacing:6px;color:var(--green)}
-.logo span{color:var(--white)}
-.nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{font-size:13px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:color .3s}
-.nav-links a:hover{color:var(--green)}
-.nav-cart{position:relative;font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:6px}
-.nav-cart .count{background:var(--green);color:var(--black);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 clamp(20px,4vw,60px);position:relative;overflow:hidden}
+.hero-split{display:flex;width:100%;max-width:1400px;margin:0 auto;align-items:center}
+.hero-left{width:60%;padding-right:40px}
+.hero-right{width:40%;position:relative;min-height:500px;display:flex;align-items:center;justify-content:center}
+.hero-heading{font-family:'Anton',sans-serif;font-size:clamp(60px,15vw,180px);line-height:0.9;text-transform:uppercase;letter-spacing:-2px;color:#fff}
+.hero-heading .line-harder{position:relative;display:inline-block}
+.hero-heading .line-harder::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:6px;background:#00FF87;transform:scaleX(0);transform-origin:left;animation:drawLine 1s 0.5s cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes drawLine{to{transform:scaleX(1)}}
+.hero-sub{margin-top:24px;font-size:clamp(16px,1.8vw,20px);color:rgba(255,255,255,0.55);line-height:1.6;font-weight:400;max-width:500px}
+.hero-btn{display:inline-block;margin-top:36px;padding:18px 48px;background:#00FF87;color:#000;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;box-shadow:0 0 30px rgba(0,255,135,0.3),0 0 60px rgba(0,255,135,0.1)}
+.hero-btn:hover{box-shadow:0 0 50px rgba(0,255,135,0.5),0 0 100px rgba(0,255,135,0.2);transform:translateY(-3px) scale(1.02)}
 
-/* Hero */
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px 40px 80px;position:relative;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1400px;margin:0 auto;width:100%}
-.hero-text h1{font-size:clamp(48px,7vw,96px);font-weight:900;line-height:0.95;letter-spacing:-2px;text-transform:uppercase}
-.hero-text h1 .accent{color:var(--green)}
-.hero-text p{margin-top:24px;font-size:18px;color:rgba(255,255,255,0.5);line-height:1.6;max-width:480px;font-weight:300}
-.hero-cta{display:inline-block;margin-top:40px;padding:18px 48px;background:var(--green);color:var(--black);font-size:14px;font-weight:800;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;box-shadow:0 0 30px rgba(0,255,135,0.3),0 0 60px rgba(0,255,135,0.1)}
-.hero-cta:hover{box-shadow:0 0 40px rgba(0,255,135,0.5),0 0 80px rgba(0,255,135,0.2);transform:translateY(-2px)}
+/* Dumbbell CSS art */
+.dumbbell-wrap{position:relative;width:100%;height:400px}
+.db-bar{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:180px;height:16px;background:#1a1a1a;border-radius:8px;border:1px solid rgba(0,255,135,0.15)}
+.db-plate{position:absolute;top:50%;transform:translateY(-50%);width:50px;height:120px;background:linear-gradient(135deg,#1a1a1a,#111);border-radius:8px;border:1px solid rgba(0,255,135,0.2)}
+.db-plate-l{left:calc(50% - 140px);animation:plateFloat 4s ease-in-out infinite}
+.db-plate-r{right:calc(50% - 140px);animation:plateFloat 4s ease-in-out infinite;animation-delay:-2s}
+.db-plate-outer{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:150px;background:linear-gradient(135deg,#141414,#0d0d0d);border-radius:10px;border:1px solid rgba(0,255,135,0.12)}
+.db-plate-ol{left:calc(50% - 175px);animation:plateFloat 5s ease-in-out infinite;animation-delay:-1s}
+.db-plate-or{right:calc(50% - 175px);animation:plateFloat 5s ease-in-out infinite;animation-delay:-3s}
+.db-cap{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:#111;border:2px solid rgba(0,255,135,0.25)}
+.db-cap-l{left:calc(50% - 200px);animation:plateFloat 6s ease-in-out infinite;animation-delay:-0.5s}
+.db-cap-r{right:calc(50% - 200px);animation:plateFloat 6s ease-in-out infinite;animation-delay:-3.5s}
+.db-accent{position:absolute;width:60px;height:2px;background:#00FF87;opacity:0.4;animation:accentPulse 3s ease-in-out infinite}
+.db-accent-1{top:35%;left:20%;transform:rotate(-15deg);animation-delay:0s}
+.db-accent-2{bottom:30%;right:15%;transform:rotate(25deg);animation-delay:-1.5s}
+.db-accent-3{top:20%;right:30%;transform:rotate(-40deg);animation-delay:-0.8s}
+.db-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#00FF87;opacity:0.2;animation:dotFloat 7s ease-in-out infinite}
+.db-dot-1{top:15%;left:25%;animation-delay:0s}
+.db-dot-2{bottom:20%;right:20%;animation-delay:-2s}
+.db-dot-3{top:40%;right:10%;animation-delay:-4s}
+@keyframes plateFloat{0%,100%{transform:translateY(-50%) translateX(0)}50%{transform:translateY(calc(-50% - 8px)) translateX(2px)}}
+@keyframes accentPulse{0%,100%{opacity:0.15}50%{opacity:0.5}}
+@keyframes dotFloat{0%,100%{transform:translate(0,0);opacity:0.15}50%{transform:translate(5px,-10px);opacity:0.4}}
 
-/* Hero Geometric */
-.hero-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:500px}
-.hex-container{position:relative;width:100%;height:500px}
-.hex{position:absolute;border:2px solid rgba(0,255,135,0.2);background:linear-gradient(135deg,rgba(0,255,135,0.05),rgba(0,255,135,0.02));transition:all .6s ease}
-.hex-1{width:220px;height:220px;top:40px;right:60px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);animation:hexFloat 6s ease-in-out infinite}
-.hex-2{width:160px;height:160px;top:180px;right:220px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);animation:hexFloat 8s ease-in-out infinite;animation-delay:-2s;border-color:rgba(0,255,135,0.35);background:linear-gradient(135deg,rgba(0,255,135,0.08),rgba(0,255,135,0.03))}
-.hex-3{width:120px;height:120px;top:60px;right:280px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);animation:hexFloat 7s ease-in-out infinite;animation-delay:-4s}
-.hex-4{width:180px;height:180px;bottom:40px;right:100px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);animation:hexFloat 9s ease-in-out infinite;animation-delay:-1s;border-color:rgba(0,255,135,0.15)}
-.hex-5{width:90px;height:90px;top:20px;right:180px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);animation:hexFloat 5s ease-in-out infinite;animation-delay:-3s;border-color:rgba(0,255,135,0.4);background:linear-gradient(135deg,rgba(0,255,135,0.12),rgba(0,255,135,0.04))}
-.hex-6{width:70px;height:70px;bottom:100px;right:320px;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);animation:hexFloat 6.5s ease-in-out infinite;animation-delay:-5s;border-color:rgba(0,255,135,0.3)}
+/* URGENCY MARQUEE */
+.marquee{border-top:1px solid rgba(0,255,135,0.15);border-bottom:1px solid rgba(0,255,135,0.15);padding:14px 0;overflow:hidden;white-space:nowrap;background:#000}
+.marquee-track{display:inline-flex;animation:scroll 25s linear infinite}
+.marquee-track span{font-size:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#00FF87;padding:0 24px}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-@keyframes hexFloat{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(3deg)}}
+/* PRODUCTS */
+.products{padding:80px clamp(20px,4vw,60px);max-width:1400px;margin:0 auto}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.p-card{background:#0a0a0a;border:1px solid transparent;overflow:hidden;transition:all .4s;position:relative;display:flex;flex-direction:column}
+.p-card:hover{border-color:#00FF87;transform:translateY(-4px)}
+.p-card:hover .p-btn{background:#00e67a;box-shadow:0 0 20px rgba(0,255,135,0.3)}
+.p-img{height:220px;background:linear-gradient(160deg,#0d0d0d 0%,#151515 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.p-shape{opacity:0.35;transition:opacity .4s}
+.p-card:hover .p-shape{opacity:0.6}
+.p-bestseller{position:absolute;top:12px;left:12px;background:rgba(0,255,135,0.12);border:1px solid rgba(0,255,135,0.25);padding:4px 10px;font-size:11px;font-weight:700;color:#00FF87;letter-spacing:0.5px}
+.p-info{padding:20px;flex:1;display:flex;flex-direction:column}
+.p-name{font-size:15px;font-weight:700;margin-bottom:10px;line-height:1.3;color:#fff}
+.p-prices{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.p-old{text-decoration:line-through;color:rgba(255,255,255,0.3);font-size:15px}
+.p-sale{font-size:22px;font-weight:700;color:#FF3B3B}
+.p-btn{width:100%;padding:14px;background:#00FF87;color:#000;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;margin-top:auto}
 
-/* Marquee Banner */
-.marquee-wrap{border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);padding:16px 0;overflow:hidden;white-space:nowrap;background:var(--dark)}
-.marquee-track{display:inline-flex;animation:marquee 30s linear infinite}
-.marquee-track span{font-size:13px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--green);padding:0 40px}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* SOCIAL PROOF */
+.social{padding:80px clamp(20px,4vw,60px);max-width:1400px;margin:0 auto}
+.social-title{font-family:'Anton',sans-serif;font-size:clamp(32px,5vw,64px);text-transform:uppercase;letter-spacing:2px;margin-bottom:48px;text-align:center}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.r-card{background:#0a0a0a;border:1px solid rgba(255,255,255,0.06);padding:32px;transition:border-color .4s}
+.r-card:hover{border-color:rgba(0,255,135,0.2)}
+.r-stars{color:#00FF87;font-size:18px;letter-spacing:3px;margin-bottom:16px}
+.r-text{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.6);font-weight:400;margin-bottom:20px;font-style:italic}
+.r-author{font-size:14px;font-weight:700;color:#fff}
+.r-verified{display:block;margin-top:4px;font-size:12px;font-weight:600;color:#00FF87;letter-spacing:0.3px}
 
-/* Section shared */
-.section{padding:100px 40px;max-width:1400px;margin:0 auto}
-.section-label{font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:12px}
-.section-title{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1px;margin-bottom:60px}
+/* GUARANTEE */
+.guarantee{padding:60px clamp(20px,4vw,60px);max-width:1400px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+.guarantee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:center}
+.g-item{padding:32px 16px}
+.g-icon{width:56px;height:56px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+.g-icon svg{width:40px;height:40px}
+.g-label{font-family:'Anton',sans-serif;font-size:20px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
 
-/* Product Grid */
-.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.product-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);overflow:hidden;transition:all .4s;position:relative}
-.product-card:hover{border-color:rgba(0,255,135,0.2);transform:translateY(-4px)}
-.product-img{height:260px;background:linear-gradient(145deg,#0d0d0d,#1a1a1a);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.product-img .geo{width:80px;height:80px;border:2px solid rgba(0,255,135,0.15);opacity:0.4}
-.product-img .geo-hex{clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
-.product-img .geo-circle{border-radius:50%}
-.product-img .geo-diamond{transform:rotate(45deg);width:60px;height:60px}
-.product-img .geo-tri{clip-path:polygon(50% 0%,100% 100%,0% 100%);width:70px;height:70px}
-.product-img .geo-square{width:65px;height:65px}
-.product-img .geo-oct{clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);width:75px;height:75px}
-.product-info{padding:24px}
-.product-name{font-size:16px;font-weight:700;margin-bottom:12px;line-height:1.3}
-.product-price{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.product-price .old{text-decoration:line-through;color:rgba(255,255,255,0.3);font-size:16px;font-weight:400}
-.product-price .current{font-size:22px;font-weight:800;color:var(--green)}
-.product-btn{width:100%;padding:14px;background:var(--green);color:var(--black);font-size:12px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
-.product-btn:hover{background:#00e67a;box-shadow:0 0 20px rgba(0,255,135,0.3)}
+/* FINAL CTA */
+.final-cta{background:#00FF87;padding:80px clamp(20px,4vw,60px);text-align:center}
+.final-cta h2{font-family:'Anton',sans-serif;font-size:clamp(36px,7vw,80px);color:#000;text-transform:uppercase;letter-spacing:2px;margin-bottom:32px;line-height:1}
+.final-btn{display:inline-block;padding:20px 56px;background:#000;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}
+.final-btn:hover{background:#111;transform:translateY(-2px);box-shadow:0 10px 40px rgba(0,0,0,0.5)}
 
-/* Reviews */
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.review-card{background:var(--card);border:1px solid rgba(255,255,255,0.06);padding:36px;position:relative}
-.review-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-.review-avatar{width:48px;height:48px;border-radius:50%;flex-shrink:0}
-.review-avatar-1{background:linear-gradient(135deg,#00FF87,#00cc6a)}
-.review-avatar-2{background:linear-gradient(135deg,#00cc6a,#009950)}
-.review-avatar-3{background:linear-gradient(135deg,#00FF87,#66ffb3)}
-.review-meta .review-name{font-size:15px;font-weight:700}
-.review-meta .review-badge{display:inline-block;margin-top:4px;font-size:11px;font-weight:600;color:var(--green);letter-spacing:0.5px}
-.review-stars{color:var(--green);font-size:14px;letter-spacing:2px;margin-bottom:14px}
-.review-text{font-size:14px;line-height:1.7;color:rgba(255,255,255,0.6);font-weight:300}
-
-/* As Seen On */
-.seen-on{border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:50px 40px;background:var(--dark)}
-.seen-on-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:80px;flex-wrap:wrap}
-.seen-on-label{font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.25)}
-.seen-on-logo{font-size:22px;font-weight:700;color:rgba(255,255,255,0.15);letter-spacing:1px}
-
-/* Urgency */
-.urgency{text-align:center;padding:40px 20px}
-.urgency-text{font-size:18px;font-weight:600;color:rgba(255,255,255,0.7)}
-.urgency-text .num{color:var(--green);font-weight:800}
-
-/* Footer */
-footer{border-top:1px solid rgba(255,255,255,0.06);padding:60px 40px 40px;background:var(--dark)}
-.footer-inner{max-width:1400px;margin:0 auto}
-.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-bottom:40px}
-.footer-brand .footer-logo{font-size:24px;font-weight:900;letter-spacing:5px;color:var(--green);margin-bottom:8px}
-.footer-brand p{font-size:13px;color:rgba(255,255,255,0.35);max-width:280px;line-height:1.6}
-.footer-links{display:flex;gap:60px}
-.footer-col h4{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:16px}
-.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:10px;transition:color .3s}
-.footer-col a:hover{color:var(--green)}
-.payment-methods{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-.pay-box{padding:8px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.5px;background:rgba(255,255,255,0.03)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.2)}
-.footer-bottom-links{display:flex;gap:24px}
-.footer-bottom-links a{font-size:12px;color:rgba(255,255,255,0.25);transition:color .3s}
-.footer-bottom-links a:hover{color:var(--green)}
+/* FOOTER */
+.footer{background:#000;border-top:1px solid rgba(255,255,255,0.06);padding:48px clamp(20px,4vw,60px) 32px;text-align:center}
+.f-logo{font-family:'Anton',sans-serif;font-size:36px;letter-spacing:6px;color:#00FF87;margin-bottom:20px}
+.f-payments{display:flex;justify-content:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.f-pay{padding:6px 16px;border:1px solid rgba(255,255,255,0.1);border-radius:6px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.5px;background:rgba(255,255,255,0.03)}
+.f-copy{font-size:13px;color:rgba(255,255,255,0.25);letter-spacing:0.5px}
 
 /* Scroll Reveal */
-.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(0.16,1,0.3,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
-.reveal-delay-4{transition-delay:.4s}
-.reveal-delay-5{transition-delay:.5s}
+.rv{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(0.16,1,0.3,1)}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-d1{transition-delay:.1s}
+.rv-d2{transition-delay:.2s}
+.rv-d3{transition-delay:.3s}
+.rv-d4{transition-delay:.4s}
+.rv-d5{transition-delay:.5s}
+.rv-d6{transition-delay:.6s}
+
+/* Micro-interactions */
+.p-card,.r-card,.g-item,.final-btn,.hero-btn,.badge,.f-pay{transition:transform .3s cubic-bezier(0.16,1,0.3,1),box-shadow .3s,border-color .4s,background .3s,opacity .8s}
+.g-item:hover{transform:translateY(-4px)}
+.g-item:hover .g-icon svg{filter:drop-shadow(0 0 8px rgba(0,255,135,0.5))}
+.g-icon svg{transition:filter .3s}
 
 /* Responsive */
 @media(max-width:1024px){
-  .hero-grid{grid-template-columns:1fr;text-align:center}
-  .hero-text p{margin-left:auto;margin-right:auto}
-  .hero-visual{display:none}
-  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-split{flex-direction:column;text-align:center;padding-top:100px}
+  .hero-left{width:100%;padding-right:0}
+  .hero-right{width:100%;min-height:300px;margin-top:40px}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .products-grid{grid-template-columns:repeat(2,1fr)}
   .reviews-grid{grid-template-columns:repeat(2,1fr)}
-  .nav-links{display:none}
 }
 @media(max-width:640px){
-  .hero{padding:120px 20px 60px}
-  .section{padding:60px 20px}
-  .product-grid{grid-template-columns:1fr}
+  .hero-split{padding-top:80px}
+  .products-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .reviews-grid{grid-template-columns:1fr}
-  .seen-on-inner{gap:40px}
-  .footer-top{flex-direction:column}
-  .footer-links{gap:40px}
-  .footer-bottom{flex-direction:column;text-align:center}
-  .navbar{padding:16px 20px}
+  .guarantee-grid{grid-template-columns:1fr;gap:0}
+  .dumbbell-wrap{transform:scale(0.65)}
+  .p-img{height:160px}
+}
+@media(max-width:375px){
+  .products-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
 <!-- Portfolio Badge -->
-<a href="/" class="portfolio-badge">murmweb.dev portfolio</a>
+<a href="/" class="badge">murmweb.dev portfolio</a>
 
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="logo">V<span>OLT</span></div>
-  <div class="nav-links">
-    <a href="#products">Shop</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-    <div class="nav-cart">Cart <span class="count">0</span></div>
-  </div>
-</nav>
-
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-grid">
-    <div class="hero-text">
-      <h1>Equipment<br>That Works<br>As Hard<br>As <span class="accent">You</span></h1>
-      <p>Performance fitness gear delivered to your door. No markups, no middlemen, no excuses.</p>
-      <a href="#products" class="hero-cta">Shop Now</a>
+  <div class="hero-split">
+    <div class="hero-left rv vis">
+      <div class="hero-heading">
+        <div>TRAIN</div>
+        <div class="line-harder">HARDER</div>
+      </div>
+      <p class="hero-sub">Premium fitness equipment. Direct bij je thuis.</p>
+      <a href="#products" class="hero-btn">SHOP NU &rarr;</a>
     </div>
-    <div class="hero-visual">
-      <div class="hex-container">
-        <div class="hex hex-1"></div>
-        <div class="hex hex-2"></div>
-        <div class="hex hex-3"></div>
-        <div class="hex hex-4"></div>
-        <div class="hex hex-5"></div>
-        <div class="hex hex-6"></div>
+    <div class="hero-right">
+      <div class="dumbbell-wrap">
+        <div class="db-cap db-cap-l"></div>
+        <div class="db-plate-outer db-plate-ol"></div>
+        <div class="db-plate db-plate-l"></div>
+        <div class="db-bar"></div>
+        <div class="db-plate db-plate-r"></div>
+        <div class="db-plate-outer db-plate-or"></div>
+        <div class="db-cap db-cap-r"></div>
+        <div class="db-accent db-accent-1"></div>
+        <div class="db-accent db-accent-2"></div>
+        <div class="db-accent db-accent-3"></div>
+        <div class="db-dot db-dot-1"></div>
+        <div class="db-dot db-dot-2"></div>
+        <div class="db-dot db-dot-3"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Marquee Banner -->
-<div class="marquee-wrap">
+<!-- URGENCY MARQUEE -->
+<div class="marquee">
   <div class="marquee-track">
-    <span>Free Shipping</span><span>&middot;</span><span>Same Week Dispatch</span><span>&middot;</span><span>30 Day Returns</span><span>&middot;</span>
-    <span>Free Shipping</span><span>&middot;</span><span>Same Week Dispatch</span><span>&middot;</span><span>30 Day Returns</span><span>&middot;</span>
-    <span>Free Shipping</span><span>&middot;</span><span>Same Week Dispatch</span><span>&middot;</span><span>30 Day Returns</span><span>&middot;</span>
-    <span>Free Shipping</span><span>&middot;</span><span>Same Week Dispatch</span><span>&middot;</span><span>30 Day Returns</span><span>&middot;</span>
-    <span>Free Shipping</span><span>&middot;</span><span>Same Week Dispatch</span><span>&middot;</span><span>30 Day Returns</span><span>&middot;</span>
-    <span>Free Shipping</span><span>&middot;</span><span>Same Week Dispatch</span><span>&middot;</span><span>30 Day Returns</span><span>&middot;</span>
+    <span>&#128293; SUMMER SALE &mdash; TOT 50% KORTING</span><span>&middot;</span><span>GRATIS VERZENDING</span><span>&middot;</span>
+    <span>&#128293; SUMMER SALE &mdash; TOT 50% KORTING</span><span>&middot;</span><span>GRATIS VERZENDING</span><span>&middot;</span>
+    <span>&#128293; SUMMER SALE &mdash; TOT 50% KORTING</span><span>&middot;</span><span>GRATIS VERZENDING</span><span>&middot;</span>
+    <span>&#128293; SUMMER SALE &mdash; TOT 50% KORTING</span><span>&middot;</span><span>GRATIS VERZENDING</span><span>&middot;</span>
+    <span>&#128293; SUMMER SALE &mdash; TOT 50% KORTING</span><span>&middot;</span><span>GRATIS VERZENDING</span><span>&middot;</span>
+    <span>&#128293; SUMMER SALE &mdash; TOT 50% KORTING</span><span>&middot;</span><span>GRATIS VERZENDING</span><span>&middot;</span>
   </div>
 </div>
 
-<!-- Products -->
-<section class="section" id="products">
-  <div class="reveal">
-    <div class="section-label">Our Bestsellers</div>
-    <div class="section-title">Built to Perform</div>
-  </div>
-  <div class="product-grid">
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-img"><div class="geo geo-hex"></div></div>
-      <div class="product-info">
-        <div class="product-name">Adjustable Dumbbell Set 24kg</div>
-        <div class="product-price">
-          <span class="old">&euro;149</span>
-          <span class="current">&euro;89</span>
-        </div>
-        <button class="product-btn">Add to Cart</button>
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="products-grid">
+
+    <!-- Product 1 - Bestseller -->
+    <div class="p-card rv rv-d1">
+      <div class="p-img">
+        <div class="p-bestseller">&#9889; 847 verkocht</div>
+        <svg class="p-shape" width="90" height="90" viewBox="0 0 90 90"><circle cx="20" cy="45" r="18" fill="none" stroke="rgba(0,255,135,0.3)" stroke-width="2"/><rect x="36" y="38" width="18" height="14" rx="3" fill="none" stroke="rgba(0,255,135,0.2)" stroke-width="2"/><circle cx="70" cy="45" r="18" fill="none" stroke="rgba(0,255,135,0.3)" stroke-width="2"/></svg>
+      </div>
+      <div class="p-info">
+        <div class="p-name">Verstelbare Dumbbells 24KG (2x)</div>
+        <div class="p-prices"><span class="p-old">&euro;179</span><span class="p-sale">&euro;99</span></div>
+        <button class="p-btn">IN WINKELWAGEN</button>
       </div>
     </div>
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-img"><div class="geo geo-circle"></div></div>
-      <div class="product-info">
-        <div class="product-name">Resistance Band Kit (5-Pack)</div>
-        <div class="product-price">
-          <span class="old">&euro;45</span>
-          <span class="current">&euro;27</span>
-        </div>
-        <button class="product-btn">Add to Cart</button>
+
+    <!-- Product 2 -->
+    <div class="p-card rv rv-d2">
+      <div class="p-img">
+        <svg class="p-shape" width="80" height="80" viewBox="0 0 80 80"><ellipse cx="40" cy="40" rx="35" ry="18" fill="none" stroke="rgba(0,255,135,0.25)" stroke-width="2"/><line x1="10" y1="40" x2="70" y2="40" stroke="rgba(0,255,135,0.15)" stroke-width="1.5" stroke-dasharray="4,4"/><ellipse cx="40" cy="40" rx="20" ry="10" fill="none" stroke="rgba(0,255,135,0.15)" stroke-width="1.5"/></svg>
+      </div>
+      <div class="p-info">
+        <div class="p-name">Weerstandsbanden Set (5 stuks)</div>
+        <div class="p-prices"><span class="p-old">&euro;49</span><span class="p-sale">&euro;27</span></div>
+        <button class="p-btn">IN WINKELWAGEN</button>
       </div>
     </div>
-    <div class="product-card reveal reveal-delay-3">
-      <div class="product-img"><div class="geo geo-diamond"></div></div>
-      <div class="product-info">
-        <div class="product-name">Ab Roller Pro</div>
-        <div class="product-price">
-          <span class="old">&euro;39</span>
-          <span class="current">&euro;19</span>
-        </div>
-        <button class="product-btn">Add to Cart</button>
+
+    <!-- Product 3 -->
+    <div class="p-card rv rv-d3">
+      <div class="p-img">
+        <svg class="p-shape" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="45" r="22" fill="none" stroke="rgba(0,255,135,0.25)" stroke-width="2"/><line x1="40" y1="10" x2="40" y2="45" stroke="rgba(0,255,135,0.3)" stroke-width="2"/><rect x="32" y="6" width="16" height="8" rx="4" fill="none" stroke="rgba(0,255,135,0.2)" stroke-width="1.5"/></svg>
+      </div>
+      <div class="p-info">
+        <div class="p-name">Ab Roller Pro Carbon</div>
+        <div class="p-prices"><span class="p-old">&euro;45</span><span class="p-sale">&euro;22</span></div>
+        <button class="p-btn">IN WINKELWAGEN</button>
       </div>
     </div>
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-img"><div class="geo geo-tri"></div></div>
-      <div class="product-info">
-        <div class="product-name">Pull-Up Bar (Doorframe)</div>
-        <div class="product-price">
-          <span class="old">&euro;59</span>
-          <span class="current">&euro;34</span>
-        </div>
-        <button class="product-btn">Add to Cart</button>
+
+    <!-- Product 4 -->
+    <div class="p-card rv rv-d1">
+      <div class="p-img">
+        <svg class="p-shape" width="80" height="90" viewBox="0 0 80 90"><rect x="10" y="5" width="60" height="10" rx="5" fill="none" stroke="rgba(0,255,135,0.25)" stroke-width="2"/><line x1="20" y1="15" x2="20" y2="85" stroke="rgba(0,255,135,0.2)" stroke-width="2"/><line x1="60" y1="15" x2="60" y2="85" stroke="rgba(0,255,135,0.2)" stroke-width="2"/></svg>
+      </div>
+      <div class="p-info">
+        <div class="p-name">Optrekstang Deurkozijn</div>
+        <div class="p-prices"><span class="p-old">&euro;65</span><span class="p-sale">&euro;38</span></div>
+        <button class="p-btn">IN WINKELWAGEN</button>
       </div>
     </div>
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-img"><div class="geo geo-square"></div></div>
-      <div class="product-info">
-        <div class="product-name">Yoga Mat 6mm Anti-Slip</div>
-        <div class="product-price">
-          <span class="old">&euro;35</span>
-          <span class="current">&euro;18</span>
-        </div>
-        <button class="product-btn">Add to Cart</button>
+
+    <!-- Product 5 -->
+    <div class="p-card rv rv-d2">
+      <div class="p-img">
+        <svg class="p-shape" width="100" height="60" viewBox="0 0 100 60"><rect x="5" y="10" width="90" height="40" rx="4" fill="none" stroke="rgba(0,255,135,0.2)" stroke-width="2"/><line x1="5" y1="30" x2="95" y2="30" stroke="rgba(0,255,135,0.12)" stroke-width="1" stroke-dasharray="6,3"/><circle cx="50" cy="30" r="6" fill="none" stroke="rgba(0,255,135,0.3)" stroke-width="1.5"/></svg>
+      </div>
+      <div class="p-info">
+        <div class="p-name">Yogamat 6mm Anti-Slip</div>
+        <div class="p-prices"><span class="p-old">&euro;39</span><span class="p-sale">&euro;19</span></div>
+        <button class="p-btn">IN WINKELWAGEN</button>
       </div>
     </div>
-    <div class="product-card reveal reveal-delay-3">
-      <div class="product-img"><div class="geo geo-oct"></div></div>
-      <div class="product-info">
-        <div class="product-name">Jump Rope Speed Pro</div>
-        <div class="product-price">
-          <span class="old">&euro;29</span>
-          <span class="current">&euro;15</span>
-        </div>
-        <button class="product-btn">Add to Cart</button>
+
+    <!-- Product 6 -->
+    <div class="p-card rv rv-d3">
+      <div class="p-img">
+        <svg class="p-shape" width="80" height="80" viewBox="0 0 80 80"><ellipse cx="40" cy="40" rx="25" ry="25" fill="none" stroke="rgba(0,255,135,0.15)" stroke-width="1.5"/><line x1="40" y1="15" x2="40" y2="0" stroke="rgba(0,255,135,0.3)" stroke-width="2"/><line x1="40" y1="65" x2="40" y2="80" stroke="rgba(0,255,135,0.3)" stroke-width="2"/><rect x="36" y="0" width="8" height="6" rx="2" fill="none" stroke="rgba(0,255,135,0.25)" stroke-width="1.5"/><rect x="36" y="74" width="8" height="6" rx="2" fill="none" stroke="rgba(0,255,135,0.25)" stroke-width="1.5"/></svg>
+      </div>
+      <div class="p-info">
+        <div class="p-name">Speed Rope Aluminium</div>
+        <div class="p-prices"><span class="p-old">&euro;35</span><span class="p-sale">&euro;17</span></div>
+        <button class="p-btn">IN WINKELWAGEN</button>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- Reviews -->
-<section class="section" id="reviews">
-  <div class="reveal">
-    <div class="section-label">What Our Customers Say</div>
-    <div class="section-title">Real Results</div>
-  </div>
+<!-- SOCIAL PROOF -->
+<section class="social">
+  <h2 class="social-title rv">2.847+ TEVREDEN KLANTEN</h2>
   <div class="reviews-grid">
-    <div class="review-card reveal reveal-delay-1">
-      <div class="review-header">
-        <div class="review-avatar review-avatar-1"></div>
-        <div class="review-meta">
-          <div class="review-name">Marcus T.</div>
-          <div class="review-badge">&#10003; Verified Purchase</div>
-        </div>
-      </div>
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="review-text">The adjustable dumbbells are unreal for the price. Solid build, smooth adjustment mechanism. Replaced my entire rack with one set. Shipping was faster than expected too.</div>
+    <div class="r-card rv rv-d1">
+      <div class="r-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="r-text">"Dumbbells zijn stevig en de kwaliteit is top voor deze prijs."</div>
+      <div class="r-author">Mark D.</div>
+      <span class="r-verified">Geverifieerde aankoop &#10003;</span>
     </div>
-    <div class="review-card reveal reveal-delay-2">
-      <div class="review-header">
-        <div class="review-avatar review-avatar-2"></div>
-        <div class="review-meta">
-          <div class="review-name">Sophie L.</div>
-          <div class="review-badge">&#10003; Verified Purchase</div>
-        </div>
-      </div>
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="review-text">Bought the resistance band kit and yoga mat together. Both are premium quality. The bands have clear weight markings and the mat grip is insane. Will be ordering more.</div>
+    <div class="r-card rv rv-d2">
+      <div class="r-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="r-text">"Eindelijk een yogamat die niet verschuift. Gebruik hem dagelijks."</div>
+      <div class="r-author">Sanne V.</div>
+      <span class="r-verified">Geverifieerde aankoop &#10003;</span>
     </div>
-    <div class="review-card reveal reveal-delay-3">
-      <div class="review-header">
-        <div class="review-avatar review-avatar-3"></div>
-        <div class="review-meta">
-          <div class="review-name">Daniel K.</div>
-          <div class="review-badge">&#10003; Verified Purchase</div>
-        </div>
-      </div>
-      <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-      <div class="review-text">Pull-up bar is sturdy and the doorframe padding actually works. No marks on my walls. Ab roller is compact but effective. Great value across the board.</div>
+    <div class="r-card rv rv-d3">
+      <div class="r-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="r-text">"Weerstandsbanden zijn perfect voor thuis trainen."</div>
+      <div class="r-author">Tim K.</div>
+      <span class="r-verified">Geverifieerde aankoop &#10003;</span>
     </div>
   </div>
 </section>
 
-<!-- As Seen On -->
-<div class="seen-on">
-  <div class="seen-on-inner">
-    <div class="seen-on-label">As Seen On</div>
-    <div class="seen-on-logo">FitReview</div>
-    <div class="seen-on-logo">GymNation</div>
-    <div class="seen-on-logo">HealthStack</div>
-  </div>
-</div>
-
-<!-- Urgency -->
-<div class="urgency reveal">
-  <div class="urgency-text">&#128293; <span class="num">847</span> sold this month</div>
-</div>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">VOLT</div>
-        <p>Premium fitness equipment at honest prices. Direct to your door.</p>
-        <div class="payment-methods">
-          <div class="pay-box">Visa</div>
-          <div class="pay-box">Mastercard</div>
-          <div class="pay-box">PayPal</div>
-          <div class="pay-box">Apple Pay</div>
-        </div>
+<!-- GUARANTEE -->
+<section class="guarantee">
+  <div class="guarantee-grid">
+    <div class="g-item rv rv-d1">
+      <div class="g-icon">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#00FF87" stroke-width="2"><path d="M20 4 L36 12 L36 28 L20 36 L4 28 L4 12 Z"/><polyline points="12,20 18,26 28,14" stroke-width="2.5"/></svg>
       </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Shop</h4>
-          <a href="#">All Products</a>
-          <a href="#">Bestsellers</a>
-          <a href="#">New Arrivals</a>
-          <a href="#">Sale</a>
-        </div>
-        <div class="footer-col">
-          <h4>Support</h4>
-          <a href="#">Contact Us</a>
-          <a href="#">Shipping Info</a>
-          <a href="#">Returns</a>
-          <a href="#">FAQ</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="#">About</a>
-          <a href="#">Blog</a>
-          <a href="#">Careers</a>
-        </div>
-      </div>
+      <div class="g-label">30 Dagen Retour</div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 VOLT. All rights reserved.</p>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+    <div class="g-item rv rv-d2">
+      <div class="g-icon">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#00FF87" stroke-width="2"><rect x="4" y="16" width="32" height="18" rx="2"/><path d="M4 22 L16 22 L18 16 L22 16 L24 22 L36 22"/><circle cx="12" cy="34" r="3"/><circle cx="28" cy="34" r="3"/></svg>
       </div>
+      <div class="g-label">Gratis Verzending</div>
+    </div>
+    <div class="g-item rv rv-d3">
+      <div class="g-icon">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#00FF87" stroke-width="2"><path d="M20 4 C20 4 34 10 34 22 C34 30 28 36 20 38 C12 36 6 30 6 22 C6 10 20 4 20 4Z"/><text x="14" y="26" font-size="12" font-family="Anton" fill="#00FF87" stroke="none">2J</text></svg>
+      </div>
+      <div class="g-label">2 Jaar Garantie</div>
     </div>
   </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="rv">KLAAR OM TE BEGINNEN?</h2>
+  <a href="#products" class="final-btn rv rv-d1">BEKIJK ALLE PRODUCTEN &rarr;</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="f-logo">VOLT</div>
+  <div class="f-payments">
+    <div class="f-pay">Visa</div>
+    <div class="f-pay">Mastercard</div>
+    <div class="f-pay">PayPal</div>
+    <div class="f-pay">Apple Pay</div>
+  </div>
+  <p class="f-copy">VOLT Fitness &copy; 2026 &middot; Amsterdam</p>
 </footer>
 
 <script>
-// Scroll Reveal
 (function(){
-  const els=document.querySelectorAll('.reveal');
-  const observer=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}
+  // Scroll Reveal via IntersectionObserver
+  var els=document.querySelectorAll('.rv');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}
     });
   },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
-  els.forEach(el=>observer.observe(el));
+  els.forEach(function(el){obs.observe(el)});
+
+  // Button ripple micro-interaction
+  document.querySelectorAll('.p-btn,.hero-btn,.final-btn').forEach(function(btn){
+    btn.addEventListener('mousedown',function(e){
+      var r=document.createElement('span');
+      var rect=btn.getBoundingClientRect();
+      var size=Math.max(rect.width,rect.height);
+      r.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);width:'+size+'px;height:'+size+'px;left:'+(e.clientX-rect.left-size/2)+'px;top:'+(e.clientY-rect.top-size/2)+'px;transform:scale(0);animation:ripple 0.6s ease-out;pointer-events:none;';
+      btn.style.position='relative';
+      btn.style.overflow='hidden';
+      btn.appendChild(r);
+      setTimeout(function(){r.remove()},600);
+    });
+  });
+
+  // Inject ripple keyframe
+  var s=document.createElement('style');
+  s.textContent='@keyframes ripple{to{transform:scale(2);opacity:0}}';
+  document.head.appendChild(s);
+
+  // Product card tilt micro-interaction
+  document.querySelectorAll('.p-card').forEach(function(card){
+    card.addEventListener('mousemove',function(e){
+      var rect=card.getBoundingClientRect();
+      var x=(e.clientX-rect.left)/rect.width-0.5;
+      var y=(e.clientY-rect.top)/rect.height-0.5;
+      card.style.transform='translateY(-4px) perspective(600px) rotateY('+x*4+'deg) rotateX('+(-y*4)+'deg)';
+    });
+    card.addEventListener('mouseleave',function(){
+      card.style.transform='';
+    });
+  });
 })();
 </script>
 

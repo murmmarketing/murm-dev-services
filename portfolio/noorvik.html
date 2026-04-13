@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Noorvik — Dutch-Designed Outdoor Gear</title>
+  <title>NOORVIK — Dutch Outdoor Gear</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -16,13 +16,13 @@
     }
 
     :root {
-      --forest: #1B3A2D;
-      --forest-light: #24503D;
-      --forest-dark: #132A20;
-      --cream: #F0EBE0;
-      --cream-dim: rgba(240, 235, 224, 0.6);
-      --orange: #D4713B;
-      --orange-hover: #E07F48;
+      --forest: #15271F;
+      --forest-light: #1C3529;
+      --forest-mid: #1A2F24;
+      --stone: #E8DFD0;
+      --stone-dim: rgba(232, 223, 208, 0.55);
+      --copper: #C17D4A;
+      --copper-hover: #D48B55;
     }
 
     html {
@@ -30,23 +30,23 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Instrument Sans', sans-serif;
       background-color: var(--forest);
-      color: var(--cream);
+      color: var(--stone);
       overflow-x: hidden;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Noise overlay */
+    /* Subtle noise texture */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.03;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-repeat: repeat;
       background-size: 256px 256px;
     }
@@ -54,72 +54,57 @@
     /* Portfolio badge */
     .portfolio-badge {
       position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      background: rgba(27, 58, 45, 0.85);
+      top: 14px;
+      left: 14px;
+      z-index: 1001;
+      background: rgba(21, 39, 31, 0.75);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(240, 235, 224, 0.15);
-      color: var(--cream-dim);
+      border: 1px solid rgba(232, 223, 208, 0.12);
+      color: var(--stone-dim);
       text-decoration: none;
-      font-size: 0.7rem;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 6px 14px;
+      letter-spacing: 0.03em;
+      padding: 5px 12px;
       border-radius: 100px;
       transition: all 0.3s ease;
     }
 
     .portfolio-badge:hover {
-      background: rgba(27, 58, 45, 0.95);
-      color: var(--cream);
-      border-color: rgba(240, 235, 224, 0.3);
+      background: rgba(21, 39, 31, 0.95);
+      color: var(--stone);
+      border-color: rgba(232, 223, 208, 0.25);
     }
 
-    /* Navigation */
-    .nav {
-      position: fixed;
+    /* Announcement bar */
+    .announcement-bar {
+      position: sticky;
       top: 0;
-      left: 0;
-      right: 0;
-      z-index: 900;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      transition: all 0.4s ease;
+      z-index: 1000;
+      background: var(--copper);
+      color: var(--forest);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
     }
 
-    .nav.scrolled {
-      background: rgba(19, 42, 32, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      padding: 14px 40px;
-      box-shadow: 0 1px 0 rgba(240, 235, 224, 0.06);
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .nav-links a {
-      color: var(--cream-dim);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--cream);
-    }
-
-    /* Hero */
+    /* ---- HERO ---- */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -136,22 +121,39 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 120% 60% at 50% 100%, rgba(19, 42, 32, 1) 0%, transparent 70%),
-        linear-gradient(180deg, transparent 40%, rgba(19, 42, 32, 0.6) 70%, rgba(19, 42, 32, 1) 100%),
-        radial-gradient(ellipse 80% 40% at 30% 80%, rgba(36, 80, 61, 0.7) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 35% at 70% 75%, rgba(36, 80, 61, 0.5) 0%, transparent 55%),
-        radial-gradient(ellipse 100% 50% at 50% 85%, rgba(27, 58, 45, 0.8) 0%, transparent 60%),
-        linear-gradient(175deg, #1B3A2D 0%, #24503D 30%, #2D6B4F 50%, #24503D 70%, #1B3A2D 100%);
+        /* Subtle sun glow at top center */
+        radial-gradient(ellipse 50% 30% at 50% 15%, rgba(232, 223, 208, 0.06) 0%, transparent 70%),
+        /* Mist layer */
+        radial-gradient(ellipse 120% 20% at 50% 55%, rgba(232, 223, 208, 0.04) 0%, transparent 60%),
+        /* Mountain ridge shapes */
+        linear-gradient(180deg,
+          #2a3d34 0%,
+          #243830 15%,
+          #1f3028 30%,
+          #1d2e26 40%,
+          #1a2b23 50%,
+          #182721 65%,
+          #15271F 80%,
+          #15271F 100%
+        );
     }
 
+    /* Layered mountain silhouettes */
     .hero::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 200px;
-      background: linear-gradient(to top, var(--forest) 0%, transparent 100%);
+      inset: 0;
+      background:
+        /* Foreground ridge - dark */
+        radial-gradient(ellipse 60% 18% at 25% 72%, #15271F 0%, transparent 70%),
+        radial-gradient(ellipse 50% 15% at 75% 70%, #15271F 0%, transparent 65%),
+        /* Mid ridge */
+        radial-gradient(ellipse 80% 20% at 40% 65%, rgba(26, 43, 35, 0.9) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 18% at 65% 62%, rgba(26, 43, 35, 0.8) 0%, transparent 55%),
+        /* Far ridge - lighter */
+        radial-gradient(ellipse 100% 15% at 50% 55%, rgba(36, 56, 48, 0.5) 0%, transparent 50%),
+        /* Bottom fade to base */
+        linear-gradient(to top, var(--forest) 0%, transparent 30%);
     }
 
     .hero-content {
@@ -161,82 +163,81 @@
     }
 
     .hero h1 {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-weight: 800;
-      font-size: clamp(3rem, 10vw, 7rem);
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(80px, 20vw, 200px);
       letter-spacing: 0.3em;
       text-transform: uppercase;
       margin-right: -0.3em;
-      line-height: 1;
-      margin-bottom: 24px;
+      line-height: 0.9;
+      margin-bottom: 28px;
+      color: var(--stone);
     }
 
     .hero p {
-      font-size: clamp(0.9rem, 2vw, 1.15rem);
-      font-weight: 300;
-      color: var(--cream-dim);
-      letter-spacing: 0.12em;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+      font-weight: 500;
+      color: var(--stone-dim);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
+      font-variant: small-caps;
     }
 
-    .hero-scroll {
+    .scroll-indicator {
       position: absolute;
-      bottom: 48px;
+      bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: scrollBounce 2.5s ease-in-out infinite;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone-dim);
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      display: block;
       width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, var(--cream-dim), transparent);
-      animation: scrollPulse 2s ease-in-out infinite;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--stone-dim), transparent);
     }
 
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 1; }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
     }
 
-    /* Sections */
+    /* ---- SECTIONS SHARED ---- */
     section {
       padding: 100px 24px;
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
-    .section-label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-weight: 700;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      letter-spacing: 0.06em;
+    .section-heading {
+      font-family: 'Instrument Serif', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: 0.04em;
       margin-bottom: 56px;
-      line-height: 1.15;
+      line-height: 1.1;
     }
 
-    /* Reveal animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Products */
+    /* ---- FEATURED COLLECTION ---- */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -245,67 +246,106 @@
 
     .product-card {
       position: relative;
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      background: linear-gradient(145deg, var(--forest-light), var(--forest-dark));
-      border: 1px solid rgba(240, 235, 224, 0.06);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+      background: var(--forest-light);
+      border: 1px solid rgba(232, 223, 208, 0.06);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
     }
 
     .product-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(240, 235, 224, 0.12);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     .product-image {
       position: relative;
-      aspect-ratio: 4 / 5;
-      background: linear-gradient(160deg, rgba(36, 80, 61, 0.6) 0%, rgba(19, 42, 32, 0.9) 100%);
+      aspect-ratio: 3 / 4;
       overflow: hidden;
+    }
+
+    /* Olive/khaki gradient for jacket */
+    .product-card:nth-child(1) .product-image {
+      background:
+        radial-gradient(circle at 35% 40%, rgba(160, 150, 110, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 65% 60%, rgba(110, 120, 80, 0.2) 0%, transparent 45%),
+        linear-gradient(155deg, #4a5438 0%, #3a4230 30%, #2d3425 60%, #1C3529 100%);
+    }
+
+    /* Charcoal gradient for pack */
+    .product-card:nth-child(2) .product-image {
+      background:
+        radial-gradient(circle at 40% 35%, rgba(90, 95, 90, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 60% 65%, rgba(70, 75, 70, 0.2) 0%, transparent 45%),
+        linear-gradient(155deg, #3a3e3a 0%, #2e3230 30%, #252825 60%, #1a1e1a 100%);
+    }
+
+    /* Cream/natural gradient for base layer */
+    .product-card:nth-child(3) .product-image {
+      background:
+        radial-gradient(circle at 35% 40%, rgba(210, 200, 180, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 60% 55%, rgba(190, 180, 160, 0.15) 0%, transparent 45%),
+        linear-gradient(155deg, #5a5448 0%, #4a4438 30%, #3a342c 60%, #2a2420 100%);
     }
 
     .product-image::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 40% 40%, rgba(240, 235, 224, 0.04) 0%, transparent 60%);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--copper);
+      color: var(--forest);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      z-index: 2;
     }
 
     .quick-add {
       position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(19, 42, 32, 0.7);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      background: linear-gradient(to top, rgba(21, 39, 31, 0.95) 0%, transparent 100%);
+      z-index: 2;
     }
 
     .product-card:hover .quick-add {
-      opacity: 1;
+      transform: translateY(0);
     }
 
     .quick-add button {
-      background: var(--orange);
-      color: var(--cream);
+      width: 100%;
+      background: var(--copper);
+      color: var(--forest);
       border: none;
-      padding: 12px 28px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 600;
+      padding: 14px 24px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: background 0.3s ease;
     }
 
     .quick-add button:hover {
-      background: var(--orange-hover);
-      transform: scale(1.04);
+      background: var(--copper-hover);
     }
 
     .product-info {
@@ -313,59 +353,83 @@
     }
 
     .product-name {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-weight: 700;
+      font-family: 'Instrument Sans', sans-serif;
+      font-weight: 600;
       font-size: 1rem;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       margin-bottom: 4px;
     }
 
     .product-desc {
       font-size: 0.8rem;
-      color: var(--cream-dim);
-      font-weight: 300;
+      color: var(--stone-dim);
+      font-weight: 400;
       margin-bottom: 12px;
+      line-height: 1.5;
     }
 
     .product-price {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      color: var(--orange);
+      color: var(--copper);
     }
 
-    /* Story */
-    .story-section {
-      background: linear-gradient(180deg, var(--forest) 0%, var(--forest-dark) 50%, var(--forest) 100%);
+    /* ---- BRAND STORY ---- */
+    .brand-story {
+      background: linear-gradient(180deg, var(--forest) 0%, var(--forest-mid) 50%, var(--forest) 100%);
     }
 
-    .story-content {
-      max-width: 640px;
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
     }
 
-    .story-content .section-title {
-      margin-bottom: 32px;
+    .story-quote {
+      position: relative;
+      padding-top: 32px;
     }
 
-    .story-content p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--cream-dim);
+    .story-quote::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--copper);
+    }
+
+    .story-quote blockquote {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.35;
+      color: var(--stone);
+    }
+
+    .story-text p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--stone-dim);
+      font-weight: 400;
       margin-bottom: 20px;
-      font-weight: 300;
     }
 
-    .story-content p:last-child {
+    .story-text p:last-child {
       margin-bottom: 0;
     }
 
-    /* Feature strip */
-    .features {
-      border-top: 1px solid rgba(240, 235, 224, 0.08);
-      border-bottom: 1px solid rgba(240, 235, 224, 0.08);
-      padding: 64px 24px;
+    /* ---- MATERIAL STRIP ---- */
+    .material-strip {
+      background: var(--forest-light);
+      padding: 72px 24px;
+      border-top: 1px solid rgba(232, 223, 208, 0.06);
+      border-bottom: 1px solid rgba(232, 223, 208, 0.06);
     }
 
-    .features-grid {
+    .materials-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 32px;
@@ -374,125 +438,129 @@
       text-align: center;
     }
 
-    .feature-item svg {
+    .material-item svg {
       width: 36px;
       height: 36px;
-      stroke: var(--orange);
+      stroke: var(--copper);
       fill: none;
       stroke-width: 1.5;
       stroke-linecap: round;
       stroke-linejoin: round;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
-    .feature-item span {
+    .material-item span {
       display: block;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--cream-dim);
+      color: var(--stone-dim);
     }
 
-    /* Signup */
-    .signup-section {
+    /* ---- NEWSLETTER ---- */
+    .newsletter {
       text-align: center;
     }
 
-    .signup-section .section-title {
-      margin-bottom: 36px;
+    .newsletter .section-heading {
+      margin-bottom: 32px;
     }
 
-    .signup-form {
+    .newsletter-form {
       display: flex;
       gap: 12px;
-      max-width: 440px;
-      margin: 0 auto;
+      max-width: 460px;
+      margin: 0 auto 20px;
     }
 
-    .signup-form input {
+    .newsletter-form input {
       flex: 1;
-      background: rgba(240, 235, 224, 0.06);
-      border: 1px solid rgba(240, 235, 224, 0.12);
-      border-radius: 8px;
-      padding: 14px 18px;
-      font-family: 'Inter', sans-serif;
+      background: rgba(232, 223, 208, 0.06);
+      border: 1px solid rgba(232, 223, 208, 0.12);
+      border-radius: 6px;
+      padding: 15px 18px;
+      font-family: 'Instrument Sans', sans-serif;
       font-size: 0.9rem;
-      color: var(--cream);
+      color: var(--stone);
       outline: none;
       transition: border-color 0.3s ease;
     }
 
-    .signup-form input::placeholder {
-      color: rgba(240, 235, 224, 0.35);
+    .newsletter-form input::placeholder {
+      color: rgba(232, 223, 208, 0.3);
     }
 
-    .signup-form input:focus {
-      border-color: var(--orange);
+    .newsletter-form input:focus {
+      border-color: var(--copper);
     }
 
-    .signup-form button {
-      background: var(--orange);
-      color: var(--cream);
+    .newsletter-form button {
+      background: var(--copper);
+      color: var(--forest);
       border: none;
-      padding: 14px 28px;
-      font-family: 'Inter', sans-serif;
+      padding: 15px 28px;
+      font-family: 'Instrument Sans', sans-serif;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.06em;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       white-space: nowrap;
       transition: background 0.3s ease;
     }
 
-    .signup-form button:hover {
-      background: var(--orange-hover);
+    .newsletter-form button:hover {
+      background: var(--copper-hover);
     }
 
-    /* Footer */
+    .newsletter-sub {
+      font-size: 0.8rem;
+      color: var(--stone-dim);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ---- FOOTER ---- */
     footer {
-      padding: 64px 24px 40px;
-      border-top: 1px solid rgba(240, 235, 224, 0.06);
+      padding: 72px 24px 40px;
+      border-top: 1px solid rgba(232, 223, 208, 0.06);
     }
 
     .footer-inner {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 40px;
-      flex-wrap: wrap;
     }
 
-    .footer-brand {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-logo {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.6rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
-    .footer-copy {
-      font-size: 0.75rem;
-      color: var(--cream-dim);
-      font-weight: 300;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 40px;
+    .footer-tagline {
+      font-size: 0.8rem;
+      color: var(--stone-dim);
+      line-height: 1.6;
     }
 
     .footer-col h4 {
       font-size: 0.7rem;
-      font-weight: 600;
+      font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--cream-dim);
-      margin-bottom: 14px;
+      color: var(--stone);
+      margin-bottom: 18px;
     }
 
     .footer-col ul {
@@ -500,24 +568,24 @@
     }
 
     .footer-col li {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .footer-col a {
-      color: var(--cream-dim);
+      color: var(--stone-dim);
       text-decoration: none;
       font-size: 0.82rem;
-      font-weight: 300;
+      font-weight: 400;
       transition: color 0.3s ease;
     }
 
     .footer-col a:hover {
-      color: var(--cream);
+      color: var(--stone);
     }
 
     .social-links {
       display: flex;
-      gap: 16px;
+      gap: 12px;
       margin-top: 4px;
     }
 
@@ -525,82 +593,124 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      border: 1px solid rgba(240, 235, 224, 0.12);
+      border: 1px solid rgba(232, 223, 208, 0.12);
       transition: border-color 0.3s ease, background 0.3s ease;
     }
 
     .social-links a:hover {
-      border-color: var(--orange);
-      background: rgba(212, 113, 59, 0.1);
+      border-color: var(--copper);
+      background: rgba(193, 125, 74, 0.1);
     }
 
     .social-links svg {
-      width: 16px;
-      height: 16px;
-      fill: var(--cream-dim);
+      width: 15px;
+      height: 15px;
+      fill: var(--stone-dim);
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .nav {
-        padding: 16px 20px;
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid rgba(232, 223, 208, 0.06);
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--stone-dim);
+    }
+
+    .payment-methods {
+      display: flex;
+      gap: 8px;
+    }
+
+    .payment-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 12px;
+      border-radius: 4px;
+      background: rgba(232, 223, 208, 0.08);
+      border: 1px solid rgba(232, 223, 208, 0.06);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--stone-dim);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 900px) {
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .nav-links {
-        gap: 20px;
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
       }
 
-      .nav-links a {
-        font-size: 0.7rem;
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
       }
+    }
 
+    @media (max-width: 600px) {
       section {
         padding: 72px 20px;
       }
 
+      .announcement-bar {
+        font-size: 0.65rem;
+        padding: 8px 16px;
+      }
+
       .products-grid {
         grid-template-columns: 1fr;
-        max-width: 360px;
+        max-width: 380px;
         margin: 0 auto;
       }
 
-      .features-grid {
+      .materials-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 40px 24px;
+        gap: 36px 24px;
       }
 
-      .signup-form {
+      .newsletter-form {
         flex-direction: column;
       }
 
-      .footer-inner {
-        flex-direction: column;
+      .footer-top {
+        grid-template-columns: 1fr;
         gap: 32px;
       }
 
-      .footer-links {
-        gap: 32px;
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .portfolio-badge {
-        top: 14px;
-        left: 14px;
-        font-size: 0.65rem;
-        padding: 5px 12px;
+        top: 48px;
+        left: 12px;
       }
     }
 
-    @media (max-width: 480px) {
-      .nav-links {
-        gap: 14px;
+    @media (max-width: 375px) {
+      .hero h1 {
+        letter-spacing: 0.15em;
+        margin-right: -0.15em;
       }
 
-      .footer-links {
-        flex-direction: column;
-        gap: 28px;
+      .hero p {
+        letter-spacing: 0.1em;
       }
     }
   </style>
@@ -609,47 +719,47 @@
 
   <a href="/" class="portfolio-badge">murmweb.dev portfolio</a>
 
-  <nav class="nav" id="nav">
-    <ul class="nav-links">
-      <li><a href="#collection">Shop</a></li>
-      <li><a href="#story">Story</a></li>
-      <li><a href="#signup">Updates</a></li>
-    </ul>
-  </nav>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Gratis verzending boven &euro;100 &middot; Retourneren binnen 30 dagen
+  </div>
 
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Noorvik</h1>
-      <p>Dutch-designed gear for real weather</p>
+      <h1>NOORVIK</h1>
+      <p>Ontworpen in Rotterdam. Getest in de Veluwe.</p>
     </div>
-    <div class="hero-scroll"></div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+    </div>
   </section>
 
+  <!-- Featured Collection -->
   <section id="collection">
     <div class="container">
-      <div class="reveal">
-        <p class="section-label">Featured</p>
-        <h2 class="section-title">The Essentials</h2>
-      </div>
+      <h2 class="section-heading reveal">De Essentials</h2>
       <div class="products-grid">
         <div class="product-card reveal">
           <div class="product-image">
+            <span class="product-badge">Bestseller</span>
             <div class="quick-add"><button>Quick Add</button></div>
           </div>
           <div class="product-info">
-            <h3 class="product-name">The Rambler Jacket</h3>
-            <p class="product-desc">Water-resistant, 4-season</p>
-            <span class="product-price">&euro;189</span>
+            <h3 class="product-name">Rambler Waterproof Jacket</h3>
+            <p class="product-desc">3-laags, 20K waterdicht, YKK-ritsen</p>
+            <span class="product-price">&euro;219</span>
           </div>
         </div>
         <div class="product-card reveal">
           <div class="product-image">
+            <span class="product-badge">Nieuw</span>
             <div class="quick-add"><button>Quick Add</button></div>
           </div>
           <div class="product-info">
             <h3 class="product-name">Trail Pack 32L</h3>
-            <p class="product-desc">Recycled materials, padded straps</p>
-            <span class="product-price">&euro;129</span>
+            <p class="product-desc">Gerecycled nylon, waterbestendige bodem</p>
+            <span class="product-price">&euro;149</span>
           </div>
         </div>
         <div class="product-card reveal">
@@ -657,128 +767,155 @@
             <div class="quick-add"><button>Quick Add</button></div>
           </div>
           <div class="product-info">
-            <h3 class="product-name">Merino Base Layer</h3>
-            <p class="product-desc">Temperature regulating</p>
-            <span class="product-price">&euro;69</span>
+            <h3 class="product-name">Merino 200 Base Layer</h3>
+            <p class="product-desc">100% Nieuw-Zeelandse merinowol</p>
+            <span class="product-price">&euro;79</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="story-section" id="story">
+  <!-- Brand Story -->
+  <section class="brand-story" id="story">
     <div class="container">
-      <div class="story-content reveal">
-        <p class="section-label">Our Story</p>
-        <h2 class="section-title">Born in Rotterdam.<br>Tested in the Veluwe.</h2>
-        <p>The Netherlands doesn't get dramatic weather. It gets persistent weather. Sideways rain that finds every gap. Winds that turn a flat landscape into a wind tunnel. Grey mornings that blur into greyer afternoons. We don't design for summit days and bluebird skies. We design for the other 340 days of the year.</p>
-        <p>Noorvik started in a garage workshop in Rotterdam-Noord, where two industrial designers got tired of outdoor gear that looked great in a showroom but failed on a Tuesday commute across the Erasmusbrug. Every piece we make is tested in the Veluwe forests, on North Sea beaches, and on the daily bike ride to work. If it can handle a Dutch winter, it can handle anything.</p>
+      <div class="story-grid">
+        <div class="story-quote reveal">
+          <blockquote>Wij geloven dat goed ontwerp begint bij slecht weer</blockquote>
+        </div>
+        <div class="story-text reveal">
+          <p>Nederland heeft geen dramatisch weer. Het heeft volhardend weer. Zijwaartse regen die elke naad vindt. Wind die een vlak landschap in een windtunnel verandert. Grijze ochtenden die overgaan in nog grijzere middagen. Wij ontwerpen niet voor de drie zonnige dagen per jaar. Wij ontwerpen voor de andere 362.</p>
+          <p>NOORVIK is geboren in een werkplaats in Rotterdam-Noord, waar twee industrieel ontwerpers genoeg hadden van outdoorkleding die er geweldig uitzag in de winkel maar faalde op de dagelijkse fietstocht over de Erasmusbrug. Elk stuk wordt getest in de bossen van de Veluwe, op Noordzeestranden, en onderweg naar werk. Onze materialen? Gerecycled waar mogelijk, duurzaam altijd. Als het een Nederlandse winter aankan, kan het alles aan.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="features reveal">
-    <div class="features-grid">
-      <div class="feature-item">
+  <!-- Material Strip -->
+  <section class="material-strip">
+    <div class="materials-grid">
+      <div class="material-item reveal">
+        <!-- Droplet -->
         <svg viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none"/>
-          <path d="M7 12l2-6 3 8 2-4 3 6" fill="none"/>
-          <path d="M2 15h20" fill="none"/>
-          <path d="M12 2v2M12 20v2" fill="none"/>
+          <path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0C19 10 12 2 12 2z"/>
         </svg>
-        <span>Waterproof</span>
+        <span>Waterproof 20K</span>
       </div>
-      <div class="feature-item">
+      <div class="material-item reveal">
+        <!-- Recycle arrows -->
         <svg viewBox="0 0 24 24">
-          <path d="M12 2L8 8H3l4 5-2 7 7-4 7 4-2-7 4-5h-5L12 2z" fill="none"/>
+          <path d="M7.5 7.5L12 3l4.5 4.5"/>
+          <path d="M12 3v10"/>
+          <path d="M16.5 16.5L12 21l-4.5-4.5"/>
+          <path d="M12 21V11"/>
+          <path d="M3 12l4.5-4.5"/>
+          <path d="M3 12h10"/>
+          <path d="M21 12l-4.5 4.5"/>
+          <path d="M21 12H11"/>
         </svg>
-        <span>Recycled</span>
+        <span>Recycled Materials</span>
       </div>
-      <div class="feature-item">
+      <div class="material-item reveal">
+        <!-- Diamond -->
         <svg viewBox="0 0 24 24">
-          <path d="M3 9l4-5h10l4 5-9 13L3 9z" fill="none"/>
-          <path d="M3 9h18" fill="none"/>
-          <path d="M9 4l-1 5 4 13M15 4l1 5-4 13" fill="none"/>
+          <path d="M12 2L2 12l10 10 10-10L12 2z"/>
         </svg>
         <span>Dutch Design</span>
       </div>
-      <div class="feature-item">
+      <div class="material-item reveal">
+        <!-- Wrench -->
         <svg viewBox="0 0 24 24">
-          <rect x="2" y="7" width="20" height="14" rx="2" fill="none"/>
-          <path d="M16 7V5a4 4 0 0 0-8 0v2" fill="none"/>
-          <path d="M9 14l2 2 4-4" fill="none"/>
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
         </svg>
-        <span>Free Returns</span>
+        <span>Lifetime Repair</span>
       </div>
     </div>
   </section>
 
-  <section class="signup-section" id="signup">
+  <!-- Newsletter -->
+  <section class="newsletter" id="newsletter">
     <div class="container reveal">
-      <p class="section-label">Stay in the loop</p>
-      <h2 class="section-title">Get early access to new drops</h2>
-      <form class="signup-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='You\'re in'; this.querySelector('input').disabled=true; this.querySelector('button').disabled=true;">
-        <input type="email" placeholder="your@email.com" required aria-label="Email address">
-        <button type="submit">Sign Up</button>
+      <h2 class="section-heading">Word lid van de NOORVIK community</h2>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Welkom!'; this.querySelector('input').disabled=true; this.querySelector('button').disabled=true;">
+        <input type="email" placeholder="jouw@email.nl" required aria-label="E-mailadres">
+        <button type="submit">Aanmelden</button>
       </form>
+      <p class="newsletter-sub">Eerste toegang tot nieuwe collecties en 10% korting op je eerste bestelling</p>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <div>
-        <div class="footer-brand">Noorvik</div>
-        <p class="footer-copy">Noorvik &copy; 2026 &middot; Rotterdam, NL</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Follow</h4>
-          <div class="social-links">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">NOORVIK</div>
+          <p class="footer-tagline">Ontworpen in Rotterdam.<br>Getest in de Veluwe.</p>
+          <div class="social-links" style="margin-top: 20px;">
             <a href="#" aria-label="Instagram">
               <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
             </a>
             <a href="#" aria-label="TikTok">
               <svg viewBox="0 0 24 24"><path d="M16.6 5.82A4.28 4.28 0 0 1 13.5 3h-3v12.4a2.59 2.59 0 0 1-2.6 2.6 2.59 2.59 0 0 1-2.6-2.6 2.59 2.59 0 0 1 2.6-2.6c.28 0 .56.05.82.13V9.73A5.81 5.81 0 0 0 5.3 9a5.67 5.67 0 0 0-1 11.27A5.67 5.67 0 0 0 10.5 15V9.4a7.52 7.52 0 0 0 4.12 1.23h.15V7.4a4.25 4.25 0 0 1 1.83-1.58z" fill="currentColor"/></svg>
             </a>
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></svg>
+            </a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Shipping</h4>
+          <h4>Shop</h4>
           <ul>
-            <li><a href="#">Free NL delivery over &euro;50</a></li>
-            <li><a href="#">EU shipping 3&ndash;5 days</a></li>
-            <li><a href="#">30-day returns</a></li>
+            <li><a href="#">Jassen</a></li>
+            <li><a href="#">Rugzakken</a></li>
+            <li><a href="#">Basislagen</a></li>
+            <li><a href="#">Accessoires</a></li>
+            <li><a href="#">Alle producten</a></li>
           </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Over Ons</h4>
+          <ul>
+            <li><a href="#">Ons verhaal</a></li>
+            <li><a href="#">Duurzaamheid</a></li>
+            <li><a href="#">Materialen</a></li>
+            <li><a href="#">Pers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Klantenservice</h4>
+          <ul>
+            <li><a href="#">Verzending</a></li>
+            <li><a href="#">Retourneren</a></li>
+            <li><a href="#">Maattabel</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">NOORVIK &copy; 2026 &middot; Rotterdam, Netherlands</span>
+        <div class="payment-methods">
+          <span class="payment-pill">iDEAL</span>
+          <span class="payment-pill">Visa</span>
+          <span class="payment-pill">MC</span>
+          <span class="payment-pill">PayPal</span>
         </div>
       </div>
     </div>
   </footer>
 
   <script>
-    // Nav fill on scroll
-    const nav = document.getElementById('nav');
-    let ticking = false;
-
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          nav.classList.toggle('scrolled', window.scrollY > 60);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    // Scroll reveal with IntersectionObserver
+    // IntersectionObserver scroll reveals
     const reveals = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Stagger siblings slightly
-          const delay = Array.from(entry.target.parentElement.children)
-            .filter(c => c.classList.contains('reveal'))
-            .indexOf(entry.target) * 100;
+          const siblings = Array.from(entry.target.parentElement.children)
+            .filter(c => c.classList.contains('reveal'));
+          const index = siblings.indexOf(entry.target);
+          const delay = index * 120;
 
           setTimeout(() => {
             entry.target.classList.add('visible');
@@ -788,8 +925,8 @@
         }
       });
     }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.12,
+      rootMargin: '0px 0px -50px 0px'
     });
 
     reveals.forEach(el => observer.observe(el));
