@@ -6,12 +6,20 @@
   var initial = saved || (prefersLight ? 'light' : 'dark');
   if (initial === 'light') document.documentElement.setAttribute('data-theme', 'light');
 
+  function swapLogo(theme) {
+    document.querySelectorAll('.logo img').forEach(function(img) {
+      img.src = theme === 'light' ? '/logo-light.png' : '/logo.png';
+    });
+  }
+  if (initial === 'light') swapLogo('light');
+
   function toggleTheme() {
     var current = document.documentElement.getAttribute('data-theme');
     var next = current === 'light' ? 'dark' : 'light';
     if (next === 'dark') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.setAttribute('data-theme', 'light');
     localStorage.setItem('theme', next);
+    swapLogo(next);
   }
   // Wire up any .theme-toggle buttons on the page (no inline handler needed).
   document.querySelectorAll('.theme-toggle').forEach(function(btn) {
