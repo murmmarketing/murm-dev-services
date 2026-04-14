@@ -178,9 +178,19 @@
     if (slug) track('portfolio_click', { project: slug });
   });
 
-  // ── Audit form success state ──────────────────
+  // ── Audit form success state + Google Ads conversion ─────
   document.querySelectorAll('[data-audit-form]').forEach(function(f) {
     f.addEventListener('submit', function() {
+      // Fire Google Ads conversion
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18089557055/FORM_SUBMIT',
+            'value': 1.0,
+            'currency': 'EUR'
+          });
+        }
+      } catch (e) {}
       var success = document.getElementById('auditSuccess');
       if (success) {
         setTimeout(function() {
