@@ -185,7 +185,7 @@
       try {
         if (typeof gtag === 'function') {
           gtag('event', 'conversion', {
-            'send_to': 'AW-18089557055/FORM_SUBMIT',
+            'send_to': 'AW-18089557055/submit',
             'value': 1.0,
             'currency': 'EUR'
           });
@@ -200,6 +200,21 @@
           success.classList.add('show');
         }, 500);
       }
+    });
+  });
+
+  // ── Cal.com booking click → Google Ads conversion ─────
+  document.querySelectorAll('a[href*="cal.com"]').forEach(function(link) {
+    link.addEventListener('click', function() {
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18089557055/booking',
+            'value': 10.0,
+            'currency': 'EUR'
+          });
+        }
+      } catch (e) {}
     });
   });
 })();
