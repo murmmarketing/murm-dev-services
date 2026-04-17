@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18089557055"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "AW-18089557055");
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Build a Custom Web App with Next.js and Supabase in 2026 &mdash; murmweb.dev</title>
+<meta name="description" content="A practical guide to building full-stack web applications with Next.js 14 and Supabase. Auth, database, API, deployment — everything you need to go from idea to production.">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://murmweb.dev/blog/build-web-app-nextjs-supabase.html">
+<meta property="og:title" content="How to Build a Custom Web App with Next.js and Supabase in 2026">
+<meta property="og:description" content="A practical guide to building full-stack web applications with Next.js 14 and Supabase. Auth, database, API, deployment.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://murmweb.dev/blog/build-web-app-nextjs-supabase.html">
+<meta property="og:image" content="https://murmweb.dev/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='monospace' font-weight='600' font-size='20' fill='%23C4A87A'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.gstatic.com/s/dmseridisplay/v15/rnCQoNPRaJDqk018e0GD4ij3.woff2" as="font" type="font/woff2" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/site.css">
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","w9omdg3pe6");
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Build a Custom Web App with Next.js and Supabase in 2026",
+  "author": { "@type": "Person", "name": "Marius Kerkvliet", "url": "https://murmweb.dev/about.html" },
+  "datePublished": "2026-04-17",
+  "dateModified": "2026-04-17",
+  "publisher": { "@type": "Organization", "name": "murmweb.dev", "logo": { "@type": "ImageObject", "url": "https://murmweb.dev/logo-dark.webp" } },
+  "description": "A practical guide to building full-stack web applications with Next.js 14 and Supabase. Auth, database, API, deployment.",
+  "mainEntityOfPage": "https://murmweb.dev/blog/build-web-app-nextjs-supabase.html",
+  "image": "https://murmweb.dev/og.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://murmweb.dev/" },
+    { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://murmweb.dev/blog/" },
+    { "@type": "ListItem", "position": 3, "name": "Next.js + Supabase Guide", "item": "https://murmweb.dev/blog/build-web-app-nextjs-supabase.html" }
+  ]
+}
+</script>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#0A0A0A; --bg-elevated:#111110; --bg-card:#161615;
+  --gold:#C4A87A; --gold-dim:rgba(196,168,122,0.12);
+  --text:#E8E4DF; --text-muted:#8A8580; --text-dim:#5A5652;
+  --border:rgba(196,168,122,0.08); --border-hover:rgba(196,168,122,0.18);
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html { scroll-behavior:smooth; }
+body { font-family:var(--sans); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+.container { max-width:720px; margin:0 auto; padding:0 24px; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+nav .nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; }
+.logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
+.logo img { width:38px; height:38px; object-fit:contain; }
+.logo span { color:var(--gold); }
+.nav-cta { font-family:var(--mono); font-size:13px; font-weight:500; color:var(--gold); text-decoration:none; padding:10px 24px; border:1px solid var(--border-hover); border-radius:4px; transition:all 0.3s ease; }
+.nav-cta:hover { background:var(--gold-dim); border-color:var(--gold); }
+article { padding:160px 0 100px; }
+article .back { font-family:var(--mono); font-size:12px; color:var(--text-dim); text-decoration:none; letter-spacing:0.04em; display:inline-block; margin-bottom:32px; transition:color 0.2s; }
+article .back:hover { color:var(--gold); }
+article .date { font-family:var(--mono); font-size:11px; color:var(--text-dim); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:16px; }
+article h1 { font-family:var(--serif); font-size:clamp(32px,5vw,48px); font-weight:400; line-height:1.15; letter-spacing:-0.02em; margin-bottom:24px; }
+article h2 { font-family:var(--serif); font-size:24px; font-weight:400; margin:48px 0 16px; color:var(--text); }
+article h3 { font-family:var(--serif); font-size:20px; font-weight:400; margin:32px 0 12px; color:var(--text); }
+article p { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:20px; }
+article strong { color:var(--text); font-weight:500; }
+article ul, article ol { margin:0 0 20px 20px; }
+article li { font-size:16px; color:var(--text-muted); line-height:1.8; margin-bottom:8px; }
+footer { padding:48px 0; border-top:1px solid var(--border); }
+footer .footer-inner { max-width:1100px; margin:0 auto; padding:0 24px; }
+footer p { font-size:13px; color:var(--text-dim); }
+footer a { color:var(--text-muted); text-decoration:none; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="read-progress"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><img src="/logo-dark.webp" alt="M" width="38" height="38" class="site-logo">murm<span>web</span>.dev</a>
+    <div class="nav-right">
+      <button type="button" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+      <a href="/#contact" class="nav-cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<article>
+  <div class="container">
+    <div class="breadcrumbs" role="navigation" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">/</span>
+      <a href="/blog/">Writing</a>
+      <span class="sep">/</span>
+      <span class="current">Next.js + Supabase Guide</span>
+    </div>
+    <div class="date">April 2026</div>
+    <h1>How to Build a Custom Web App with Next.js and Supabase in 2026</h1>
+    <div class="byline">
+      <span>By <a href="/about.html">Marius Kerkvliet</a></span>
+      <span class="dot">&middot;</span>
+      <span>12 min read</span>
+    </div>
+
+    <p>Three years ago, Firebase was the default backend for solo developers and small teams shipping web apps. It was fast to set up, well-documented, and integrated tightly with Google&rsquo;s ecosystem. But the trade-offs became clear as projects matured: a proprietary NoSQL data model that fought against relational queries, vendor lock-in that made migration painful, and pricing that scaled unpredictably once you passed the free tier. Something better was needed.</p>
+
+    <p>That something turned out to be <a href="https://supabase.com" style="color:var(--gold)">Supabase</a> &mdash; an open-source Firebase alternative built on top of PostgreSQL. Paired with <a href="https://nextjs.org" style="color:var(--gold)">Next.js</a> and deployed on Vercel, it gives you a full production stack with zero DevOps overhead. Auth, database, file storage, real-time subscriptions, edge functions &mdash; all backed by a real Postgres database you actually own.</p>
+
+    <p>I&rsquo;ve shipped multiple production applications with this stack, including <a href="https://murmreps.com" style="color:var(--gold)">MurmReps</a>, a product discovery platform with 15,000+ items. This guide covers everything I&rsquo;ve learned &mdash; the architecture decisions, the real-world pitfalls, and the patterns that actually work in production.</p>
+
+    <h2>What you get out of the box</h2>
+
+    <p>Supabase is not just a database. When you create a project, you get an entire backend platform ready to use:</p>
+
+    <ul>
+      <li><strong>Authentication:</strong> Email/password, OAuth providers (Google, GitHub, Discord, and more), magic links, and phone auth. User management, session handling, and JWT tokens are all handled for you.</li>
+      <li><strong>PostgreSQL database:</strong> A full Postgres instance with a visual table editor, SQL editor, and database management tools built into the dashboard. You write real SQL, not proprietary query syntax.</li>
+      <li><strong>Row Level Security (RLS):</strong> Postgres-native security policies that control which rows each user can read, insert, update, or delete. Your security logic lives in the database itself, not scattered across API endpoints.</li>
+      <li><strong>Real-time subscriptions:</strong> Listen for database changes over WebSockets. When a row is inserted, updated, or deleted, connected clients receive the change instantly.</li>
+      <li><strong>File storage:</strong> S3-compatible object storage with access policies tied to your auth system. Upload images, documents, or any file type with built-in CDN delivery.</li>
+      <li><strong>Edge Functions:</strong> Deno-based serverless functions that run close to your users. Useful for webhooks, scheduled tasks, and any server-side logic that doesn&rsquo;t fit in a Next.js API route.</li>
+    </ul>
+
+    <p>The key insight here is portability. Your data lives in a standard Postgres database. If you ever outgrow Supabase or want to self-host, you can export your entire database and run it on any Postgres-compatible service. Try doing that with Firestore.</p>
+
+    <h2>The architecture</h2>
+
+    <p>Next.js App Router and Supabase work together in a clean, predictable pattern. The division of responsibility is straightforward once you understand where each piece fits.</p>
+
+    <p><strong>Server Components handle reads.</strong> When a page loads, Server Components run on the server and can query Supabase directly using the server-side client. No API layer needed, no loading spinners, no client-side fetch waterfalls. The data is already in the HTML when it reaches the browser. You create a server client using <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">createServerClient</code> from the <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">@supabase/ssr</code> package, passing it the cookies from the request.</p>
+
+    <p><strong>Client Components handle interactivity.</strong> For real-time features, auth state changes, and user interactions, you use the browser-side Supabase client created with <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">createBrowserClient</code>. This client uses the <strong>anon key</strong> &mdash; a public key that respects your RLS policies. It&rsquo;s safe to expose in frontend code because RLS ensures users can only access data they&rsquo;re authorized to see.</p>
+
+    <p><strong>API routes handle writes with business logic.</strong> When you need server-side validation, computed fields, or operations that require elevated permissions, you create Next.js API routes. These use the <strong>service_role key</strong>, which bypasses RLS entirely. This key must never be exposed to the client &mdash; it goes in server-side environment variables only.</p>
+
+    <p>The pattern looks like this in practice: a product page is a Server Component that fetches product data from Supabase and renders it as static HTML with ISR. The &ldquo;like&rdquo; button on that page is a Client Component that uses the browser client to insert a row into the <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">likes</code> table. And the admin endpoint that recalculates product scores is an API route using the service_role key to update all products at once.</p>
+
+    <h2>What I learned building MurmReps</h2>
+
+    <p><a href="https://murmreps.com" style="color:var(--gold)">MurmReps</a> is a product discovery platform I built for the replica fashion community. It indexes 15,000+ products across dozens of sellers, with filtering, search, quality ratings, and user engagement features. Every lesson below comes from shipping and running this application in production.</p>
+
+    <p><strong>RLS must explicitly grant permissions to the anon role.</strong> This tripped me up early. When you enable Row Level Security on a table, the default behavior is deny-all. No policy means no access &mdash; not even for reads. The confusing part is that Supabase doesn&rsquo;t return an error when a query hits a table with no matching policy. It returns an empty array. You&rsquo;ll stare at your code wondering why your query returns nothing, check the SQL in the dashboard (where it works because the dashboard uses the service_role), and lose hours before realizing the anon role simply has no <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">SELECT</code> policy.</p>
+
+    <p><strong>Server-side scoring prevents gaming.</strong> MurmReps ranks products using a weighted algorithm that combines view count, like count, QC rating, recency, and variant count. This scoring runs entirely server-side through an API route. If you computed scores client-side or stored the weights in the frontend, someone could reverse-engineer the formula and game it. By keeping the computation on the server with the service_role key, the ranking stays honest.</p>
+
+    <p><strong>ISR gives you the best of both worlds.</strong> Product pages use Incremental Static Regeneration with a five-minute revalidation window. The first visitor triggers a static page build. For the next five minutes, every visitor gets that cached static page &mdash; instant load times, no database queries. After five minutes, the next request triggers a background rebuild with fresh data. You get static-site speed with near-real-time data. For a catalog of 15,000+ products, this means the vast majority of page views never touch the database at all.</p>
+
+    <p><strong>Search performance is better than you&rsquo;d expect.</strong> Supabase&rsquo;s <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">.ilike()</code> method with proper column indexes delivers sub-80ms search results across the entire product catalog. We support 45 different filters (category, seller, price range, quality rating, and more) and the queries remain fast because PostgreSQL&rsquo;s query planner is remarkably good at combining indexes. You don&rsquo;t need Elasticsearch or Algolia for a dataset this size &mdash; Postgres handles it natively.</p>
+
+    <p><strong>Internal tools don&rsquo;t need a full auth system.</strong> The MurmReps admin panel is a Next.js route group (<code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">/admin</code>) protected by a simple password stored in an environment variable. The password is checked against a value in <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">sessionStorage</code> on the client and verified via an API route header on the server. There&rsquo;s no user registration, no OAuth flow, no session database. For a single-user admin panel, this is the right level of complexity. Don&rsquo;t over-engineer your internal tools.</p>
+
+    <h2>Common mistakes</h2>
+
+    <p>After building with this stack for over a year, these are the mistakes I see most often &mdash; including ones I made myself.</p>
+
+    <p><strong>Not enabling RLS from day one.</strong> Every table you create in Supabase starts with RLS disabled. This means any user with your anon key (which is public) can read, write, and delete any row in that table. The dashboard shows a warning, but it&rsquo;s easy to ignore during development. Enable RLS on every table immediately after creating it, then add policies as needed. The deny-all default is a feature, not a bug &mdash; it forces you to think about access control explicitly.</p>
+
+    <p><strong>Exposing the service_role key in frontend code.</strong> The service_role key bypasses all Row Level Security policies. It&rsquo;s the master key to your database. If this key ends up in your client-side JavaScript &mdash; through a <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">.env</code> file prefixed with <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">NEXT_PUBLIC_</code>, or hardcoded in a component &mdash; anyone can inspect your page source and gain full access to your database. The service_role key belongs in server-side environment variables (<code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">SUPABASE_SERVICE_ROLE_KEY</code>, without the <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">NEXT_PUBLIC_</code> prefix) and should only be used in API routes and Server Components.</p>
+
+    <p><strong>No rate limiting on public API routes.</strong> If your Next.js app has API routes that write to the database, someone will find them. Bots, scrapers, and curious developers will send thousands of requests. Without rate limiting, they can fill your database with junk data, exhaust your Supabase quota, or worse. Use middleware-level rate limiting with something like <a href="https://upstash.com" style="color:var(--gold)">Upstash Redis</a> or Vercel&rsquo;s built-in rate limiting. At minimum, add basic IP-based throttling to any public-facing endpoint.</p>
+
+    <p><strong>Skipping auth checks on API routes.</strong> Every admin or protected API route must verify the caller&rsquo;s identity before doing anything. Whether you&rsquo;re checking a session token, verifying a password header, or validating a JWT, the check must happen on every single request. Don&rsquo;t assume that because an endpoint isn&rsquo;t linked in your UI, nobody will find it. API routes are public URLs &mdash; treat them that way.</p>
+
+    <h2>What it costs to run</h2>
+
+    <p>One of the biggest advantages of this stack is cost predictability. Here&rsquo;s what a production application actually costs per month:</p>
+
+    <ul>
+      <li><strong>Supabase:</strong> The free tier includes 500MB of database storage, 1GB of file storage, 50,000 monthly active users for auth, and 500MB of bandwidth. That&rsquo;s enough for most MVPs and early-stage products. When you need daily backups, more storage, or higher limits, the Pro plan is $25/month.</li>
+      <li><strong>Vercel:</strong> The Hobby tier is free and handles personal projects with reasonable traffic. The Pro plan at $20/month unlocks team features, more bandwidth, longer build times, and analytics. For most solo-developer projects, the free tier is sufficient.</li>
+      <li><strong>Cloudflare:</strong> Free for DNS management and CDN caching. The free plan includes DDoS protection, SSL certificates, and basic analytics. You don&rsquo;t need to pay for Cloudflare unless you&rsquo;re doing something unusual.</li>
+      <li><strong>Domain:</strong> Roughly $10&ndash;$15 per year depending on the TLD. A <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">.com</code> or <code style="font-family:var(--mono);font-size:14px;background:var(--bg-elevated);padding:2px 6px;border-radius:4px;">.dev</code> domain costs about a euro per month.</li>
+    </ul>
+
+    <p><strong>Total: under $50/month</strong> for a production application serving thousands of users with authentication, a full relational database, file storage, and global CDN delivery. Many projects run entirely on free tiers during development and early traction.</p>
+
+    <p>Compare that to a traditional setup. A Rails application on Heroku starts at $7/month for a basic dyno, but you need a database add-on ($9/month), a Redis instance for background jobs ($15/month), and separate services for auth, file storage, and email. You&rsquo;re looking at $50&ndash;$100/month before your first user signs up, plus the DevOps overhead of managing it all.</p>
+
+    <p>An AWS setup is even more involved. EC2 instances, RDS databases, S3 buckets, CloudFront distributions, ALB load balancers, ACM certificates, IAM roles &mdash; each with its own pricing model and configuration surface. You can absolutely build a cheaper, more scalable infrastructure on AWS, but the operational complexity is orders of magnitude higher. For solo builders and small teams, that complexity is the actual cost.</p>
+
+    <p>The Next.js + Supabase + Vercel stack eliminates operational overhead entirely. You push to Git, Vercel builds and deploys. You create a table in the Supabase dashboard, write an RLS policy, and your API is ready. There&rsquo;s no server to SSH into, no Docker containers to manage, no CI/CD pipeline to maintain. You spend your time building features, not fighting infrastructure.</p>
+
+    <div style="background:var(--bg-elevated);border-radius:12px;padding:40px 36px;margin:48px 0 0;text-align:center;">
+      <p style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--text);margin-bottom:8px;">Need help building your app?</p>
+      <p style="font-size:14px;color:var(--text-muted);margin-bottom:24px;">I&rsquo;ve shipped production Next.js + Supabase platforms. Tell me what you&rsquo;re building.</p>
+      <a href="/#contact" style="display:inline-block;font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:0.04em;color:var(--bg);background:var(--gold);text-decoration:none;padding:14px 32px;border-radius:6px;transition:all 0.3s ease;">Get in touch &rarr;</a>
+    </div>
+
+    <div class="share-bar">
+      <div class="share-label">Share this article</div>
+      <div class="share-buttons">
+        <button type="button" class="share-btn" data-share="copy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          Copy link
+        </button>
+        <button type="button" class="share-btn" data-share="twitter">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share on X
+        </button>
+        <button type="button" class="share-btn" data-share="linkedin">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </button>
+      </div>
+    </div>
+  </div>
+</article>
+
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</a>
+
+<footer>
+  <div class="footer-inner">
+    <p>&copy; 2026 murmweb.dev &mdash; Leiden, Netherlands</p>
+  </div>
+</footer>
+<script src="/site.js" defer></script>
+</body>
+</html>
