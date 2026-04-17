@@ -590,10 +590,6 @@ html[data-theme="light"] .testimonials-arrow:hover { background:rgba(0,0,0,0.08)
 .exit-modal .audit-btn { width:100%; }
 .exit-no-thanks { display:block; margin-top:14px; text-align:center; font-family:var(--mono); font-size:11px; color:var(--text-dim); text-decoration:none; cursor:pointer; background:none; border:none; width:100%; }
 .exit-no-thanks:hover { color:var(--text-muted); }
-/* Keep custom cursor visible on top of the exit modal (including form inputs) */
-@media (pointer:fine) and (min-width:769px) {
-  .exit-overlay, .exit-overlay *, .exit-modal, .exit-modal * { cursor: none !important; }
-}
 
 /* ── Calendar Embed ─────────────────────────── */
 
@@ -1511,9 +1507,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   }
   requestAnimationFrame(loop);
 
-  // Hide default cursor
-  document.documentElement.style.cursor = 'none';
-  document.querySelectorAll('a,button,summary,[data-tilt]').forEach(function(el) { el.style.cursor = 'none'; });
 })();
 
 /* ── Case Study Tabs ──────────────────────────── */
