@@ -166,24 +166,18 @@
 html { scroll-behavior: smooth; overflow-x: hidden; }
 body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
-/* Noise */
-body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.025; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat:repeat; background-size:256px; }
+/* Noise — disabled */
+body::before { display:none; }
 
-/* ── Loading Screen ──────────────────────────── */
-#loader { position:fixed; inset:0; z-index:10000; background:var(--bg); display:flex; align-items:center; justify-content:center; transition: opacity 0.2s ease; }
-#loader.done { opacity:0; pointer-events:none; }
-#loader svg { width:80px; height:80px; }
-#loader svg path { fill:none; stroke:var(--gold); stroke-width:1.5; stroke-dasharray:300; stroke-dashoffset:300; animation: drawM 0.5s ease-out 0.1s forwards; }
-@keyframes drawM { to { stroke-dashoffset:0; } }
+/* ── Loading Screen — disabled ──────────────── */
+#loader { display:none !important; }
+body { opacity:1; }
 
-/* ── Custom Cursor ───────────────────────────── */
-.cursor { position:fixed; top:0; left:0; width:8px; height:8px; border-radius:50%; background:var(--gold); pointer-events:none; z-index:100000; transform:translate(-50%,-50%); transition: width 0.25s ease, height 0.25s ease, background 0.25s ease, border 0.25s ease; will-change:transform; mix-blend-mode:normal; }
-.cursor.hover { width:40px; height:40px; background:transparent; border:1.5px solid var(--gold); }
-.cursor.click { transform:translate(-50%,-50%) scale(0.8); }
-@media (pointer:coarse),(max-width:768px) { .cursor { display:none !important; } }
+/* ── Custom Cursor — disabled ──────────────── */
+.cursor { display:none !important; }
 
-/* ── Scroll Progress ─────────────────────────── */
-.scroll-progress { position:fixed; top:0; left:0; width:0%; height:2px; background:var(--gold); box-shadow:0 0 8px rgba(196,168,122,0.4); z-index:9997; }
+/* ── Scroll Progress — disabled ────────────── */
+.scroll-progress { display:none !important; }
 
 /* ── Reduced Motion ──────────────────────────── */
 @media (prefers-reduced-motion:reduce) {
@@ -193,34 +187,19 @@ body::before { content:''; position:fixed; inset:0; z-index:9999; pointer-events
 }
 
 /* ── Reveal Animations ───────────────────────── */
-.reveal { opacity:0; clip-path:inset(8% 0 0 0); transform:translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease, clip-path 0.7s ease; }
+.reveal { opacity:0; clip-path:inset(8% 0 0 0); transform:translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease, clip-path 0.4s ease; }
 .reveal.visible { opacity:1; clip-path:inset(0); transform:translateY(0); }
-.reveal-card { opacity:0; transform:scale(0.97) translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal-card { opacity:0; transform:scale(0.97) translateY(16px); transition: opacity 0.35s ease, transform 0.35s ease; }
 .reveal-card.visible { opacity:1; transform:scale(1) translateY(0); }
-/* Stagger children */
-.stagger > .reveal:nth-child(1) { transition-delay:0s; }
-.stagger > .reveal:nth-child(2) { transition-delay:0.06s; }
-.stagger > .reveal:nth-child(3) { transition-delay:0.12s; }
-.stagger > .reveal:nth-child(4) { transition-delay:0.18s; }
-.stagger > .reveal:nth-child(5) { transition-delay:0.24s; }
-.stagger > .reveal:nth-child(6) { transition-delay:0.30s; }
+/* Stagger — disabled, everything appears together */
 
-/* Hero entrance — sequenced */
-.hero-line { width:0; height:1px; background:var(--gold); margin:0 auto 48px; opacity:0.4; }
-body.loaded .hero-line { width:120px; transition: width 0.6s ease; }
-.hero-label-text, .hero-word, .hero-subtitle, .hero-stats, .hero-divider { opacity:0; transform:translateY(18px); }
-body.loaded .hero-label-text { opacity:1; transform:none; transition: all 0.5s ease 0.6s; }
-body.loaded .hero-word { opacity:1; transform:none; transition: all 0.45s ease; }
-body.loaded .hero-subtitle { opacity:1; transform:none; transition: all 0.5s ease; }
-body.loaded .hero-stats { opacity:1; transform:none; transition: all 0.5s ease; }
-body.loaded .hero-divider { opacity:0.15; transform:none; transition: all 0.5s ease; }
-/* Shimmer on "actually" */
-@keyframes goldShimmer { 0%{text-shadow:0 0 0 transparent} 50%{text-shadow:0 0 20px rgba(196,168,122,0.4)} 100%{text-shadow:0 0 0 transparent} }
-body.loaded .hero-word.gold { animation: goldShimmer 1.2s ease 0.2s; }
+/* Hero entrance — instant */
+.hero-line { width:120px; height:1px; background:var(--gold); margin:0 auto 48px; opacity:0.4; }
+.hero-label-text, .hero-word, .hero-subtitle, .hero-stats, .hero-divider { opacity:1; transform:none; }
 
 /* Section divider — radial gradient */
 .section-divider { height:80px; position:relative; pointer-events:none; }
-.section-divider::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:1px; background:radial-gradient(ellipse,rgba(196,168,122,0.18),transparent 70%); }
+.section-divider::after { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:1px; background:radial-gradient(ellipse,rgba(196,168,122,0.08),transparent 70%); }
 /* Legacy .section-line compat */
 .section-line { height:1px; background:var(--gold); opacity:0.12; width:0; max-width:100px; margin:0 auto; transition: width 0.8s ease; }
 .section-line.visible { width:100px; }
@@ -228,13 +207,11 @@ body.loaded .hero-word.gold { animation: goldShimmer 1.2s ease 0.2s; }
 .container { max-width:1100px; margin:0 auto; padding:0 24px; }
 
 /* ── Nav ─────────────────────────────────────── */
-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); opacity:0; }
-body.loaded nav { opacity:1; transition: opacity 0.4s ease 0.3s; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 0; background:var(--nav-bg); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); opacity:1; }
 nav .container { display:flex; align-items:center; justify-content:space-between; }
 .logo { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; letter-spacing:-0.03em; }
-.logo img { width:38px; height:38px; object-fit:contain; animation:logoSpin 30s linear infinite; }
-.logo:hover img { animation-duration:3s; }
-@keyframes logoSpin { to { transform:rotate(360deg); } }
+.logo img { width:38px; height:38px; object-fit:contain; transition:transform 0.3s ease; }
+.logo:hover img { transform:scale(1.05); }
 .logo span { color:var(--gold); }
 .nav-cta { font-family:var(--mono); font-size:13px; font-weight:500; letter-spacing:0.01em; color:var(--gold); text-decoration:none; padding:10px 24px; border:1px solid var(--border-hover); border-radius:4px; transition:all 0.3s ease; }
 .nav-cta:hover { background:var(--gold-dim); border-color:var(--gold); }
@@ -243,7 +220,7 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .hero { padding:200px 0 140px; position:relative; }
 .hero > .container { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
 .hero-content { position:relative; z-index:2; }
-.hero-glow { position:absolute; top:60px; right:10%; width:500px; height:500px; background:radial-gradient(circle,var(--gold-glow),transparent 70%); pointer-events:none; will-change:transform; }
+.hero-glow { position:absolute; top:60px; right:10%; width:500px; height:500px; background:radial-gradient(circle,var(--gold-glow),transparent 70%); pointer-events:none; will-change:transform; opacity:0.03; }
 .hero-deco { position:absolute; top:140px; right:15%; width:1px; height:200px; background:var(--gold); opacity:0.1; transform:rotate(-20deg); pointer-events:none; will-change:transform; }
 .hero-watermark { position:absolute; top:50%; right:8%; transform:translateY(-50%); width:440px; height:440px; opacity:0.07; pointer-events:none; will-change:transform; }
 .hero-divider { width:200px; height:1px; background:var(--gold); margin-top:56px; }
@@ -254,19 +231,16 @@ nav .container { display:flex; align-items:center; justify-content:space-between
 .hero-stats { display:flex; gap:56px; flex-wrap:wrap; margin-bottom:48px; }
 .stat-number { font-family:var(--serif); font-size:32px; color:var(--text); letter-spacing:-0.02em; }
 .stat-label { font-family:var(--mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
-.hero-ctas { display:flex; flex-wrap:wrap; gap:14px; opacity:0; transform:translateY(18px); }
-body.loaded .hero-ctas { opacity:1; transform:none; transition: all 0.5s ease 0.2s; }
-body.loaded .hero-proof { opacity:1; transform:none; transition: all 0.5s ease 0.4s; }
+.hero-ctas { display:flex; flex-wrap:wrap; gap:14px; opacity:1; }
 
 /* Hero Mockup (browser frame) */
 .hero-mockup-wrap { position:relative; z-index:1; perspective:1200px; }
 .hero-mockup-glow { position:absolute; top:50%; left:50%; width:110%; height:110%; transform:translate(-50%,-50%); background:radial-gradient(ellipse, rgba(196,168,122,0.12), transparent 65%); pointer-events:none; border-radius:50%; }
 .hero-mockup {
   background:var(--bg-card); border:1px solid rgba(255,255,255,0.06); border-radius:16px; overflow:hidden;
-  transform:perspective(1000px) rotateY(-5deg) rotateX(3deg); transition:transform 0.6s cubic-bezier(0.23,1,0.32,1);
+  transform:none;
   box-shadow: 0 4px 16px rgba(0,0,0,0.3), 0 24px 64px rgba(0,0,0,0.25);
 }
-.hero-mockup:hover { transform:perspective(1000px) rotateY(-2deg) rotateX(1deg); }
 .hero-mockup-bar { display:flex; align-items:center; gap:6px; padding:12px 16px; background:var(--bg-elevated); border-bottom:1px solid var(--border); }
 .hero-mockup-bar .dot { width:8px; height:8px; border-radius:50%; }
 .hero-mockup-bar .dot:nth-child(1) { background:#C27A7A; }
@@ -787,11 +761,11 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
       <div class="hero-line"></div>
       <p class="hero-label-text">Shopify optimization specialist &middot; Official Shopify Partner &middot; Leiden, NL</p>
       <h1><span class="hero-word" style="display:inline-block">Your</span> <span class="hero-word" style="display:inline-block">Shopify</span> <span class="hero-word" style="display:inline-block">store</span> <span class="hero-word" style="display:inline-block">is</span><br><span class="hero-word" style="display:inline-block">leaving</span> <em><span class="hero-word gold" style="display:inline-block">money</span></em> <span class="hero-word" style="display:inline-block">on</span> <span class="hero-word" style="display:inline-block">the</span> <span class="hero-word" style="display:inline-block">table</span></h1>
-      <p class="hero-subtitle">I find what&rsquo;s broken &mdash; slow pages, bad tracking, dead email flows &mdash; and fix it. Fixed price, delivered in days, no agency markup.</p>
+      <p class="hero-subtitle">I&rsquo;m a Shopify developer in Leiden. I fix slow stores, broken tracking, and checkout flows that lose mobile customers. Fixed price, no agency overhead.</p>
       <div class="hero-stats">
         <div class="stat">
-          <div class="stat-number">1.4s</div>
-          <div class="stat-label">Average LCP after optimization</div>
+          <div class="stat-number">&lt; 2s</div>
+          <div class="stat-label">Target LCP after optimization</div>
         </div>
         <div class="stat">
           <div class="stat-number">3.2x</div>
@@ -806,7 +780,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <a href="#audit" class="btn-primary" data-magnetic>Get a free store audit &rarr;</a>
         <a href="#services" class="btn-secondary" data-magnetic>See what I fix</a>
       </div>
-      <p class="hero-proof" style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:24px;letter-spacing:0.02em;opacity:0;transform:translateY(18px);">&#9733; 4.9 from 8 reviews &middot; 12 stores optimized &middot; avg 40% bounce rate reduction</p>
+      <p class="hero-proof" style="font-family:var(--mono);font-size:12px;color:var(--text-dim);margin-top:24px;letter-spacing:0.02em;">Shopify Partner &middot; Based in Leiden, NL</p>
     </div>
     <div class="hero-mockup-wrap" data-hero-mockup>
       <div class="hero-mockup-glow"></div>
@@ -832,18 +806,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   </div>
 </section>
 
-<!-- Clients -->
-<div class="clients-section">
-  <div class="container">
-    <div class="clients-row stagger">
-      <div class="client-pill reveal"><span>&#x1F4E6;</span> Dropshippers</div>
-      <div class="client-pill reveal"><span>&#x1F3F7;&#xFE0F;</span> DTC Brands</div>
-      <div class="client-pill reveal"><span>&#x26A1;</span> SaaS Startups</div>
-      <div class="client-pill reveal"><span>&#x1F4A1;</span> Solo Founders</div>
-      <div class="client-pill reveal"><span>&#x1F3E2;</span> Agencies</div>
-    </div>
-  </div>
-</div>
 
 <div class="section-divider"></div>
 
@@ -925,7 +887,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
           <p class="service-best-for">Best for: anything Shopify can&rsquo;t do out of the box</p>
           <p>Custom product builders, complex filtering systems, API integrations, wholesale portals, multi-currency logic, admin dashboards. Full-stack Next.js + Supabase builds when you&rsquo;ve outgrown templates.</p>
           <span class="service-price">from &euro;2,500 <span>&mdash; scope dependent</span></span>
-          <p style="margin-top:10px;font-size:12px;font-style:italic;color:var(--text-dim);">Agencies typically charge &euro;8,000&ndash;15,000 for this scope</p>
           <div class="premium-right" style="margin-top:20px;">
             <strong>What this includes:</strong><br>
             Custom database, auth, admin panel, API integrations, Vercel deployment, and 14 days post-launch support. You own all the code.
@@ -950,38 +911,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
       </div>
     </div>
 
-    <!-- Pricing Comparison Table -->
-    <div class="compare-section reveal">
-      <p class="compare-title">Compare all services</p>
-      <div class="compare-wrap">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Audit &amp; Speed Fix<span class="col-price">from &euro;400</span></th>
-              <th>Tracking Setup<span class="col-price">from &euro;650</span></th>
-              <th class="popular">Conversion Optimization<span class="col-price">from &euro;750</span></th>
-              <th>Custom Development<span class="col-price">from &euro;2,500</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="feature">Performance audit</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Speed optimization</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Meta Pixel setup</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Conversions API (server-side)</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">GA4 enhanced ecommerce</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Klaviyo email flows</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Heatmap analysis</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Checkout optimization</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Product page redesign</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">A/B test recommendations</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Custom database/API</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Admin panel</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td></tr>
-            <tr><td class="feature">Post-launch support (14 days)</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1107,7 +1036,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
     <!-- Portfolio -->
     <div class="portfolio-section">
       <h3 class="section-title reveal">Work</h3>
-      <p class="portfolio-subtitle reveal">Selected projects across different industries and platforms</p>
+      <p class="portfolio-subtitle reveal">Example builds across different industries</p>
       <div class="portfolio-grid">
         <div class="portfolio-card reveal-card">
           <div class="portfolio-thumb" style="background:linear-gradient(180deg,#15271F,#1E3A2C);">
@@ -1120,7 +1049,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
           <div class="portfolio-info">
             <div class="portfolio-tag">Brand Store</div>
             <h3>Noorvik Outdoor</h3>
-            <p class="portfolio-result">ROAS from 1.8x to 3.2x after speed optimization</p>
+            <p class="portfolio-result">Full speed optimization and Conversions API setup</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Conversions API</span><span class="portfolio-pill">Klaviyo</span></div>
             <a href="/portfolio/noorvik.html" class="portfolio-link" aria-label="View Noorvik project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
@@ -1136,7 +1065,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
           <div class="portfolio-info">
             <div class="portfolio-tag">Dropship Store</div>
             <h3>VOLT Fitness</h3>
-            <p class="portfolio-result">Launched in 48hrs, first sale within 3 days</p>
+            <p class="portfolio-result">Dropship store with Meta Pixel and Dawn theme customization</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Meta Pixel</span><span class="portfolio-pill">Dawn</span></div>
             <a href="/portfolio/volt-fitness.html" class="portfolio-link" aria-label="View VOLT Fitness project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
@@ -1152,7 +1081,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
           <div class="portfolio-info">
             <div class="portfolio-tag">Local Business</div>
             <h3>Terrace Amsterdam</h3>
-            <p class="portfolio-result">Restaurant website with 40% more reservations</p>
+            <p class="portfolio-result">Restaurant site with online reservation flow</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Custom HTML</span><span class="portfolio-pill">Vercel</span></div>
             <a href="/portfolio/terrace-amsterdam.html" class="portfolio-link" aria-label="View Terrace Amsterdam project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
@@ -1184,7 +1113,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
           <div class="portfolio-info">
             <div class="portfolio-tag">Brand Store</div>
             <h3>Luxe Essentials</h3>
-            <p class="portfolio-result">Premium skincare brand with 2x email signup rate</p>
+            <p class="portfolio-result">Premium skincare store with Klaviyo email integration</p>
             <div class="portfolio-pills"><span class="portfolio-pill">Shopify</span><span class="portfolio-pill">Klaviyo</span><span class="portfolio-pill">Custom Theme</span></div>
             <a href="/portfolio/luxe-essentials.html" class="portfolio-link" aria-label="View Luxe Essentials project">View project <span class="portfolio-link-arrow">&rarr;</span></a>
           </div>
@@ -1194,21 +1123,19 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   </div>
 </section>
 
-<!-- Social Proof Marquee -->
+<!-- Projects -->
 <div class="marquee-section">
-  <p class="marquee-label reveal">Trusted by</p>
-  <div class="marquee-track">
-    <span class="marquee-item">MurmReps</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Noorvik</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Kuyper &amp; Co</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Bureau Digitaal</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Nordic Home</span><span class="marquee-dot"></span>
-    <!-- Duplicate for seamless loop -->
-    <span class="marquee-item">MurmReps</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Noorvik</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Kuyper &amp; Co</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Bureau Digitaal</span><span class="marquee-dot"></span>
-    <span class="marquee-item">Nordic Home</span><span class="marquee-dot"></span>
+  <p class="marquee-label reveal">Projects</p>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:0 24px;">
+    <span class="marquee-item" style="display:inline-block">MurmReps</span>
+    <span style="color:var(--text-dim)">&middot;</span>
+    <span class="marquee-item" style="display:inline-block">Noorvik</span>
+    <span style="color:var(--text-dim)">&middot;</span>
+    <span class="marquee-item" style="display:inline-block">Kuyper &amp; Co</span>
+    <span style="color:var(--text-dim)">&middot;</span>
+    <span class="marquee-item" style="display:inline-block">Bureau Digitaal</span>
+    <span style="color:var(--text-dim)">&middot;</span>
+    <span class="marquee-item" style="display:inline-block">Nordic Home</span>
   </div>
   <div class="proof-badges reveal">
     <span class="proof-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>Official Shopify Partner</span>
@@ -1220,7 +1147,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
 <section class="testimonials-section">
   <div class="container">
     <h2 class="section-title reveal">What clients say</h2>
-    <p class="testimonials-aggregate reveal" style="font-family:var(--mono);font-size:13px;color:var(--gold);margin-top:-4px;margin-bottom:0;letter-spacing:0.02em;">&#9733; 4.9 average from 8 client reviews</p>
+    <p class="testimonials-aggregate reveal" style="font-family:var(--mono);font-size:13px;color:var(--gold);margin-top:-4px;margin-bottom:0;letter-spacing:0.02em;">What clients say</p>
     <div class="testimonials-aggregate-line reveal"></div>
     <div class="testimonials-wrap">
     <button class="testimonials-arrow testimonials-arrow-left hidden" aria-label="Scroll left"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
@@ -1233,7 +1160,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">DB</div>
-          <div class="testimonial-meta"><strong>Daan van der Berg</strong><span>Founder @ Noorvik &mdash; outdoor gear, Rotterdam</span></div>
+          <div class="testimonial-meta"><strong>Daan B.</strong><span>e-commerce, Rotterdam</span></div>
           <span class="testimonial-date">March 2026</span>
         </div>
       </div>
@@ -1244,7 +1171,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">EW</div>
-          <div class="testimonial-meta"><strong>Emma Whitfield</strong><span>DTC skincare brand &mdash; London</span></div>
+          <div class="testimonial-meta"><strong>Emma W.</strong><span>DTC brand, London</span></div>
           <span class="testimonial-date">Feb 2026</span>
         </div>
       </div>
@@ -1255,7 +1182,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">YA</div>
-          <div class="testimonial-meta"><strong>Yusuf Al-Rashid</strong><span>Performance marketer &mdash; Dubai</span></div>
+          <div class="testimonial-meta"><strong>Yusuf A.</strong><span>performance marketing, Dubai</span></div>
           <span class="testimonial-date">Jan 2026</span>
         </div>
       </div>
@@ -1266,7 +1193,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">MG</div>
-          <div class="testimonial-meta"><strong>Marloes de Groot</strong><span>Operations, Kuyper &amp; Co &mdash; Amsterdam</span></div>
+          <div class="testimonial-meta"><strong>Marloes G.</strong><span>operations, Amsterdam</span></div>
           <span class="testimonial-date">March 2026</span>
         </div>
       </div>
@@ -1277,7 +1204,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">RG</div>
-          <div class="testimonial-meta"><strong>Ryan Gallagher</strong><span>First-time store owner &mdash; Dublin</span></div>
+          <div class="testimonial-meta"><strong>Ryan G.</strong><span>store owner, Dublin</span></div>
           <span class="testimonial-date">Feb 2026</span>
         </div>
       </div>
@@ -1288,7 +1215,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">SB</div>
-          <div class="testimonial-meta"><strong>Stijn Bakker</strong><span>Lead dev @ Bureau Digitaal &mdash; Utrecht</span></div>
+          <div class="testimonial-meta"><strong>Stijn B.</strong><span>dev agency, Utrecht</span></div>
           <span class="testimonial-date">Ongoing</span>
         </div>
       </div>
@@ -1299,7 +1226,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">CP</div>
-          <div class="testimonial-meta"><strong>Charlotte Peeters</strong><span>E-commerce manager &mdash; Antwerp</span></div>
+          <div class="testimonial-meta"><strong>Charlotte P.</strong><span>e-commerce, Antwerp</span></div>
           <span class="testimonial-date">Jan 2026</span>
         </div>
       </div>
@@ -1310,7 +1237,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <div class="testimonial-divider"></div>
         <div class="testimonial-footer">
           <div class="testimonial-avatar">TE</div>
-          <div class="testimonial-meta"><strong>Tobias Engstr&ouml;m</strong><span>Founder, Nordic Home &mdash; Stockholm</span></div>
+          <div class="testimonial-meta"><strong>Tobias E.</strong><span>home &amp; lifestyle, Stockholm</span></div>
           <span class="testimonial-date">Dec 2025</span>
         </div>
       </div>
@@ -1319,7 +1246,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   </div>
 </section>
 
-<div class="micro-cta reveal">Join 12+ stores already optimized. <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer">Book a free strategy call &rarr;</a></div>
 
 <div class="section-divider"></div>
 
@@ -1405,29 +1331,16 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
 <!-- CTA -->
 <section id="contact" class="cta-section">
   <div class="container">
-    <h2 class="section-title reveal">Stop guessing why your<br>store isn&rsquo;t converting</h2>
+    <h2 class="section-title reveal">Let&rsquo;s fix your store</h2>
     <p class="section-subtitle reveal">Send me your store URL or book a call. I&rsquo;ll reply within 24 hours with a scope, a price, and a timeline. Or I&rsquo;ll tell you it&rsquo;s not a fit.</p>
     <div class="cta-buttons reveal">
       <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" class="btn-primary" data-magnetic>Book a free strategy call &rarr;</a>
       <a href="mailto:hello@murmweb.dev" class="btn-secondary" data-magnetic>Or send me an email</a>
     </div>
-    <div class="response-badge reveal"><span class="response-dot"></span>Typically responds within 4 hours</div>
+    <div class="response-badge reveal"><span class="response-dot"></span>I reply personally, usually same day</div>
   </div>
 </section>
 
-<!-- Email Capture -->
-<section class="email-capture-section">
-  <div class="container">
-    <div class="email-capture-inner">
-      <h2 class="section-title reveal">The 7 things killing your Shopify store&rsquo;s conversion rate</h2>
-      <p class="section-subtitle reveal" style="margin:0 auto;">A plain-text email with the exact checks I run on every store audit. No PDF, no drip sequence, no upsell.</p>
-      <form class="audit-form reveal" action="https://formspree.io/f/mykbqrpd" method="POST" style="max-width:480px;margin:36px auto 0;">
-        <input type="email" name="email" class="audit-input" placeholder="you@yourbrand.com" required>
-        <button type="submit" class="audit-btn">Send me the list &rarr;</button>
-      </form>
-    </div>
-  </div>
-</section>
 
 </main>
 
@@ -1450,7 +1363,7 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         <a href="/blog/">Blog</a>
       </div>
     </div>
-    <p class="footer-flex">Hand-coded. Hosted on Vercel. Loads in under 0.5s.</p>
+    <p class="footer-flex">Hand-coded in Leiden. No templates, no page builders.</p>
   </div>
 </footer>
 
@@ -1459,21 +1372,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
 </a>
 
-<!-- Exit Intent Popup -->
-<div class="exit-overlay" id="exitOverlay">
-  <div class="exit-modal">
-    <button type="button" class="exit-close" aria-label="Close" data-exit-close>&times;</button>
-    <h3>Your store has at least 3 fixable problems.</h3>
-    <p>Want me to find them? Drop your URL and I&rsquo;ll send a personal report within 24 hours. Free, no strings.</p>
-    <form class="audit-form" action="https://formspree.io/f/mykbqrpd" method="POST" data-audit-form>
-      <input type="hidden" name="_subject" value="New audit request from murmweb.dev">
-      <input type="email" name="email" class="audit-input" placeholder="your@email.com" required>
-      <input type="text" name="store_url" class="audit-input" placeholder="yourstore.myshopify.com" required>
-      <button type="submit" class="audit-btn">Send me the audit &rarr;</button>
-    </form>
-    <button type="button" class="exit-no-thanks" data-exit-close>No thanks</button>
-  </div>
-</div>
 
 <script>
 (function(){
@@ -1604,12 +1502,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
         : 'translateY(' + (scrollY * speed) + 'px)';
     });
 
-    // Hero mockup: reduce tilt on scroll
-    var heroMockup = document.querySelector('[data-hero-mockup] .hero-mockup');
-    if (heroMockup) {
-      var tiltFactor = Math.max(0, 1 - scrollY / 600);
-      heroMockup.style.transform = 'perspective(1000px) rotateY(' + (-5 * tiltFactor) + 'deg) rotateX(' + (3 * tiltFactor) + 'deg)';
-    }
 
     // Scroll progress
     var h = document.documentElement.scrollHeight - window.innerHeight;
@@ -1661,47 +1553,6 @@ html[data-theme="light"] .service-popular { background:var(--gold); color:#FFFFF
   update();
 })();
 
-/* ── Exit Intent Popup ────────────────────────── */
-(function(){
-  var isMobile = window.matchMedia('(pointer:coarse)').matches || window.innerWidth < 769;
-  if (isMobile) return;
-  if (sessionStorage.getItem('exit_shown')) return;
-
-  var overlay = document.getElementById('exitOverlay');
-  if (!overlay) return;
-
-  function closeExit() {
-    overlay.classList.remove('show');
-    setTimeout(function(){ overlay.style.display = 'none'; }, 300);
-  }
-
-  function showExit() {
-    if (sessionStorage.getItem('exit_shown')) return;
-    if (sessionStorage.getItem('audit_submitted')) return;
-    sessionStorage.setItem('exit_shown', '1');
-    overlay.style.display = 'flex';
-    requestAnimationFrame(function(){ overlay.classList.add('show'); });
-  }
-
-  document.addEventListener('mouseout', function(e) {
-    if (e.clientY <= 0 && !e.relatedTarget) showExit();
-  });
-
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) closeExit();
-  });
-
-  document.querySelectorAll('[data-exit-close]').forEach(function(btn) {
-    btn.addEventListener('click', closeExit);
-  });
-
-  // Mark audit as submitted on form interaction
-  document.querySelectorAll('[data-audit-form]').forEach(function(f) {
-    f.addEventListener('submit', function() {
-      sessionStorage.setItem('audit_submitted', '1');
-    });
-  });
-})();
 </script>
 <!-- Sticky Mobile CTA -->
 <div class="mobile-cta-bar">
