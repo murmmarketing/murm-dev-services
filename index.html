@@ -10,6 +10,22 @@
   gtag("js", new Date());
   gtag("config", "AW-18089557055");
 </script>
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-18089557055/zVG4CLrshZwcEL_44rFD',
+      'value': 1.0,
+      'currency': 'EUR',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Custom Web Apps & AI Automation — murmweb.dev</title>
 <meta name="description" content="I build custom web applications, AI automation workflows, and marketing sites for businesses that have outgrown templates. Next.js, Supabase, Claude. Based in Leiden, NL.">

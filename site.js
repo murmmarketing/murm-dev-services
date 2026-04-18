@@ -181,15 +181,8 @@
   // ── Audit form success state + Google Ads conversion ─────
   document.querySelectorAll('[data-audit-form]').forEach(function(f) {
     f.addEventListener('submit', function() {
-      // Fire Google Ads conversion
       try {
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-18089557055/submit',
-            'value': 1.0,
-            'currency': 'EUR'
-          });
-        }
+        if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
       } catch (e) {}
       var success = document.getElementById('auditSuccess');
       if (success) {
@@ -207,13 +200,7 @@
   document.querySelectorAll('a[href*="cal.com"]').forEach(function(link) {
     link.addEventListener('click', function() {
       try {
-        if (typeof gtag === 'function') {
-          gtag('event', 'conversion', {
-            'send_to': 'AW-18089557055/booking',
-            'value': 10.0,
-            'currency': 'EUR'
-          });
-        }
+        if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
       } catch (e) {}
     });
   });
