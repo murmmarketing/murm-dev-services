@@ -1,0 +1,15 @@
+{
+  "name": "murm-dev-services",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "murmweb.dev static site + admin API",
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.34.3",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.9.6"
+  }
+}
