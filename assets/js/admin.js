@@ -234,7 +234,7 @@
     return `
       <div class="row" data-hash="${r._hash}" tabindex="0" role="row">
         <div class="td center" role="cell"><span class="dot ${scoreClass(score)}" aria-label="score ${score}"></span></div>
-        <div class="td" role="cell"><div><span class="name">${escapeHtml(r.name || '—')}</span><span class="city-inline">${escapeHtml(city)}${r.business_type ? ' · ' + escapeHtml(r.business_type) : ''}</span></div></div>
+        <div class="td" role="cell"><span class="name">${escapeHtml(r.name || '—')}</span></div>
         <div class="td x-mobile" role="cell">${escapeHtml(city)}</div>
         <div class="td x-mobile" role="cell">${escapeHtml(r.business_type || '')}</div>
         <div class="td x-mobile center" role="cell">${score || '—'}</div>
