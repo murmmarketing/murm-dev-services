@@ -13,12 +13,10 @@ export const config = {
   ],
 };
 
-const PUBLIC_PATHS = new Set([
-  "/admin/login",
-  "/admin/login.html",
-  "/admin/legacy",
-  "/admin/legacy.html",
-]);
+// Login pages: redirect away if the visitor is already authed, otherwise let through.
+const LOGIN_PATHS = new Set(["/admin/login", "/admin/login.html"]);
+// Always public — no auth check either way.
+const ALWAYS_PUBLIC = new Set(["/admin/legacy", "/admin/legacy.html"]);
 
 function getCookie(header, name) {
   if (!header) return null;
@@ -33,7 +31,7 @@ export default async function middleware(request) {
   const url = new URL(request.url);
   const path = url.pathname.replace(/\/+$/, "") || "/";
 
-  if (PUBLIC_PATHS.has(path)) return;
+  if (ALWAYS_PUBLIC.has(path)) return;
 
   const cookieName = process.env.AUTH_COOKIE_NAME || "murm_admin_session";
   const secret = process.env.ADMIN_SESSION_SECRET;
@@ -45,6 +43,12 @@ export default async function middleware(request) {
       await jwtVerify(token, new TextEncoder().encode(secret));
       valid = true;
     } catch { /* invalid or expired */ }
+  }
+
+  // Already logged in and hitting the login page → send them to the dashboard.
+  if (LOGIN_PATHS.has(path)) {
+    if (valid) return Response.redirect(new URL("/admin", request.url).toString(), 302);
+    return;
   }
 
   if (valid) return;

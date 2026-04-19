@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Log in — Admin</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0908'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-weight='500' font-size='22' fill='%23F2EFEA'%3EM%3C/text%3E%3Ccircle cx='23' cy='10' r='2.2' fill='%23FF6B3D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0908; --bg-2:#11100E; --bg-3:#17140F;
+  --ink:#F2EFEA; --ink-2:#C8C2B6; --ink-3:#8A8478; --ink-4:#55514A;
+  --rule:rgba(255,255,255,0.08); --rule-2:rgba(255,255,255,0.14);
+  --coral:#FF6B3D; --gold:#D4A574;
+  --bad:#C27A7A;
+  --serif:"Fraunces",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --sans:ui-sans-serif,system-ui,-apple-system,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden}
+body{font-family:var(--sans);font-size:13px;-webkit-font-smoothing:antialiased;position:relative}
+
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;
+  opacity:0.035;mix-blend-mode:screen;
+  background-image:var(--grain);background-size:180px 180px;
+}
+
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 24px;position:relative;z-index:2}
+.box{width:100%;max-width:420px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-3)}
+.eyebrow .num{color:var(--coral)}
+h1{font-family:var(--serif);font-weight:400;font-size:48px;letter-spacing:-0.035em;line-height:1;color:var(--ink)}
+.hint{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);margin-top:-6px}
+
+form{display:flex;flex-direction:column;gap:14px;margin-top:16px}
+label{display:flex;flex-direction:column;gap:6px}
+label span{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-4)}
+input[type=password]{
+  background:var(--bg-2);border:1px solid var(--rule);
+  padding:14px 16px;font-family:var(--mono);font-size:14px;color:var(--ink);
+  outline:none;transition:border-color .15s ease;
+  border-radius:0;width:100%;
+}
+input[type=password]:focus{border-color:var(--coral)}
+.hp{position:absolute;left:-9999px;opacity:0;pointer-events:none}
+
+button[type=submit]{
+  background:var(--ink);color:var(--bg);border:none;padding:14px 22px;
+  font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
+  cursor:pointer;transition:background .15s ease;font-weight:500;
+  display:inline-flex;align-items:center;justify-content:space-between;gap:20px;
+}
+button[type=submit]:hover{background:var(--coral)}
+button[type=submit]:disabled{opacity:0.5;cursor:not-allowed}
+
+.err{
+  font-family:var(--mono);font-size:11px;letter-spacing:0.12em;
+  color:var(--bad);min-height:16px;
+}
+.foot{
+  margin-top:20px;padding-top:20px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ink-4);
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+.foot a{color:var(--ink-3);text-decoration:none}
+.foot a:hover{color:var(--coral)}
+
+@media (max-width:480px){
+  h1{font-size:40px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="box">
+    <div class="eyebrow"><span class="num">00</span> · Sign in</div>
+    <h1>Admin</h1>
+    <div class="hint">Internal. Not for clients.</div>
+    <form id="loginForm" novalidate>
+      <label>
+        <span>Password</span>
+        <input type="password" id="pw" autocomplete="current-password" required autofocus>
+      </label>
+      <input type="text" class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" id="submit">
+        Sign in <span aria-hidden="true">→</span>
+      </button>
+      <div class="err" id="err" role="alert"></div>
+    </form>
+    <div class="foot">
+      <span>murmweb.dev</span>
+      <a href="/">← back to site</a>
+    </div>
+  </div>
+</div>
+<script>
+  (function(){
+    const grain = "<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(#n)'/></svg>";
+    document.documentElement.style.setProperty('--grain', "url(\"data:image/svg+xml;utf8," + encodeURIComponent(grain) + "\")");
+
+    const form = document.getElementById('loginForm');
+    const pw = document.getElementById('pw');
+    const err = document.getElementById('err');
+    const btn = document.getElementById('submit');
+    const hp = form.querySelector('input[name="website"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      err.textContent = '';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/admin/login', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw.value, website: hp.value }),
+        });
+        if (res.ok) {
+          const next = new URL(location.href).searchParams.get('next') || '/admin';
+          location.replace(next);
+          return;
+        }
+        if (res.status === 429) {
+          err.textContent = 'Too many attempts. Try again in 15 minutes.';
+        } else {
+          err.textContent = 'Incorrect password.';
+        }
+      } catch {
+        err.textContent = 'Network error. Try again.';
+      } finally {
+        btn.disabled = false;
+        pw.select();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
