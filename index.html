@@ -111,9 +111,18 @@ function gtag_report_conversion(url) {
           "itemOffered": {
             "@type": "Service",
             "name": "Website Build",
-            "description": "Marketing sites, landing pages, portfolios. Hand-coded or Next.js, deployed on Vercel."
+            "description": "Marketing sites, landing pages, portfolios. Hand-coded or Next.js, deployed on Vercel. One-time €750 + €75/mo hosting."
           },
           "priceSpecification": { "@type": "PriceSpecification", "price": "750", "priceCurrency": "EUR", "minPrice": "750" }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Subscription",
+            "description": "All-inclusive website subscription: design, build, hosting, unlimited text edits, 2 hours/quarter for larger changes, monthly performance reports. €250 setup + €150/mo with 12-month minimum."
+          },
+          "priceSpecification": { "@type": "PriceSpecification", "price": "150", "priceCurrency": "EUR", "minPrice": "150" }
         },
         {
           "@type": "Offer",
@@ -929,6 +938,51 @@ function gtag_report_conversion(url) {
 
   .svc-card.feat{ grid-column: span 8; }
   .svc-card.sm{ grid-column: span 4; }
+
+  /* Two-path pricing inside a svc-card foot (Website card only) */
+  .svc-card .foot-paths{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .svc-card .path-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .svc-card .path-row + .path-row{
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+  }
+  .svc-card .path-label{
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    flex-shrink: 0;
+  }
+  .svc-card .path-price{
+    font-family: var(--serif);
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-align: right;
+    line-height: 1.2;
+  }
+  .svc-card .path-price .sub{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.02em;
+    margin-left: 6px;
+  }
+  .svc-card .path-row.pref .path-price{ color: var(--coral); }
+  .svc-card:hover .path-row.pref .path-price{
+    font-family: var(--serif);
+    font-size: 22px;
+  }
 
   .svc-foot{
     margin-top: 32px;
@@ -2003,11 +2057,17 @@ function gtag_report_conversion(url) {
         </div>
         <h3>A proper site, <em>not a Wix job.</em></h3>
         <p class="copy">
-          Marketing sites for businesses who want something faster and sharper than a theme. Next.js, CMS, hosting included.
+          Marketing sites for businesses who want something faster and sharper than a theme. 5–8 pages, CMS, SSL, hosting. Pay once or subscribe.
         </p>
-        <div class="foot">
-          <div class="price">from €750 <small>+ €75/mo</small></div>
-          <div class="incl">5–8 pages<br/>CMS · SSL<br/>Retainer updates</div>
+        <div class="foot foot-paths">
+          <div class="path-row">
+            <span class="path-label">Pay once</span>
+            <span class="path-price">€750<span class="sub">+ €75/mo hosting</span></span>
+          </div>
+          <div class="path-row pref">
+            <span class="path-label">Subscribe</span>
+            <span class="path-price">€250<span class="sub">+ €150/mo, all-in</span></span>
+          </div>
         </div>
       </div>
 

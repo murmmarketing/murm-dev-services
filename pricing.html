@@ -53,6 +53,14 @@
     },
     {
       "@type": "Question",
+      "name": "One-time or subscription — which is better?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The one-time option (€750 + €75/mo) is cheaper over 3+ years if you rarely update your site. The subscription (€250 + €150/mo) is better if you want unlimited text edits, regular updates, and someone on call for 2 hours of larger changes each quarter. Lower upfront cost, all-inclusive. 12-month minimum, then month-to-month."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "What's your turnaround?",
       "acceptedAnswer": {
         "@type": "Answer",
@@ -122,6 +130,29 @@ h1 { font-family:var(--serif); font-size:clamp(36px,5vw,52px); font-weight:400; 
 .tier li::before { content:'✓'; position:absolute; left:0; color:var(--gold); }
 .tier ul.excluded li::before { content:'—'; color:var(--text-dim); }
 .tier .meta { display:flex; gap:32px; flex-wrap:wrap; font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-top:20px; padding-top:20px; border-top:1px solid var(--border); }
+/* Two-path pricing inside the Website tier */
+.pay-paths { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:28px 0 8px; }
+.pay-path { position:relative; background:var(--bg-elevated); border:1px solid var(--border); border-radius:10px; padding:28px 24px 24px; display:flex; flex-direction:column; }
+.pay-path.recommended { border-color:var(--border-hover); }
+.pay-path .tag-subtle { position:absolute; top:-9px; right:16px; font-family:var(--mono); font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); background:var(--bg-card); padding:3px 9px; border:1px solid var(--border-hover); border-radius:3px; }
+.pay-path .pay-label { font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-dim); margin-bottom:10px; }
+.pay-path .pay-price { font-family:var(--serif); font-size:32px; font-weight:400; color:var(--text); line-height:1.05; letter-spacing:-0.02em; margin-bottom:4px; }
+.pay-path .pay-price small { font-family:var(--mono); font-size:13px; color:var(--text-muted); letter-spacing:0; font-weight:400; margin-left:4px; }
+.pay-path .pay-note { font-size:13px; color:var(--text-muted); margin-bottom:18px; line-height:1.5; }
+.pay-path h4 { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-dim); margin:8px 0 10px; font-weight:500; }
+.pay-path ul { list-style:none; margin:0 0 20px; padding:0; }
+.pay-path li { font-size:13px; color:var(--text-muted); padding:5px 0 5px 18px; position:relative; line-height:1.5; }
+.pay-path li::before { content:'·'; position:absolute; left:4px; color:var(--gold); font-weight:700; }
+.pay-path .pay-cta { margin-top:auto; font-family:var(--mono); font-size:12px; color:var(--gold); text-decoration:none; padding-top:16px; border-top:1px solid var(--border); letter-spacing:0.02em; transition:color 0.2s ease; }
+.pay-path .pay-cta:hover { color:var(--text); }
+.pay-choose { margin:24px 0 8px; padding:20px 24px; background:var(--bg-elevated); border-left:2px solid var(--gold); border-radius:0 6px 6px 0; }
+.pay-choose h4 { font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-dim); margin:0 0 10px; font-weight:500; }
+.pay-choose ul { list-style:none; margin:0; padding:0; }
+.pay-choose li { font-size:14px; color:var(--text-muted); padding:4px 0; line-height:1.6; position:static; }
+.pay-choose li::before { content:none; }
+.pay-choose li strong { color:var(--text); font-weight:500; font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; margin-right:6px; }
+@media (max-width:680px) { .pay-paths { grid-template-columns:1fr; } }
+
 .comparison { margin-top:80px; }
 .comparison h2 { font-family:var(--serif); font-size:32px; font-weight:400; margin-bottom:32px; }
 .comparison-table { width:100%; border-collapse:collapse; font-size:14px; }
@@ -219,21 +250,53 @@ footer p { font-size:13px; color:var(--text-dim); }
     </div>
 
     <div class="tier">
-      <h2>Website Build</h2>
-      <div class="price">from &euro;750</div>
-      <p class="desc">Fast, well-designed sites without the agency price</p>
-      <p class="best-for">Best for: any business that needs a professional web presence &mdash; restaurants, freelancers, local businesses, portfolios</p>
-      <h3>What&rsquo;s included</h3>
-      <ul>
-        <li>Custom design (no templates)</li>
-        <li>Mobile-first responsive</li>
-        <li>SEO optimized</li>
-        <li>Contact forms &amp; analytics</li>
-        <li>Fast loading (sub-1s)</li>
-        <li>Vercel / Cloudflare hosting</li>
-        <li>7 days post-launch support</li>
-      </ul>
-      <div class="meta"><span>Delivery: 3&ndash;5 days</span><span><a href="/#contact" style="color:var(--gold);text-decoration:none;">Get a quote &rarr;</a></span></div>
+      <h2>Website</h2>
+      <p class="desc">Fast, well-designed sites. Two ways to pay.</p>
+      <p class="best-for">Best for: restaurants, freelancers, local businesses, portfolios &mdash; anyone who&rsquo;s outgrown a Wix theme.</p>
+
+      <div class="pay-paths">
+        <div class="pay-path">
+          <div class="pay-label">Pay once</div>
+          <div class="pay-price">&euro;750 <small>setup</small></div>
+          <div class="pay-note">+ &euro;75/mo hosting &amp; basics. You update text yourself via the CMS.</div>
+          <h4>Includes</h4>
+          <ul>
+            <li>Custom design (no templates)</li>
+            <li>Mobile-first, SEO, analytics</li>
+            <li>CMS for self-service edits</li>
+            <li>Vercel / Cloudflare hosting</li>
+            <li>Contact forms &amp; SSL</li>
+            <li>7 days post-launch support</li>
+          </ul>
+          <a href="/#contact?plan=one-time" class="pay-cta">Get a quote &rarr;</a>
+        </div>
+
+        <div class="pay-path recommended">
+          <span class="tag-subtle">Recommended · active sites</span>
+          <div class="pay-label">Subscribe</div>
+          <div class="pay-price">&euro;250 <small>setup + &euro;150/mo</small></div>
+          <div class="pay-note">All-inclusive. 12-month minimum, then month-to-month.</div>
+          <h4>Everything above, plus</h4>
+          <ul>
+            <li>Unlimited text edits (48h response)</li>
+            <li>2 hours/quarter for larger changes</li>
+            <li>Monthly performance &amp; traffic report</li>
+            <li>Priority support (24h on workdays)</li>
+            <li>Domain stays yours &mdash; no lock-in</li>
+          </ul>
+          <a href="/#contact?plan=subscription" class="pay-cta">Start subscription &rarr;</a>
+        </div>
+      </div>
+
+      <div class="pay-choose">
+        <h4>Which is right for me?</h4>
+        <ul>
+          <li><strong>One-time</strong> Portfolios and brochure sites you rarely touch after launch.</li>
+          <li><strong>Subscribe</strong> Active businesses &mdash; news, events, menu changes &mdash; or anyone who&rsquo;d rather not think about it.</li>
+        </ul>
+      </div>
+
+      <div class="meta"><span>Delivery: 3&ndash;5 days</span><span>All prices exclude 21% BTW</span></div>
     </div>
 
     <div class="tier">
@@ -290,6 +353,7 @@ footer p { font-size:13px; color:var(--text-dim); }
     <div class="faq-mini">
       <h2>Frequently asked</h2>
       <details><summary>How does pricing work?</summary><p>Fixed pricing per project. I scope the work, give you a number, and that&rsquo;s what you pay. No hourly billing, no scope creep surprises.</p></details>
+      <details><summary>One-time or subscription &mdash; which is better?</summary><p>The one-time option (&euro;750 + &euro;75/mo) is cheaper over 3+ years if you rarely update your site. The subscription (&euro;250 + &euro;150/mo) is better if you want unlimited text edits, regular updates, and someone on call for 2 hours of larger changes each quarter. Lower upfront cost, all-inclusive. 12-month minimum, then month-to-month.</p></details>
       <details><summary>What&rsquo;s your turnaround?</summary><p>Websites: 3&ndash;5 days. AI automation: 1&ndash;2 weeks. Custom web apps: 3&ndash;6 weeks depending on scope. I&rsquo;ll give you an exact timeline before we start.</p></details>
       <details><summary>Can I start with a small project?</summary><p>Yes. A website build or single automation workflow is a great way to work together before committing to a larger app project.</p></details>
       <details><summary>What if I need ongoing development?</summary><p>The monthly retainer gives you a developer on call. Bug fixes, new features, automation tweaks &mdash; all included. Cancel anytime.</p></details>
