@@ -22,11 +22,11 @@ function gtag_report_conversion() {
 </script>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Free site audit — MurmWeb</title>
-<meta name="description" content="Drop your website URL and email. You'll get a PDF audit within 5 working days covering design, conversion, SEO, and technical issues." />
+<meta name="description" content="Free PDF site audit covering design, conversion, and SEO. No sales call, no pitch deck — just the audit. Delivered within 5 working days." />
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://murmweb.dev/audit">
 <meta property="og:title" content="Free site audit — MurmWeb">
-<meta property="og:description" content="Drop your website URL and email. You'll get a PDF audit within 5 working days covering design, conversion, SEO, and technical issues.">
+<meta property="og:description" content="Free PDF site audit covering design, conversion, and SEO. No sales call, no pitch deck — just the audit. Delivered within 5 working days.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://murmweb.dev/audit">
 <meta property="og:image" content="https://murmweb.dev/og.png">
@@ -38,193 +38,590 @@ function gtag_report_conversion() {
 <link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/v3.css" />
 <style>
-  body{ cursor: auto; }
-  .audit-wrap{
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 120px var(--gutter) 80px;
-    min-height: 100vh;
+  /* ======== audit page — isolated, uses v3.css tokens ======== */
+  body{ cursor: auto; min-height: 100vh; display: flex; flex-direction: column; }
+  main.audit{ flex: 1; }
+
+  /* --- minimal nav --- */
+  .audit-nav{
+    position: sticky; top: 0; z-index: 50;
+    padding: 20px var(--gutter);
+    backdrop-filter: blur(12px);
+    background: rgba(10,10,10,0.75);
+    border-bottom: 1px solid var(--rule);
   }
-  .audit-back{
+  .audit-wordmark{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .audit-wordmark .dot{ color: var(--accent); padding: 0 2px; }
+
+  /* --- hero --- */
+  .hero-block{
+    padding: 100px var(--gutter) 80px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow{
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--ink-4);
-    text-transform: uppercase;
     letter-spacing: 0.16em;
-    text-decoration: none;
-    display: inline-block;
-    margin-bottom: 64px;
-    transition: color .2s;
+    text-transform: uppercase;
+    color: var(--ink-4);
+    margin-bottom: 32px;
   }
-  .audit-back:hover{ color: var(--ink-2); }
-  .audit-h1{
+  .hero-eyebrow .sep{ margin: 0 10px; color: var(--ink-5); }
+  .hero-h1{
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(48px, 8vw, 96px);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
+    font-size: clamp(44px, 7.2vw, 104px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
     color: var(--ink);
-    margin: 0 0 36px;
+    margin: 0 0 44px;
+    max-width: 14ch;
   }
-  .audit-intro{
+  .hero-h1 .broken{
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .hero-h1 .broken .squiggle{
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -0.12em;
+    width: 100%;
+    height: 0.22em;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .hero-h1 .broken .squiggle path{
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 220;
+    stroke-dashoffset: 220;
+    animation: squiggleDraw 800ms ease-out 600ms forwards;
+  }
+  @keyframes squiggleDraw{ to{ stroke-dashoffset: 0; } }
+
+  .hero-sub{
     font-family: var(--sans);
     font-size: 18px;
-    line-height: 1.55;
+    line-height: 1.6;
     color: var(--ink-2);
+    max-width: 58ch;
     margin: 0 0 56px;
-    max-width: 560px;
   }
+  .hero-sub em{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink);
+    font-size: 1.04em;
+  }
+
+  .what-you-get{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .wyg-item{
+    padding: 22px 0;
+    border-right: 1px solid var(--rule);
+  }
+  .wyg-item:last-child{ border-right: none; }
+  .wyg-num{
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .wyg-label{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+
+  /* --- form section --- */
+  .form-section{
+    padding: 0 var(--gutter) 120px;
+    max-width: 640px;
+    margin: 0 auto;
+    transition: opacity 300ms ease;
+  }
+  .form-section-inner{ padding-top: 80px; }
   .audit-form{
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 28px;
   }
-  .audit-field{ display: flex; flex-direction: column; gap: 8px; }
+  .audit-field{ display: flex; flex-direction: column; gap: 10px; position: relative; }
   .audit-field label{
     font-family: var(--mono);
     font-size: 10px;
-    color: var(--ink-4);
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    color: var(--ink-4);
   }
+  .audit-field label .optional{ color: var(--ink-5); letter-spacing: 0.08em; }
   .audit-field input,
   .audit-field textarea{
     background: transparent;
     border: 1px solid var(--rule-2);
-    border-radius: 3px;
-    padding: 14px 16px;
+    border-radius: 2px;
+    padding: 18px 16px;
+    min-height: 52px;
+    box-sizing: border-box;
     font-family: var(--sans);
-    font-size: 15px;
+    font-size: 16px;
     color: var(--ink);
     outline: none;
-    transition: border-color .2s;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
     width: 100%;
-    box-sizing: border-box;
   }
   .audit-field input::placeholder,
   .audit-field textarea::placeholder{ color: var(--ink-4); }
   .audit-field input:focus,
-  .audit-field textarea:focus{ border-color: var(--accent); }
-  .audit-field textarea{ min-height: 110px; resize: vertical; }
+  .audit-field textarea:focus{
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255,107,61,0.12);
+  }
+  .audit-field textarea{
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+  .url-preview{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-4);
+    margin: -2px 0 0;
+    min-height: 16px;
+    transition: color 200ms ease;
+  }
+  .url-preview.live{ color: var(--accent); }
+  .url-preview .prefix{ color: var(--ink-5); }
+
   .audit-submit{
     align-self: flex-start;
     margin-top: 12px;
     border: none;
     cursor: pointer;
+    min-width: 260px;
+  }
+  .audit-submit[disabled]{ opacity: 0.55; cursor: wait; }
+  .micro-note{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    letter-spacing: 0.06em;
+    margin: 0;
   }
   .audit-err{
+    display: none;
+    padding: 14px 16px;
+    border: 1px solid var(--accent);
+    background: rgba(255,107,61,0.06);
     font-family: var(--mono);
     font-size: 12px;
-    color: var(--accent);
-    margin-top: 16px;
-    display: none;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 4px;
   }
   .audit-err.show{ display: block; }
-  .audit-success{ display: none; }
-  .audit-success.show{ display: block; }
-  .audit-success h2{
+  .audit-err a{ color: var(--accent); }
+
+  /* Honeypot — visually hidden but still a tabbable element (we disable tabs explicitly) */
+  .hp-wrap{
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* --- trust anchor --- */
+  .trust{
+    padding: 80px var(--gutter);
+    max-width: 720px;
+    margin: 0 auto;
+    border-top: 1px solid var(--rule);
+  }
+  .trust p{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .trust p b{
+    font-style: normal;
+    font-family: var(--sans);
+    font-weight: 500;
+    color: var(--ink);
+    font-size: 0.9em;
+  }
+  .trust a{
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,107,61,0.35);
+    transition: border-color 200ms ease;
+  }
+  .trust a:hover{ border-bottom-color: var(--accent); }
+
+  /* --- success state --- */
+  .success{
+    display: none;
+    padding: 120px var(--gutter) 120px;
+    max-width: 640px;
+    margin: 0 auto;
+    opacity: 0;
+    transition: opacity 300ms ease;
+  }
+  .success.show{ opacity: 1; }
+  .success-check{
+    width: 56px; height: 56px;
+    margin-bottom: 40px;
+    display: block;
+  }
+  .success-check path{
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: checkDraw 700ms ease-out 200ms forwards;
+  }
+  @keyframes checkDraw{ to{ stroke-dashoffset: 0; } }
+  .success h1{
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: clamp(40px, 7vw, 72px);
+    font-size: clamp(48px, 7vw, 88px);
     line-height: 1.0;
     color: var(--ink);
     margin: 0 0 28px;
   }
-  .audit-success p{
+  .success p{
     font-family: var(--sans);
-    font-size: 17px;
+    font-size: 18px;
     line-height: 1.55;
     color: var(--ink-2);
-    max-width: 560px;
+    margin: 0 0 48px;
+    max-width: 56ch;
   }
-  .audit-success a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
+  .success p b{ color: var(--ink); font-weight: 500; }
+  .success p a{ color: var(--accent); }
+  .back-home{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+  .back-home:hover{ color: var(--ink); }
+
+  /* --- footer --- */
+  .audit-footer{
+    padding: 40px var(--gutter);
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-4);
+  }
+  .audit-footer .wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .audit-footer a{ color: var(--ink-3); text-decoration: none; }
+  .audit-footer a:hover{ color: var(--ink); }
+
+  /* --- No-JS fallback: when server redirects to /audit?ok=1#thanks,
+         CSS :target swaps the form out for the success block. --- */
+  body:has(#thanks:target) .form-section{ display: none; }
+  body:has(#thanks:target) .trust{ display: none; }
+  body:has(#thanks:target) .success{ display: block; opacity: 1; }
+
+  /* --- mobile --- */
   @media (max-width: 768px){
-    .audit-wrap{ padding: 80px var(--gutter) 60px; }
-    .audit-back{ margin-bottom: 40px; }
-    .audit-h1{ font-size: clamp(40px, 10vw, 64px); line-height: 1.05; }
-    .audit-intro{ font-size: 16px; margin-bottom: 40px; }
+    .hero-block{ padding: 56px var(--gutter) 56px; }
+    .form-section-inner{ padding-top: 40px; }
+    .form-section{ padding-bottom: 80px; }
+    .hero-h1{ font-size: clamp(38px, 10vw, 56px); line-height: 1.05; max-width: 100%; }
+    .hero-h1 .broken{ white-space: normal; }
+    .hero-sub{ font-size: 16px; }
+    .what-you-get{ grid-template-columns: 1fr; }
+    .wyg-item{
+      padding: 18px 0;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+    }
+    .wyg-item:last-child{ border-bottom: none; }
+    .audit-submit{ width: 100%; min-width: 0; justify-content: center; }
+    .trust{ padding: 56px var(--gutter); }
+    .trust p{ font-size: 19px; }
+    .success{ padding: 80px var(--gutter); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-h1 .broken .squiggle path{ animation: none; stroke-dashoffset: 0; }
+    .success-check path{ animation: none; stroke-dashoffset: 0; }
+    .form-section, .success{ transition: none; }
   }
 </style>
 </head>
 <body>
 
-<main class="audit-wrap">
-  <a href="/" class="audit-back">← Back to murmweb.dev</a>
+<nav class="audit-nav">
+  <a href="/" class="audit-wordmark" aria-label="Back to murmweb.dev">Murm<span class="dot">·</span>Web</a>
+</nav>
 
-  <h1 class="audit-h1">Free site audit</h1>
+<main class="audit">
 
-  <p class="audit-intro">Drop your website URL and email. You'll get a PDF audit within 5 working days covering design, conversion, SEO, and technical issues.</p>
-
-  <form id="auditForm" class="audit-form" action="https://formspree.io/f/mykbqrpd" method="POST">
-    <div class="audit-field">
-      <label for="url">Website URL</label>
-      <input type="url" id="url" name="url" required placeholder="https://yoursite.com" />
+  <!-- HERO -->
+  <section class="hero-block">
+    <div class="hero-eyebrow">
+      <span>Free site audit</span><span class="sep">·</span><span>No sales call</span>
     </div>
-    <div class="audit-field">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required placeholder="you@company.com" />
-    </div>
-    <div class="audit-field">
-      <label for="notes">Anything specific you want me to look at? <span style="color:var(--ink-5)">(optional)</span></label>
-      <textarea id="notes" name="notes" placeholder="e.g. homepage conversion, product pages, mobile performance…"></textarea>
-    </div>
-    <button type="submit" class="btn-primary audit-submit">Send me the audit <span class="ar">→</span></button>
-    <div id="auditErr" class="audit-err">Something went wrong. Please email <a href="mailto:hello@murmweb.dev" style="color:inherit;text-decoration:underline;">hello@murmweb.dev</a> directly.</div>
-  </form>
 
-  <div id="auditSuccess" class="audit-success">
-    <h2>Thanks.</h2>
+    <h1 class="hero-h1">What's <span class="broken">broken<svg class="squiggle" viewBox="0 0 100 8" preserveAspectRatio="none" aria-hidden="true"><path d="M0 4 Q 3.125 1 6.25 4 T 12.5 4 T 18.75 4 T 25 4 T 31.25 4 T 37.5 4 T 43.75 4 T 50 4 T 56.25 4 T 62.5 4 T 68.75 4 T 75 4 T 81.25 4 T 87.5 4 T 93.75 4 T 100 4"/></svg></span> on your site?</h1>
+
+    <p class="hero-sub">
+      Every site has blindspots — pages that load slow, copy that buries the lede, flows that leak conversion. I'll look at yours and send you a PDF with specific things worth fixing. <em>No sales call, no pitch deck — just the audit.</em> I do a handful of these each month because sometimes it turns into real work, but mostly it just helps people ship better sites.
+    </p>
+
+    <div class="what-you-get" role="list">
+      <div class="wyg-item" role="listitem"><span class="wyg-num">01</span><span class="wyg-label">Design &amp; UX</span></div>
+      <div class="wyg-item" role="listitem"><span class="wyg-num">02</span><span class="wyg-label">Conversion flow</span></div>
+      <div class="wyg-item" role="listitem"><span class="wyg-num">03</span><span class="wyg-label">Tech &amp; SEO</span></div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section" data-form-section>
+    <div class="form-section-inner">
+      <div id="auditErr" class="audit-err" data-error role="alert">
+        Something went wrong. Try again, or email <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a> directly.
+      </div>
+
+      <form id="auditForm"
+            class="audit-form"
+            data-audit-form
+            action="/api/audit-submit"
+            method="POST"
+            novalidate>
+
+        <div class="audit-field">
+          <label for="url">Website URL</label>
+          <input id="url" name="url" type="text" inputmode="url" autocomplete="url"
+                 required placeholder="yoursite.com"
+                 aria-describedby="url-preview" />
+          <p class="url-preview" id="url-preview" data-url-preview aria-live="polite"></p>
+        </div>
+
+        <div class="audit-field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email"
+                 required placeholder="you@yoursite.com" />
+        </div>
+
+        <div class="audit-field">
+          <label for="notes">Anything specific you want me to look at? <span class="optional">(optional)</span></label>
+          <textarea id="notes" name="notes" rows="4"
+                    placeholder="e.g. checkout flow, mobile speed, homepage lede…"></textarea>
+        </div>
+
+        <!-- Honeypot — invisible to real users, bots auto-fill it -->
+        <div class="hp-wrap" aria-hidden="true">
+          <label for="website_extra">Website (leave empty)</label>
+          <input type="text" id="website_extra" name="website_extra" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button type="submit" class="btn-primary audit-submit">
+          Send me the audit <span class="ar">→</span>
+        </button>
+
+        <p class="micro-note">No spam. No newsletter. Just the audit.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- TRUST ANCHOR -->
+  <section class="trust" data-trust>
     <p>
-      I'll send your audit PDF within <b>5 working days</b> to <b id="auditSuccessEmail">your email</b>.
-      If you don't see it by <b id="auditSuccessDate">next week</b>, check spam or reply to
+      I run <a href="/">murmweb.dev</a> solo from <b>Leiden</b>. I've shipped 10+ sites this year and run <a href="https://murmreps.com" target="_blank" rel="noopener noreferrer">MurmReps</a>, a platform with 15,000+ products. My own site isn't perfect either — that's why I audit mine too.
+    </p>
+  </section>
+
+  <!-- SUCCESS STATE -->
+  <section id="thanks" class="success" data-success-section aria-live="polite">
+    <svg class="success-check" viewBox="0 0 56 56" aria-hidden="true">
+      <circle cx="28" cy="28" r="25" stroke="var(--accent)" stroke-width="2" fill="none" opacity="0.35"/>
+      <path d="M16 28 L25 37 L41 20"/>
+    </svg>
+    <h1>Got it.</h1>
+    <p>
+      You'll get a PDF audit within <b>5 working days</b> at <b data-success-email>your email</b>.
+      If you don't see it by <b data-success-date>next week</b>, check spam or reply to
       <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a>.
     </p>
-  </div>
+    <a href="/" class="back-home">← Back to MurmWeb</a>
+  </section>
+
 </main>
+
+<footer class="audit-footer">
+  <div class="wrap">
+    <span>© 2026 MurmWeb · Leiden, NL</span>
+    <span><a href="/">murmweb.dev</a> · <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a></span>
+  </div>
+</footer>
 
 <script>
 (function(){
-  var form = document.getElementById('auditForm');
-  var success = document.getElementById('auditSuccess');
-  var err = document.getElementById('auditErr');
-  var emailSpan = document.getElementById('auditSuccessEmail');
-  var dateSpan = document.getElementById('auditSuccessDate');
-  var submitBtn = form.querySelector('button[type="submit"]');
+  var form   = document.getElementById('auditForm');
+  var urlEl  = form.url;
+  var emlEl  = form.email;
+  var notEl  = form.notes;
+  var hpEl   = form.website_extra;
+  var btn    = form.querySelector('button[type="submit"]');
+  var btnOrig= btn.innerHTML;
 
+  var errEl   = document.getElementById('auditErr');
+  var formSec = document.querySelector('[data-form-section]');
+  var trustEl = document.querySelector('[data-trust]');
+  var okSec   = document.querySelector('[data-success-section]');
+  var okEmail = document.querySelector('[data-success-email]');
+  var okDate  = document.querySelector('[data-success-date]');
+  var preview = document.querySelector('[data-url-preview]');
+
+  // --- URL live preview ---
+  function normalizeUrl(raw){
+    var s = (raw || '').trim();
+    if(!s) return null;
+    if(!/^https?:\/\//i.test(s)) s = 'https://' + s;
+    try{
+      var u = new URL(s);
+      if(!u.hostname || u.hostname.indexOf('.') === -1) return null;
+      return u;
+    }catch(e){ return null; }
+  }
+  function updatePreview(){
+    var u = normalizeUrl(urlEl.value);
+    if(u){
+      preview.innerHTML = '<span class="prefix">I’ll look at:</span> ' + u.hostname.replace(/^www\./,'');
+      preview.classList.add('live');
+    }else{
+      preview.textContent = '';
+      preview.classList.remove('live');
+    }
+  }
+  urlEl.addEventListener('input', updatePreview);
+  urlEl.addEventListener('blur', function(){
+    // Auto-prepend https:// in the field itself, so the user sees the canonical form they submitted.
+    var raw = urlEl.value.trim();
+    if(raw && !/^https?:\/\//i.test(raw)) urlEl.value = 'https://' + raw;
+  });
+
+  // --- success state helpers ---
+  function plusWorkingDays(d){
+    // Spec: success copy shows "don't see it by [date+9]" (5 working days + weekend buffer).
+    var out = new Date(d.getTime());
+    out.setDate(out.getDate() + 9);
+    return out;
+  }
+  function fmtDate(d){
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return d.getDate() + ' ' + months[d.getMonth()];
+  }
+  function showSuccess(email){
+    okEmail.textContent = email || 'your email';
+    okDate.textContent  = fmtDate(plusWorkingDays(new Date()));
+    formSec.style.transition = 'opacity 300ms ease';
+    formSec.style.opacity    = '0';
+    if(trustEl){
+      trustEl.style.transition = 'opacity 300ms ease';
+      trustEl.style.opacity    = '0';
+    }
+    setTimeout(function(){
+      formSec.style.display = 'none';
+      if(trustEl) trustEl.style.display = 'none';
+      okSec.style.display = 'block';
+      // next frame so the opacity transition fires
+      requestAnimationFrame(function(){ okSec.classList.add('show'); });
+      // update URL so refresh/back preserves success
+      try{ history.replaceState(null, '', '/audit#thanks'); }catch(e){}
+      okSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  // --- submit ---
   form.addEventListener('submit', function(ev){
     ev.preventDefault();
-    err.classList.remove('show');
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.6';
+    errEl.classList.remove('show');
 
-    var fd = new FormData(form);
-    var email = fd.get('email') || 'your email';
+    // Normalize URL client-side so the server sees https://…
+    var rawUrl = urlEl.value.trim();
+    var normalizedUrl = rawUrl && !/^https?:\/\//i.test(rawUrl) ? 'https://' + rawUrl : rawUrl;
 
-    fetch(form.action, {
+    var payload = {
+      url:            normalizedUrl,
+      email:          emlEl.value.trim(),
+      notes:          notEl.value.trim(),
+      website_extra:  hpEl.value  // server rejects if non-empty
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = 'Sending…';
+
+    fetch('/api/audit-submit', {
       method: 'POST',
-      body: fd,
-      headers: { 'Accept': 'application/json' }
-    }).then(function(resp){
-      if(!resp.ok){ throw new Error('Formspree ' + resp.status); }
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error('submit_failed:' + res.status);
       try{ if(typeof gtag_report_conversion === 'function') gtag_report_conversion(); }catch(e){}
-
-      var d = new Date();
-      d.setDate(d.getDate() + 9); // 5 working days + weekend buffer
-      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      dateSpan.textContent = d.getDate() + ' ' + months[d.getMonth()];
-      emailSpan.textContent = email;
-
-      form.style.display = 'none';
-      success.classList.add('show');
-      success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showSuccess(payload.email);
     }).catch(function(){
-      submitBtn.disabled = false;
-      submitBtn.style.opacity = '1';
-      err.classList.add('show');
+      btn.disabled = false;
+      btn.innerHTML = btnOrig;
+      errEl.classList.add('show');
+      errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });
+
+  // --- on load: if we landed via no-JS redirect (?ok=1#thanks), the :has(:target)
+  //     CSS rule already swaps the view. Also fire conversion if ok=1 present.
+  if(/[?&]ok=1/.test(location.search)){
+    try{ if(typeof gtag_report_conversion === 'function') gtag_report_conversion(); }catch(e){}
+  }
 })();
 </script>
 
