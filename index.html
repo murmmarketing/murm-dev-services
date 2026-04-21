@@ -1400,6 +1400,13 @@ function renderHeadline(key){
     if(node.nodeType === 3){
       const frag = document.createDocumentFragment();
       [...node.textContent].forEach(ch => {
+        // Thin-glyph punctuation renders invisibly under gradient-clip / text-fill-transparent
+        // (see v3.css .hero-title .accent .ch). Keep as bare text so it inherits solid colour.
+        if (ch === "'" || ch === "\u2019" || ch === "." ||
+            ch === "," || ch === "!" || ch === "?") {
+          frag.appendChild(document.createTextNode(ch));
+          return;
+        }
         const s = document.createElement('span');
         s.className = 'ch' + (ch === ' ' ? ' sp' : '');
         s.textContent = ch === ' ' ? '\u00a0' : ch;

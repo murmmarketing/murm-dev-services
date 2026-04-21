@@ -511,12 +511,6 @@ html.menu-open, html.menu-open body{ overflow: hidden; }
   font-family: var(--serif);
   font-style: italic;
   color: var(--accent);
-  background: linear-gradient(90deg, var(--accent) 0%, #FFB380 50%, var(--accent) 100%);
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradShift 6s linear infinite;
 }
 .hero-title .accent .ch{
   background: linear-gradient(90deg, var(--accent) 0%, #FFB380 50%, var(--accent) 100%);
@@ -524,6 +518,7 @@ html.menu-open, html.menu-open body{ overflow: hidden; }
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: gradShift 6s linear infinite;
 }
 @keyframes gradShift{ to{ background-position: 200% center; } }
 
