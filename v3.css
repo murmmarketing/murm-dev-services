@@ -421,6 +421,13 @@ body::before{
   -webkit-text-fill-color: transparent;
   animation: gradShift 6s linear infinite;
 }
+.hero-title .accent .ch{
+  background: linear-gradient(90deg, var(--accent) 0%, #FFB380 50%, var(--accent) 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 @keyframes gradShift{ to{ background-position: 200% center; } }
 
 .hero-foot{

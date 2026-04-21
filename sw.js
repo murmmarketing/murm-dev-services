@@ -1,4 +1,4 @@
-const CACHE = 'murmweb-v2';
+const CACHE = 'murmweb-v3';
 const ASSETS = [
   '/',
   '/index.html',
