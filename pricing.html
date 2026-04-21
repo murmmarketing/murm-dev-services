@@ -12,11 +12,11 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pricing — murmweb.dev</title>
-<meta name="description" content="Fixed pricing for custom web apps, AI automation, and marketing sites. No hourly billing, no surprises.">
+<meta name="description" content="Fixed pricing for custom web apps, websites, and Shopify stores. From a €600 one-pager to a €5,900 custom e-commerce build. No hourly billing, no surprises.">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://murmweb.dev/pricing.html">
 <meta property="og:title" content="Pricing — murmweb.dev">
-<meta property="og:description" content="Fixed pricing for custom web apps, AI automation, and marketing sites. No hourly billing, no surprises.">
+<meta property="og:description" content="Fixed pricing for custom web apps, websites, and Shopify stores. From a €600 one-pager to a €5,900 custom e-commerce build. No hourly billing, no surprises.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://murmweb.dev/pricing.html">
 <meta property="og:image" content="https://murmweb.dev/og.png">
@@ -53,18 +53,34 @@
     },
     {
       "@type": "Question",
-      "name": "One-time or subscription — which is better?",
+      "name": "One-off or subscription — which is right for me?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The one-time option (€750 + €75/mo) is cheaper over 3+ years if you rarely update your site. The subscription (€250 + €150/mo) is better if you want unlimited text edits, regular updates, and someone on call for 2 hours of larger changes each quarter. Lower upfront cost, all-inclusive. 12-month minimum, then month-to-month."
+        "text": "Pay once for a website you own outright (from €600 to €5,900 depending on scope). Or subscribe for €250 setup + €150/mo — all-inclusive, with unlimited text edits and 2 hours/quarter for larger changes. 12-month minimum, then month-to-month."
       }
     },
     {
       "@type": "Question",
-      "name": "What's your turnaround?",
+      "name": "Why are your delivery times so short?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Websites: 3-5 days. AI automation: 1-2 weeks. Custom web apps: 3-6 weeks depending on scope. I'll give you an exact timeline before we start."
+        "text": "Fixed scope, tight deliverables, no feature creep. The scope is locked before work starts, so every hour goes into shipping, not redefining the project."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the €19.95 maintenance pack?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hosting + maintenance. Vercel hosting, SSL, security patches, dependency updates, and uptime monitoring. Auto-added to every build unless you decline. No content edits included — that's what the €150/mo Care plan is for."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the Shopify Starter package work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "€1,100, delivered in one week. You get the Dawn theme with brand customization, 20 products imported and styled, collections and product pages, cart and checkout configured, plus payment and shipping setup. A Shopify monthly subscription is separate."
       }
     },
     {
@@ -72,7 +88,7 @@
       "name": "Can I start with a small project?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. A website build or single automation workflow is a great way to work together before committing to a larger app project."
+        "text": "Yes. A one-pager or Shopify Starter is a great way to work together before committing to a larger app or e-commerce build."
       }
     },
     {
@@ -80,7 +96,7 @@
       "name": "What if I need ongoing development?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The monthly retainer gives you a developer on call. Bug fixes, new features, automation tweaks — all included. Cancel anytime."
+        "text": "The Strategic partner retainer (€500+/mo) gives you a developer on call with weekly sync, unlimited small edits, and scope-locked feature development. Cancel anytime."
       }
     }
   ]
@@ -186,6 +202,20 @@ h1 { font-family:var(--serif); font-size:clamp(36px,5vw,52px); font-weight:400; 
 footer { padding:48px 0; border-top:1px solid var(--border); }
 footer .footer-inner { max-width:1100px; margin:0 auto; padding:0 24px; }
 footer p { font-size:13px; color:var(--text-dim); }
+.section-head { font-family:var(--serif); font-size:clamp(24px,3vw,32px); font-weight:400; letter-spacing:-0.01em; margin:72px 0 24px; color:var(--text); }
+.section-head:first-of-type { margin-top:48px; }
+.section-lede { font-size:14px; color:var(--text-muted); margin:-12px 0 28px; max-width:600px; line-height:1.6; }
+.tier-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-bottom:8px; }
+.tier.compact { padding:28px 24px; margin-bottom:0; display:flex; flex-direction:column; }
+.tier.compact h2 { font-size:20px; margin-bottom:4px; line-height:1.2; }
+.tier.compact .price { font-size:14px; margin-bottom:12px; }
+.tier.compact .desc { font-size:13px; margin-bottom:14px; line-height:1.55; }
+.tier.compact h3 { margin:10px 0 8px; }
+.tier.compact ul { margin-bottom:12px; }
+.tier.compact li { font-size:12.5px; padding:4px 0 4px 18px; }
+.tier.compact .meta { font-size:10.5px; gap:14px; padding-top:14px; margin-top:auto; }
+.tier.compact .tag { top:14px; right:14px; font-size:9px; padding:3px 8px; }
+@media (max-width:680px) { .tier-grid { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -212,151 +242,178 @@ footer p { font-size:13px; color:var(--text-dim); }
     <h1>What I charge</h1>
     <p class="intro">Fixed pricing. No hourly billing, no scope creep, no surprise invoices. You know exactly what you&rsquo;re paying before we start.</p>
 
-    <div class="tier popular">
-      <span class="tag">Most popular</span>
-      <h2>Custom Web App</h2>
-      <div class="price">from &euro;2,500</div>
-      <p class="desc">Full-stack applications on Next.js + Supabase</p>
-      <p class="best-for">Best for: startups needing an MVP, businesses replacing spreadsheets with a real app, platforms with complex data</p>
-      <h3>What&rsquo;s included</h3>
-      <ul>
-        <li>User authentication &amp; roles</li>
-        <li>Admin dashboard</li>
-        <li>Database design &amp; API</li>
-        <li>Stripe / Mollie payments</li>
-        <li>Real-time data &amp; search</li>
-        <li>Vercel deployment</li>
-        <li>14 days post-launch support</li>
-      </ul>
-      <div class="meta"><span>Delivery: scope dependent</span><span><a href="/#contact" style="color:var(--gold);text-decoration:none;">Tell me what you need &rarr;</a></span></div>
+    <h2 class="section-head">One-off builds</h2>
+    <p class="section-lede">Pay once, own it outright. All prices exclude 21% BTW.</p>
+    <div class="tier-grid">
+
+      <div class="tier compact">
+        <h2>One-pager</h2>
+        <div class="price">&euro;600</div>
+        <p class="desc">Single page, fixed scope. CMS optional.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>Custom design (no templates)</li>
+          <li>Mobile-first, SEO, analytics</li>
+          <li>Contact form + SSL</li>
+          <li>Vercel deployment</li>
+        </ul>
+        <div class="meta"><span>Delivery: 3 days</span></div>
+      </div>
+
+      <div class="tier compact">
+        <h2>Multi-page</h2>
+        <div class="price">&euro;1,200</div>
+        <p class="desc">3&ndash;5 pages with CMS and contact form.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>Custom design across 3&ndash;5 pages</li>
+          <li>CMS for self-service edits</li>
+          <li>Contact forms, SEO, analytics</li>
+          <li>Vercel / Cloudflare hosting</li>
+        </ul>
+        <div class="meta"><span>Delivery: 1 week</span></div>
+      </div>
+
+      <div class="tier compact">
+        <h2>Shopify Starter</h2>
+        <div class="price">&euro;1,100</div>
+        <p class="desc">Dawn theme + customization + 20 products.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>Dawn theme with brand customization</li>
+          <li>20 products imported and styled</li>
+          <li>Collections, product pages, cart</li>
+          <li>Payment + shipping setup</li>
+        </ul>
+        <div class="meta"><span>Delivery: 1 week</span></div>
+      </div>
+
+      <div class="tier compact popular">
+        <span class="tag">Most popular</span>
+        <h2>Custom Web App</h2>
+        <div class="price">from &euro;2,900</div>
+        <p class="desc">Dashboards, portals, internal tools on Next.js + Supabase.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>User authentication &amp; roles</li>
+          <li>Admin dashboard</li>
+          <li>Database design &amp; API</li>
+          <li>Stripe / Mollie payments</li>
+          <li>14 days post-launch support</li>
+        </ul>
+        <div class="meta"><span>Delivery: 2&ndash;3 weeks</span></div>
+      </div>
+
+      <div class="tier compact">
+        <h2>Custom E-commerce</h2>
+        <div class="price">from &euro;5,900</div>
+        <p class="desc">Full custom build with admin, catalogue, and payments.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>Bespoke storefront design</li>
+          <li>Admin + order management</li>
+          <li>Stripe / Mollie + shipping</li>
+          <li>Next.js or Shopify Hydrogen</li>
+          <li>14 days post-launch support</li>
+        </ul>
+        <div class="meta"><span>Delivery: 3&ndash;4 weeks</span></div>
+      </div>
+
     </div>
 
-    <div class="tier">
-      <h2>AI Workflow Automation</h2>
-      <div class="price">from &euro;1,500</div>
-      <p class="desc">Turn manual processes into automated systems</p>
-      <p class="best-for">Best for: businesses spending hours on repetitive tasks &mdash; lead follow-up, reporting, data entry, email management</p>
-      <h3>What&rsquo;s included</h3>
-      <ul>
-        <li>Process audit &amp; mapping</li>
-        <li>Claude / AI agent setup</li>
-        <li>Email automation (triage, follow-up, outreach)</li>
-        <li>Data pipelines &amp; monitoring</li>
-        <li>Telegram / Slack alerting</li>
-        <li>Custom dashboards</li>
-        <li>30 days support</li>
-      </ul>
-      <div class="meta"><span>Delivery: 1&ndash;2 weeks</span><span><a href="/#contact" style="color:var(--gold);text-decoration:none;">Automate my workflow &rarr;</a></span></div>
+    <h2 class="section-head">Ongoing</h2>
+    <p class="section-lede">Monthly plans that keep your site alive after launch. All prices exclude 21% BTW.</p>
+    <div class="tier-grid">
+
+      <div class="tier compact">
+        <h2>Hosting + maintenance</h2>
+        <div class="price">&euro;19,95/mo</div>
+        <p class="desc">Auto-added to every build unless declined.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>Vercel hosting</li>
+          <li>SSL + security patches</li>
+          <li>Dependency updates</li>
+          <li>Uptime monitoring</li>
+        </ul>
+        <div class="meta"><span>No edits included</span></div>
+      </div>
+
+      <div class="tier compact popular">
+        <span class="tag">Most popular</span>
+        <h2>Care + iteration</h2>
+        <div class="price">&euro;150/mo</div>
+        <p class="desc">Maintenance plus monthly edits and priority support.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>Everything in Hosting + maintenance</li>
+          <li>2 hours of content/design edits/mo</li>
+          <li>Priority support (24h workdays)</li>
+          <li>Monthly performance report</li>
+        </ul>
+        <div class="meta"><span>Cancel anytime</span></div>
+      </div>
+
+      <div class="tier compact">
+        <h2>Strategic partner</h2>
+        <div class="price">from &euro;500/mo</div>
+        <p class="desc">Active retainer with weekly sync and ongoing development.</p>
+        <h3>Includes</h3>
+        <ul>
+          <li>Weekly sync call</li>
+          <li>Unlimited small edits</li>
+          <li>Scope-locked feature development</li>
+          <li>Priority response (same-day)</li>
+        </ul>
+        <div class="meta"><span>Cancel anytime</span></div>
+      </div>
+
     </div>
 
+    <h2 class="section-head">Or subscribe instead of paying upfront</h2>
+    <p class="section-lede">Prefer not to drop &euro;600&ndash;&euro;5,900 in one go? Subscribe for &euro;250 setup + &euro;150/mo &mdash; all-inclusive. 12-month minimum, then month-to-month.</p>
     <div class="tier">
-      <h2>Website</h2>
-      <p class="desc">Fast, well-designed sites. Two ways to pay.</p>
-      <p class="best-for">Best for: restaurants, freelancers, local businesses, portfolios &mdash; anyone who&rsquo;s outgrown a Wix theme.</p>
-
       <div class="pay-paths">
         <div class="pay-path">
           <div class="pay-label">Pay once</div>
-          <div class="pay-price">&euro;750 <small>setup</small></div>
-          <div class="pay-note">+ &euro;75/mo hosting &amp; basics. You update text yourself via the CMS.</div>
-          <h4>Includes</h4>
+          <div class="pay-price">&euro;600 <small>to &euro;5,900</small></div>
+          <div class="pay-note">Own your build outright. Hosting + maintenance added at &euro;19,95/mo unless declined.</div>
+          <h4>Best for</h4>
           <ul>
-            <li>Custom design (no templates)</li>
-            <li>Mobile-first, SEO, analytics</li>
-            <li>CMS for self-service edits</li>
-            <li>Vercel / Cloudflare hosting</li>
-            <li>Contact forms &amp; SSL</li>
-            <li>7 days post-launch support</li>
+            <li>Projects you own and rarely change</li>
+            <li>Portfolios and brochure sites</li>
+            <li>Businesses with up-front budget</li>
           </ul>
           <a href="/#contact?plan=one-time" class="pay-cta">Get a quote &rarr;</a>
         </div>
 
         <div class="pay-path recommended">
-          <span class="tag-subtle">Recommended · active sites</span>
+          <span class="tag-subtle">Active sites</span>
           <div class="pay-label">Subscribe</div>
           <div class="pay-price">&euro;250 <small>setup + &euro;150/mo</small></div>
           <div class="pay-note">All-inclusive. 12-month minimum, then month-to-month.</div>
-          <h4>Everything above, plus</h4>
+          <h4>Includes</h4>
           <ul>
             <li>Unlimited text edits (48h response)</li>
             <li>2 hours/quarter for larger changes</li>
-            <li>Monthly performance &amp; traffic report</li>
-            <li>Priority support (24h on workdays)</li>
+            <li>Monthly performance report</li>
+            <li>Priority support (24h workdays)</li>
             <li>Domain stays yours &mdash; no lock-in</li>
           </ul>
           <a href="/#contact?plan=subscription" class="pay-cta">Start subscription &rarr;</a>
         </div>
-      </div>
-
-      <div class="pay-choose">
-        <h4>Which is right for me?</h4>
-        <ul>
-          <li><strong>One-time</strong> Portfolios and brochure sites you rarely touch after launch.</li>
-          <li><strong>Subscribe</strong> Active businesses &mdash; news, events, menu changes &mdash; or anyone who&rsquo;d rather not think about it.</li>
-        </ul>
-      </div>
-
-      <div class="meta"><span>Delivery: 3&ndash;5 days</span><span>All prices exclude 21% BTW</span></div>
-    </div>
-
-    <div class="tier">
-      <h2>Monthly Retainer</h2>
-      <div class="price">from &euro;500/month</div>
-      <p class="desc">A developer on call, cancel anytime</p>
-      <p class="best-for">Best for: businesses with an existing app or site that needs ongoing development without hiring full-time</p>
-      <h3>What&rsquo;s included</h3>
-      <ul>
-        <li>Bug fixes &amp; maintenance</li>
-        <li>New features &amp; iterations</li>
-        <li>Performance monitoring</li>
-        <li>AI workflow tweaks</li>
-        <li>Priority response (same-day)</li>
-        <li>Monthly progress report</li>
-      </ul>
-      <div class="meta"><span>Cancel anytime</span><span><a href="/#contact" style="color:var(--gold);text-decoration:none;">Start a retainer &rarr;</a></span></div>
-    </div>
-
-    <div class="comparison">
-      <h2>Compare packages</h2>
-      <div style="overflow-x:auto;">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Feature</th>
-              <th>Web App</th>
-              <th>AI Automation</th>
-              <th>Website</th>
-              <th>Retainer</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Custom design</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>Database &amp; API</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>User auth &amp; roles</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>Admin dashboard</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>Payments (Stripe/Mollie)</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>AI / Claude integration</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-            <tr><td>Process automation</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-            <tr><td>Email automation</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-            <tr><td>Alerting (Telegram/Slack)</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-            <tr><td>SEO optimization</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>Mobile-first responsive</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>Vercel deployment</td><td class="check">&#10003;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td><td class="dash">&mdash;</td></tr>
-            <tr><td>Bug fixes &amp; maintenance</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-            <tr><td>New features</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="dash">&mdash;</td><td class="check">&#10003;</td></tr>
-            <tr><td>Post-launch support</td><td class="check">14 days</td><td class="check">30 days</td><td class="check">7 days</td><td class="check">Ongoing</td></tr>
-          </tbody>
-        </table>
       </div>
     </div>
 
     <div class="faq-mini">
       <h2>Frequently asked</h2>
       <details><summary>How does pricing work?</summary><p>Fixed pricing per project. I scope the work, give you a number, and that&rsquo;s what you pay. No hourly billing, no scope creep surprises.</p></details>
-      <details><summary>One-time or subscription &mdash; which is better?</summary><p>The one-time option (&euro;750 + &euro;75/mo) is cheaper over 3+ years if you rarely update your site. The subscription (&euro;250 + &euro;150/mo) is better if you want unlimited text edits, regular updates, and someone on call for 2 hours of larger changes each quarter. Lower upfront cost, all-inclusive. 12-month minimum, then month-to-month.</p></details>
-      <details><summary>What&rsquo;s your turnaround?</summary><p>Websites: 3&ndash;5 days. AI automation: 1&ndash;2 weeks. Custom web apps: 3&ndash;6 weeks depending on scope. I&rsquo;ll give you an exact timeline before we start.</p></details>
-      <details><summary>Can I start with a small project?</summary><p>Yes. A website build or single automation workflow is a great way to work together before committing to a larger app project.</p></details>
-      <details><summary>What if I need ongoing development?</summary><p>The monthly retainer gives you a developer on call. Bug fixes, new features, automation tweaks &mdash; all included. Cancel anytime.</p></details>
+      <details><summary>One-off or subscription &mdash; which is right for me?</summary><p>Pay once for a website you own outright (from &euro;600 to &euro;5,900 depending on scope). Or subscribe for &euro;250 setup + &euro;150/mo &mdash; all-inclusive, with unlimited text edits and 2 hours/quarter for larger changes. 12-month minimum, then month-to-month.</p></details>
+      <details><summary>Why are your delivery times so short?</summary><p>Fixed scope, tight deliverables, no feature creep. The scope is locked before work starts, so every hour goes into shipping, not redefining the project.</p></details>
+      <details><summary>What is the &euro;19.95 maintenance pack?</summary><p>Hosting + maintenance. Vercel hosting, SSL, security patches, dependency updates, and uptime monitoring. Auto-added to every build unless you decline. No content edits included &mdash; that&rsquo;s what the &euro;150/mo Care plan is for.</p></details>
+      <details><summary>How does the Shopify Starter package work?</summary><p>&euro;1,100, delivered in one week. You get the Dawn theme with brand customization, 20 products imported and styled, collections and product pages, cart and checkout configured, plus payment and shipping setup. A Shopify monthly subscription is separate.</p></details>
+      <details><summary>Can I start with a small project?</summary><p>Yes. A one-pager or Shopify Starter is a great way to work together before committing to a larger app or e-commerce build.</p></details>
+      <details><summary>What if I need ongoing development?</summary><p>The Strategic partner retainer (&euro;500+/mo) gives you a developer on call with weekly sync, unlimited small edits, and scope-locked feature development. Cancel anytime.</p></details>
     </div>
 
     <div class="cta-section">
