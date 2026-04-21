@@ -2015,6 +2015,16 @@ footer{
   .pola{ grid-column: auto !important; grid-row: auto !important; }
 }
 
+@media (max-width: 768px){
+  .hero{ padding: 120px 0 60px; }
+  .hero-title{
+    font-size: clamp(40px, 10vw, 72px);
+    line-height: 1.05;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+}
+
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
     animation-duration: 0.01ms !important;
