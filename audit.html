@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18089557055"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "AW-18089557055");
+</script>
+<script>
+function gtag_report_conversion() {
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18089557055/zVG4CLrshZwcEL_44rFD',
+    'value': 1.0,
+    'currency': 'EUR'
+  });
+  return true;
+}
+</script>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Free site audit — MurmWeb</title>
+<meta name="description" content="Drop your website URL and email. You'll get a PDF audit within 5 working days covering design, conversion, SEO, and technical issues." />
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://murmweb.dev/audit">
+<meta property="og:title" content="Free site audit — MurmWeb">
+<meta property="og:description" content="Drop your website URL and email. You'll get a PDF audit within 5 working days covering design, conversion, SEO, and technical issues.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://murmweb.dev/audit">
+<meta property="og:image" content="https://murmweb.dev/og.png">
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230A0A0A'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-weight='500' font-size='22' fill='%23F2EFEA'%3EM%3C/text%3E%3Ccircle cx='23' cy='10' r='2.2' fill='%23FF6B3D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="/v3.css" />
+<style>
+  body{ cursor: auto; }
+  .audit-wrap{
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 120px var(--gutter) 80px;
+    min-height: 100vh;
+  }
+  .audit-back{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 64px;
+    transition: color .2s;
+  }
+  .audit-back:hover{ color: var(--ink-2); }
+  .audit-h1{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 36px;
+  }
+  .audit-intro{
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0 0 56px;
+    max-width: 560px;
+  }
+  .audit-form{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .audit-field{ display: flex; flex-direction: column; gap: 8px; }
+  .audit-field label{
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-4);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .audit-field input,
+  .audit-field textarea{
+    background: transparent;
+    border: 1px solid var(--rule-2);
+    border-radius: 3px;
+    padding: 14px 16px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .audit-field input::placeholder,
+  .audit-field textarea::placeholder{ color: var(--ink-4); }
+  .audit-field input:focus,
+  .audit-field textarea:focus{ border-color: var(--accent); }
+  .audit-field textarea{ min-height: 110px; resize: vertical; }
+  .audit-submit{
+    align-self: flex-start;
+    margin-top: 12px;
+    border: none;
+    cursor: pointer;
+  }
+  .audit-err{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 16px;
+    display: none;
+  }
+  .audit-err.show{ display: block; }
+  .audit-success{ display: none; }
+  .audit-success.show{ display: block; }
+  .audit-success h2{
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1.0;
+    color: var(--ink);
+    margin: 0 0 28px;
+  }
+  .audit-success p{
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 560px;
+  }
+  .audit-success a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
+  @media (max-width: 768px){
+    .audit-wrap{ padding: 80px var(--gutter) 60px; }
+    .audit-back{ margin-bottom: 40px; }
+    .audit-h1{ font-size: clamp(40px, 10vw, 64px); line-height: 1.05; }
+    .audit-intro{ font-size: 16px; margin-bottom: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="audit-wrap">
+  <a href="/" class="audit-back">← Back to murmweb.dev</a>
+
+  <h1 class="audit-h1">Free site audit</h1>
+
+  <p class="audit-intro">Drop your website URL and email. You'll get a PDF audit within 5 working days covering design, conversion, SEO, and technical issues.</p>
+
+  <form id="auditForm" class="audit-form" action="https://formspree.io/f/mykbqrpd" method="POST">
+    <div class="audit-field">
+      <label for="url">Website URL</label>
+      <input type="url" id="url" name="url" required placeholder="https://yoursite.com" />
+    </div>
+    <div class="audit-field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required placeholder="you@company.com" />
+    </div>
+    <div class="audit-field">
+      <label for="notes">Anything specific you want me to look at? <span style="color:var(--ink-5)">(optional)</span></label>
+      <textarea id="notes" name="notes" placeholder="e.g. homepage conversion, product pages, mobile performance…"></textarea>
+    </div>
+    <button type="submit" class="btn-primary audit-submit">Send me the audit <span class="ar">→</span></button>
+    <div id="auditErr" class="audit-err">Something went wrong. Please email <a href="mailto:hello@murmweb.dev" style="color:inherit;text-decoration:underline;">hello@murmweb.dev</a> directly.</div>
+  </form>
+
+  <div id="auditSuccess" class="audit-success">
+    <h2>Thanks.</h2>
+    <p>
+      I'll send your audit PDF within <b>5 working days</b> to <b id="auditSuccessEmail">your email</b>.
+      If you don't see it by <b id="auditSuccessDate">next week</b>, check spam or reply to
+      <a href="mailto:hello@murmweb.dev">hello@murmweb.dev</a>.
+    </p>
+  </div>
+</main>
+
+<script>
+(function(){
+  var form = document.getElementById('auditForm');
+  var success = document.getElementById('auditSuccess');
+  var err = document.getElementById('auditErr');
+  var emailSpan = document.getElementById('auditSuccessEmail');
+  var dateSpan = document.getElementById('auditSuccessDate');
+  var submitBtn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    err.classList.remove('show');
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.6';
+
+    var fd = new FormData(form);
+    var email = fd.get('email') || 'your email';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(resp){
+      if(!resp.ok){ throw new Error('Formspree ' + resp.status); }
+      try{ if(typeof gtag_report_conversion === 'function') gtag_report_conversion(); }catch(e){}
+
+      var d = new Date();
+      d.setDate(d.getDate() + 9); // 5 working days + weekend buffer
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      dateSpan.textContent = d.getDate() + ' ' + months[d.getMonth()];
+      emailSpan.textContent = email;
+
+      form.style.display = 'none';
+      success.classList.add('show');
+      success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }).catch(function(){
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      err.classList.add('show');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

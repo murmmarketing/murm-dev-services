@@ -1531,6 +1531,18 @@ section{ position: relative; padding: 160px 0; z-index: 1; }
   color: var(--ink);
   line-height: 1;
 }
+.cta-wa{
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: color .2s;
+}
+.cta-wa:hover{ color: var(--ink); }
+
 .work-row .name em{ color: var(--accent); font-style: italic; }
 .work-row .name-ar{
   width: 10px; height: 10px;

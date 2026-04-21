@@ -196,12 +196,4 @@
     });
   });
 
-  // ── Cal.com booking click → Google Ads conversion ─────
-  document.querySelectorAll('a[href*="cal.com"]').forEach(function(link) {
-    link.addEventListener('click', function() {
-      try {
-        if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
-      } catch (e) {}
-    });
-  });
 })();
