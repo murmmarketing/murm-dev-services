@@ -154,10 +154,33 @@ function gtag_report_conversion(url) {
         <span class="glyph">▢</span><span class="lbl">TWEAKS</span>
       </button>
       <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" onclick="return gtag_report_conversion('https://cal.com/murmweb/free-15-min-intro-call');" class="nav-cta">Book a call<span class="ar">↗</span></a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
   <div class="nav-progress" id="nav-progress"></div>
 </nav>
+
+<!-- =========================================================
+     MOBILE MENU OVERLAY
+     ========================================================= -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 4 L18 18 M18 4 L4 18"/></svg>
+  </button>
+  <nav class="mobile-menu-links">
+    <a href="#case">Case</a>
+    <a href="#services">Services</a>
+    <a href="#scope">Scope</a>
+    <a href="#process">Process</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="mobile-menu-foot">
+    <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" onclick="return gtag_report_conversion('https://cal.com/murmweb/free-15-min-intro-call');" class="btn-primary">Book a 15-min intro call <span class="ar">→</span></a>
+  </div>
+</div>
 
 <!-- =========================================================
      LIVE STATUS BAR (sub-nav)
@@ -825,7 +848,7 @@ function gtag_report_conversion(url) {
 
     <div class="row">
       <div class="left">
-        <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" onclick="return gtag_report_conversion('https://cal.com/murmweb/free-15-min-intro-call');" class="btn-primary">Book a 30-min call <span class="ar">→</span></a>
+        <a href="https://cal.com/murmweb/free-15-min-intro-call" target="_blank" rel="noopener noreferrer" onclick="return gtag_report_conversion('https://cal.com/murmweb/free-15-min-intro-call');" class="btn-primary">Book a 15-min intro call <span class="ar">→</span></a>
         <a href="mailto:hello@murmweb.dev" class="btn-ghost">hello@murmweb.dev ↗</a>
         <a href="tel:+31655629684" class="btn-ghost">Or call · 06 55 62 96 84 ↗</a>
         <a href="#scope" class="btn-ghost">Try the scope configurator</a>
@@ -1274,6 +1297,38 @@ const AUDIO = (function(){
   }
   addEventListener('scroll', tick, { passive: true });
   tick();
+})();
+
+/*==========================================================
+  MOBILE MENU
+==========================================================*/
+(function mobileMenu(){
+  const btn = $('#nav-hamburger');
+  const menu = $('#mobile-menu');
+  const close = $('#mobile-menu-close');
+  if(!btn || !menu) return;
+  const links = $$('a', menu);
+  function open(){
+    btn.classList.add('open');
+    menu.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    menu.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('menu-open');
+  }
+  function shut(){
+    btn.classList.remove('open');
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    menu.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('menu-open');
+  }
+  btn.addEventListener('click', () => {
+    menu.classList.contains('open') ? shut() : open();
+  });
+  close.addEventListener('click', shut);
+  links.forEach(l => l.addEventListener('click', shut));
+  addEventListener('keydown', e => { if(e.key === 'Escape' && menu.classList.contains('open')) shut(); });
+  addEventListener('resize', () => { if(innerWidth > 900 && menu.classList.contains('open')) shut(); });
 })();
 
 /*==========================================================
