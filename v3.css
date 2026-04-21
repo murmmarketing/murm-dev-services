@@ -2032,6 +2032,51 @@ footer{
   }
 }
 
+/* =========================================================
+   FLOATING WHATSAPP CTA (persistent bottom-right across site)
+   ========================================================= */
+.wa-float{
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  z-index: 100;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  opacity: 0;
+  animation: waAppear 600ms ease-out 800ms forwards;
+}
+.wa-float:hover{
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+.wa-float:active{ transform: scale(0.98); }
+.wa-float:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+@keyframes waAppear{
+  from{ opacity: 0; transform: translateY(20px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px){
+  .wa-float{
+    width: 52px; height: 52px;
+    right: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+  .wa-float svg{ width: 26px; height: 26px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .wa-float{ animation: none; opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
     animation-duration: 0.01ms !important;
