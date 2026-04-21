@@ -360,7 +360,7 @@ function gtag_report_conversion(url) {
         <div class="demo-form" id="demo-form">
           <div class="db-head">
             <span>build a form →</span>
-            <span><span class="acc" id="df-count">0</span> fields added</span>
+            <span><span class="acc" id="df-count">0</span> <span id="df-count-label">fields added</span></span>
           </div>
           <div class="field" data-f="name"><span class="i"></span>Full name<span class="x">+</span></div>
           <div class="field" data-f="email"><span class="i"></span>Email<span class="x">+</span></div>
@@ -532,7 +532,7 @@ function gtag_report_conversion(url) {
         <div class="line" id="line-retainer"><b>After launch</b><span>—</span></div>
         <div class="line total-line"><b>Total (ex. BTW)</b><span>€<span id="scope-total-n2">600</span></span></div>
 
-        <div class="weeks">Timeline: <b id="scope-weeks">1</b> weeks · Earliest start: <b id="scope-start">May 2026</b></div>
+        <div class="weeks">Timeline: <b id="scope-weeks">1</b> <span id="scope-weeks-unit">week</span> · Earliest start: <b id="scope-start">May 2026</b></div>
 
         <div class="cta-row">
           <a href="mailto:hello@murmweb.dev?subject=MurmWeb%20scope%20request" class="btn-primary" style="width:100%; justify-content: space-between;">Send this scope <span class="ar">→</span></a>
@@ -612,21 +612,21 @@ function gtag_report_conversion(url) {
     <div class="work-list">
       <a class="work-row" href="https://murmreps.com" target="_blank" rel="noopener noreferrer">
         <div class="idx">01</div>
-        <div class="name">MurmReps <em>↗</em></div>
+        <div class="name">MurmReps <svg class="name-ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8L8 2M4 2h4v4"/></svg></div>
         <div class="desc">Fashion replica discovery platform — my own product, 15k+ curated listings on Next.js 14 + Supabase.</div>
         <div class="year live">2025 · LIVE</div>
         <div class="ar">→</div>
       </a>
       <a class="work-row" href="https://murm-demo-postkantoordelft.vercel.app" target="_blank" rel="noopener noreferrer">
         <div class="idx">02</div>
-        <div class="name">'t Postkantoor Delft <em>↗</em></div>
+        <div class="name">'t Postkantoor Delft <svg class="name-ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8L8 2M4 2h4v4"/></svg></div>
         <div class="desc">Pitch demo — editorial site concept for a hospitality spot in Delft. Live preview, sent cold.</div>
         <div class="year live">2026 · PITCH DEMO</div>
         <div class="ar">→</div>
       </a>
       <a class="work-row" href="https://murm-demo-de-ketelman.vercel.app" target="_blank" rel="noopener noreferrer">
         <div class="idx">03</div>
-        <div class="name">De Ketelman <em>↗</em></div>
+        <div class="name">De Ketelman <svg class="name-ar" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 8L8 2M4 2h4v4"/></svg></div>
         <div class="desc">Pitch demo — workwear-styled site for a one-person CV-installateur in Utrecht. Concept to live deploy in under an hour.</div>
         <div class="year live">2026 · PITCH DEMO</div>
         <div class="ar">→</div>
@@ -668,7 +668,6 @@ function gtag_report_conversion(url) {
           <span class="nl-chip">Juweliers</span>
           <span class="nl-chip">Klantportaal</span>
           <span class="nl-chip">Boekingssysteem</span>
-          <span class="nl-chip">AI-automatisering</span>
         </div>
         <a href="mailto:hello@murmweb.dev?subject=Kennismaking%20MurmWeb" class="nl-cta">Plan een kennismaking <span>↗</span></a>
       </div>
@@ -827,7 +826,7 @@ function gtag_report_conversion(url) {
           <b>I'm Marius Kerkvliet</b> — Dutch solo developer, based in Leiden. I run <em>murmweb.dev</em> alongside <a href="https://murmreps.com" target="_blank" rel="noopener noreferrer" style="color:inherit"><em>MurmReps</em></a>, a fashion replica discovery platform I built and operate myself.
         </p>
         <p>
-          I specialise in <b>Next.js</b> and <b>Supabase</b> because they're the shortest path from a decision to a deployed feature. I'm a <b>Shopify Partner</b> for e-commerce. For AI automation I use <b>Claude</b>, <b>n8n</b>, and whatever else does the job without leaking money.
+          I specialise in <b>Next.js</b> and <b>Supabase</b> because they're the shortest path from a decision to a deployed feature. I'm a <b>Shopify Partner</b> for e-commerce. I use <b>Claude</b> for code and design work, and whatever tools make sense for the job without leaking money.
         </p>
         <p>
           MurmWeb isn't a hat I put on. It's just me, a good keyboard, and the clients I choose to work with — <span class="accent">three to four serious projects per year</span>, no sub-contractors, no agency layer. The person you have a coffee with is the person writing the code.
@@ -1533,12 +1532,15 @@ renderHeadline(T.headline || 'c');
 (function sv1(){
   const wrap = $('#demo-form'); if(!wrap) return;
   const counter = $('#df-count');
+  const counterLabel = $('#df-count-label');
   $$('.field', wrap).forEach(f => {
     f.addEventListener('click', () => {
       f.classList.toggle('added');
       const x = f.querySelector('.x');
       x.textContent = f.classList.contains('added') ? '✓' : '+';
-      counter.textContent = $$('.field.added', wrap).length;
+      const n = $$('.field.added', wrap).length;
+      counter.textContent = n;
+      counterLabel.textContent = n === 1 ? 'field added' : 'fields added';
       AUDIO.tick();
     });
   });
@@ -1583,6 +1585,7 @@ renderHeadline(T.headline || 'c');
   const totalEl = $('#scope-total-n');
   const totalEl2 = $('#scope-total-n2');
   const weeksEl = $('#scope-weeks');
+  const weeksUnitEl = $('#scope-weeks-unit');
   const lineBase = $('#line-base-v');
   const lineAdd = $('#line-addons-v');
   const lineRet = $('#line-retainer');
@@ -1622,6 +1625,7 @@ renderHeadline(T.headline || 'c');
     totalEl.textContent = formatPrice(total);
     totalEl2.textContent = formatPrice(total);
     weeksEl.textContent = weeks;
+    weeksUnitEl.textContent = weeks === 1 ? 'week' : 'weeks';
     lineBase.textContent = baseName;
     lineAdd.textContent = addonBits.length ? addonBits.join(' · ') + ' · €' + formatPrice(addons) : '—';
     if(afterScope){

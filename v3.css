@@ -1532,6 +1532,16 @@ section{ position: relative; padding: 160px 0; z-index: 1; }
   line-height: 1;
 }
 .work-row .name em{ color: var(--accent); font-style: italic; }
+.work-row .name-ar{
+  width: 10px; height: 10px;
+  margin-left: 4px;
+  vertical-align: 0.05em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .work-row .desc{
   font-family: var(--serif);
   font-size: 15px;
