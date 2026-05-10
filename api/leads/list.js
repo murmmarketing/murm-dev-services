@@ -17,7 +17,7 @@ async function webHandler(request) {
   if (!VALID_SOURCES.has(source)) return jsonResponse({ error: "bad_source" }, 400, reqId);
 
   const page = Math.max(1, Number(url.searchParams.get("page")) || 1);
-  const limit = Math.min(50, Math.max(1, Number(url.searchParams.get("limit")) || 50));
+  const limit = Math.min(1000, Math.max(1, Number(url.searchParams.get("limit")) || 50));
   const q = (url.searchParams.get("q") || "").toLowerCase().trim();
   const statusFilter = url.searchParams.get("status");
   const cityFilter = url.searchParams.get("city");
