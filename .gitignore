@@ -4,3 +4,4 @@
 .env*.local
 node_modules/
 *.log
+AUDIT_REPORT_*.md
